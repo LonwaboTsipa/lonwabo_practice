@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"allowJs": false,		
+		"module": "commonjs",		
+		"outDir": "dist",
+		"declaration": true,
+        "strictNullChecks": true				
+	},
+	"exclude": [        
+        "node_modules",
+		"dist"		
+    ],
+    "awesomeTypescriptLoaderOptions":{
+        "emitRequireType":false,
+        "useBabel":true,
+        "forkChecker":true
+    }
+}

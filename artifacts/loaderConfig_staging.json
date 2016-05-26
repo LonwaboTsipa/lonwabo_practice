@@ -1,0 +1,12 @@
+{
+	"local": false,
+	"userName": "[CLIENT_NAME]_STAGING_ADMIN_USERNAME",
+	"userPwd": "[CLIENT_NAME]_STAGING_ADMIN_PASSWORD",
+	"loaderName": "[CLIENT_NAME]_ksys339_loader_staging",
+	"ftpServer": "[CLIENT_NAME]_STAGING_SFTP_SERVER",
+	"ftpUser": "[CLIENT_NAME]_STAGING_SFTP_USER",
+	"ftpPwd": "[CLIENT_NAME]_STAGING_SFTP_PASSWORD",
+	"clientName":"[CLIENT_NAME]",
+	"scheduleType":"SCHEDULE",
+	"schedule":"00 */60 * * * *" 
+}

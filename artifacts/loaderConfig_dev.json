@@ -1,0 +1,12 @@
+{
+	"local": true,
+	"userName": "[CLIENT_NAME]_DEV_ADMIN_USERNAME",
+	"userPwd": "[CLIENT_NAME]_DEV_ADMIN_PASSWORD",
+	"loaderName": "[CLIENT_NAME]_ksys339_loader_dev",
+	"ftpServer": "[CLIENT_NAME]_DEV_SFTP_SERVER",
+	"ftpUser": "[CLIENT_NAME]_DEV_SFTP_USER",
+	"ftpPwd": "[CLIENT_NAME]_DEV_SFTP_PASSWORD",
+	"clientName":"[CLIENT_NAME]TOOLS",
+	"scheduleType":"IMMEDIATE",
+	"schedule":"00 */60 * * * *"    
+}
