@@ -6,7 +6,9 @@ Please fork this branch and not commit to it with client specific changed.
 The project has place holders for values that need to change for each project.
 
 Do a full solution find and replace on the following keys:
+
 `[CLIENT_NAME]` - Upper case client name with no spaces (Underscores are allowed)
+
 `[PROJECT_CODE]` - The projects code, e.g. 'ksys339'
 
 The following commands can be used to be able to initialize the solution:
