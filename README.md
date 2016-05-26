@@ -4,18 +4,30 @@
 Please fork this branch and not commit to it with client specific changed.
 
 The project has place holders for values that need to change for each project.
+
 Do a full solution find and replace on the following keys:
 `[CLIENT_NAME]` - Upper case client name with no spaces (Underscores are allowed)
 `[PROJECT_CODE]` - The projects code, e.g. 'ksys339'
 
 The following commands can be used to be able to initialize the solution:
-`npm run`
-    `init:artifacts` - Creates the missing folders in the artifacts folder
 
-To load properties through the loader use the following command from a terminal in the project root:
-`node dist/index.js <ENV> property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation`
+`npm install` - Installs missing node_modules
 
-To install run `npm install`
+`npm run init:artifacts` - Creates the missing folders in the artifacts folder
+
+`npm run build` - Builds the solution and outputs to the dist folder
+
+`npm run properties:dev` - Creates the properties using the development instance
+
+`npm run properties:staging` - Creates the properties using the staging instance
+
+`npm run properties:prod` - Creates the properties using the production instance
+
+`npm run start` - Starts the development instance
+
+`npm run start:staging` - Starts the staging instance
+
+`npm run start:prod` - Starts the production instance
 
 ## Development and testing
 
