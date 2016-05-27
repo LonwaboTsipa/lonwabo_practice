@@ -3,7 +3,7 @@ jest.mock("@kurtosys/udm_data_toolkit", () => dataToolkitMock);
 
 import {processShareClasses} from "./shareClassProcessor";
 
-describe('shareClassProcessor.ts', () => {
+describe('src/processors/shareClassProcessor.ts', () => {
     beforeEach(() => {
         
     });

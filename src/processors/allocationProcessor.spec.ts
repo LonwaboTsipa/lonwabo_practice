@@ -3,7 +3,7 @@ jest.mock("@kurtosys/udm_data_toolkit", () => dataToolkitMock);
 
 import {processAllocations} from "./allocationProcessor";
 
-describe('allocationProcessor.ts', () => {
+describe('src/processors/allocationProcessor.ts', () => {
     beforeEach(() => {
         
     });

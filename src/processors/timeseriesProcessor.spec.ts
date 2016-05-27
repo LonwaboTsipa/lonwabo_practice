@@ -3,7 +3,7 @@ jest.mock("@kurtosys/udm_data_toolkit", () => dataToolkitMock);
 
 import {processTimeseries} from "./timeseriesProcessor";
 
-describe('timeseriesProcessor.ts', () => {
+describe('src/processors/timeseriesProcessor.ts', () => {
     beforeEach(() => {
         
     });

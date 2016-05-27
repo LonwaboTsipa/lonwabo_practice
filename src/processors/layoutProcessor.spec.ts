@@ -3,7 +3,7 @@ jest.mock("@kurtosys/udm_data_toolkit", () => dataToolkitMock);
 
 import {processLayouts} from "./layoutProcessor";
 
-describe('layoutProcessor.ts', () => {
+describe('src/processors/layoutProcessor.ts', () => {
     beforeEach(() => {
         
     });
