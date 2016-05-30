@@ -9,6 +9,15 @@ Go to project root and run this to clear the git history
 	rm -rf .git
 ```
 
+The solution is using Typescript to be able to compile, not webpack as these solutions have no need to minify their code, being non-client facing.
+
+Make sure that you have typings installed as well as the at least node v6.2.0
+
+```
+	npm install typings -g 
+	nvm use v6.2.0
+```	
+
 The project has place holders for values that need to change for each project.
 
 Do a full solution find and replace on the following keys:
