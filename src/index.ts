@@ -35,9 +35,10 @@ export async function loadDataAsync() {
         let client = await getClient();
         let loaderStart = await registerLoaderStart();
         let dataToLoad = new dataLoadingArray();
-        let ftpPath = 'pending';
+        let ftpSourceRelativePath = 'pending';
+        let ftpArchiveRelativePath = 'archive';
         if (useFTP) {
-            let syncResult = await syncFTPFolder(ftpPath);    
+            let syncResult = await syncFTPFolder(ftpSourceRelativePath);    
         }
         
         let hasFilesToLoad = await loadFilesFromFolder(pendingDir, rawManifest.filter(m => m.isFileForLoad));
@@ -70,7 +71,7 @@ export async function loadDataAsync() {
             insertDataToLoad(dataToLoad);            
             
             if (useFTP) {
-                await finalizeFTP(ftpPath);
+                await finalizeFTP(ftpSourceRelativePath, ftpArchiveRelativePath);
             }
         }
         else {
