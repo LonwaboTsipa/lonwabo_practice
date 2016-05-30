@@ -1,6 +1,6 @@
 {
 	"automock": false,
-	"scriptPreprocessor": "./jest.preprocessor.js",
+	"scriptPreprocessor": "./spec/jest-preprocessor.js",
 	"testRegex": ".*\\.spec\\.ts$",
 	"moduleFileExtensions": [
 		"js",

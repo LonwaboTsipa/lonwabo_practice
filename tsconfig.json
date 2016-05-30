@@ -9,11 +9,7 @@
 	},
 	"exclude": [        
         "node_modules",
-		"dist"		
-    ],
-    "awesomeTypescriptLoaderOptions":{
-        "emitRequireType":false,
-        "useBabel":true,
-        "forkChecker":true
-    }
+		"dist",
+		"spec"		
+    ]
 }
