@@ -1,7 +1,13 @@
 # On Premise Loader Template project
 
 ## Setup
-To start with this please fork this into the new repository need for the client. You may need someone with GitHub access to do this for you. 
+To start do a clone of this repo, then clear the git history in your clone. Then you can just commit this to your repo.
+
+Go to project root and run this to clear the git history
+
+```
+	rm -rf .git
+```
 
 The project has place holders for values that need to change for each project.
 
