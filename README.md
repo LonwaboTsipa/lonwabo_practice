@@ -1,7 +1,7 @@
 # On Premise Loader Template project
 
 ## Setup
-Please fork this branch and not commit to it with client specific changed.
+To start with this please fork this into the new repository need for the client. You may need someone with GitHub access to do this for you. 
 
 The project has place holders for values that need to change for each project.
 
