@@ -1,4 +1,4 @@
-
+require('isomorphic-fetch');
 import { login, dataLoadingArray, LOADER_CONFIG,
     getClient,
     initDataToolkitConfig,

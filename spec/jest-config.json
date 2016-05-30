@@ -1,0 +1,22 @@
+{
+	"automock": false,
+	"scriptPreprocessor": "./jest.preprocessor.js",
+	"testRegex": ".*\\.spec\\.ts$",
+	"moduleFileExtensions": [
+		"js",
+		"json",
+		"ts",
+		"node"
+	],
+	"testPathDirs": [
+		"src"
+	],
+	"setupFiles": [
+		"spec/jest-startup.ts"
+	],
+	"globals": {
+		"jasmine": {
+			"DEFAULT_TIMEOUT_INTERVAL": 20000
+		}
+	}
+}

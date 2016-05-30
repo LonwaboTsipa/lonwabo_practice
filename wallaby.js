@@ -1,10 +1,13 @@
+
 module.exports = function (wallaby) {
 
     return {
         files: [
             'src/**/*.ts',
             '!src/**/*.spec.ts',
-            { pattern: 'src/**/*.json', instrument: false, load: false }
+            { pattern: 'src/**/*.json', instrument: false, load: false },
+            { pattern: 'artifacts/**/*', instrument: false, load: false },
+            { pattern: 'spec/**/*', instrument: false, load: false }
         ],
         tests: [
             'src/**/*.spec.ts'
@@ -17,15 +20,10 @@ module.exports = function (wallaby) {
             type: 'node',
             runner: 'node'
         },
-        setup: function (wallaby) {            
-            wallaby.testFramework.configure({
-                "automock": false,
-                "globals": {
-                    "jasmine": {
-                        "DEFAULT_TIMEOUT_INTERVAL": 20000
-                    }
-                }
-            });
+
+        setup: function (wallaby) {
+            var jestConfig = require("./spec/jest-config.json");
+            wallaby.testFramework.configure(jestConfig);
         }
     };
 };

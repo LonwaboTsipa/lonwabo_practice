@@ -6,10 +6,10 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist/",
-    "prepublish": "npm run clean && npm run build",    
-    "build": "npm run clean && tsc",    
+    "prepublish": "npm run clean && npm run build",
+    "build": "npm run clean && tsc",
     "build:watch": "tsc -w",
-    "test": "jest --no-cache",
+    "test": "jest --no-cache --config spec/jest-config.json",
     "properties:dev": "node dist/index.js DEV property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation",
     "properties:staging": "node dist/index.js STAGING property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation",
     "properties:prod": "node dist/index.js PROD property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation",
@@ -19,21 +19,7 @@
     "init:artifacts": "sh scripts/init-artifacts.sh"
   },
   "author": "",
-  "license": "ISC",
-  "jest": {
-    "automock": false,
-    "scriptPreprocessor": "./jest.preprocessor.js",
-    "testRegex": ".*\\.spec\\.ts$",
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts",
-      "node"
-    ],
-    "testPathDirs": [
-      "src"
-    ]
-  },
+  "license": "ISC",  
   "devDependencies": {
     "awesome-typescript-loader": "^0.17.0",
     "babel": "^6.5.2",
@@ -60,6 +46,7 @@
   },
   "dependencies": {
     "@kurtosys/udm_data_toolkit": "^1.2.5",
+    "isomorphic-fetch": "^2.2.1",
     "moment": "^2.13.0",
     "path": "^0.12.7",
     "source-map-support": "^0.4.0"
