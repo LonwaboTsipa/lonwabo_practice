@@ -1,7 +1,27 @@
 # On Premise Loader Template project
 
 ## Setup
-To start do a clone of this repo, then clear the git history in your clone. Then you can just commit this to your repo.
+To start do a clone of this repo, then change the repo path. 
+
+```
+	git clone https://github.com/Kurtosys/ksys_loader_start.git <YOUR PROJECT FOLDER>
+	cd <YOUR PROJECT FOLDER>
+	git remote set-url origin <YOUR PROJECT GIT URL>
+	git push origin master
+```
+
+Now setup the upstream to the template to be able to get latest of the template into your project
+
+```
+	git remote add upstream https://github.com/Kurtosys/ksys_loader_start.git
+``` 
+
+To update from the template call the following:
+
+```
+	git pull upstream master
+```
+
 
 Go to project root and run this to clear the git history
 
