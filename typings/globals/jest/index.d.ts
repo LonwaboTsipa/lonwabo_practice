@@ -59,9 +59,7 @@ declare namespace jest {
         only(name: string, fn: EmptyFunction): void;
     }
 
-    interface Mock<T> {
-        new (): T;
-        (...args: any[]): any; // TODO please fix this line! added for TypeScript 1.1.0-1 https://github.com/DefinitelyTyped/DefinitelyTyped/pull/2932
+    interface Mock<T> {                
         mock: MockContext<T>;
         mockClear(): void;
         mockImplementation(fn: Function): Mock<T>;

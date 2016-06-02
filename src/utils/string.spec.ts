@@ -24,7 +24,7 @@ describe("string", () => {
 	});
 	
 	describe("isNullOrWhitespace", () => {
-		it("will return true on null, undefined, empty or whitespace", () => {
+		it("will return true on null, undefined, empty or whitespace", () => {			
 			expect(isNullOrWhitespace(null as any)).toBe(true);
 			expect(isNullOrWhitespace(undefined as any)).toBe(true);
 			expect(isNullOrWhitespace("")).toBe(true);
