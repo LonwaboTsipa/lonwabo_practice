@@ -2,7 +2,7 @@
 	"local": false,
 	"userName": "[CLIENT_NAME]_STAGING_ADMIN_USERNAME",
 	"userPwd": "[CLIENT_NAME]_STAGING_ADMIN_PASSWORD",
-	"loaderName": "[CLIENT_NAME]_ksys339_loader_staging",
+	"loaderName": "[CLIENT_NAME]_[PROJECT_CODE]_loader_staging",
 	"ftpServer": "[CLIENT_NAME]_STAGING_SFTP_SERVER",
 	"ftpUser": "[CLIENT_NAME]_STAGING_SFTP_USER",
 	"ftpPwd": "[CLIENT_NAME]_STAGING_SFTP_PASSWORD",

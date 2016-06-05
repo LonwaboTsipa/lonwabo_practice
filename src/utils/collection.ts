@@ -5,7 +5,7 @@ export function firstOrDefault<TElement>(collection: TElement[], defaultResult: 
 	return (collection || []).length === 0 ? defaultResult : collection[0];
 }
 
-export function isNullOrEmpty(collection: any[]): boolean {
+export function isNullOrEmpty(collection: any[] | undefined): boolean {
 	return isNullOrUndefined(collection) || collection.length === 0;
 }
 

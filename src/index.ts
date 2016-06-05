@@ -1,22 +1,9 @@
 require('isomorphic-fetch');
-import { login, dataLoadingArray, LOADER_CONFIG,
-    getClient,
-    initDataToolkitConfig,
-    registerLoaderStart,
-    loadFilesFromFolder,
-    IManifest,
-    insertWebSocket,
-    createData,
-    IPropertyDescriptor,
-    registerLoaderEnd,
-    syncFTPFolder,
-    finalizeFTP,
-    TargetObject,
-    EntityType
-} from "@kurtosys/udm_data_toolkit";
+import { login, dataLoadingArray, LOADER_CONFIG, getClient, initDataToolkitConfig, registerLoaderStart, loadFilesFromFolder, IManifest,
+        insertWebSocket, createData, IPropertyDescriptor, registerLoaderEnd, syncFTPFolder, finalizeFTP, TargetObject, EntityType } from "@kurtosys/udm_data_toolkit";
 import * as path from "path";
 import * as fs from "fs";
-import {orchestrateManifest, toCode, isNullOrEmpty} from "./utils";
+import {orchestrateManifest, toCode, isNullOrEmpty, concatDataToLoad} from "./utils";
 import {processAllocations, processFunds, processShareClasses} from "./processors";
 import {fetchFunds, fetchShares} from "./services";
 // Get the manifest with data source mappings
@@ -46,13 +33,13 @@ export async function loadDataAsync() {
         if (hasFilesToLoad) {
             // PROCESSING LOGIC GOES HERE
             
-            if (manifest['funds'] && !isNullOrEmpty(manifest['funds'].data)) {
-                let result = await processFunds(manifest['funds'].data);
+            if (manifest["funds"] && !isNullOrEmpty(manifest['funds'].data)) {
+                let result = await processFunds(manifest['funds'].data as {}[]);
                 dataToLoad = concatDataToLoad(dataToLoad, result);
             }
             
             if (manifest['shareClasses'] && !isNullOrEmpty(manifest['shareClasses'].data)) {
-                let result = await processShareClasses(manifest['shareClasses'].data);
+                let result = await processShareClasses(manifest['shareClasses'].data as {}[]);
                 dataToLoad = concatDataToLoad(dataToLoad, result);
             }
             
@@ -64,11 +51,11 @@ export async function loadDataAsync() {
             fundsAndShares = fundsAndShares.concat(dataToLoad.classes || []);
             
             if (manifest['allocations'] && !isNullOrEmpty(manifest['allocations'].data)) {
-                let result = await processAllocations(fundsAndShares, manifest['allocations'].data);
+                let result = await processAllocations(fundsAndShares, manifest['allocations'].data as {}[]);
                 dataToLoad = concatDataToLoad(dataToLoad, result);
             }
             
-            insertDataToLoad(dataToLoad);            
+            //insertDataToLoad(dataToLoad);            
             
             if (useFTP) {
                 await finalizeFTP(ftpSourceRelativePath, ftpArchiveRelativePath);
@@ -101,14 +88,4 @@ async function insertDataToLoad(dataToLoad: dataLoadingArray) {
     }    
 }
 
-function concatDataToLoad(global, current) {
-    let response = Object.assign({}, global);
-    Object.keys(current).map(key => {
-        if (!response[key]) {
-            response[key] = [];
-        }
-        response[key] = response[key].concat(current[key]);
-    });
-    return response;
-}
 initDataToolkitConfig(rootDir, loadDataAsync);
