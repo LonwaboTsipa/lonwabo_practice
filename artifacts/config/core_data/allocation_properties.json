@@ -1,1 +1,16 @@
-[]
+[
+	{
+        "code": "allocation_1",
+        "entityType": "CLSS",
+        "label": "Allocation 1",
+        "description": "Allocation 1 Description",
+        "group": "core",		
+        "extended": [
+            {
+                "label": "sector",
+                "dataType": "STRG"
+            }
+        ],
+        "cardinality": "1"
+    }	
+]

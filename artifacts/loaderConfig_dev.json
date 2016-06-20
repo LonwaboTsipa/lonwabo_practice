@@ -1,12 +1,15 @@
 {
 	"local": true,
-	"userName": "[CLIENT_NAME]_DEV_ADMIN_USERNAME",
-	"userPwd": "[CLIENT_NAME]_DEV_ADMIN_PASSWORD",
+	"userName": "TEMPLATE_DEV_ADMIN_USERNAME",
+	"userPwd": "TEMPLATE_DEV_ADMIN_PASSWORD",
 	"loaderName": "[CLIENT_NAME]_[PROJECT_CODE]_loader_dev",
 	"ftpServer": "[CLIENT_NAME]_DEV_SFTP_SERVER",
 	"ftpUser": "[CLIENT_NAME]_DEV_SFTP_USER",
 	"ftpPwd": "[CLIENT_NAME]_DEV_SFTP_PASSWORD",
-	"clientName":"[CLIENT_NAME]TOOLS",
+	"clientName":"TEMPLATE_CLIENTTOOLS",
 	"scheduleType":"IMMEDIATE",
-	"schedule":"00 */60 * * * *"    
+	"schedule":"00 */60 * * * *",
+	"endPoints": {
+        "search" : "http://localhost:12004/searchEntity"
+    }     
 }

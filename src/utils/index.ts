@@ -5,3 +5,5 @@ export * from "./excel";
 export * from "./manifest";
 export * from "./function";
 export * from "./dataToLoad";
+export * from "./processor";
+export * from "./orchestrate";

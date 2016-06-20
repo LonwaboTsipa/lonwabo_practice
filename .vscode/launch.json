@@ -16,8 +16,8 @@
 			],
 			"env": {
 				"NODE_ENV": "development",
-				"": "template_dev_admin_user",
-				"": "password"
+				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
+				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
 			},
 			"externalConsole": false,
 			"sourceMaps": true,

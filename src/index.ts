@@ -1,16 +1,15 @@
 require('isomorphic-fetch');
 import { login, dataLoadingArray, LOADER_CONFIG, getClient, initDataToolkitConfig, registerLoaderStart, loadFilesFromFolder, IManifest,
-        insertWebSocket, createData, IPropertyDescriptor, registerLoaderEnd, syncFTPFolder, finalizeFTP, TargetObject, EntityType } from "@kurtosys/udm_data_toolkit";
+       IPropertyDescriptor, registerLoaderEnd, syncFTPFolder, finalizeFTP
+       } from "@kurtosys/udm_data_toolkit";
 import * as path from "path";
 import * as fs from "fs";
-import {orchestrateManifest, toCode, isNullOrEmpty, concatDataToLoad} from "./utils";
-import {processAllocations, processFunds, processShareClasses} from "./processors";
-import {fetchFunds, fetchShares} from "./services";
+import {orchestrateManifest, toCode, isNullOrEmpty, concatDataToLoad, insertDataToLoad, orchestrateManifestData, isNullOrUndefined} from "./utils";
+import {processAllocations, processFunds, processShareClasses, processTimeseries} from "./processors";
+import {fetchFunds, fetchShareClasses} from "./services";
 // Get the manifest with data source mappings
 const rawManifest = <IManifest[]>require("../artifacts/config/manifest");
-// Orchestrate the manifest to be able to create an object out of the manifest items
-// This requires the manifest elements to have a "key" attribute
-const manifest = orchestrateManifest(rawManifest);
+
 
 const rootDir = path.resolve(process.cwd(), "artifacts");
 const pendingDir = path.resolve(rootDir, "pending");
@@ -31,31 +30,39 @@ export async function loadDataAsync() {
         let hasFilesToLoad = await loadFilesFromFolder(pendingDir, rawManifest.filter(m => m.isFileForLoad));
 
         if (hasFilesToLoad) {
-            // PROCESSING LOGIC GOES HERE
+            // Orchestrate the manifest to be able to create an object out of the manifest items
+            // This requires the manifest elements to have a "key" attribute
+            // The data needs to be loaded in first before we orchestrate the manifest as it does not mutate the original
+            const manifest = orchestrateManifest(rawManifest);
+            // PROCESSING LOGIC GOES HERE            
+            if (manifest["funds"] && !isNullOrEmpty(manifest['funds'].orchestratedData)) {                
+                let result = await processFunds(manifest['funds'].orchestratedData as {}[]);
+                dataToLoad = concatDataToLoad(dataToLoad, result);                                                    
+            }
             
-            if (manifest["funds"] && !isNullOrEmpty(manifest['funds'].data)) {
-                let result = await processFunds(manifest['funds'].data as {}[]);
+            if (manifest['shareClasses'] && !isNullOrEmpty(manifest['shareClasses'].orchestratedData)) {
+                let result = await processShareClasses(manifest['shareClasses'].orchestratedData as {}[]);
                 dataToLoad = concatDataToLoad(dataToLoad, result);
             }
             
-            if (manifest['shareClasses'] && !isNullOrEmpty(manifest['shareClasses'].data)) {
-                let result = await processShareClasses(manifest['shareClasses'].data as {}[]);
-                dataToLoad = concatDataToLoad(dataToLoad, result);
-            }
-            
+            await insertDataToLoad(dataToLoad);
             // Fetch any additional funds or share classes that were previously loaded 
             // this is done in case we are running delta files
-            let fundsAndShares = await fetchFunds(token);
-            fundsAndShares = fundsAndShares.concat(await fetchShares(token));
-            fundsAndShares = fundsAndShares.concat(dataToLoad.funds || []);
-            fundsAndShares = fundsAndShares.concat(dataToLoad.classes || []);
+            let existingFunds = await fetchFunds(token);
+            let existingShareClasses = await fetchShareClasses(token);
+            let fundsAndShares = [].concat(existingFunds).concat(existingShareClasses);
             
-            if (manifest['allocations'] && !isNullOrEmpty(manifest['allocations'].data)) {
-                let result = await processAllocations(fundsAndShares, manifest['allocations'].data as {}[]);
+            if (manifest['allocations'] && !isNullOrEmpty(manifest['allocations'].orchestratedData)) {
+                let result = await processAllocations(fundsAndShares, manifest['allocations'].orchestratedData as {}[]);
+                dataToLoad = concatDataToLoad(dataToLoad, result);
+            }
+
+            if (manifest['timeseries'] && !isNullOrEmpty(manifest['timeseries'].orchestratedData)) {
+                let result = await processTimeseries(fundsAndShares, manifest['timeseries'].orchestratedData as {}[]);
                 dataToLoad = concatDataToLoad(dataToLoad, result);
             }
             
-            //insertDataToLoad(dataToLoad);            
+            await insertDataToLoad(dataToLoad, true);            
             
             if (useFTP) {
                 await finalizeFTP(ftpSourceRelativePath, ftpArchiveRelativePath);
@@ -74,18 +81,6 @@ export async function loadDataAsync() {
         }
         throw e;
     }
-}
-
-async function insertDataToLoad(dataToLoad: dataLoadingArray) {
-    let mappings = [
-        { key: 'funds', entityType: 'fund', targetObject: 'FUND' },
-        { key: 'classes', entityType: 'fund', targetObject: 'CLSS' }
-    ];
-    for (let mapping of mappings) {
-        if (!isNullOrEmpty(dataToLoad[mapping.key])) {
-            insertWebSocket(dataToLoad[mapping.key], mapping.entityType as TargetObject, mapping.targetObject as EntityType)        
-        }
-    }    
 }
 
 initDataToolkitConfig(rootDir, loadDataAsync);

@@ -1,1 +1,43 @@
-[]
+[
+	{
+        "key": "funds",
+        "isFileForLoad": true,
+        "fileName": "Fund.csv",
+        "sheet": "Fund",
+        "regex": "Fund.*\\.csv",
+        "type": "csv",
+        "raw": true,
+        "description": "Funds",
+        "csvOptions": { "separator": ";", "quote": "'", "escape": "'" }
+    },
+	{
+        "key": "shareClasses",
+        "isFileForLoad": true,
+        "fileName": "ShareClasses.xlsx",
+        "sheet": "ShareClass",
+        "regex": "ShareClass.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "Share Classes"
+    },
+    {
+        "key": "allocations",
+        "isFileForLoad": true,
+        "fileName": "Allocation.xlsx",
+        "sheet": "Allocation",
+        "regex": "Allocation.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "Allocations"
+    },
+    {
+        "key": "timeseries",
+        "isFileForLoad": true,
+        "fileName": "Timeseries.xlsx",
+        "sheet": "Timeseries",
+        "regex": "Timeseries.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "Timeseries"
+    }
+]

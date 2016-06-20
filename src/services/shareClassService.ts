@@ -1,6 +1,6 @@
 import { LOADER_CONFIG } from "@kurtosys/udm_data_toolkit";
 
-export async function fetchShares(token) {
+export async function fetchShareClasses(token) {
     let response = await fetch(LOADER_CONFIG["originalConfig"].endPoints.search, {
         method: "POST",
         headers: Object.assign({}, {

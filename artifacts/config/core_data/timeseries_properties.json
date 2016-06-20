@@ -1,1 +1,11 @@
-[]
+[
+	{
+        "code": "timeseries_1",
+        "entityType": "CLSS",
+        "label": "Timeseries 1",
+        "description": "Timeseries 1 Description",
+        "group": "core",		
+        "extended": [],
+        "cardinality": "1"
+    }	
+]

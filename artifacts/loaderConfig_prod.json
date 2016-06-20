@@ -8,5 +8,8 @@
 	"ftpPwd": "[CLIENT_NAME]_PROD_SFTP_PASSWORD",
 	"clientName":"[CLIENT_NAME]",
 	"scheduleType":"SCHEDULE",
-	"schedule":"00 */60 * * * *" 
+	"schedule":"00 */60 * * * *",
+	"endPoints": {
+        "search" : "https://api.fundpress.io/fund/searchentity"
+    }
 }

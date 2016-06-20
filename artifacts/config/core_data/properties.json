@@ -1,1 +1,67 @@
-[]
+[
+	{
+        "code": "client_code",
+        "entityType": "FUND",
+        "dataType": "STRG",
+        "validationRule": "NONE",
+        "group": "core",
+        "description": "clientCode",
+        "label": "Client Code",
+        "cardinality": "1",
+		"sourceField": "Fund Code"
+    },
+    {
+        "code": "name",
+        "entityType": "FUND",
+        "dataType": "STRG",
+        "validationRule": "NONE",
+        "group": "core",
+        "description": "Fund name",
+        "label": "Name",
+        "cardinality": "1",
+		"sourceField": "Name"
+    },
+	{
+        "code": "external_id",
+        "entityType": "FUND",
+        "dataType": "STRG",
+        "validationRule": "NONE",
+        "group": "core",
+        "description": "External ID",
+        "label": "External ID",
+        "cardinality": "1"
+    },
+    {
+        "code": "isin",
+        "entityType": "CLSS",
+        "dataType": "STRG",
+        "validationRule": "NONE",
+        "group": "core",
+        "description": "The share class' ISIN",
+        "label": "Isin",
+        "cardinality": "1",
+		"sourceField": "Isin"
+    },
+    {
+        "code": "fund_key",
+        "entityType": "CLSS",
+        "dataType": "STRG",
+        "validationRule": "NONE",
+        "group": "core",
+        "description": "Fund Key",
+        "label": "Fund",
+        "cardinality": "1",
+		"sourceField": "Fund"
+    },
+	{
+        "code": "name",
+        "entityType": "CLSS",
+        "dataType": "STRG",
+        "validationRule": "NONE",
+        "group": "core",
+        "description": "Name",
+        "label": "Name",
+        "cardinality": "1",
+        "sourceField": "Name"
+    }
+]

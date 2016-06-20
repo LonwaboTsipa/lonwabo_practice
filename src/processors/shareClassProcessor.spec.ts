@@ -8,7 +8,11 @@ describe('src/processors/shareClassProcessor.ts', () => {
         
     });
     describe("processShareClasses", () => {        
-        let dataToLoad = [];
+        let dataToLoad = [{
+            "clientCode": "testCode",
+            "entityType": "CLSS",
+            "propertiesPub": {}
+        }];   
         pit("will return dataLoadingArray with classes", async () => {
             let response = await processShareClasses(dataToLoad);   
             expect(response).toBeDefined();
