@@ -33,34 +33,30 @@ export async function loadDataAsync() {
             // This requires the manifest elements to have a "key" attribute
             // The data needs to be loaded in first before we orchestrate the manifest as it does not mutate the original
             const manifest = orchestrateManifest(rawManifest);
-            // PROCESSING LOGIC GOES HERE            
-            if (manifest["funds"] && !isNullOrEmpty(manifest['funds'].orchestratedData)) {                
-                let result = await processFunds(manifest['funds'].orchestratedData as {}[]);
-                dataToLoad = concatDataToLoad(dataToLoad, result);                                                    
-            }
+
+            // Process Funds            
+            dataToLoad = concatDataToLoad(dataToLoad, await processFunds(manifest));
             
-            if (manifest['shareClasses'] && !isNullOrEmpty(manifest['shareClasses'].orchestratedData)) {
-                let result = await processShareClasses(manifest['shareClasses'].orchestratedData as {}[]);
-                dataToLoad = concatDataToLoad(dataToLoad, result);
-            }
+            // Process Share Classes
+            dataToLoad = concatDataToLoad(dataToLoad, await processShareClasses(manifest));
             
+            // Save Fund & ShareClass data to the database, incase we are processing delta files and we need the full fund & share class data for 
+            // allocations, etc.
             await insertDataToLoad(dataToLoad);
+
             // Fetch any additional funds or share classes that were previously loaded 
             // this is done in case we are running delta files
             let existingFunds = await fetchFunds(token);
             let existingShareClasses = await fetchShareClasses(token);
             let fundsAndShares = [].concat(existingFunds).concat(existingShareClasses);
             
-            if (manifest['allocations'] && !isNullOrEmpty(manifest['allocations'].orchestratedData)) {
-                let result = await processAllocations(fundsAndShares, manifest['allocations'].orchestratedData as {}[]);
-                dataToLoad = concatDataToLoad(dataToLoad, result);
-            }
+            // Process Allocations
+            dataToLoad = concatDataToLoad(dataToLoad, await processAllocations(fundsAndShares, manifest));
 
-            if (manifest['timeseries'] && !isNullOrEmpty(manifest['timeseries'].orchestratedData)) {
-                let result = await processTimeseries(fundsAndShares, manifest['timeseries'].orchestratedData as {}[]);
-                dataToLoad = concatDataToLoad(dataToLoad, result);
-            }
+            // Process Timeseries
+            dataToLoad = concatDataToLoad(dataToLoad, await processTimeseries(fundsAndShares, manifest));
             
+            // Insert Allocation, Timeseries, etc
             await insertDataToLoad(dataToLoad, true);            
             
             if (useFTP) {

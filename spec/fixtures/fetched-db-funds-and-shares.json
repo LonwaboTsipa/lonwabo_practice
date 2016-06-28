@@ -1,0 +1,149 @@
+[
+	{
+		"entityId": 1,
+		"parentEntityId": null,
+		"type": "FUND",
+		"clientId": 2,
+		"clientCode": "Fund1",
+		"lastModified": "2016-06-28T11:03:29.000Z",
+		"lastModifiedBy": 2,
+		"created": "2016-06-21T12:45:28.000Z",
+		"createdBy": 2,
+		"properties_pub": {
+			"client_code": {
+				"value": "Fund1"
+			},
+			"external_id": {
+				"value": "f1"
+			},
+			"name": {
+				"value": "Fund one"
+			}
+		},
+		"properties_draft": null,
+		"userProperties_pub": null,
+		"userProperties_draft": null,
+		"jobReference": "71e42650-74d4-4be0-a465-07617fac5567",
+		"rowHash": "164706544ba5be2cab649d8cf2787a87dea079332530164df649ca69c8016ba1",
+		"timeseries": [
+			{
+				"timeseriesId": 1,
+				"clientId": 2,
+				"entityId": 1,
+				"code": "timeseries_1",
+				"periodicity": "MONTHLY",
+				"ccy": "N/A",
+				"classification": "N/A",
+				"values": [
+					{
+						"date": "2016-01-01",
+						"value": 10
+					},
+					{
+						"date": "2016-02-01",
+						"value": 15
+					},
+					{
+						"date": "2016-03-01",
+						"value": 20
+					},
+					{
+						"date": "2016-04-01",
+						"value": 25
+					},
+					{
+						"date": "2016-05-01",
+						"value": 30
+					},
+					{
+						"date": "2016-06-01",
+						"value": 35
+					},
+					{
+						"date": "2016-07-01",
+						"value": 40
+					},
+					{
+						"date": "2016-08-01",
+						"value": 45
+					},
+					{
+						"date": "2016-09-01",
+						"value": 50
+					},
+					{
+						"date": "2016-10-01",
+						"value": 55
+					},
+					{
+						"date": "2016-11-01",
+						"value": 60
+					},
+					{
+						"date": "2016-12-01",
+						"value": 65
+					}
+				],
+				"lastModified": "2016-06-28T11:00:13.000Z",
+				"lastModifiedBy": 2,
+				"created": "2016-06-21T12:45:31.000Z",
+				"createdBy": 2,
+				"jobReference": "b36f14eb-81b3-477a-ab83-6e811a8d080c",
+				"rowHash": "25dc7d165d00c608e900a596666e0bd3f500ce76681b8f3fdfcba32c67d010da"
+			}
+		],
+		"allocations": [
+			{
+				"allocationId": 1,
+				"clientId": 2,
+				"entityId": 1,
+				"code": "allocation_1",
+				"ccy": "N/A",
+				"values": [
+					{
+						"label": "Company 1",
+						"sector": "Industrial",
+						"value": 50
+					}
+				],
+				"lastModified": "2016-06-28T11:00:13.000Z",
+				"lastModifiedBy": 2,
+				"created": "2016-06-21T12:45:32.000Z",
+				"createdBy": 2,
+				"jobReference": "65dbafd2-bfbf-4af2-8240-84c5a2e3198b",
+				"rowHash": "5b4f3c819eadd2edca3560ca06e35e4e056a1d7ee1dad337739c1a239fc5d0f2"
+			}
+		],
+		"statistics": []
+	},
+	{
+		"entityId": 2,
+		"parentEntityId": null,
+		"type": "CLSS",
+		"clientId": 2,
+		"clientCode": "Isin1",
+		"lastModified": "2016-06-28T11:03:29.000Z",
+		"lastModifiedBy": 2,
+		"created": "2016-06-21T12:45:28.000Z",
+		"createdBy": 2,
+		"properties_pub": {
+			"fund_key": {
+				"value": "Fund1"
+			},
+			"isin": {
+				"value": "Isin1"
+			},
+			"name": {
+				"value": "ShareClass1"
+			}
+		},
+		"properties_draft": null,
+		"userProperties_pub": null,
+		"userProperties_draft": null,
+		"jobReference": "e8269649-21c5-4bb6-a4a3-4a4d299eb936",
+		"rowHash": "ca546c02abeaf1145c45b5ca8eed703677cb1d1c9cebf3666795908644653d0a",
+		"timeseries": [],
+		"allocations": [],
+		"statistics": []
+	}
+]

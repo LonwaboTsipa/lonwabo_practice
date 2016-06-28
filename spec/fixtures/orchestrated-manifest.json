@@ -1,0 +1,157 @@
+{
+    "funds": {
+        "key": "funds",
+        "isFileForLoad": true,
+        "fileName": "Fund.csv",
+        "sheet": "Fund",
+        "regex": "Fund.*\\.csv",
+        "type": "csv",
+        "raw": true,
+        "description": "Funds",
+        "csvOptions": {
+            "separator": ";",
+            "quote": "'",
+            "escape": "'"
+        },
+        "orchestratedData": [
+            {
+                "Fund Code": "Fund1",
+                "Name": "Fund one",
+                "External ID": "f1"
+            }
+        ]
+    },
+    "shareClasses": {
+        "key": "shareClasses",
+        "isFileForLoad": true,
+        "fileName": "ShareClasses.xlsx",
+        "sheet": "ShareClass",
+        "regex": "ShareClass.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "Share Classes",
+        "orchestratedData": [
+            {
+                "Isin": "Isin1",
+                "Fund": "Fund1",
+                "Name": "ShareClass1"
+            }
+        ]
+    },
+    "allocations": {
+        "key": "allocations",
+        "isFileForLoad": true,
+        "fileName": "Allocation.xlsx",
+        "sheet": "Allocation",
+        "regex": "Allocation.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "Allocations",
+        "orchestratedData": [
+            {
+                "Date": 42370,
+                "Fund Code": "Fund1",
+                "Type": "Allocation 1",
+                "Label": "Company 1",
+                "Value": 50,
+                "Sector": "Industrial"
+            }
+        ]
+    },
+    "timeseries": {
+        "key": "timeseries",
+        "isFileForLoad": true,
+        "fileName": "Timeseries.xlsx",
+        "sheet": "Timeseries",
+        "regex": "Timeseries.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "Timeseries",
+        "orchestratedData": [
+            {
+                "Date": 42370,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "10"
+            },
+            {
+                "Date": 42401,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "15"
+            },
+            {
+                "Date": 42430,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "20"
+            },
+            {
+                "Date": 42461,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "25"
+            },
+            {
+                "Date": 42491,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "30"
+            },
+            {
+                "Date": 42522,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "35"
+            },
+            {
+                "Date": 42552,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "40"
+            },
+            {
+                "Date": 42583,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "45"
+            },
+            {
+                "Date": 42614,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "50"
+            },
+            {
+                "Date": 42644,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "55"
+            },
+            {
+                "Date": 42675,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "60"
+            },
+            {
+                "Date": 42705,
+                "FundCode": "Fund1",
+                "Type": "Timeseries1",
+                "Periodicity": "Monthly",
+                "Value": "65"
+            }
+        ]
+    }
+}
