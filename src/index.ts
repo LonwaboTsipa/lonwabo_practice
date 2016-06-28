@@ -10,7 +10,6 @@ import {fetchFunds, fetchShareClasses} from "./services";
 // Get the manifest with data source mappings
 const rawManifest = <IManifest[]>require("../artifacts/config/manifest");
 
-
 const rootDir = path.resolve(process.cwd(), "artifacts");
 const pendingDir = path.resolve(rootDir, "pending");
 const useFTP = false;

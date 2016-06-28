@@ -22,7 +22,7 @@ export function orchestrateXlsxData(rawDataToProcess: XlsxData): {}[] {
 	return orchestrateArrayOfArrays(rawDataToProcess);
 } 
 
-export function orchestrateArrayOfArrays(rawDataToProcess: (string | number)[][]): {}[] {
+export function orchestrateArrayOfArrays(rawDataToProcess: (string | number | undefined)[][]): {}[] {
 	let response = [];
 	if (!isNullOrEmpty(rawDataToProcess)) {
 		let data = [].concat(rawDataToProcess);
