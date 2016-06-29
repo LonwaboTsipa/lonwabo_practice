@@ -62,13 +62,23 @@ export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFund
         { key: 'timeseries', targetType: 'timeseries', isCreateDataElement: false, disabled: false },
         { key: 'statistics', targetType: 'statistics', isCreateDataElement: false, disabled: false },
         { key: 'allocations', targetType: 'allocations', isCreateDataElement: false, disabled: false },
-        { key: 'documents', targetType: 'documents', isCreateDataElement: false, disabled: false }
+        { key: 'documents', targetType: 'documents', isCreateDataElement: false, disabled: false },
+        { key: 'commentary', targetType: 'commentary', isCreateDataElement: false, disabled: false },
+        { key: 'disclaimers', targetType: 'commentary', isCreateDataElement: false, disabled: false }
     ];
 
     for (let mapping of mappings) {
         let entityTypes = ["FUND", "CLSS"];
         for (let entityType of entityTypes) {
-            let records = dataToLoad[mapping.key].filter(element => element.entityType === entityType);
+            let records = dataToLoad[mapping.key].filter(element => {
+                if (element.entityType) {
+                    return element.entityType === entityType;
+                } else if (element.type){
+                    return element.type === entityType;
+                } else {
+                    return element;
+                }
+            });
             if (records && records.length > 0) {
                 if (!mapping.disabled && dataToLoad[mapping.key] && dataToLoad[mapping.key].length > 0) {
                     if (mapping.key === 'documents') {
