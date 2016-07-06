@@ -5,7 +5,7 @@ import { login, dataLoadingArray, LOADER_CONFIG, getClient, initDataToolkitConfi
 import * as path from "path";
 import * as fs from "fs";
 import {orchestrateManifest, toCode, isNullOrEmpty, concatDataToLoad, insertDataToLoad, orchestrateManifestData, isNullOrUndefined} from "./utils";
-import {processAllocations, processFunds, processShareClasses, processTimeseries} from "./processors";
+import {processAllocations, processFunds, processShareClasses, processTimeseries, processStatistics} from "./processors";
 import {fetchFunds, fetchShareClasses} from "./services";
 // Get the manifest with data source mappings
 const rawManifest = <IManifest[]>require("../artifacts/config/manifest");
@@ -52,6 +52,9 @@ export async function loadDataAsync() {
             
             // Process Allocations
             dataToLoad = concatDataToLoad(dataToLoad, await processAllocations(fundsAndShares, manifest));
+
+            // Process Statistics
+            dataToLoad = concatDataToLoad(dataToLoad, await processStatistics(fundsAndShares, manifest));
 
             // Process Timeseries
             dataToLoad = concatDataToLoad(dataToLoad, await processTimeseries(fundsAndShares, manifest));

@@ -1,0 +1,22 @@
+[
+	{
+		"code": "client_code",
+		"dataType": "STRG",
+		"sourceField": "Fund Code"
+	},
+	{
+		"code": "type",
+		"dataType": "STRG",
+		"sourceField": "Type"
+	},
+	{
+		"code": "label",
+		"dataType": "STRG",
+		"sourceField": "Label"
+	},
+	{
+		"code": "value",
+		"dataType": "DCML",
+		"sourceField": "Value"
+	}
+]

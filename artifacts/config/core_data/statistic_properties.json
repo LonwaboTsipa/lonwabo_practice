@@ -1,1 +1,11 @@
-[]
+[
+	{
+		"code": "statistics_1",
+		"entityType": "CLSS",
+		"label": "Statistics 1",
+		"description": "Statistics 1 Description",
+		"formatCode": "number",
+		"group": "core",
+		"extended": [],
+	}
+]
