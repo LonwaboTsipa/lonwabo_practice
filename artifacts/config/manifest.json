@@ -1,5 +1,5 @@
 [
-	{
+    {
         "key": "funds",
         "isFileForLoad": true,
         "fileName": "Fund.csv",
@@ -8,9 +8,13 @@
         "type": "csv",
         "raw": true,
         "description": "Funds",
-        "csvOptions": { "separator": ";", "quote": "'", "escape": "'" }
+        "csvOptions": {
+            "separator": ";",
+            "quote": "'",
+            "escape": "'"
+        }
     },
-	{
+    {
         "key": "shareClasses",
         "isFileForLoad": true,
         "fileName": "ShareClasses.xlsx",
@@ -39,5 +43,71 @@
         "type": "xlsx",
         "raw": true,
         "description": "Timeseries"
+    },
+    {
+        "key": "searchApi",
+        "isFileForLoad": false,
+        "type": "api",
+        "description": "searchApi",
+        "apiOptions": {
+            "type": "Fundpress_entity",
+            "url": "/searchEntity",
+            "method": "POST",
+            "body": {
+                "type": "FUND",
+                "clientCode": [""],
+                "search": []                           
+            }
+        }
+    },
+    {
+        "key": "userList",
+        "isFileForLoad": false,
+        "type": "api",
+        "description": "userList",
+        "apiOptions": {
+            "type": "Fundpress_auth",
+            "url": "/listUsers",
+            "method": "POST"            
+        }
+    },
+    {
+        "key": "monringstarDetails",
+        "isFileForLoad": false,
+        "type": "api",
+        "description": "monringstarDetails",
+        "apiOptions": {
+            "type": "morningstar",
+            "url": "/DataOutput.aspx?Package=EDW&ClientId=FW&IDTYpe=FundShareClassId&Content=1471&Currencies=BAS&Id={mstarInternalId}",
+            "method": "GET"                   
+        }
+    },
+    {
+        "key": "oneview",
+        "isFileForLoad": false,
+        "type": "api",
+        "description": "oneview",
+        "apiOptions": {
+            "type": "oneview",
+            "url": "/wmfreportconfig/65J3.json",
+            "method": "GET",
+            "deepLinks": {
+                "shareClasses": {                    
+                    "shareclassMaster": {
+                        "_deepLinkApiOptions": {}                        
+                    },
+                    "characterstics": {
+                        "_deepLinkApiOptions": {}
+                    },
+                    "performance": {
+                        "returns": {
+                            "_deepLinkApiOptions": {}
+                        }
+                    }
+                }                
+            }                 
+        }
     }
+    
+
 ]

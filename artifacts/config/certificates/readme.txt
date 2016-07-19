@@ -1,0 +1,1 @@
+This is the location for adding certificates that can be used for 2 way ssl.

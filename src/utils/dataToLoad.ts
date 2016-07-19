@@ -1,20 +1,20 @@
 import {firstOrDefault} from "../utils";
 import {dataLoadingArray, insertWebSocket, createData, createDocuments, TargetObject, EntityType, PropertyType } from "@kurtosys/udm_data_toolkit";
-export function getProperty(item : { [keys: string]: any; }, property: string): any {
+export function getProperty(item: { [keys: string]: any; }, property: string): any {
     return item && item[property] ? item[property] : "";
 }
-export function getClientCode(item : {}) {
+export function getClientCode(item: {}) {
     return getProperty(item, 'clientCode');
 }
-export function getTimeseriesKey(item : {}) {
+export function getTimeseriesKey(item: {}) {
     let keys = ['clientCode', 'code', 'ccy', 'classification', 'periodicity'];
     return keys.map(k => item[k]).join('|');
 }
-export function getStatisticsKey(item : {}) {
+export function getStatisticsKey(item: {}) {
     let keys = ['clientCode', 'code', 'ccy'];
     return keys.map(k => item[k]).join('|');
 }
-export function getAllocationsKey(item : {}) {
+export function getAllocationsKey(item: {}) {
     let keys = ['clientCode', 'code', 'ccy'];
     return keys.map(k => item[k]).join('|');
 }
@@ -28,7 +28,7 @@ let mappings = {
     'documents': { key: 'documents', uniqueIdentifierFn: getClientCode }
 };
 
-export function concatDataToLoad(global : dataLoadingArray, ...params : dataLoadingArray[]) : dataLoadingArray {
+export function concatDataToLoad(global: dataLoadingArray, ...params: dataLoadingArray[]): dataLoadingArray {
     let response = Object.assign({}, global);
     for (let current of params) {
         Object.keys(current).map(key => {
@@ -69,29 +69,32 @@ export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFund
 
     for (let mapping of mappings) {
         let entityTypes = ["FUND", "CLSS"];
-        for (let entityType of entityTypes) {
-            let records = dataToLoad[mapping.key].filter(element => {
-                if (element.entityType) {
-                    return element.entityType === entityType;
-                } else if (element.type){
-                    return element.type === entityType;
-                } else {
-                    return element;
-                }
-            });
-            if (records && records.length > 0) {
-                if (!mapping.disabled && dataToLoad[mapping.key] && dataToLoad[mapping.key].length > 0) {
-                    if (mapping.key === 'documents') {
-                        await createDocuments(records);
+        if (dataToLoad && dataToLoad[mapping.key]) {
+            for (let entityType of entityTypes) {
+                let records = dataToLoad[mapping.key].filter(element => {
+                    if (element.entityType) {
+                        return element.entityType === entityType;
+                    } else if (element.type) {
+                        return element.type === entityType;
+                    } else {
+                        return element;
                     }
-                    else if (mapping.isCreateDataElement) {
-                        await createData(records, mapping.targetType as PropertyType);
-                    }
-                    else {
-                        await insertWebSocket(records, mapping.targetType as TargetObject, entityType as EntityType);
+                });
+                if (records && records.length > 0) {
+                    if (!mapping.disabled && dataToLoad[mapping.key] && dataToLoad[mapping.key].length > 0) {
+                        if (mapping.key === 'documents') {
+                            await createDocuments(records);
+                        }
+                        else if (mapping.isCreateDataElement) {
+                            await createData(records, mapping.targetType as PropertyType);
+                        }
+                        else {
+                            await insertWebSocket(records, mapping.targetType as TargetObject, entityType as EntityType);
+                        }
                     }
                 }
             }
         }
+
     }
 }

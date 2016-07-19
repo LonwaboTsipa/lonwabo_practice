@@ -6,10 +6,26 @@
 	"ftpServer": "[CLIENT_NAME]_DEV_SFTP_SERVER",
 	"ftpUser": "[CLIENT_NAME]_DEV_SFTP_USER",
 	"ftpPwd": "[CLIENT_NAME]_DEV_SFTP_PASSWORD",
-	"clientName":"TEMPLATE_CLIENTTOOLS",
-	"scheduleType":"IMMEDIATE",
-	"schedule":"00 */60 * * * *",
+	"clientName": "TEMPLATE_CLIENTTOOLS",
+	"scheduleType": "IMMEDIATE",
+	"schedule": "00 */60 * * * *",
 	"endPoints": {
-        "search" : "http://localhost:12004/searchEntity"
-    }     
+		"search": "http://localhost:12004/searchEntity"
+	},
+	"externalApi": {
+		"morningstar": {
+			"isTextResponse": true,
+			"type": "morningstar",
+			"baseUrl": "http://edw.morningstar.com/"			
+		},
+		"oneview": {
+			"type": "oneview",
+			"baseUrl": "https://api.test-oneview.wellington.com",
+			"requiresCertificate": true,
+			"certificateName": "Welldev.p12",
+			"certificatePassphrase": "PASSPHRASE",
+			"username": "USERNAME",
+			"password": "PASSWORD"
+		}
+	}
 }

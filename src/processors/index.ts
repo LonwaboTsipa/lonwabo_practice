@@ -1,3 +1,4 @@
+export * from "./baseProcessor";
 export * from "./allocationProcessor";
 export * from "./documentProcessor";
 export * from "./fundProcessor";
