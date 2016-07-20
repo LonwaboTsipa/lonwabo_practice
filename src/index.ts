@@ -34,16 +34,16 @@ export async function loadDataAsync() {
         const manifest = await ingestAll(rawManifest);
 
         // Process the data here
-        //dataToLoad = concatDataToLoad(dataToLoad, await processAll(manifest));
+        dataToLoad = concatDataToLoad(dataToLoad, await processAll(manifest));
         // Insert Allocation, Timeseries, etc
-        //await insertDataToLoad(dataToLoad, true);
+        await insertDataToLoad(dataToLoad, true);
 
-        // if (useFTP) {
-        //     await finalizeFTP(ftpSourceRelativePath, ftpArchiveRelativePath);
-        // }
+        if (useFTP) {
+            await finalizeFTP(ftpSourceRelativePath, ftpArchiveRelativePath);
+        }
 
-        // registerEndRan = true;
-        // let endResponse = await registerLoaderEnd(0, null as any, rawManifest, dataToLoad);
+        registerEndRan = true;
+        let endResponse = await registerLoaderEnd(0, null as any, rawManifest, dataToLoad);
     }
     catch (e) {
         console.error(`Loader experienced an error: ${JSON.stringify(e.message)}`);
