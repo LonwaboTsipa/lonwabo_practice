@@ -6,6 +6,6 @@
 		"description": "Statistics 1 Description",
 		"formatCode": "number",
 		"group": "core",
-		"extended": [],
+		"extended": []
 	}
 ]

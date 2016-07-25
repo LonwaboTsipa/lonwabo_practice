@@ -1,5 +1,7 @@
+import { IManifest } from "@kurtosys/udm_data_toolkit";
 let dataToolkitMock = jest.genMockFromModule("@kurtosys/udm_data_toolkit");
 jest.mock("@kurtosys/udm_data_toolkit", () => dataToolkitMock);
+
 
 import {processShareClasses} from "./shareClassProcessor";
 
