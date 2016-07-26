@@ -1,7 +1,7 @@
 import { dataLoadingArray } from "@kurtosys/udm_data_toolkit";
 import { IFundOrShareClass } from "../models";
 import { isNullOrUndefined, isNullOrEmpty, processValueCollection, safe } from "../utils";
-let properties = require("../../artifacts/config/core_data/statistics_properties");
+let properties = require("../../artifacts/config/core_data/statistic_properties");
 let mapping = require("../../artifacts/config/mapping/statistics");
 export async function processStatistics(funds: IFundOrShareClass[], manifest: {}): Promise<dataLoadingArray> {
 	let response = new dataLoadingArray();
