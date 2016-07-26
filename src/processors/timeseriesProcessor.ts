@@ -7,14 +7,13 @@ export async function processTimeseries(funds: IFundOrShareClass[], manifest: {}
 	let response = new dataLoadingArray();	
 	if (!response.timeseries) {
 		response.timeseries = [];
-	}
-
+	}	
 	// Prepare dataToProcess for Timeseries here
 	let dataToProcess = safe(() => manifest['timeseries'].orchestratedData, []);
 
 	// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {
-		response.timeseries = processValueCollection(dataToProcess, properties, mapping, false);
+		response.timeseries = processValueCollection('timeseries_1', dataToProcess, properties, mapping, false);
 	}
 	
 	return response;

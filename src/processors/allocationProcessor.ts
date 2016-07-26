@@ -14,7 +14,7 @@ export async function processAllocations(funds: IFundOrShareClass[], manifest: {
 	
 	// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {		
-		response.allocations = processValueCollection(dataToProcess, properties, mapping);		
+		response.allocations = processValueCollection('allocation_1', dataToProcess, properties, mapping);		
 	}
 	
 	return response;

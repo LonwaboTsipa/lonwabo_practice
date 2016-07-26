@@ -71,7 +71,7 @@
             {
                 "Date": 42370,
                 "FundCode": "Fund1",
-                "Type": "Timeseries1",
+                "Type": "Timeseries 1",
                 "Periodicity": "Monthly",
                 "Value": "10"
             },

@@ -1,4 +1,5 @@
 import { IPropertyDescriptor, DataType, IPropertyPub, IFund, IShareClass, EntityType } from "@kurtosys/udm_data_toolkit";
+import { IMapping } from "../models";
 import { safe, firstOrDefault, isNullOrUndefined} from "../utils";
 import { CLIENT_CODE_KEY, ISIN_KEY } from "../constants";
 import * as moment from "moment";
@@ -133,16 +134,36 @@ export function getPeriodicityValue(value: string = 'monthly') {
 	return response;
 }
 
-export function processValueCollection(rows, labelValueProperties, mapping: IPropertyDescriptor[], isLabelCollection: boolean = true, periodicity: string = 'MONTHLY', entityType: "CLSS" | "FUND" = "CLSS"): {}[] {
-	let hash = {};
+function getMappingByType(type: string, mappings: IMapping[]) {
+	console.log(mappings);
+	let mapping = safe(() => mappings.filter(m => m.type === type)[0], null);
+	if (!mapping) {
+		mapping = safe(() => mappings.filter(m => m.type === '_default')[0], null);
+	}
+	return mapping;
+}
+
+export function processValueCollection(collectionType: string, rows, labelValueProperties, mappings: IMapping[], isLabelCollection: boolean = true, periodicity: string = 'MONTHLY', entityType: "CLSS" | "FUND" = "CLSS"): {}[] {
+	let hash = {};	
+	let explicitMapping = getMappingByType(collectionType, mappings);
+	if (!explicitMapping) {
+		console.log("No mapping found to process");
+		return [];
+	}
+	if (!explicitMapping.mappings || explicitMapping.mappings.length === 0) {
+		console.log("No mappings setup to process, mappings is null or length is 0");
+		return [];
+	}
+	let mappingProperties = explicitMapping.mappings;
 	for (let row of rows) {
-		let clientCodeProperty = getClientCodeProperty(mapping);
+		
+		let clientCodeProperty = getClientCodeProperty(mappingProperties);
 		let clientCode = getPropertyValue(row, clientCodeProperty);
-		let type = getPropertyValueByCode(row, "type", mapping);
-		let label = getPropertyValueByCode(row, "label", mapping);
-		let value = getPropertyValueByCode(row, "value", mapping);
-		let date = getPropertyValueByCode(row, "date", mapping);
-		let ccy = getPropertyValueByCode(row, "ccy", mapping, true) || "N/A";
+		let type = getPropertyValueByCode(row, "type", mappingProperties);
+		let label = getPropertyValueByCode(row, "label", mappingProperties);
+		let value = getPropertyValueByCode(row, "value", mappingProperties);
+		let date = getPropertyValueByCode(row, "date", mappingProperties);
+		let ccy = getPropertyValueByCode(row, "ccy", mappingProperties, true) || "N/A";
 
 		let property = getLabelValueProperty(type, labelValueProperties);
 		if (property) {
@@ -173,16 +194,16 @@ export function processValueCollection(rows, labelValueProperties, mapping: IPro
 				valueObj.label = label;
 			}
 			else {
-				let inputPeriodicity = getPropertyValueByCode(row, "periodicity", mapping);
+				let inputPeriodicity = getPropertyValueByCode(row, "periodicity", mappingProperties);
 				fundData[code].periodicity = getPeriodicityValue(inputPeriodicity);
-				let inputClassification = getPropertyValueByCode(row, "classification", mapping);
+				let inputClassification = getPropertyValueByCode(row, "classification", mappingProperties);
 				fundData[code].classification = inputClassification || "N/A";
 				valueObj.date = date;
 			}
 			labelValueObj.values.push(valueObj);
 			if (property.extended) {
 				for (let extendedProperty of property.extended) {
-					let mappingProperty = getPropertyByCode(extendedProperty.label, mapping);
+					let mappingProperty = getPropertyByCode(extendedProperty.label, mappingProperties);
 					if (mappingProperty) {
 						let extendedValue = getPropertyValue(row, mappingProperty);
 						valueObj[mappingProperty.code] = extendedValue;	

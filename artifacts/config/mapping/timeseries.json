@@ -1,27 +1,32 @@
 [
 	{
-		"code": "client_code",
-		"dataType": "STRG",
-		"sourceField": "Fund Code"
-	},
-	{
-		"code": "date",
-		"dataType": "DATE",
-		"sourceField": "Date"
-	},
-	{
-		"code": "type",
-		"dataType": "STRG",
-		"sourceField": "Type"
-	},
-	{
-		"code": "value",
-		"dataType": "DCML",
-		"sourceField": "Value"
-	},
-	{
-		"code": "periodicity",
-		"dataType": "STRG",
-		"sourceField": "Periodicity"
+		"type": "timeseries_1",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "Fund Code"
+			},
+			{
+				"code": "date",
+				"dataType": "DATE",
+				"sourceField": "Date"
+			},
+			{
+				"code": "type",
+				"dataType": "STRG",
+				"sourceField": "Type"
+			},
+			{
+				"code": "value",
+				"dataType": "DCML",
+				"sourceField": "Value"
+			},
+			{
+				"code": "periodicity",
+				"dataType": "STRG",
+				"sourceField": "Periodicity"
+			}
+		]
 	}
 ]

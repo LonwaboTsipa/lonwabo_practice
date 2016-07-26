@@ -1,7 +1,7 @@
 import { IPropertyDescriptor, DataType, IPropertyPub } from "@kurtosys/udm_data_toolkit";
 import { getClientCodeProperty, getPropertyValueByCode, getPropertyByCode, getDefaultValueForType,
 	processPropertiesPub, getPropertyValue, processValueCollection, getPeriodicityValue} from './processor';
-
+import { IMapping } from "../models";
 
 describe("processor", () => {
 	let baseProperty = <IPropertyDescriptor>{
@@ -414,41 +414,46 @@ describe("processor", () => {
 				"cardinality": "1"
 			}
 		];
-		let allocationMapping = <IPropertyDescriptor[]>[
+		let allocationMapping = <IMapping[]>[
 			{
-				"code": "client_code",
-				"dataType": "STRG",
-				"sourceField": "Fund Code"
-			},
-			{
-				"code": "date",
-				"dataType": "DATE",
-				"sourceField": "Date"
-			},
-			{
-				"code": "type",
-				"dataType": "STRG",
-				"sourceField": "Type"
-			},
-			{
-				"code": "label",
-				"dataType": "STRG",
-				"sourceField": "Label"
-			},
-			{
-				"code": "value",
-				"dataType": "DCML",
-				"sourceField": "Value"
-			},
-			{
-				"code": "sector",
-				"dataType": "STRG",
-				"sourceField": "Sector"
-			},
-			{
-				"code": "periodicity",
-				"dataType": "STRG",
-				"sourceField": "Periodicitiy"
+				"type": "allocation_1",
+				"mappings": [
+					{
+						"code": "client_code",
+						"dataType": "STRG",
+						"sourceField": "Fund Code"
+					},
+					{
+						"code": "date",
+						"dataType": "DATE",
+						"sourceField": "Date"
+					},
+					{
+						"code": "type",
+						"dataType": "STRG",
+						"sourceField": "Type"
+					},
+					{
+						"code": "label",
+						"dataType": "STRG",
+						"sourceField": "Label"
+					},
+					{
+						"code": "value",
+						"dataType": "DCML",
+						"sourceField": "Value"
+					},
+					{
+						"code": "sector",
+						"dataType": "STRG",
+						"sourceField": "Sector"
+					},
+					{
+						"code": "periodicity",
+						"dataType": "STRG",
+						"sourceField": "Periodicitiy"
+					}
+				]
 			}
 		];
 		let allocationResult = [{
@@ -468,11 +473,11 @@ describe("processor", () => {
 			values: [{ value: 50, date: '2016-01-01', sector: 'Industrial' }]
 		}];
 		it("will process the allocation value collection when passed some rows", () => {
-			let result = processValueCollection(rows, allocationLabelValueProperties, allocationMapping);
+			let result = processValueCollection("allocation_1", rows, allocationLabelValueProperties, allocationMapping);
 			expect(result).toEqual(allocationResult);
 		});
 		it("will process the date allocation value collection when passed some rows", () => {
-			let result = processValueCollection(rows, allocationLabelValueProperties, allocationMapping, false);
+			let result = processValueCollection("allocation_1", rows, allocationLabelValueProperties, allocationMapping, false);
 			expect(result).toEqual(dateAllocationResult);
 		});
 	});
