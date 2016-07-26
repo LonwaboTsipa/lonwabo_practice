@@ -114,6 +114,7 @@ export function getLabelValueProperty(inputValue: string, labelValueProperties: 
 	return labelValueProperty;
 }
 
+
 export function getPeriodicityValue(value: string = 'monthly') {
 	let response = "MONTHLY"; // default value set
 	value = value.toLowerCase();
@@ -158,14 +159,13 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 	for (let row of rows) {
 		
 		let clientCodeProperty = getClientCodeProperty(mappingProperties);
-		let clientCode = getPropertyValue(row, clientCodeProperty);
-		let type = getPropertyValueByCode(row, "type", mappingProperties);
+		let clientCode = getPropertyValue(row, clientCodeProperty);		
 		let label = getPropertyValueByCode(row, "label", mappingProperties);
 		let value = getPropertyValueByCode(row, "value", mappingProperties);
 		let date = getPropertyValueByCode(row, "date", mappingProperties);
 		let ccy = getPropertyValueByCode(row, "ccy", mappingProperties, true) || "N/A";
-
-		let property = getLabelValueProperty(type, labelValueProperties);
+		
+		let property = getPropertyByCode(collectionType, labelValueProperties);
 		if (property) {
 			let { code } = property;
 			if (!hash[clientCode]) {
