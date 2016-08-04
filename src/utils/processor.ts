@@ -46,9 +46,12 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 	let propertyKey = property.hasOwnProperty("sourceField") ? "sourceField" : "label";
 	let itemKey = property[propertyKey];
 	let value = safe(() => instance[itemKey], defaultValue);
+	
 	switch (property.dataType) {
 		case "STRG":
-			value = value.toString();
+			if (value) {
+				value = value.toString();
+			}			
 			break;
 		case "DCML":
 			value = parseFloat(value);
