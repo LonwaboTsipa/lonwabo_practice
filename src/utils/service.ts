@@ -1,5 +1,6 @@
 import { LOADER_CONFIG, IManifest } from "@kurtosys/udm_data_toolkit";
-import { isNullOrWhitespace, safe } from "../utils";
+import { isNullOrWhitespace, safe, deepCopy } from "../utils";
+import { IApiRequestOptions } from "../models";
 import * as request from "request";
 import * as fs from "fs";
 import * as path from "path";
@@ -45,8 +46,20 @@ export function getCertificateContent(certificateName: string): string {
     return content;
 }
 
-export async function callApi(manifestItem: IManifest, requestBody: {} = {}, urlParameters: {} = {}, requestHeaders: {} = {}) {
+export async function callApi(manifestItem: IManifest, options: IApiRequestOptions = {}) {
     return new Promise((resolve, reject) => {
+        let { requestBody, urlParameters, requestHeaders } = options;
+        
+        if (options.passRequestBodyToDeepLinks) {
+            options.parentRequestBody = requestBody;
+        }
+        if (options.passUrlParametersToDeepLinks) {
+            options.parentUrlParameters = urlParameters;
+        }
+        if (options.passRequestHeadersToDeepLinks) {
+            options.parentRequestHeaders = requestHeaders;
+        }
+
         let { apiOptions } = manifestItem;
         if (!apiOptions) {
             throw new Error("No apiOptions key found in manifestItem");
@@ -103,7 +116,7 @@ export async function callApi(manifestItem: IManifest, requestBody: {} = {}, url
                 resolve();
             }
             else {
-                body = loadDeepLinks(targetApi, manifestItem, JSON.parse(body));
+                body = loadDeepLinks(targetApi, manifestItem, JSON.parse(body), options);
                 resolve(body);
 
             }
@@ -111,21 +124,35 @@ export async function callApi(manifestItem: IManifest, requestBody: {} = {}, url
     });
 }
 
-export async function loadDeepLinks(targetApi, manifestItem: IManifest, body: {}) {
+export async function loadDeepLinks(targetApi, manifestItem: IManifest, body: {}, apiRequestOptions: IApiRequestOptions) {
     let { deepLinks } = manifestItem.apiOptions;
     console.log('deepLinks', deepLinks);
     if (deepLinks) {
-        await ingestDeepLinks(manifestItem, deepLinks, body);
+        if (Array.isArray(body)) {
+            for (let element of body) {
+                await ingestDeepLinks(manifestItem, deepLinks, element, apiRequestOptions);
+            }
+        }
+        else {
+            await ingestDeepLinks(manifestItem, deepLinks, body, apiRequestOptions);
+        }
     }
     return body;
 }
 
-async function ingestDeepLinks(manifestItem: IManifest, deepLinks, body: {}) {        
+/**
+ * 
+ * 
+ * @param {IManifest} manifestItem
+ * @param {any} deepLinks
+ * @param {{}} body
+ */
+async function ingestDeepLinks(manifestItem: IManifest, deepLinks, body: {}, apiRequestOptions: IApiRequestOptions) {        
     const DEEP_LINK_API_OPTIONS_KEY = "_deepLinkApiOptions";
     const deepLinkExplicitKeys = [DEEP_LINK_API_OPTIONS_KEY];
     for (let deepLinkKey of Object.keys(deepLinks)) {        
         let deepLinkObject = deepLinks[deepLinkKey] || {};
-        let deepLinkApiOptions = safe(() => deepLinkObject[DEEP_LINK_API_OPTIONS_KEY], false);        
+        let deepLinkApiOptions = <IApiRequestOptions>safe(() => deepLinkObject[DEEP_LINK_API_OPTIONS_KEY], false);        
         if (body && body[deepLinkKey]) {
             if (deepLinkApiOptions) {
                 deepLinkApiOptions = typeof deepLinkApiOptions !== "object" ? {} : deepLinkApiOptions;
@@ -134,7 +161,17 @@ async function ingestDeepLinks(manifestItem: IManifest, deepLinks, body: {}) {
                 let childRequestBody = deepLinkApiOptions.requestBody || {};
                 let childUrlParameters = deepLinkApiOptions.urlParameters || {};
                 let childRequestHeaders = deepLinkApiOptions.requestHeaders || {};
-                body[deepLinkKey] = await callApi(childManifestItem, childRequestBody, childUrlParameters, childRequestHeaders);
+
+                let parentOptions = deepCopy(apiRequestOptions);
+                let attributesToKeepFromParentOptions = ["parentRequestBody", "parentRequestHeaders", "parentUrlParameters"];
+                for (let key of Object.keys(parentOptions)) {
+                    if (attributesToKeepFromParentOptions.indexOf(key) === -1) {
+                        delete parentOptions[key];
+                    }
+                }
+                // Use the parent api request options to override the child deep link api options
+                let options = <IApiRequestOptions>Object.assign({}, deepCopy(deepLinkApiOptions), parentOptions); 
+                body[deepLinkKey] = await callApi(childManifestItem, options);
             }
             else {
                 let objectsToLoad = [];
@@ -144,11 +181,13 @@ async function ingestDeepLinks(manifestItem: IManifest, deepLinks, body: {}) {
                 else {
                     objectsToLoad = body[deepLinkKey];
                 }
+                let deepLinkPromises = [];
                 for (let objectToLoad of objectsToLoad) {
                     let childManifestItem = Object.assign({}, manifestItem);
                     childManifestItem.apiOptions = Object.assign({}, childManifestItem.apiOptions, { "deepLinks": deepLinkObject });
-                    await ingestDeepLinks(childManifestItem, deepLinkObject, objectToLoad);
+                    deepLinkPromises.push(ingestDeepLinks(childManifestItem, deepLinkObject, objectToLoad, apiRequestOptions));                    
                 }
+                await Promise.all(deepLinkPromises);
             }
         }
     }    

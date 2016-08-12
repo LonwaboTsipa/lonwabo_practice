@@ -1,4 +1,4 @@
-import { safe } from './function';
+import { safe, getValueFromComplexKeyIdentifier } from './function';
 
 describe("function", () => {
 	describe("safe", () => {
@@ -32,5 +32,49 @@ describe("function", () => {
 			let result = safe(() => obj["key"], defaultValue); 
 			expect(result).toBe(null);
 		});		
+	});
+
+	describe("getValueFromComplexKeyIdentifier", () => {
+		let instance = {
+			"name": "testRootName",
+			"department": {
+				"name": "testDepartmentName",
+				"lastModified": {
+					"username": "testUsername"
+				}
+			}
+		};
+		it("will handle a null sourceField", () => {
+			let result = getValueFromComplexKeyIdentifier(null, instance);
+			expect(result).toBe(null);
+		});
+		it("will handle a undefined sourceField", () => {
+			let result = getValueFromComplexKeyIdentifier(undefined, instance);
+			expect(result).toBe(null);
+		});
+		it("will handle a null instance", () => {			
+			let result = getValueFromComplexKeyIdentifier(null, null);
+			expect(result).toBe(null);
+		});
+		it("will handle a undefined instance", () => {			
+			let result = getValueFromComplexKeyIdentifier(null, undefined);
+			expect(result).toBe(null);
+		});
+		it("will handle a undefined sub instance", () => {			
+			let result = getValueFromComplexKeyIdentifier("department.invalidSubObject.name", instance);
+			expect(result).toBe(null);
+		});
+		it("will return a root level element", () => {
+			let result = getValueFromComplexKeyIdentifier("name", instance);
+			expect(result).toBe("testRootName");
+		});
+		it("will return a second level element", () => {
+			let result = getValueFromComplexKeyIdentifier("department.name", instance);
+			expect(result).toBe("testDepartmentName");
+		});
+		it("will return a third level element", () => {
+			let result = getValueFromComplexKeyIdentifier("department.lastModified.username", instance);
+			expect(result).toBe("testUsername");
+		});
 	});
 });

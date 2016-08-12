@@ -1,6 +1,6 @@
 import { IPropertyDescriptor, DataType, IPropertyPub, IFund, IShareClass, EntityType } from "@kurtosys/udm_data_toolkit";
 import { IMapping } from "../models";
-import { safe, firstOrDefault, isNullOrUndefined} from "../utils";
+import { safe, firstOrDefault, isNullOrUndefined, getValueFromComplexKeyIdentifier } from "../utils";
 import { CLIENT_CODE_KEY, ISIN_KEY } from "../constants";
 import * as moment from "moment";
 
@@ -45,7 +45,7 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 	let defaultValue = getDefaultValueForType(property.dataType, allowNull);
 	let propertyKey = property.hasOwnProperty("sourceField") ? "sourceField" : "label";
 	let itemKey = property[propertyKey];
-	let value = safe(() => instance[itemKey], defaultValue);
+	let value = getValueFromComplexKeyIdentifier(itemKey, instance, defaultValue);
 	
 	switch (property.dataType) {
 		case "STRG":

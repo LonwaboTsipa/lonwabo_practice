@@ -12,3 +12,11 @@ export function isNullOrUndefined<T>(value: T | null | undefined): value is null
 export function isUndefined<T>(value: T | undefined): value is undefined {
 	return value === void 0; 
 }
+
+export function deepCopy<T>(value?: T | undefined): T | null {
+	if (!isUndefined(value)) {
+		let response = JSON.parse(JSON.stringify(value));	
+		return response;
+	}
+	return null;
+}

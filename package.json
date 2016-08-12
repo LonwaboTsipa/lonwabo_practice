@@ -32,6 +32,7 @@
     "imports-loader": "^0.6.5",
     "jest": "^12.1.1",
     "jest-cli": "^12.1.1",
+    "jsdoc": "^3.4.0",
     "json-loader": "^0.5.4",
     "mocha": "^2.5.3",
     "node-fetch": "^1.5.3",
@@ -39,7 +40,7 @@
     "rimraf": "^2.5.2",
     "tslint": "^3.10.2",
     "tslint-loader": "^2.1.4",
-    "typescript": "^1.9.0-dev.20160526-1.0",
+    "typescript": "^2.1.0-dev.20160811",
     "wallaby-webpack": "0.0.22",
     "webpack": "^1.13.1",
     "webpack-node-externals": "^1.2.0"
