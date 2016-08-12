@@ -57,14 +57,14 @@ export function concatDataToLoad(global: dataLoadingArray, ...params: dataLoadin
 // TODO: Add testing
 export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFundsAndClasses: Boolean = false) {
     let mappings = [
-        { key: 'funds', targetType: 'fund', isCreateDataElement: false, disabled: excludeFundsAndClasses },
-        { key: 'classes', targetType: 'fund', isCreateDataElement: false, disabled: excludeFundsAndClasses },
-        { key: 'timeseries', targetType: 'timeseries', isCreateDataElement: false, disabled: false },
-        { key: 'statistics', targetType: 'statistics', isCreateDataElement: false, disabled: false },
-        { key: 'allocations', targetType: 'allocations', isCreateDataElement: false, disabled: false },
-        { key: 'documents', targetType: 'documents', isCreateDataElement: false, disabled: false },
-        { key: 'commentary', targetType: 'commentary', isCreateDataElement: false, disabled: false },
-        { key: 'disclaimers', targetType: 'commentary', isCreateDataElement: false, disabled: false }
+        { key: 'funds', targetType: 'fund', isCreateDataElement: false, disabled: excludeFundsAndClasses, batchSize: 50 },
+        { key: 'classes', targetType: 'fund', isCreateDataElement: false, disabled: excludeFundsAndClasses, batchSize: 50 },
+        { key: 'timeseries', targetType: 'timeseries', isCreateDataElement: false, disabled: false, batchSize: 50 },
+        { key: 'statistics', targetType: 'statistics', isCreateDataElement: false, disabled: false, batchSize: 50 },
+        { key: 'allocations', targetType: 'allocations', isCreateDataElement: false, disabled: false, batchSize: 50 },
+        { key: 'documents', targetType: 'documents', isCreateDataElement: false, disabled: false, batchSize: 50 },
+        { key: 'commentary', targetType: 'commentary', isCreateDataElement: false, disabled: false, batchSize: 50 },
+        { key: 'disclaimers', targetType: 'commentary', isCreateDataElement: false, disabled: false, batchSize: 50 }
     ];
 
     for (let mapping of mappings) {
@@ -82,15 +82,20 @@ export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFund
                 });
                 if (records && records.length > 0) {
                     if (!mapping.disabled && dataToLoad[mapping.key] && dataToLoad[mapping.key].length > 0) {
-                        if (mapping.key === 'documents') {
-                            await createDocuments(records);
-                        }
-                        else if (mapping.isCreateDataElement) {
-                            await createData(records, mapping.targetType as PropertyType);
-                        }
-                        else {
-                            await insertWebSocket(records, mapping.targetType as TargetObject, entityType as EntityType);
-                        }
+                        let maxBatchSize = mapping.batchSize;
+                        while (records.length > 0) {
+                            let batchSize = Math.max(maxBatchSize, records.length);
+                            let batchRecords = records.splice(0, batchSize);
+                            if (mapping.key === 'documents') {
+                                await createDocuments(batchRecords);
+                            }
+                            else if (mapping.isCreateDataElement) {
+                                await createData(batchRecords, mapping.targetType as PropertyType);
+                            }
+                            else {
+                                await insertWebSocket(batchRecords, mapping.targetType as TargetObject, entityType as EntityType);
+                            }
+                        }                        
                     }
                 }
             }
