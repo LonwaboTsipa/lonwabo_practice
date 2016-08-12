@@ -84,7 +84,7 @@ export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFund
                     if (!mapping.disabled && dataToLoad[mapping.key] && dataToLoad[mapping.key].length > 0) {
                         let maxBatchSize = mapping.batchSize;
                         while (records.length > 0) {
-                            let batchSize = Math.max(maxBatchSize, records.length);
+                            let batchSize = Math.min(maxBatchSize, records.length);
                             let batchRecords = records.splice(0, batchSize);
                             if (mapping.key === 'documents') {
                                 await createDocuments(batchRecords);
