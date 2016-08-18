@@ -1,6 +1,6 @@
 import { IPropertyDescriptor, DataType, IPropertyPub } from "@kurtosys/udm_data_toolkit";
 import { getClientCodeProperty, getPropertyValueByCode, getPropertyByCode, getDefaultValueForType,
-	processPropertiesPub, getPropertyValue, processValueCollection, getPeriodicityValue, processDocumentCollection} from './processor';
+	processPropertiesPub, getPropertyValue, processValueCollection, getPeriodicityValue, processLinkedDocumentCollection} from './processor';
 import { IMapping } from "../models";
 
 describe("processor", () => {
@@ -506,10 +506,12 @@ describe("processor", () => {
 	describe("processDocumentCollection", () => {
 		describe("handling linked documents", () => {
 			let documentMetaProperties = [];
+			let documentMappings = [];
+			let documentRows = [];
 			beforeEach(() => {
 				documentMetaProperties = [
 					{
-						"code": "doctype",
+						"code": "document_type",
 						"dataType": "STRG",
 						"validationRule": "NONE",
 						"label": "document type",
@@ -517,14 +519,65 @@ describe("processor", () => {
 						"group": "core"
 					}
 				];
+				documentMappings = [
+					{
+						"type": "document_1",
+						"mappings": [
+							{
+								"code": "client_code",
+								"dataType": "STRG",
+								"sourceField": "{ISIN}-{Document Type}-{Culture}"
+							},
+							{
+								"code": "culture_code",
+								"dataType": "STRG",
+								"sourceField": "Culture"
+							},
+							{
+								"code": "title",
+								"dataType": "STRG",
+								"sourceField": "Title"
+							},
+							{
+								"code": "path",
+								"dataType": "STRG",
+								"sourceField": "Path"
+							},
+							{
+								"code": "document_type",
+								"dataType": "STRG",
+								"sourceField": "Document Type"
+							}
+						]
+					}
+				];
+				documentRows = [{
+					ISIN: 'Isin1',
+					Title: 'Kurtosys Benefits',
+					Culture: 'en-GB',
+					'Document Type': 'Marketing',
+					Path: 'https://www.kurtosys.com/wp-content/uploads/10_Ways_Asset_Managers_benefit_using_Kurtosys.pdf'
+				}];
 			});
 			it("will return an empty array when no rows are passed", () => {
-				let result = processDocumentCollection([], []);
+				let result = processLinkedDocumentCollection('document_1', [], documentMetaProperties, documentMappings);
 				expect(result).toEqual([]);
 			});
 			it("will return an empty array when no rows are passed", () => {
-				let result = processDocumentCollection([], documentMetaProperties);
-				expect(result).toEqual([]);
+				let result = processLinkedDocumentCollection('document_1', documentRows, documentMetaProperties, documentMappings);
+				expect(result).toEqual([
+					{
+						clientCode: 'Isin1-Marketing-en-GB', 
+						cultureCode: 'en-GB', 
+						title: 'Kurtosys Benefits', 
+						path: 'https://www.kurtosys.com/wp-content/uploads/10_Ways_Asset_Managers_benefit_using_Kurtosys.pdf', 
+						meta: { 
+							document_type: { 
+								value: ['Marketing'] 
+							} 
+						}
+					}
+				]);
 			});
 		});
 	})

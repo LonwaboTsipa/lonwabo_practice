@@ -1,1 +1,10 @@
-[]
+[
+	{
+		"code": "document_type",
+		"dataType": "STRG",
+		"validationRule": "NONE",
+		"label": "document type",
+		"description": "document type",
+		"group": "core"
+	}
+]

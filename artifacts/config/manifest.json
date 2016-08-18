@@ -45,6 +45,16 @@
         "description": "Timeseries"
     },
     {
+        "key": "documents",
+        "isFileForLoad": true,
+        "fileName": "Document.xlsx",
+        "sheet": "Document",
+        "regex": "Document.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "Share Classes"
+    },
+    {
         "key": "searchApi",
         "isFileForLoad": false,
         "type": "api",
@@ -72,10 +82,10 @@
         }
     },
     {
-        "key": "monringstarDetails",
+        "key": "morningstarDetails",
         "isFileForLoad": false,
         "type": "api",
-        "description": "monringstarDetails",
+        "description": "morningstarDetails",
         "apiOptions": {
             "type": "morningstar",
             "url": "/DataOutput.aspx?Package=EDW&ClientId=FW&IDTYpe=FundShareClassId&Content=1471&Currencies=BAS&Id={mstarInternalId}",

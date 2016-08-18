@@ -5,33 +5,28 @@
 			{
 				"code": "client_code",
 				"dataType": "STRG",
-				"sourceField": "isin"
+				"sourceField": "{ISIN}-{Document Type}-{Culture}"
 			},
 			{
 				"code": "culture_code",
 				"dataType": "STRG",
-				"sourceField": "{region}-{language}"
+				"sourceField": "Culture"
 			},
 			{
-				"code": "type",
+				"code": "title",
 				"dataType": "STRG",
-				"sourceField": "Type"
+				"sourceField": "Title"
 			},
 			{
-				"code": "label",
+				"code": "path",
 				"dataType": "STRG",
-				"sourceField": "Label"
+				"sourceField": "Path"
 			},
 			{
-				"code": "value",
-				"dataType": "DCML",
-				"sourceField": "Value"
-			},
-			{
-				"code": "sector",
+				"code": "document_type",
 				"dataType": "STRG",
-				"sourceField": "Sector"
-			}
+				"sourceField": "Document Type"
+			}			
 		]
 	}
 ]

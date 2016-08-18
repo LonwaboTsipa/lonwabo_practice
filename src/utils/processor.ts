@@ -138,8 +138,7 @@ export function getPeriodicityValue(value: string = 'monthly') {
 	return response;
 }
 
-function getMappingByType(type: string, mappings: IMapping[]) {
-	console.log(mappings);
+function getMappingByType(type: string, mappings: IMapping[]) {	
 	let mapping = safe(() => mappings.filter(m => m.type === type)[0], null);
 	if (!mapping) {
 		mapping = safe(() => mappings.filter(m => m.type === '_default')[0], null);
@@ -147,9 +146,46 @@ function getMappingByType(type: string, mappings: IMapping[]) {
 	return mapping;
 }
 
-export function processDocumentCollection(rows: {}[] = [], documentMetaProperties: {}[] = []): {}[] {
-	let result = [];
-	return result;
+export function processLinkedDocumentCollection(collectionType: string, rows: {}[] = [], documentMetaProperties: {}[] = [], mappings: IMapping[] = []): {}[] {
+	let hash = {};	
+	let explicitMapping = getMappingByType(collectionType, mappings);
+	if (!explicitMapping) {
+		console.log("No mapping found to process");
+		return [];
+	}
+	if (!explicitMapping.mappings || explicitMapping.mappings.length === 0) {
+		console.log("No mappings setup to process, mappings is null or length is 0");
+		return [];
+	}
+	let mappingProperties = explicitMapping.mappings;
+	for (let row of rows) {
+		
+		let clientCodeProperty = getClientCodeProperty(mappingProperties);
+		let clientCode = getPropertyValue(row, clientCodeProperty);		
+		let cultureCode = getPropertyValueByCode(row, "culture_code", mappingProperties);
+		let title = getPropertyValueByCode(row, "title", mappingProperties);
+		let path = getPropertyValueByCode(row, "path", mappingProperties);		
+				
+		let meta = {};
+		for (let metaProperties of documentMetaProperties) {
+			let { code } = metaProperties;
+			let value = getPropertyValueByCode(row, code, mappingProperties);
+			meta[code] = { value: [value] };
+		}		
+		hash[clientCode] = {
+			clientCode,
+			cultureCode,
+			title,
+			path,
+			meta
+		};		
+	}
+	
+	let response = [];
+	Object.keys(hash).map(clientCode => {
+		response.push(hash[clientCode]);		
+	});
+	return response;
 }
 
 export function processValueCollection(collectionType: string, rows, labelValueProperties, mappings: IMapping[], isLabelCollection: boolean = true, periodicity: string = 'MONTHLY', entityType: "CLSS" | "FUND" = "CLSS"): {}[] {
