@@ -9,3 +9,4 @@ export * from "./processor";
 export * from "./orchestrate";
 export * from "./service";
 export * from "./ingestor";
+export * from "./object";

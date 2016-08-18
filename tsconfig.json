@@ -4,8 +4,7 @@
 		"allowJs": false,		
 		"module": "commonjs",		
 		"outDir": "dist",
-		"declaration": true,
-        "strictNullChecks": true				
+		"declaration": true        				
 	},
 	"exclude": [        
         "node_modules",

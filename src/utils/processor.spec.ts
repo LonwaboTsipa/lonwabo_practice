@@ -1,6 +1,6 @@
 import { IPropertyDescriptor, DataType, IPropertyPub } from "@kurtosys/udm_data_toolkit";
 import { getClientCodeProperty, getPropertyValueByCode, getPropertyByCode, getDefaultValueForType,
-	processPropertiesPub, getPropertyValue, processValueCollection, getPeriodicityValue} from './processor';
+	processPropertiesPub, getPropertyValue, processValueCollection, getPeriodicityValue, processDocumentCollection} from './processor';
 import { IMapping } from "../models";
 
 describe("processor", () => {
@@ -502,4 +502,30 @@ describe("processor", () => {
 			expect(result).toEqual("MONTHLY");
 		});
 	});
+
+	describe("processDocumentCollection", () => {
+		describe("handling linked documents", () => {
+			let documentMetaProperties = [];
+			beforeEach(() => {
+				documentMetaProperties = [
+					{
+						"code": "doctype",
+						"dataType": "STRG",
+						"validationRule": "NONE",
+						"label": "document type",
+						"description": "document type",
+						"group": "core"
+					}
+				];
+			});
+			it("will return an empty array when no rows are passed", () => {
+				let result = processDocumentCollection([], []);
+				expect(result).toEqual([]);
+			});
+			it("will return an empty array when no rows are passed", () => {
+				let result = processDocumentCollection([], documentMetaProperties);
+				expect(result).toEqual([]);
+			});
+		});
+	})
 });

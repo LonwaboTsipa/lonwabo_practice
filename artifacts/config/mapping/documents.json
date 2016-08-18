@@ -1,0 +1,37 @@
+[
+	{
+		"type": "document_1",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "isin"
+			},
+			{
+				"code": "culture_code",
+				"dataType": "STRG",
+				"sourceField": "{region}-{language}"
+			},
+			{
+				"code": "type",
+				"dataType": "STRG",
+				"sourceField": "Type"
+			},
+			{
+				"code": "label",
+				"dataType": "STRG",
+				"sourceField": "Label"
+			},
+			{
+				"code": "value",
+				"dataType": "DCML",
+				"sourceField": "Value"
+			},
+			{
+				"code": "sector",
+				"dataType": "STRG",
+				"sourceField": "Sector"
+			}
+		]
+	}
+]

@@ -1,6 +1,6 @@
 import { IPropertyDescriptor, DataType, IPropertyPub, IFund, IShareClass, EntityType } from "@kurtosys/udm_data_toolkit";
 import { IMapping } from "../models";
-import { safe, firstOrDefault, isNullOrUndefined, getValueFromComplexKeyIdentifier } from "../utils";
+import { safe, firstOrDefault, isNullOrUndefined, getValueFromStringNotation } from "../utils";
 import { CLIENT_CODE_KEY, ISIN_KEY } from "../constants";
 import * as moment from "moment";
 
@@ -45,7 +45,7 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 	let defaultValue = getDefaultValueForType(property.dataType, allowNull);
 	let propertyKey = property.hasOwnProperty("sourceField") ? "sourceField" : "label";
 	let itemKey = property[propertyKey];
-	let value = getValueFromComplexKeyIdentifier(itemKey, instance, defaultValue);
+	let value = getValueFromStringNotation(itemKey, instance, defaultValue);
 	
 	switch (property.dataType) {
 		case "STRG":
@@ -145,6 +145,11 @@ function getMappingByType(type: string, mappings: IMapping[]) {
 		mapping = safe(() => mappings.filter(m => m.type === '_default')[0], null);
 	}
 	return mapping;
+}
+
+export function processDocumentCollection(rows: {}[] = [], documentMetaProperties: {}[] = []): {}[] {
+	let result = [];
+	return result;
 }
 
 export function processValueCollection(collectionType: string, rows, labelValueProperties, mappings: IMapping[], isLabelCollection: boolean = true, periodicity: string = 'MONTHLY', entityType: "CLSS" | "FUND" = "CLSS"): {}[] {

@@ -8,7 +8,7 @@ export async function processDocuments(funds: IFundOrShareClass[], dataToProcess
 	}
 	
 	// Add processing logic here
-
+	
 	
 	return response;
 }   
