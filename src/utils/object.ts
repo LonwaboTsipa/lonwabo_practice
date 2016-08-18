@@ -2,6 +2,16 @@ import { isNullOrUndefined, isUndefined, safe } from "../utils";
 const OPEN_CHAR = '{';
 const CLOSE_CHAR = '}';
 const MODIFIER_SEPARATOR = ":";
+
+/**
+ * Will get the value specified in the string notation from the instance that is passed to it.
+ * 
+ * @export
+ * @param {(string |)} [stringNotation=null | undefined]
+ * @param {({} |)} [instance=null | undefined]
+ * @param {*} [defaultValue=null]
+ * @returns {*}
+ */
 export function getValueFromStringNotation(stringNotation: string | null | undefined, instance: {} | null | undefined, defaultValue: any = null) : any {
     let value = null;
 	let parameterList = getInnerParameters(stringNotation);
@@ -70,6 +80,14 @@ export function getValueFromDotNotation(sourceField: string | null | undefined, 
 	return value;
 }
 
+/**
+ * Will take in the original value and details on how to modify it. This allows for uppercase, lowercase etc
+ * 
+ * @export
+ * @param {*} value
+ * @param {string[]} [modifierDetails=[]]
+ * @returns {*}
+ */
 export function applyModifier(value: any, modifierDetails: string[] = []) : any {
 	if (modifierDetails && modifierDetails.length > 0 && !isNullOrUndefined(value) && typeof value !== "object") {
 		let firstModifier = modifierDetails[0];
@@ -84,6 +102,13 @@ export function applyModifier(value: any, modifierDetails: string[] = []) : any 
 	return value;
 }
 
+/**
+ * Fetches parameters that are inside the string that are wrapped with the opening and closing tags ({})
+ * 
+ * @export
+ * @param {string} stringNotation
+ * @returns {string[]}
+ */
 export function getInnerParameters(stringNotation: string): string[] {
 	let result = [];
 	let workingNotation = stringNotation;
