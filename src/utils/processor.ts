@@ -2,6 +2,7 @@ import { IPropertyDescriptor, DataType, IPropertyPub, IFund, IShareClass, Entity
 import { IMapping } from "../models";
 import { safe, firstOrDefault, isNullOrUndefined, getValueFromStringNotation } from "../utils";
 import { CLIENT_CODE_KEY, ISIN_KEY } from "../constants";
+import * as crypto from 'crypto';
 import * as moment from "moment";
 
 export function getDefaultValueForType(type: DataType | undefined, allowNull = false) {
@@ -72,6 +73,9 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 			break;
 		default:
 			break;
+	}
+	if (property.mustHash) {
+		value = crypto.createHash('md5').update(value).digest("hex");
 	}
 	return value;
 }
