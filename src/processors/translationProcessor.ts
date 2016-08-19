@@ -9,7 +9,7 @@ export async function processTranslations(manifest: {}[]) : Promise<dataLoadingA
 	
 	// Prepare dataToProcess for Allocations here
 	let dataToProcess = safe(() => manifest['translations'].orchestratedData, []);
-	console.log('translations dataToProcess: ', dataToProcess);
+	
 	// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {		
 		response.translations = processTranslationCollection('translation_1', dataToProcess, mappings);		
