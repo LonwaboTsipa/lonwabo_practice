@@ -2,7 +2,7 @@ import { dataLoadingArray } from "@kurtosys/udm_data_toolkit";
 import { IFundOrShareClass } from "../models";
 import { processLinkedDocumentCollection, safe, isNullOrEmpty } from "../utils";
 let properties = require("../../artifacts/config/core_data/document_metadata");
-let mapping = require("../../artifacts/config/mapping/documents");
+let mappings = require("../../artifacts/config/mapping/documents");
 
 export async function processDocuments(funds: IFundOrShareClass[], manifest: {}) : Promise<dataLoadingArray> {
 	let response = new dataLoadingArray();	
@@ -15,7 +15,7 @@ export async function processDocuments(funds: IFundOrShareClass[], manifest: {})
 	
 	// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {		
-		response.documents = processLinkedDocumentCollection('document_1', dataToProcess, properties, mapping);		
+		response.documents = processLinkedDocumentCollection('document_1', dataToProcess, properties, mappings);		
 	}
 	
 

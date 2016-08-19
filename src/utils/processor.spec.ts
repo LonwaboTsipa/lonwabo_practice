@@ -1,6 +1,6 @@
 import { IPropertyDescriptor, DataType, IPropertyPub } from "@kurtosys/udm_data_toolkit";
 import { getClientCodeProperty, getPropertyValueByCode, getPropertyByCode, getDefaultValueForType,
-	processPropertiesPub, getPropertyValue, processValueCollection, getPeriodicityValue, processLinkedDocumentCollection} from './processor';
+	processPropertiesPub, getPropertyValue, processValueCollection, getPeriodicityValue, processLinkedDocumentCollection, processTranslationCollection} from './processor';
 import { IMapping } from "../models";
 
 describe("processor", () => {
@@ -502,7 +502,55 @@ describe("processor", () => {
 			expect(result).toEqual("MONTHLY");
 		});
 	});
-
+	describe("processTranslationCollection", () => {
+		let translationRows = [];
+		let translationMappings = [];
+		beforeEach(() => {
+			translationRows = [
+				{
+					"Culture": "en-GB",
+					"Phrase": "Example",
+					"Translation Culture": "fr-FR",
+					"Translation": "Exemple"
+				}
+			];
+			translationMappings = [
+				{
+					"type": "translation_1",
+					"mappings": [
+						{
+							"code": "culture",
+							"dataType": "STRG",
+							"sourceField": "Culture"
+						},
+						{
+							"code": "phrase",
+							"dataType": "STRG",
+							"sourceField": "Phrase"
+						},
+						{
+							"code": "translation_culture",
+							"dataType": "STRG",
+							"sourceField": "Translation Culture"
+						},
+						{
+							"code": "translation",
+							"dataType": "STRG",
+							"sourceField": "Translation"
+						}
+					]
+				}
+			]
+		});
+		it("will return an empty array if no data is passed to it", () => {
+			let result = processTranslationCollection('translation_1', [], translationMappings);
+			expect(result).toEqual([]);
+		});
+		it("will return a translation record", () => {
+			let result = processTranslationCollection('translation_1', translationRows, translationMappings);
+			expect(result).toEqual([{ culture: 'en-GB', phrase: 'Example', translationCulture: 'fr-FR', translation: 'Exemple' }]);
+		});
+	});
 	describe("processDocumentCollection", () => {
 		describe("handling linked documents", () => {
 			let documentMetaProperties = [];
@@ -567,14 +615,14 @@ describe("processor", () => {
 				let result = processLinkedDocumentCollection('document_1', documentRows, documentMetaProperties, documentMappings);
 				expect(result).toEqual([
 					{
-						clientCode: 'Isin1-Marketing-en-GB', 
-						cultureCode: 'en-GB', 
-						title: 'Kurtosys Benefits', 
-						path: 'https://www.kurtosys.com/wp-content/uploads/10_Ways_Asset_Managers_benefit_using_Kurtosys.pdf', 
-						meta: { 
-							document_type: { 
-								value: ['Marketing'] 
-							} 
+						clientCode: 'Isin1-Marketing-en-GB',
+						cultureCode: 'en-GB',
+						title: 'Kurtosys Benefits',
+						path: 'https://www.kurtosys.com/wp-content/uploads/10_Ways_Asset_Managers_benefit_using_Kurtosys.pdf',
+						meta: {
+							document_type: {
+								value: ['Marketing']
+							}
 						}
 					}
 				]);

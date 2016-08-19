@@ -1,0 +1,27 @@
+[
+	{
+		"type": "translation_1",
+		"mappings": [
+			{
+				"code": "culture",
+				"dataType": "STRG",
+				"sourceField": "Culture"
+			},
+			{
+				"code": "phrase",
+				"dataType": "STRG",
+				"sourceField": "Phrase"
+			},
+			{
+				"code": "translation_culture",
+				"dataType": "STRG",
+				"sourceField": "Translation Culture"
+			},
+			{
+				"code": "translation",
+				"dataType": "STRG",
+				"sourceField": "Translation"
+			}			
+		]
+	}
+]

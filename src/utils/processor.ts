@@ -192,6 +192,40 @@ export function processLinkedDocumentCollection(collectionType: string, rows: {}
 	return response;
 }
 
+export function processTranslationCollection(collectionType: string, rows: {}[] = [], mappings: IMapping[] = []): {}[] {
+	let hash = {};	
+	let explicitMapping = getMappingByType(collectionType, mappings);
+	if (!explicitMapping) {
+		console.log("No mapping found to process");
+		return [];
+	}
+	if (!explicitMapping.mappings || explicitMapping.mappings.length === 0) {
+		console.log("No mappings setup to process, mappings is null or length is 0");
+		return [];
+	}
+	let mappingProperties = explicitMapping.mappings;
+	for (let row of rows) {
+		
+		let culture = getPropertyValueByCode(row, "culture", mappingProperties);
+		let phrase = getPropertyValueByCode(row, "phrase", mappingProperties);
+		let translationCulture = getPropertyValueByCode(row, "translation_culture", mappingProperties);		
+		let translation = getPropertyValueByCode(row, "translation", mappingProperties);
+		let key = `${culture}-${translationCulture}-${phrase}`;	
+		hash[key] = {
+			culture,
+			phrase,
+			translationCulture,
+			translation
+		};		
+	}
+	
+	let response = [];
+	Object.keys(hash).map(key => {
+		response.push(hash[key]);		
+	});
+	return response;
+}
+
 export function processValueCollection(collectionType: string, rows, labelValueProperties, mappings: IMapping[], isLabelCollection: boolean = true, periodicity: string = 'MONTHLY', entityType: "CLSS" | "FUND" = "CLSS"): {}[] {
 	let hash = {};	
 	let explicitMapping = getMappingByType(collectionType, mappings);

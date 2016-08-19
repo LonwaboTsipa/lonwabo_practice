@@ -52,7 +52,17 @@
         "regex": "Document.*\\.xlsx",
         "type": "xlsx",
         "raw": true,
-        "description": "Share Classes"
+        "description": "Documents"
+    },
+    {
+        "key": "translations",
+        "isFileForLoad": true,
+        "fileName": "Translation.xlsx",
+        "sheet": "Translation",
+        "regex": "Translation.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "Translation"
     },
     {
         "key": "searchApi",
