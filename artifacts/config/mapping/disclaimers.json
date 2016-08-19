@@ -1,0 +1,27 @@
+[
+	{
+		"type": "disclaimer_1",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "Fund Code"
+			},
+			{
+				"code": "disclaimer_type",
+				"dataType": "STRG",
+				"sourceField": "Disclaimer Type"
+			},
+			{
+				"code": "culture",
+				"dataType": "STRG",
+				"sourceField": "Culture"
+			},
+			{
+				"code": "disclaimer",
+				"dataType": "STRG",
+				"sourceField": "Disclaimer"
+			}					
+		]
+	}
+]

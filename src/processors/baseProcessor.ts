@@ -1,7 +1,8 @@
 import { login, dataLoadingArray, getClient, IManifest } from "@kurtosys/udm_data_toolkit";
 import {concatDataToLoad, insertDataToLoad} from "../utils";
-import {processAllocations, processFunds, processShareClasses, processTimeseries, 
-		processStatistics, processDocuments, processTranslations} from "../processors";
+import {processAllocations, processFunds, processShareClasses, processTimeseries,
+	processStatistics, processDocuments, processTranslations, processCommentaries,
+	processDisclaimers} from "../processors";
 import {fetchFunds, fetchShareClasses} from "../services";
 import { IOrchestratedManifest } from "../models";
 
@@ -37,8 +38,14 @@ export async function processAll(manifest: IOrchestratedManifest): Promise<dataL
 	// Proccess Documents
 	dataToLoad = concatDataToLoad(dataToLoad, await processDocuments(fundsAndShares, manifest));
 
-	// Proccess Documents
+	// Proccess Translations
 	dataToLoad = concatDataToLoad(dataToLoad, await processTranslations(manifest));
+
+	// Proccess Commentaries
+	dataToLoad = concatDataToLoad(dataToLoad, await processCommentaries(fundsAndShares, manifest));
+
+	// Proccess Disclaimers
+	dataToLoad = concatDataToLoad(dataToLoad, await processDisclaimers(fundsAndShares, manifest));
 
 
 	return dataToLoad;

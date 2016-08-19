@@ -1,5 +1,7 @@
 export * from "./baseProcessor";
 export * from "./allocationProcessor";
+export * from "./commentaryProcessor";
+export * from "./disclaimerProcessor";
 export * from "./documentProcessor";
 export * from "./fundProcessor";
 export * from "./layoutProcessor";

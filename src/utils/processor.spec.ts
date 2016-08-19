@@ -1,6 +1,8 @@
 import { IPropertyDescriptor, DataType, IPropertyPub } from "@kurtosys/udm_data_toolkit";
-import { getClientCodeProperty, getPropertyValueByCode, getPropertyByCode, getDefaultValueForType,
-	processPropertiesPub, getPropertyValue, processValueCollection, getPeriodicityValue, processLinkedDocumentCollection, processTranslationCollection} from './processor';
+import { getClientCodeProperty, getPropertyValueByCode, getPropertyByCode,
+	getDefaultValueForType, processPropertiesPub, getPropertyValue,
+	processValueCollection, getPeriodicityValue, processLinkedDocumentCollection,
+	processTranslationCollection, processCommentaryCollection, processDisclaimerCollection} from './processor';
 import { IMapping } from "../models";
 
 describe("processor", () => {
@@ -500,6 +502,146 @@ describe("processor", () => {
 		it('will return the default value of MONTHLY for an unknown key', () => {
 			let result = getPeriodicityValue("TEST");
 			expect(result).toEqual("MONTHLY");
+		});
+	});
+	describe("processCommentaryCollection", () => {
+		let commentaryRows = [];
+		let commentaryMappings = [];
+		let commentaryTypes = [];
+		beforeEach(() => {
+			commentaryTypes = [
+				{
+					"commentaryType": "Fund Overview",
+					"description": "Fund Overview"
+				}
+			];
+			commentaryRows = [
+				{
+					"Fund Code": "Fund1",
+					"Commentary Type": "Fund Overview",
+					"Culture": "en-GB",
+					"Commentary": "This is the en-GB Fund Overview Commentary1"
+				},
+				{
+					"Fund Code": "Fund1",
+					"Commentary Type": "Fund Overview",
+					"Culture": "en-GB",
+					"Commentary": "This is the en-GB Fund Overview Commentary"
+				}
+			];
+			commentaryMappings = [
+				{
+					"type": "commentary_1",
+					"mappings": [
+						{
+							"code": "client_code",
+							"dataType": "STRG",
+							"sourceField": "Fund Code"
+						},
+						{
+							"code": "commentary_type",
+							"dataType": "STRG",
+							"sourceField": "Commentary Type"
+						},
+						{
+							"code": "culture",
+							"dataType": "STRG",
+							"sourceField": "Culture"
+						},
+						{
+							"code": "commentary",
+							"dataType": "STRG",
+							"sourceField": "Commentary"
+						}
+					]
+				}
+			]
+		});
+		it("will return an empty array if no data is passed to it", () => {
+			let result = processCommentaryCollection('commentary_1', [], commentaryTypes, commentaryMappings);
+			expect(result).toEqual([]);
+		});
+		it("will return a commentary record", () => {
+			let result = processCommentaryCollection('commentary_1', commentaryRows, commentaryTypes, commentaryMappings);
+			expect(result).toEqual([
+				{
+					commentaryType: 'Fund Overview',
+					linkedEntity: 'Fund1',
+					commentaries: [
+						{ culture: 'en-GB', commentary: 'This is the en-GB Fund Overview Commentary' }
+					]
+				}
+			]);
+		});
+	});
+	describe("processDisclaimerCollection", () => {
+		let disclaimerRows = [];
+		let disclaimerMappings = [];
+		let disclaimerTypes = [];
+		beforeEach(() => {
+			disclaimerTypes = [
+				{
+					"disclaimerType": "Performance",
+					"description": "Performance"
+				}
+			];
+			disclaimerRows = [
+				{
+					"Fund Code": "Fund1",
+					"Disclaimer Type": "Performance",
+					"Culture": "en-GB",
+					"Disclaimer": "This is the en-GB Performance Disclaimer 1"
+				},
+				{
+					"Fund Code": "Fund1",
+					"Disclaimer Type": "Performance",
+					"Culture": "en-GB",
+					"Disclaimer": "This is the en-GB Performance Disclaimer"
+				}
+			];
+			disclaimerMappings = [
+				{
+					"type": "disclaimer_1",
+					"mappings": [
+						{
+							"code": "client_code",
+							"dataType": "STRG",
+							"sourceField": "Fund Code"
+						},
+						{
+							"code": "disclaimer_type",
+							"dataType": "STRG",
+							"sourceField": "Disclaimer Type"
+						},
+						{
+							"code": "culture",
+							"dataType": "STRG",
+							"sourceField": "Culture"
+						},
+						{
+							"code": "disclaimer",
+							"dataType": "STRG",
+							"sourceField": "Disclaimer"
+						}
+					]
+				}
+			]
+		});
+		it("will return an empty array if no data is passed to it", () => {
+			let result = processDisclaimerCollection('disclaimer_1', [], disclaimerTypes, disclaimerMappings);
+			expect(result).toEqual([]);
+		});
+		it("will return a disclaimer record", () => {
+			let result = processDisclaimerCollection('disclaimer_1', disclaimerRows, disclaimerTypes, disclaimerMappings);
+			expect(result).toEqual([
+				{
+					disclaimerType: 'Performance',
+					linkedEntity: 'Fund1',
+					disclaimers: [
+						{ culture: 'en-GB', disclaimer: 'This is the en-GB Performance Disclaimer' }
+					]
+				}
+			]);
 		});
 	});
 	describe("processTranslationCollection", () => {

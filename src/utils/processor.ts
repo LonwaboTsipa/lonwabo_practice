@@ -47,12 +47,12 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 	let propertyKey = property.hasOwnProperty("sourceField") ? "sourceField" : "label";
 	let itemKey = property[propertyKey];
 	let value = getValueFromStringNotation(itemKey, instance, defaultValue);
-	
+
 	switch (property.dataType) {
 		case "STRG":
 			if (value) {
 				value = value.toString();
-			}			
+			}
 			break;
 		case "DCML":
 			value = parseFloat(value);
@@ -142,7 +142,7 @@ export function getPeriodicityValue(value: string = 'monthly') {
 	return response;
 }
 
-function getMappingByType(type: string, mappings: IMapping[]) {	
+function getMappingByType(type: string, mappings: IMapping[]) {
 	let mapping = safe(() => mappings.filter(m => m.type === type)[0], null);
 	if (!mapping) {
 		mapping = safe(() => mappings.filter(m => m.type === '_default')[0], null);
@@ -151,7 +151,7 @@ function getMappingByType(type: string, mappings: IMapping[]) {
 }
 
 export function processLinkedDocumentCollection(collectionType: string, rows: {}[] = [], documentMetaProperties: {}[] = [], mappings: IMapping[] = []): {}[] {
-	let hash = {};	
+	let hash = {};
 	let explicitMapping = getMappingByType(collectionType, mappings);
 	if (!explicitMapping) {
 		console.log("No mapping found to process");
@@ -163,37 +163,44 @@ export function processLinkedDocumentCollection(collectionType: string, rows: {}
 	}
 	let mappingProperties = explicitMapping.mappings;
 	for (let row of rows) {
-		
+
 		let clientCodeProperty = getClientCodeProperty(mappingProperties);
-		let clientCode = getPropertyValue(row, clientCodeProperty);		
+		let clientCode = getPropertyValue(row, clientCodeProperty);
 		let cultureCode = getPropertyValueByCode(row, "culture_code", mappingProperties);
 		let title = getPropertyValueByCode(row, "title", mappingProperties);
-		let path = getPropertyValueByCode(row, "path", mappingProperties);		
-				
+		let path = getPropertyValueByCode(row, "path", mappingProperties);
+
 		let meta = {};
 		for (let metaProperties of documentMetaProperties) {
 			let { code } = metaProperties;
 			let value = getPropertyValueByCode(row, code, mappingProperties);
 			meta[code] = { value: [value] };
-		}		
+		}
 		hash[clientCode] = {
 			clientCode,
 			cultureCode,
 			title,
 			path,
 			meta
-		};		
+		};
 	}
-	
+
 	let response = [];
 	Object.keys(hash).map(clientCode => {
-		response.push(hash[clientCode]);		
+		response.push(hash[clientCode]);
 	});
 	return response;
 }
-
-export function processTranslationCollection(collectionType: string, rows: {}[] = [], mappings: IMapping[] = []): {}[] {
-	let hash = {};	
+interface ICommentaryInstance {
+	culture: string,
+	commentary: string
+}
+interface IDisclaimerInstance {
+	culture: string,
+	disclaimer: string
+}
+export function processCommentaryCollection(collectionType: string, rows, properties, mappings: IMapping[]): {}[] {
+	let hash = {};
 	let explicitMapping = getMappingByType(collectionType, mappings);
 	if (!explicitMapping) {
 		console.log("No mapping found to process");
@@ -205,29 +212,148 @@ export function processTranslationCollection(collectionType: string, rows: {}[] 
 	}
 	let mappingProperties = explicitMapping.mappings;
 	for (let row of rows) {
-		
+
+		let clientCodeProperty = getClientCodeProperty(mappingProperties);
+		let linkedEntity = getPropertyValue(row, clientCodeProperty);
+		let culture = getPropertyValueByCode(row, "culture", mappingProperties);
+		let commentaryType = getPropertyValueByCode(row, "commentary_type", mappingProperties);
+		let commentary = getPropertyValueByCode(row, "commentary", mappingProperties);
+
+		if (!hash[linkedEntity]) {
+			hash[linkedEntity] = {}
+		}
+		let fundData = hash[linkedEntity];
+		if (!fundData[commentaryType]) {
+			fundData[commentaryType] = {
+				commentaryType,
+				linkedEntity,
+				"commentaries": <ICommentaryInstance[]>[]
+			};
+		}
+		let commentaryObj = fundData[commentaryType];
+		let commentaryInstance = <ICommentaryInstance>{
+			culture,
+			commentary
+		};
+
+		// Check that a commentary does not already exist for the culture we are working with
+		let existingCommentaryInstance = <ICommentaryInstance>firstOrDefault(commentaryObj.commentaries.filter(c => c.culture === culture));
+		if (existingCommentaryInstance) {
+			existingCommentaryInstance.commentary = commentary;
+		}
+		else {
+			commentaryObj.commentaries.push(commentaryInstance);
+		}
+
+
+
+	}
+
+	let response = [];
+	Object.keys(hash).map(clientCode => {
+		Object.keys(hash[clientCode]).map(code => {
+			response.push(hash[clientCode][code]);
+		})
+	});
+	return response;
+}
+
+export function processDisclaimerCollection(collectionType: string, rows, properties, mappings: IMapping[]): {}[] {
+	let hash = {};
+	let explicitMapping = getMappingByType(collectionType, mappings);
+	if (!explicitMapping) {
+		console.log("No mapping found to process");
+		return [];
+	}
+	if (!explicitMapping.mappings || explicitMapping.mappings.length === 0) {
+		console.log("No mappings setup to process, mappings is null or length is 0");
+		return [];
+	}
+	let mappingProperties = explicitMapping.mappings;
+	for (let row of rows) {
+
+		let clientCodeProperty = getClientCodeProperty(mappingProperties);
+		let linkedEntity = getPropertyValue(row, clientCodeProperty);
+		let culture = getPropertyValueByCode(row, "culture", mappingProperties);
+		let disclaimerType = getPropertyValueByCode(row, "disclaimer_type", mappingProperties);
+		let disclaimer = getPropertyValueByCode(row, "disclaimer", mappingProperties);
+
+		if (!hash[linkedEntity]) {
+			hash[linkedEntity] = {}
+		}
+		let fundData = hash[linkedEntity];
+		if (!fundData[disclaimerType]) {
+			fundData[disclaimerType] = {
+				disclaimerType,
+				linkedEntity,
+				"disclaimers": <IDisclaimerInstance[]>[]
+			};
+		}
+		let disclaimerObj = fundData[disclaimerType];
+		let disclaimerInstance = <IDisclaimerInstance>{
+			culture,
+			disclaimer
+		};
+
+		// Check that a disclaimer does not already exist for the culture we are working with
+		let existingDisclaimerInstance = <IDisclaimerInstance>firstOrDefault(disclaimerObj.disclaimers.filter(c => c.culture === culture));
+		if (existingDisclaimerInstance) {
+			existingDisclaimerInstance.disclaimer = disclaimer;
+		}
+		else {
+			disclaimerObj.disclaimers.push(disclaimerInstance);
+		}
+
+
+
+	}
+
+	let response = [];
+	Object.keys(hash).map(clientCode => {
+		Object.keys(hash[clientCode]).map(code => {
+			response.push(hash[clientCode][code]);
+		})
+	});
+	return response;
+}
+
+
+export function processTranslationCollection(collectionType: string, rows: {}[] = [], mappings: IMapping[] = []): {}[] {
+	let hash = {};
+	let explicitMapping = getMappingByType(collectionType, mappings);
+	if (!explicitMapping) {
+		console.log("No mapping found to process");
+		return [];
+	}
+	if (!explicitMapping.mappings || explicitMapping.mappings.length === 0) {
+		console.log("No mappings setup to process, mappings is null or length is 0");
+		return [];
+	}
+	let mappingProperties = explicitMapping.mappings;
+	for (let row of rows) {
+
 		let culture = getPropertyValueByCode(row, "culture", mappingProperties);
 		let phrase = getPropertyValueByCode(row, "phrase", mappingProperties);
-		let translationCulture = getPropertyValueByCode(row, "translation_culture", mappingProperties);		
+		let translationCulture = getPropertyValueByCode(row, "translation_culture", mappingProperties);
 		let translation = getPropertyValueByCode(row, "translation", mappingProperties);
-		let key = `${culture}-${translationCulture}-${phrase}`;	
+		let key = `${culture}-${translationCulture}-${phrase}`;
 		hash[key] = {
 			culture,
 			phrase,
 			translationCulture,
 			translation
-		};		
+		};
 	}
-	
+
 	let response = [];
 	Object.keys(hash).map(key => {
-		response.push(hash[key]);		
+		response.push(hash[key]);
 	});
 	return response;
 }
 
 export function processValueCollection(collectionType: string, rows, labelValueProperties, mappings: IMapping[], isLabelCollection: boolean = true, periodicity: string = 'MONTHLY', entityType: "CLSS" | "FUND" = "CLSS"): {}[] {
-	let hash = {};	
+	let hash = {};
 	let explicitMapping = getMappingByType(collectionType, mappings);
 	if (!explicitMapping) {
 		console.log("No mapping found to process");
@@ -239,14 +365,14 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 	}
 	let mappingProperties = explicitMapping.mappings;
 	for (let row of rows) {
-		
+
 		let clientCodeProperty = getClientCodeProperty(mappingProperties);
-		let clientCode = getPropertyValue(row, clientCodeProperty);		
+		let clientCode = getPropertyValue(row, clientCodeProperty);
 		let label = getPropertyValueByCode(row, "label", mappingProperties);
 		let value = getPropertyValueByCode(row, "value", mappingProperties);
 		let date = getPropertyValueByCode(row, "date", mappingProperties);
 		let ccy = getPropertyValueByCode(row, "ccy", mappingProperties, true) || "N/A";
-		
+
 		let property = getPropertyByCode(collectionType, labelValueProperties);
 		if (property) {
 			let { code } = property;
@@ -288,13 +414,13 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 					let mappingProperty = getPropertyByCode(extendedProperty.label, mappingProperties);
 					if (mappingProperty) {
 						let extendedValue = getPropertyValue(row, mappingProperty);
-						valueObj[mappingProperty.code] = extendedValue;	
-					}					
+						valueObj[mappingProperty.code] = extendedValue;
+					}
 				}
 			}
 		}
 	}
-	
+
 	let response = [];
 	Object.keys(hash).map(clientCode => {
 		Object.keys(hash[clientCode]).map(code => {

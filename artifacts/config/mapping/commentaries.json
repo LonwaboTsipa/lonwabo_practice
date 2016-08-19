@@ -1,0 +1,27 @@
+[
+	{
+		"type": "commentary_1",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "Fund Code"
+			},
+			{
+				"code": "commentary_type",
+				"dataType": "STRG",
+				"sourceField": "Commentary Type"
+			},
+			{
+				"code": "culture",
+				"dataType": "STRG",
+				"sourceField": "Culture"
+			},
+			{
+				"code": "commentary",
+				"dataType": "STRG",
+				"sourceField": "Commentary"
+			}					
+		]
+	}
+]
