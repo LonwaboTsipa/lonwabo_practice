@@ -7,7 +7,9 @@
   "scripts": {
     "clean": "rimraf dist/",
     "prepublish": "npm run clean && npm run build",
-    "build": "npm run clean && tsc",
+    "build:dev": "npm run clean && tsc",
+    "build": "npm run clean && tsc && npm run compile",
+    "compile": "babel ./build -d ./dist -s",
     "build:watch": "tsc -w",
     "test": "jest --no-cache --config spec/jest-config.json",
     "properties:dev": "node dist/index.js DEV property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation",
@@ -22,8 +24,8 @@
   "license": "ISC",
   "devDependencies": {
     "awesome-typescript-loader": "^0.17.0",
-    "babel": "^6.5.2",
-    "babel-core": "^6.9.0",
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-polyfill": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
@@ -41,13 +43,13 @@
     "rimraf": "^2.5.2",
     "tslint": "^3.10.2",
     "tslint-loader": "^2.1.4",
-    "typescript": "^2.1.0-dev.20160811",
+    "typescript": "^2.0.0",
     "wallaby-webpack": "0.0.22",
     "webpack": "^1.13.1",
     "webpack-node-externals": "^1.2.0"
   },
   "dependencies": {
-    "@kurtosys/udm_data_toolkit": "^1.2.5",
+    "@kurtosys/udm_data_toolkit": "^1.2.9",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.13.0",
     "path": "^0.12.7",
