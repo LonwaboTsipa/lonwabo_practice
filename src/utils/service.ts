@@ -1,9 +1,10 @@
 import { LOADER_CONFIG, IManifest } from "@kurtosys/udm_data_toolkit";
 import { isNullOrWhitespace, safe, deepCopy } from "../utils";
-import { IApiRequestOptions } from "../models";
+import { IApiRequestOptions, IApiManifest, IApiOptionsItems } from "../models";
 import * as request from "request";
 import * as fs from "fs";
 import * as path from "path";
+
 // This will generate a url for the call api function
 export function getUrl(baseUrl: string = "", urlSuffix: string = "", parameters: any = {}) {
     let url = "";
@@ -20,7 +21,7 @@ export function getUrl(baseUrl: string = "", urlSuffix: string = "", parameters:
         if (urlSuffix.startsWith("/")) {
             urlSuffix = urlSuffix.substr(1);
         }
-        url = `${baseUrl}${urlSuffix}`
+        url = `${baseUrl}${urlSuffix}`;
     }
     if (!url) {
         return "";
@@ -46,10 +47,10 @@ export function getCertificateContent(certificateName: string): string {
     return content;
 }
 
-export async function callApi(manifestItem: IManifest, options: IApiRequestOptions = {}) {
+export async function callApi(manifestItem: IApiManifest, options: IApiRequestOptions = {}) {
     return new Promise((resolve, reject) => {
         let { requestBody, urlParameters, requestHeaders } = options;
-        
+
         if (options.passRequestBodyToDeepLinks) {
             options.parentRequestBody = requestBody;
         }
@@ -110,7 +111,7 @@ export async function callApi(manifestItem: IManifest, options: IApiRequestOptio
             pfx,
             passphrase,
             securityOptions
-        }, (error, response, body) => {
+        } as any, (error, response, body) => {
             if (error) {
                 console.error(`Error on api call to ${url}, with message: ${error}`);
                 resolve();
@@ -124,7 +125,7 @@ export async function callApi(manifestItem: IManifest, options: IApiRequestOptio
     });
 }
 
-export async function loadDeepLinks(targetApi, manifestItem: IManifest, body: {}, apiRequestOptions: IApiRequestOptions) {
+export async function loadDeepLinks(targetApi, manifestItem: IApiManifest, body: {}, apiRequestOptions: IApiRequestOptions) {
     let { deepLinks } = manifestItem.apiOptions;
     console.log('deepLinks', deepLinks);
     if (deepLinks) {
@@ -141,18 +142,18 @@ export async function loadDeepLinks(targetApi, manifestItem: IManifest, body: {}
 }
 
 /**
- * 
- * 
+ *
+ *
  * @param {IManifest} manifestItem
  * @param {any} deepLinks
  * @param {{}} body
  */
-async function ingestDeepLinks(manifestItem: IManifest, deepLinks, body: {}, apiRequestOptions: IApiRequestOptions) {        
+async function ingestDeepLinks(manifestItem: IApiManifest, deepLinks, body: {}, apiRequestOptions: IApiRequestOptions) {
     const DEEP_LINK_API_OPTIONS_KEY = "_deepLinkApiOptions";
     const deepLinkExplicitKeys = [DEEP_LINK_API_OPTIONS_KEY];
-    for (let deepLinkKey of Object.keys(deepLinks)) {        
+    for (let deepLinkKey of Object.keys(deepLinks)) {
         let deepLinkObject = deepLinks[deepLinkKey] || {};
-        let deepLinkApiOptions = <IApiRequestOptions>safe(() => deepLinkObject[DEEP_LINK_API_OPTIONS_KEY], false);        
+        let deepLinkApiOptions = <IApiRequestOptions>safe(() => deepLinkObject[DEEP_LINK_API_OPTIONS_KEY], false);
         if (body && body[deepLinkKey]) {
             if (deepLinkApiOptions) {
                 deepLinkApiOptions = typeof deepLinkApiOptions !== "object" ? {} : deepLinkApiOptions;
@@ -170,7 +171,7 @@ async function ingestDeepLinks(manifestItem: IManifest, deepLinks, body: {}, api
                     }
                 }
                 // Use the parent api request options to override the child deep link api options
-                let options = <IApiRequestOptions>Object.assign({}, deepCopy(deepLinkApiOptions), parentOptions); 
+                let options = <IApiRequestOptions>Object.assign({}, deepCopy(deepLinkApiOptions), parentOptions);
                 body[deepLinkKey] = await callApi(childManifestItem, options);
             }
             else {
@@ -185,10 +186,10 @@ async function ingestDeepLinks(manifestItem: IManifest, deepLinks, body: {}, api
                 for (let objectToLoad of objectsToLoad) {
                     let childManifestItem = Object.assign({}, manifestItem);
                     childManifestItem.apiOptions = Object.assign({}, childManifestItem.apiOptions, { "deepLinks": deepLinkObject });
-                    deepLinkPromises.push(ingestDeepLinks(childManifestItem, deepLinkObject, objectToLoad, apiRequestOptions));                    
+                    deepLinkPromises.push(ingestDeepLinks(childManifestItem, deepLinkObject, objectToLoad, apiRequestOptions));
                 }
                 await Promise.all(deepLinkPromises);
             }
         }
-    }    
-} 
+    }
+}

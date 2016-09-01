@@ -126,14 +126,14 @@ describe("dataToLoad", () => {
 		};
 		let genericItem = {
 			"clientCode": "testClientCode"
-		}
+		};
 		let globalDataToLoad = new dataLoadingArray();
 		it("will not mutate globalDataToLoad variable", () => {
 			let newDataToLoad = new dataLoadingArray();
 			let result = concatDataToLoad(globalDataToLoad, newDataToLoad);
 			expect(result).not.toBe(globalDataToLoad);
 		});
-		
+
 		function testConcatWithCollectionKey(collectionKey) {
 			let newDataToLoad = new dataLoadingArray();
 			newDataToLoad[collectionKey] = [genericItem];
@@ -146,7 +146,7 @@ describe("dataToLoad", () => {
 			expect(result[collectionKey].length).toEqual(1);
 			expect(result[collectionKey][0]).toEqual(genericItem);
 		}
-		
+
 		function testConcatWithCollectionKeyBlankGlobalCollection(collectionKey) {
 			let blankGlobalDataToLoad = new dataLoadingArray();
 			blankGlobalDataToLoad[collectionKey] = null;
@@ -161,7 +161,7 @@ describe("dataToLoad", () => {
 			expect(result[collectionKey].length).toEqual(1);
 			expect(result[collectionKey][0]).toEqual(genericItem);
 		}
-		
+
 		let collectionKeys = [
 			"funds", "classes", "allocations",
 			"timeseries", "statistics", "commentary",
@@ -176,7 +176,7 @@ describe("dataToLoad", () => {
 				testConcatWithCollectionKeyBlankGlobalCollection(collectionKey);
 			});
 		}
-		
+
 		it("will not add duplicate funds", () => {
 			let blankGlobalDataToLoad = new dataLoadingArray();
 			blankGlobalDataToLoad.funds.push(fund);
@@ -191,6 +191,6 @@ describe("dataToLoad", () => {
 			expect(result[collectionKey].length).toEqual(1);
 			expect(result[collectionKey][0]).toEqual(genericItem);
 		});
-				
+
 	});
 });

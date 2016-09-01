@@ -5,6 +5,7 @@
     "node": "registry:dt/node#6.0.0+20160524002506"
   },
   "globalDependencies": {
+    "jsonschema": "registry:dt/jsonschema#0.0.0+20160811135847",
     "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
   },
   "dependencies": {

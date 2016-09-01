@@ -74,7 +74,7 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 		default:
 			break;
 	}
-	if (property.mustHash) {
+	if (property["mustHash"]) {
 		value = crypto.createHash('md5').update(value).digest("hex");
 	}
 	return value;
@@ -172,7 +172,7 @@ export function processLinkedDocumentCollection(collectionType: string, rows: {}
 
 		let meta = {};
 		for (let metaProperties of documentMetaProperties) {
-			let { code } = metaProperties;
+			let { code } = metaProperties as any;
 			let value = getPropertyValueByCode(row, code, mappingProperties);
 			meta[code] = { value: [value] };
 		}

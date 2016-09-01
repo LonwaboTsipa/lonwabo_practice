@@ -1,5 +1,5 @@
 import {firstOrDefault} from "../utils";
-import {IPropertyDescriptor, dataLoadingArray, insertWebSocket, createData, createDocuments, TargetObject, EntityType, PropertyType } from "@kurtosys/udm_data_toolkit";
+import {IPropertyDescriptor, dataLoadingArray, insertWebSocket, createData, createDocuments, TargetObject, EntityType, PropertyType, IDocument } from "@kurtosys/udm_data_toolkit";
 export function getProperty(item: { [keys: string]: any; }, property: string): any {
     return item && item[property] ? item[property] : "";
 }
@@ -104,7 +104,7 @@ export async function sendDataToAPI(mapping, records: {}[], entityType: string =
             let batchSize = Math.min(maxBatchSize, records.length);
             let batchRecords = records.splice(0, batchSize);
             if (mapping.key === 'documents') {
-                await createDocuments(batchRecords);
+                await createDocuments(batchRecords as any);
             }
             else if (mapping.isCreateDataElement) {
                 await createData(batchRecords as IPropertyDescriptor[], mapping.targetType as PropertyType);

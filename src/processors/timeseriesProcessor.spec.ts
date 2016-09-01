@@ -1,6 +1,7 @@
 let dataToolkitMock = jest.genMockFromModule("@kurtosys/udm_data_toolkit");
 jest.mock("@kurtosys/udm_data_toolkit", () => dataToolkitMock);
 
+import { IManifest } from "@kurtosys/udm_data_toolkit";
 import {processTimeseries} from "./timeseriesProcessor";
 
 const manifest = <{[key : string] : IManifest}[]>require("../../spec/fixtures/orchestrated-manifest");
