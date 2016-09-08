@@ -65,9 +65,10 @@ export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFund
         { key: 'documents', targetType: 'documents', isCreateDataElement: false, disabled: false, ignoreEntityType: true, batchSize: 50 },
         { key: 'commentary', targetType: 'commentary', isCreateDataElement: false, disabled: false, ignoreEntityType: true, batchSize: 50 },
         { key: 'disclaimers', targetType: 'disclaimer', isCreateDataElement: false, disabled: false, ignoreEntityType: true, batchSize: 50 },
-        { key: 'translations', targetType: 'translation', isCreateDataElement: true, disabled: false, ignoreEntityType: true, batchSize: 50 }
+        { key: 'translations', targetType: 'translation', isCreateDataElement: true, disabled: false, ignoreEntityType: true, batchSize: 50 },
+        { key: 'fundLists', targetType: 'fundList', isCreateDataElement: true, disabled: false, ignoreEntityType: true, batchSize: 50 }
     ];
-
+    
     for (let mapping of mappings) {
         let records = [];
         if (!mapping.ignoreEntityType) {
@@ -96,12 +97,9 @@ export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFund
 
 export async function sendDataToAPI(mapping, records: {}[], entityType: string = "") {
     if (!mapping.disabled && records && records.length > 0) {
-
-        let maxBatchSize = mapping.batchSize;
-        let count = 0;
-        while (records.length > 0) {
-            count++;
-            let batchSize = Math.min(maxBatchSize, records.length);
+        let maxBatchSize = mapping.batchSize;        
+        while (records.length > 0) {            
+            let batchSize = records.length;
             let batchRecords = records.splice(0, batchSize);
             if (mapping.key === 'documents') {
                 await createDocuments(batchRecords as any);
