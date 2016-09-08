@@ -85,6 +85,16 @@
         "description": "Disclaimer"
     },
     {
+        "key": "fundlist",
+        "isFileForLoad": true,
+        "fileName": "FundList.xlsx",
+        "sheet": "FundList",
+        "regex": "FundList.*\\.xlsx",
+        "type": "xlsx",
+        "raw": true,
+        "description": "FundList"
+    },
+    {
         "key": "searchApi",
         "isFileForLoad": false,
         "type": "api",

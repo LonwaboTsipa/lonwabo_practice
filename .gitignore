@@ -38,3 +38,5 @@ artifacts/output/*
 artifacts/pending/*
 artifacts/errors/*
 artifacts/historical/*
+
+.DS_Store

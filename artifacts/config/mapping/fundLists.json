@@ -1,0 +1,22 @@
+[
+	{
+		"type": "fundlist_1",
+		"mappings": [
+			{
+				"code": "type",
+				"dataType": "STRG",
+				"sourceField": "Type"
+			},
+			{
+				"code": "list_name",
+				"dataType": "STRG",
+				"sourceField": "{Type}_{Suffix}"
+			},
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "Client Code"
+			}	
+		]
+	}
+]

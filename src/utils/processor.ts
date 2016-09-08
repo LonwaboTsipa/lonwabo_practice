@@ -317,6 +317,36 @@ export function processDisclaimerCollection(collectionType: string, rows, proper
 	return response;
 }
 
+export function processFundListCollection(collectionType: string, rows: {}[] = [], mappings: IMapping[] = []): {}[] {
+	let hash = {};
+	let explicitMapping = getMappingByType(collectionType, mappings);
+	if (!explicitMapping) {
+		console.log("No mapping found to process");
+		return [];
+	}
+	if (!explicitMapping.mappings || explicitMapping.mappings.length === 0) {
+		console.log("No mappings setup to process, mappings is null or length is 0");
+		return [];
+	}
+	let mappingProperties = explicitMapping.mappings;
+	for (let row of rows) {
+		let listName = getPropertyValueByCode(row, "list_name", mappingProperties);	
+		let key = listName;
+		if (!hash[key]) {
+			hash[key] = {
+				listName,
+				funds: []
+			};
+		}
+		hash[key].funds.push(getPropertyValueByCode(row, "client_code", mappingProperties));
+	}
+
+	let response = [];
+	Object.keys(hash).map(key => {
+		response.push(hash[key]);
+	});
+	return response;
+}
 
 export function processTranslationCollection(collectionType: string, rows: {}[] = [], mappings: IMapping[] = []): {}[] {
 	let hash = {};

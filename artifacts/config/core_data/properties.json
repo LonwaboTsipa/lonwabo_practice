@@ -32,6 +32,17 @@
         "cardinality": "1"
     },
     {
+        "code": "test",
+        "entityType": "FUND",
+        "dataType": "STRG",
+        "validationRule": "NONE",
+        "group": "core",
+        "description": "test",
+        "label": "Test",
+        "cardinality": "1",
+        "sourceField": "Test"
+    },
+    {
         "code": "isin",
         "entityType": "CLSS",
         "dataType": "STRG",

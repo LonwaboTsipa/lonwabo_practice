@@ -1,8 +1,11 @@
 import { IPropertyDescriptor, DataType, IPropertyPub } from "@kurtosys/udm_data_toolkit";
-import { getClientCodeProperty, getPropertyValueByCode, getPropertyByCode,
+import {
+	getClientCodeProperty, getPropertyValueByCode, getPropertyByCode,
 	getDefaultValueForType, processPropertiesPub, getPropertyValue,
 	processValueCollection, getPeriodicityValue, processLinkedDocumentCollection,
-	processTranslationCollection, processCommentaryCollection, processDisclaimerCollection} from './processor';
+	processTranslationCollection, processCommentaryCollection, processDisclaimerCollection,
+	processFundListCollection
+} from './processor';
 import { IMapping } from "../models";
 
 describe("processor", () => {
@@ -502,6 +505,68 @@ describe("processor", () => {
 		it('will return the default value of MONTHLY for an unknown key', () => {
 			let result = getPeriodicityValue("TEST");
 			expect(result).toEqual("MONTHLY");
+		});
+	});
+	describe("processFundListCollection", () => {
+		let fundlistRows = [];
+		let fundlistMappings = [];
+		let commentaryTypes = [];
+		beforeEach(() => {
+			fundlistRows = [
+				{
+					"Type": "fundlist_1",
+					"Suffix": "UK",
+					"Client Code": "Isin1"
+				},
+				{
+					"Type": "fundlist_1",
+					"Suffix": "UK",
+					"Client Code": "Isin2"
+				},
+				{
+					"Type": "fundlist_1",
+					"Suffix": "US",
+					"Client Code": "Isin3"
+				},
+				{
+					"Type": "fundlist_1",
+					"Suffix": "US",
+					"Client Code": "Isin4"
+				}
+			];
+			fundlistMappings = [
+				{
+					"type": "fundlist_1",
+					"mappings": [
+						{
+							"code": "type",
+							"dataType": "STRG",
+							"sourceField": "Type"
+						},
+						{
+							"code": "list_name",
+							"dataType": "STRG",
+							"sourceField": "{Type}_{Suffix}"
+						},
+						{
+							"code": "client_code",
+							"dataType": "STRG",
+							"sourceField": "Client Code"
+						}
+					]
+				}
+			]
+		});
+		it("will return an empty array if no data is passed to it", () => {
+			let result = processFundListCollection('fundlist_1', [], fundlistMappings);
+			expect(result).toEqual([]);
+		});
+		it("will return a fund list record", () => {
+			let result = processFundListCollection('fundlist_1', fundlistRows, fundlistMappings);
+			expect(result).toEqual([
+				{ listName: 'fundlist_1_UK', funds: [ 'Isin1', 'Isin2' ] },
+				{ listName: 'fundlist_1_US', funds: [ 'Isin3', 'Isin4' ] }
+			]);
 		});
 	});
 	describe("processCommentaryCollection", () => {
