@@ -23,5 +23,40 @@
 				"sourceField": "Value"
 			}
 		]
+	},
+	{
+		"type": "morningStarInternalDetails",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "isin"
+			},
+			{
+				"code": "label",
+				"dataType": "STRG",
+				"sourceField": "label"
+			},
+			{
+				"code": "value",
+				"dataType": "DCML",
+				"sourceField": "value"
+			},
+			{
+				"code": "isin",
+				"dataType": "STRG",
+				"sourceField": "isin"
+			},
+			{
+				"code": "internal_id",
+				"dataType": "STRG",
+				"sourceField": "internal_id"
+			},
+			{
+				"code": "category_id",
+				"dataType": "STRG",
+				"sourceField": "category_id"
+			}
+		]
 	}
 ]

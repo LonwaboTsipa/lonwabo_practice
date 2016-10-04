@@ -3,8 +3,30 @@
 		"code": "statistics_1",
 		"entityType": "CLSS",
 		"label": "Statistics 1",
-		"description": "Statistics 1 Description",		
+		"description": "Statistics 1 Description",
 		"group": "core",
 		"extended": []
+	},
+	{
+		"code": "morningStarInternalDetails",
+		"entityType": "CLSS",
+		"label": "Morning Star Internal Details",
+		"description": "Morning Star Internal Details that are specific to the share class",
+		"group": "core",
+		"extended": [
+			{
+				"label": "isin",
+				"dataType": "STRG"
+			},
+			{
+				"label": "internal_id",
+				"dataType": "STRG"
+			},
+			{
+				"label": "category_id",
+				"dataType": "STRG"
+			}
+		],
+		"cardinality": "1"
 	}
 ]

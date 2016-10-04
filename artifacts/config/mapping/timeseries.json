@@ -28,5 +28,30 @@
 				"sourceField": "Periodicity"
 			}
 		]
+	},
+	{
+		"type": "morningStarDailyPrices",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "isin"
+			},
+			{
+				"code": "date",
+				"dataType": "DATE",
+				"sourceField": "date"
+			},
+			{
+				"code": "value",
+				"dataType": "DCML",
+				"sourceField": "value"
+			},
+			{
+				"code": "change",
+				"dataType": "DCML",
+				"sourceField": "change"
+			}
+		]
 	}
 ]

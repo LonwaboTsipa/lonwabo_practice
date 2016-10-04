@@ -123,17 +123,7 @@
             "method": "POST"
         }
     },
-    {
-        "key": "morningstarDetails",
-        "isFileForLoad": false,
-        "type": "api",
-        "description": "morningstarDetails",
-        "apiOptions": {
-            "type": "morningstar",
-            "url": "/DataOutput.aspx?Package=EDW&ClientId=FW&IDTYpe=FundShareClassId&Content=1471&Currencies=BAS&Id={mstarInternalId}",
-            "method": "GET"
-        }
-    },
+    
     {
         "key": "oneview",
         "isFileForLoad": false,

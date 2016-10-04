@@ -27,7 +27,10 @@ export async function fetchFunds(token) {
     if (response.status >= 200 && response.status < 400) {
         let body = (await response.json());
         if (body && body.values) {
-            return body.values;
+            return body.values.map(fund => {
+                fund.propertiesPub = fund.properties_pub;
+                delete fund.properties_pub;  
+            });
         }
         return [];
     }

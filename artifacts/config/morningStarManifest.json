@@ -1,0 +1,35 @@
+[
+	{
+        "key": "morningstarInternalDetails",
+        "isFileForLoad": false,
+        "type": "api",
+        "description": "morningstarInternalDetails",
+        "apiOptions": {
+            "type": "morningstar",
+            "url": "/GetUniverseXML.aspx?ClientId=FW&ActiveStatus=1&ISIN={isin}",
+            "method": "GET"
+        }
+    },
+    {
+        "key": "morningstarDetails",
+        "isFileForLoad": false,
+        "type": "api",
+        "description": "morningstarDetails",
+        "apiOptions": {
+            "type": "morningstar",
+            "url": "/DataOutput.aspx?Package=EDW&ClientId=FW&IDTYpe=FundShareClassId&Content=1471&Currencies=BAS&Id={morningStarInternalId}",
+            "method": "GET"
+        }
+    },
+    {
+        "key": "morningstarDailyPrices",
+        "isFileForLoad": false,
+        "type": "api",
+        "description": "morningstarDetails",
+        "apiOptions": {
+            "type": "morningstar",
+            "url": "/HistoryData/HistoryData.aspx?ClientId=FW&DataType=price&PriceTypeId=1&SecId={morningStarInternalId}",
+            "method": "GET"
+        }
+    }
+]
