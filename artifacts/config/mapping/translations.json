@@ -5,22 +5,22 @@
 			{
 				"code": "culture",
 				"dataType": "STRG",
-				"sourceField": "Culture"
+				"sourceField": "culture"
 			},
 			{
 				"code": "phrase",
 				"dataType": "STRG",
-				"sourceField": "Phrase"
+				"sourceField": "phrase"
 			},
 			{
 				"code": "translation_culture",
 				"dataType": "STRG",
-				"sourceField": "Translation Culture"
+				"sourceField": "translationCulture"
 			},
 			{
 				"code": "translation",
 				"dataType": "STRG",
-				"sourceField": "Translation"
+				"sourceField": "translation"
 			}			
 		]
 	}
