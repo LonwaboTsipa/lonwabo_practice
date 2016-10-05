@@ -17,16 +17,6 @@ export async function processStatistics(funds: IFundOrShareClass[], manifest: {}
 	if (!isNullOrEmpty(dataToProcess)) {		
 		response.statistics = processValueCollection('statistics_1', dataToProcess, properties, mapping);		
 	}
-
-	// morningstarInternalDetails processing, this is to allow for the internal details about the share classes
-	// to be loaded once and not every time. In other loaders this might be added directly to the propertiesPub
-	// but this can cause a problem with the internal details are run without being able to access morningStar
-	dataToProcess = safe(() => manifest['morningstarInternalDetails'].orchestratedData, []);
-	
-	// Add processing logic here
-	if (!isNullOrEmpty(dataToProcess)) {		
-		response.statistics = processValueCollection('morningstarInternalDetails', dataToProcess, properties, mapping);		
-	}
 	
 
 	return response;

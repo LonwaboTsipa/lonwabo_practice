@@ -6,16 +6,20 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist/",
+    "clean:build": "rimraf build/",
+    "clean:logs": "rimraf artifacts/errors/* && rimraf artifacts/output/*",
     "prepublish": "npm run clean && npm run build",
     "build:dev": "npm run clean && tsc",
-    "build": "npm run clean && tsc && npm run compile",
+    "build": "npm run clean:logs && npm run clean && tsc && npm run compile && npm run clean:build",
     "compile": "babel ./build -d ./dist -s",
     "build:watch": "tsc -w",
     "test": "jest --no-cache --config spec/jest-config.json",
+    "properties:local": "node dist/index.js LOCAL property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation",
     "properties:dev": "node dist/index.js DEV property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation",
     "properties:staging": "node dist/index.js STAGING property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation",
     "properties:prod": "node dist/index.js PROD property allocationProperty statisticsProperty timeseriesProperty commentaryType disclaimerType docmeta formatCode fundList translation",
-    "start": "node dist/index.js DEV",
+    "start:local": "node dist/index.js LOCAL",
+    "start:dev": "node dist/index.js DEV",
     "start:staging": "sh scripts/start-staging.sh",
     "start:prod": "sh scripts/start-production.sh",
     "init:artifacts": "sh scripts/init-artifacts.sh"
@@ -49,7 +53,7 @@
     "webpack-node-externals": "^1.2.0"
   },
   "dependencies": {
-    "@kurtosys/udm_data_toolkit": "^1.2.10",
+    "@kurtosys/udm_data_toolkit": "^1.2.12",
     "csvtojson": "^1.0.2",
     "isomorphic-fetch": "^2.2.1",
     "jsonschema": "^1.1.0",

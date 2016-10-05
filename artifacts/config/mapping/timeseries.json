@@ -30,7 +30,7 @@
 		]
 	},
 	{
-		"type": "morningStarDailyPrices",
+		"type": "morning_star_daily_prices",
 		"mappings": [
 			{
 				"code": "client_code",

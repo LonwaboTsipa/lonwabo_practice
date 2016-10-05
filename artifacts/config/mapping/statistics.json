@@ -25,7 +25,7 @@
 		]
 	},
 	{
-		"type": "morningStarInternalDetails",
+		"type": "morning_star_internal_details",
 		"mappings": [
 			{
 				"code": "client_code",

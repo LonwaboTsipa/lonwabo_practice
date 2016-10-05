@@ -30,6 +30,7 @@ export async function fetchShareClasses(token) {
             return body.values.map(shareClass => {
                 shareClass.propertiesPub = shareClass.properties_pub;
                 delete shareClass.properties_pub;  
+                return shareClass;
             });
         }        
         return [];

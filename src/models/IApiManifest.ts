@@ -11,4 +11,5 @@ export interface IApiOptionsItems {
 	method?: string;
 	url?: string;
 	deepLinks: any;
+	schema?: string;
 }

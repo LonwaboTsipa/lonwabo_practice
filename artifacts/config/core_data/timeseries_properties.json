@@ -9,7 +9,7 @@
         "cardinality": "1"
     }	,
     {
-        "code": "morningStarDailyPrices",
+        "code": "morning_star_daily_prices",
         "entityType": "CLSS",
         "label": "Morning Star Daily Prices",
         "description": "Morning Star Daily Prices",

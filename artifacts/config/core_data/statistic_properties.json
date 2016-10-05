@@ -8,10 +8,10 @@
 		"extended": []
 	},
 	{
-		"code": "morningStarInternalDetails",
+		"code": "morning_star_internal_details",
 		"entityType": "CLSS",
 		"label": "Morning Star Internal Details",
-		"description": "Morning Star Internal Details that are specific to the share class",
+		"description": "Morning Star Internal Details for the share class",
 		"group": "core",
 		"extended": [
 			{

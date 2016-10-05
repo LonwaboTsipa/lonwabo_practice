@@ -3,7 +3,8 @@ import {processAllocations, processFunds, processShareClasses, processTimeseries
 import {fetchFunds, fetchShareClasses} from "../services";
 import { IOrchestratedManifest } from "../models";
 import {orchestrateManifest, callApi} from "../utils";
-let translations =  require("./translations.json");
+
+//let translations =  require("./translations.json");
 export async function ingestAll(rawManifest: IManifest[]): Promise<IOrchestratedManifest> {
 	// Orchestrate the manifest to be able to create an object out of the manifest items
 	// This requires the manifest elements to have a "key" attribute
@@ -12,7 +13,7 @@ export async function ingestAll(rawManifest: IManifest[]): Promise<IOrchestrated
 
 	// Any additional ingestion can be done here for API calls or orchestrating
 	// data that wil be needed at the processor level
-	manifest['translations'].orchestratedData = translations;
-
+	//manifest['translations'].orchestratedData = translations;
+	
 	return manifest;
 }

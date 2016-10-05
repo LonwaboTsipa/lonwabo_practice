@@ -4,7 +4,7 @@ import { login, dataLoadingArray, LOADER_CONFIG, getClient, initDataToolkitConfi
 } from "@kurtosys/udm_data_toolkit";
 import * as path from "path";
 import * as fs from "fs";
-import {orchestrateManifest, toCode, isNullOrEmpty, concatDataToLoad, insertDataToLoad, orchestrateManifestData, isNullOrUndefined} from "./utils";
+import {orchestrateManifest, toCode, isNullOrEmpty, concatDataToLoad, insertDataToLoad, orchestrateManifestData, isNullOrUndefined, addException, clearExceptions} from "./utils";
 import {ingestAll} from "./ingestors";
 import {processAll} from "./processors";
 
@@ -16,6 +16,7 @@ const rootDir = path.resolve(process.cwd(), "artifacts");
 const pendingDir = path.resolve(rootDir, "pending");
 const useFTP = false;
 export async function loadDataAsync() {
+    clearExceptions();
     let registerEndRan = false;
     try {
         let token = await login();

@@ -384,6 +384,7 @@ export function processTranslationCollection(collectionType: string, rows: {}[] 
 
 export function processValueCollection(collectionType: string, rows, labelValueProperties, mappings: IMapping[], isLabelCollection: boolean = true, periodicity: string = 'MONTHLY', entityType: "CLSS" | "FUND" = "CLSS"): {}[] {
 	let hash = {};
+	
 	let explicitMapping = getMappingByType(collectionType, mappings);
 	if (!explicitMapping) {
 		console.log("No mapping found to process");
@@ -396,14 +397,15 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 	let mappingProperties = explicitMapping.mappings;
 	for (let row of rows) {
 
-		let clientCodeProperty = getClientCodeProperty(mappingProperties);
-		let clientCode = getPropertyValue(row, clientCodeProperty);
+		let clientCodeProperty = getClientCodeProperty(mappingProperties);		
+		let clientCode = getPropertyValue(row, clientCodeProperty);		
 		let label = getPropertyValueByCode(row, "label", mappingProperties);
 		let value = getPropertyValueByCode(row, "value", mappingProperties);
 		let date = getPropertyValueByCode(row, "date", mappingProperties);
 		let ccy = getPropertyValueByCode(row, "ccy", mappingProperties, true) || "N/A";
 
 		let property = getPropertyByCode(collectionType, labelValueProperties);
+		
 		if (property) {
 			let { code } = property;
 			if (!hash[clientCode]) {

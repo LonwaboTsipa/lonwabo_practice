@@ -9,7 +9,18 @@
 	"clientName":"[CLIENT_NAME]",
 	"scheduleType":"SCHEDULE",
 	"schedule":"00 */60 * * * *",
+	"morningStarIngestion": {
+		"internalDetails": false,
+		"dailyPrices": false
+	},
 	"endPoints": {
         "search" : "https://api.fundpress.io/fund/searchentity"
-    }
+    },
+	"externalApi": {
+		"morningstar": {
+			"isTextResponse": true,
+			"type": "morningstar",
+			"baseUrl": "http://edw.morningstar.com/"			
+		}
+	}
 }

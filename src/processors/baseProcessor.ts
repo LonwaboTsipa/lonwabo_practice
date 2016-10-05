@@ -1,10 +1,12 @@
-import { login, dataLoadingArray, getClient, IManifest } from "@kurtosys/udm_data_toolkit";
+import { login, dataLoadingArray, getClient, IManifest, LOADER_CONFIG } from "@kurtosys/udm_data_toolkit";
 import {concatDataToLoad, insertDataToLoad} from "../utils";
 import {processAllocations, processFunds, processShareClasses, processTimeseries,
 	processStatistics, processDocuments, processTranslations, processCommentaries,
-	processDisclaimers} from "../processors";
+	processDisclaimers, processMorningStar } from "../processors";
 import {fetchFunds, fetchShareClasses} from "../services";
-import { IOrchestratedManifest } from "../models";
+import { IOrchestratedManifest, IMorningStarIngestionIndication } from "../models";
+
+
 
 export async function processAll(manifest: IOrchestratedManifest): Promise<dataLoadingArray> {
 	let token = await login();
@@ -47,6 +49,15 @@ export async function processAll(manifest: IOrchestratedManifest): Promise<dataL
 	// Proccess Disclaimers
 	dataToLoad = concatDataToLoad(dataToLoad, await processDisclaimers(fundsAndShares, manifest));
 
+	// Process MorningStar data
+	let morningStarIngestion = (LOADER_CONFIG["originalConfig"]["morningStarIngestion"] || {}) as IMorningStarIngestionIndication;
+	let anyMorningStarIngestion = Object.keys(morningStarIngestion).reduce((existing, key) => {
+		return existing || morningStarIngestion[key];
+	}, false);
+	if (anyMorningStarIngestion) {
+		dataToLoad = concatDataToLoad(dataToLoad, await processMorningStar(fundsAndShares, manifest));
+	}
+	
 
 	return dataToLoad;
 }
