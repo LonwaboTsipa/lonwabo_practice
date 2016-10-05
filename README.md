@@ -16,13 +16,6 @@ Now setup the upstream to the template to be able to get latest of the template 
 	git remote add upstream https://github.com/Kurtosys/ksys_loader_start.git
 ``` 
 
-To update from the template call the following:
-
-```
-	git pull upstream master
-```
-
-
 Go to project root and run this to clear the git history
 
 ```
