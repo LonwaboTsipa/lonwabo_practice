@@ -27,7 +27,11 @@ export async function fetchShareClasses(token) {
     if (response.status >= 200 && response.status < 400) {
         let body = (await response.json());
         if (body && body.values) {
-            return body.values;
+            return body.values.map(shareClass => {
+                shareClass.propertiesPub = shareClass.properties_pub;
+                delete shareClass.properties_pub;  
+                return shareClass;
+            });
         }        
         return [];
     }

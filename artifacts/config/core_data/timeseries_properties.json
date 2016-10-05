@@ -7,5 +7,19 @@
         "group": "core",		
         "extended": [],
         "cardinality": "1"
+    }	,
+    {
+        "code": "morning_star_daily_prices",
+        "entityType": "CLSS",
+        "label": "Morning Star Daily Prices",
+        "description": "Morning Star Daily Prices",
+        "group": "core",		
+        "extended": [
+            {
+				"label": "change",
+				"dataType": "DCML"
+			}
+        ],
+        "cardinality": "1"
     }	
 ]

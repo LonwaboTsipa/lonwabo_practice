@@ -1,5 +1,6 @@
 export interface IApiRequestOptions {
-    requestBody?: {};
+    dontParseBodyAsJson?: boolean;
+	requestBody?: {};
 	urlParameters?: {};
 	requestHeaders?: {};
 	passRequestBodyToDeepLinks?: boolean;

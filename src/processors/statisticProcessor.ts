@@ -17,6 +17,7 @@ export async function processStatistics(funds: IFundOrShareClass[], manifest: {}
 	if (!isNullOrEmpty(dataToProcess)) {		
 		response.statistics = processValueCollection('statistics_1', dataToProcess, properties, mapping);		
 	}
+	
 
 	return response;
 }   

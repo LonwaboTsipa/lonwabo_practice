@@ -1,5 +1,5 @@
 import { LOADER_CONFIG, IManifest } from "@kurtosys/udm_data_toolkit";
-import { isNullOrWhitespace, safe, deepCopy } from "../utils";
+import { isNullOrWhitespace, safe, deepCopy, validateJSONSchema, addException } from "../utils";
 import { IApiRequestOptions, IApiManifest, IApiOptionsItems } from "../models";
 import * as request from "request";
 import * as fs from "fs";
@@ -114,15 +114,60 @@ export async function callApi(manifestItem: IApiManifest, options: IApiRequestOp
         } as any, (error, response, body) => {
             if (error) {
                 console.error(`Error on api call to ${url}, with message: ${error}`);
+                addException({
+                    message: `Error on api call to ${url}, with message: ${error}`,
+                    description: error,
+                    apiDetails: {
+                        method: method,
+                        url: url,
+                        requestBody: JSON.stringify(body)
+                    }
+                });
                 resolve();
             }
             else {
-                body = loadDeepLinks(targetApi, manifestItem, JSON.parse(body), options);
-                resolve(body);
+                let responseBody = options.dontParseBodyAsJson ? body : JSON.parse(body);
+                if (!options.dontParseBodyAsJson && manifestItem.apiOptions.schema) {
+                    let schema = getSchema(manifestItem.apiOptions.schema);
+                    let validationResponse = validateJSONSchema(responseBody, schema);
+                    if (validationResponse.errors.length > 0) {
+                        addException({
+                            message: "Invalid JSON response from API Call.",
+                            apiDetails: {
+                                expectedSchema: schema,
+                                schemaValidationResponse: JSON.stringify(validationResponse),
+                                method: method,
+                                url: url,
+                                response: JSON.stringify(responseBody)
+                            }
+                        });
+                        body = undefined;
+                    }
+                    else {
+                        body = loadDeepLinks(targetApi, manifestItem, responseBody, options);
+                    }
+                    console.log('validationResponse', validationResponse);
+                }
+                else {
+                    body = loadDeepLinks(targetApi, manifestItem, responseBody, options);
+                }
 
+                resolve(body);
             }
         });
     });
+}
+
+const SCHEMA_STORE = {};
+
+export function getSchema(schemaName: string) {
+    if (!SCHEMA_STORE[schemaName]) {
+        let filePath = path.resolve('../../artifacts/config/schema/' + schemaName);
+        console.log('filePath', filePath);
+        let fileContent = fs.readFileSync(filePath);
+        SCHEMA_STORE[schemaName] = fileContent;
+    }
+    return SCHEMA_STORE[schemaName];
 }
 
 export async function loadDeepLinks(targetApi, manifestItem: IApiManifest, body: {}, apiRequestOptions: IApiRequestOptions) {
