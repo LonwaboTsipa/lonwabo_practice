@@ -38,5 +38,5 @@ artifacts/output/*
 artifacts/pending/*
 artifacts/errors/*
 artifacts/historical/*
-
+temp
 .DS_Store

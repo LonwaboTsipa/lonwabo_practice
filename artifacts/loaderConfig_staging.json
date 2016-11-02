@@ -11,7 +11,8 @@
 	"schedule":"00 */60 * * * *",
 	"morningStarIngestion": {
 		"internalDetails": false,
-		"dailyPrices": false
+		"dailyPrices": false,
+		"details": false
 	},
 	"endPoints": {
         "search" : "https://api.fundpress.io/fund/searchentity"

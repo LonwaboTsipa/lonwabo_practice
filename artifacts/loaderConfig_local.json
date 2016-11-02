@@ -11,7 +11,8 @@
 	"schedule": "00 */60 * * * *",
 	"morningStarIngestion": {
 		"internalDetails": true,
-		"dailyPrices": true
+		"dailyPrices": true,
+		"details": true
 	},
 	"endPoints": {
 		"search": "http://localhost:12004/searchEntity"

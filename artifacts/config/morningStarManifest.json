@@ -22,6 +22,11 @@
         }
     },
     {
+        "key": "morningstarHistoricalPerformance",
+        "isFileForLoad": false,
+        "description": "morningstarHistoricalPerformance"        
+    },
+    {
         "key": "morningstarDailyPrices",
         "isFileForLoad": false,
         "type": "api",

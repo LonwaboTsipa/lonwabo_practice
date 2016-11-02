@@ -2,7 +2,7 @@ import { login, dataLoadingArray, getClient, IManifest, IBaseEntity, LOADER_CONF
 import { processAllocations, processFunds, processShareClasses, processTimeseries } from "../processors";
 import { fetchFunds, fetchShareClasses } from "../services";
 import { IOrchestratedManifest, IFundOrShareClass, IApiManifest, IMorningStarIngestionIndication } from "../models";
-import { orchestrateManifest, callApi, safe, isNullOrUndefined } from "../utils";
+import { orchestrateManifest, callApi, safe, isNullOrUndefined, isNullOrWhitespace } from "../utils";
 
 import * as xpath from "xpath";
 import { parseString } from "xml2js";
@@ -20,6 +20,9 @@ export async function ingestAllMorningstar(funds: IFundOrShareClass[]): Promise<
 	if (morningStarIngestion.internalDetails && morningStarManifest['morningstarInternalDetails']) {
 		morningStarManifest['morningstarInternalDetails'] = await ingestMorningStarInternalDetails(funds, morningStarManifest['morningstarInternalDetails']);
 	}
+	if (morningStarIngestion.details && morningStarManifest['morningstarDetails']) {
+		morningStarManifest = await ingestMorningStarDetails(funds, morningStarManifest, morningStarManifest['morningstarInternalDetails']);
+	}
 	if (morningStarIngestion.dailyPrices && morningStarManifest['morningstarDailyPrices']) {
 		morningStarManifest['morningstarDailyPrices'] = await ingestMorningStarDailyPrices(funds, morningStarManifest['morningstarDailyPrices'], morningStarManifest['morningstarInternalDetails']);
 	}
@@ -29,7 +32,7 @@ export async function ingestAllMorningstar(funds: IFundOrShareClass[]): Promise<
 export async function ingestMorningStarInternalDetails(funds: IFundOrShareClass[], manifestItem: IManifest): Promise<IManifest> {
 	manifestItem.orchestratedData = [];
 	let promises = [];
-	
+
 	for (let fund of funds) {
 		let isin = safe(() => fund['propertiesPub']['isin']['value'], null);
 		if (isin && isin !== '') {
@@ -39,7 +42,7 @@ export async function ingestMorningStarInternalDetails(funds: IFundOrShareClass[
 			}
 			else {
 				let urlParameters = { isin };
-				promises.push(callApi(manifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson:true }));
+				promises.push(callApi(manifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson: true }));
 			}
 		}
 
@@ -81,16 +84,81 @@ export async function ingestMorningStarInternalDetails(funds: IFundOrShareClass[
 			if (internalDetailObj) {
 				manifestItem.orchestratedData.push(internalDetailObj);
 			}
-			
+
 		}
 	}
-	
+
 	return manifestItem;
 
 }
 
+export async function ingestMorningStarDetails(funds: IFundOrShareClass[], manifest: IOrchestratedManifest, internalDetailsManifestItem: IManifest): Promise<IOrchestratedManifest> {
+
+	let promises = [];
+	let detailsByInternalId = (internalDetailsManifestItem.orchestratedData as { isin: string; internal_id: string; }[]).reduce((existing, current) => {
+		existing[current.internal_id] = current;
+		return existing;
+	}, {});
+	let detailManifestItem = manifest['morningstarDetails'];
+	for (let internalDetail of (internalDetailsManifestItem.orchestratedData as { isin: string; internal_id: string; }[])) {
+		let urlParameters = { morningStarInternalId: internalDetail.internal_id };
+		promises.push(callApi(detailManifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson: true }));
+	}
+
+
+	if (promises.length > 0) {
+		let detailResponses = [];
+		const batchSize = 100;
+		while (promises.length > 0) {
+			let currentBatchSize = Math.min(batchSize, promises.length);
+			let currentBatch = promises.splice(0, currentBatchSize);
+			let batchResponses = await Promise.all(currentBatch);
+			detailResponses.push(...batchResponses);
+		}
+
+		for (let detailResponse of detailResponses) {
+			if (!isNullOrWhitespace(detailResponse)) {
+				try {
+					let doc = new DOMParser().parseFromString(detailResponse);
+					let fundShareClassXPath = '//Index/FundShareClass';
+					let fundShareClassNode = xpath.select(fundShareClassXPath, doc);
+					let internalId = fundShareClassNode;
+
+					let shareClass = detailsByInternalId[internalId];
+					ingestMorningStarHistoricalPerformance(doc, shareClass, manifest);
+
+					//response.values = performanceDetails;
+				}
+				catch (e) {
+					console.log(`Error getting performance from morning star: ${e.message}`);
+				}
+			}
+		}
+	}
+	return manifest;
+}
+
+export function ingestMorningStarHistoricalPerformance(detailXml: any, shareClass: IFundOrShareClass, manifest: IOrchestratedManifest) {
+	let historicalPerformanceXPath = '//Index/IndexPerformance/Performance/HistoricalPerformance/HistoricalPerformanceDetail/ReturnHistory/Return[@Type="6"][ReturnDetail/@TimePeriod="M1" or ReturnDetail/@TimePeriod="MI"]';
+	let historicalPerformanceDetailXml = xpath.select(historicalPerformanceXPath, doc);
+
+	let performanceDetails = [];
+	if (historicalPerformanceDetailXml) {
+		for (let childNode of historicalPerformanceDetailXml) {
+			let performanceDetail = {
+				"date": xpath.select('EndDate/text()', childNode).toString(),
+				"percent": parseFloat(xpath.select('ReturnDetail/Value/text()', childNode).toString())
+			};
+			performanceDetails.push(performanceDetail);
+		}
+	}
+}
+
 export async function ingestMorningStarDailyPrices(funds: IFundOrShareClass[], manifestItem: IManifest, internalDetailsManifestItem: IManifest): Promise<IManifest> {
-	manifestItem.orchestratedData = [];
+	if (!manifestItem.orchestratedData) {
+		manifestItem.orchestratedData = [];
+	}
+
 	let promises = [];
 	let internalDetailsByInternalId = (internalDetailsManifestItem.orchestratedData as { isin: string; internal_id: string; }[]).reduce((existing, current) => {
 		existing[current.internal_id] = current;
@@ -99,18 +167,19 @@ export async function ingestMorningStarDailyPrices(funds: IFundOrShareClass[], m
 
 	for (let internalDetail of (internalDetailsManifestItem.orchestratedData as { isin: string; internal_id: string; }[])) {
 		let urlParameters = { morningStarInternalId: internalDetail.internal_id };
-		promises.push(callApi(manifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson:true }));
+		promises.push(callApi(manifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson: true }));
 	}
 
 	if (promises.length > 0) {
 		let dailyPriceResponses = await Promise.all(promises);
-		let converter = new Converter({
-            "delimiter": ";",
-            "quote": "'"
-        });
+
 		for (let dailyPriceResponse of dailyPriceResponses) {
-			
+
 			await (new Promise((resolve, reject) => {
+				let converter = new Converter({
+					"delimiter": ";",
+					"quote": "'"
+				});
 				converter.fromString(dailyPriceResponse, function (err, results) {
 					// CHECK THIS ORDER
 					results = results.sort((a, b) => {
@@ -141,7 +210,7 @@ export async function ingestMorningStarDailyPrices(funds: IFundOrShareClass[], m
 		}
 
 	}
-	
+
 	return manifestItem;
 
 }
