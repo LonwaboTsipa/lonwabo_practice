@@ -139,7 +139,8 @@ export async function ingestMorningStarDetails(funds: IFundOrShareClass[], manif
 }
 
 export function ingestMorningStarHistoricalPerformance(detailXml: any, shareClass: IFundOrShareClass, manifest: IOrchestratedManifest) {
-	let historicalPerformanceXPath = '//Index/IndexPerformance/Performance/HistoricalPerformance/HistoricalPerformanceDetail/ReturnHistory/Return[@Type="6"][ReturnDetail/@TimePeriod="M1" or ReturnDetail/@TimePeriod="MI"]';
+	let doc = new DOMParser().parseFromString(detailXml);
+    let historicalPerformanceXPath = '//Index/IndexPerformance/Performance/HistoricalPerformance/HistoricalPerformanceDetail/ReturnHistory/Return[@Type="6"][ReturnDetail/@TimePeriod="M1" or ReturnDetail/@TimePeriod="MI"]';
 	let historicalPerformanceDetailXml = xpath.select(historicalPerformanceXPath, doc);
 
 	let performanceDetails = [];
