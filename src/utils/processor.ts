@@ -130,7 +130,7 @@ export function getPeriodicityValue(value: string = 'monthly') {
 		"WEEKLY": ["7", "w", "week", "weekly", "wkly"],
 		"MONTHLY": ["30", "m", "month", "monthly", "mnthly"],
 		"QUARTERLY": ["90", "q", "quarter", "quarterly", "qrtrly"],
-		"YEARLY": ["365", "y", "year", "yearly", "yrly"]
+		"ANNUALLY": ["365", "y", "year", "yearly", "yrly", "annually"]
 	};
 	for (let key of Object.keys(possibleValues)) {
 		let values = possibleValues[key];
