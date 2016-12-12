@@ -435,7 +435,11 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 			}
 			else {
 				let inputPeriodicity = getPropertyValueByCode(row, "periodicity", mappingProperties);
-				fundData[code].periodicity = getPeriodicityValue(inputPeriodicity) || periodicity;
+                if (!inputPeriodicity){
+					fundData[code].periodicity = periodicity;
+				}else{
+					fundData[code].periodicity = getPeriodicityValue(inputPeriodicity) || periodicity;
+				}
 				let inputClassification = getPropertyValueByCode(row, "classification", mappingProperties);
 				fundData[code].classification = inputClassification || "N/A";
 				valueObj.date = date;
