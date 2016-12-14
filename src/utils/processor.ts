@@ -452,7 +452,10 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 					let mappingProperty = getPropertyByCode(extendedProperty.label, mappingProperties);
 					if (mappingProperty) {
 						let extendedValue = getPropertyValue(row, mappingProperty);
-						valueObj[mappingProperty.code] = extendedValue;
+                        // avoid 'null' values from reaching the processor
+						if(!isNullOrUndefined(extendedValue)) {
+							valueObj[mappingProperty.code] = extendedValue;
+						}
 					}
 				}
 			}
