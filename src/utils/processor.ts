@@ -56,9 +56,11 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 			break;
 		case "DCML":
 			value = parseFloat(value);
+			if(isNaN(value)) value = null;
 			break;
 		case "ITGR":
 			value = parseInt(value, 10);
+			if(isNaN(value)) value = null;
 			break;
 		case "BOOL":
 			let boolTrueValues = ["true", "t", "yes", "y", "1", "on", "confirm"];
