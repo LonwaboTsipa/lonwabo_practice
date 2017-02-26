@@ -10,7 +10,7 @@ describe('src/processors/allocationProcessor.ts', () => {
     describe("processAllocations", () => {
         let funds = [];
         let dataToLoad = [];
-        pit("will return dataLoadingArray with allocations", async () => {
+        it("will return dataLoadingArray with allocations", async () => {
             let response = await processAllocations(funds, dataToLoad);   
             expect(response).toBeDefined();
             expect(response.allocations).toBeDefined();

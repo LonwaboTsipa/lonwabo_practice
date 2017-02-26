@@ -2,7 +2,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch",
+			"name": "Launch Local",
 			"type": "node",
 			"request": "launch",
 			"program": "${workspaceRoot}/dist/index.js",
@@ -16,6 +16,72 @@
 			],
 			"env": {
 				"NODE_ENV": "development",
+				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
+				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
+			},
+			"externalConsole": false,
+			"sourceMaps": true,
+			"outDir": "${workspaceRoot}/dist"
+		},
+		{
+			"name": "Launch Dev",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/dist/index.js",
+			"stopOnEntry": false,
+			"args": ["DEV"],
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": null,
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "development",
+				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
+				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
+			},
+			"externalConsole": false,
+			"sourceMaps": true,
+			"outDir": "${workspaceRoot}/dist"
+		},
+		{
+			"name": "Launch Staging",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/dist/index.js",
+			"stopOnEntry": false,
+			"args": ["STAGING"],
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": null,
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "staging",
+				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
+				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
+			},
+			"externalConsole": false,
+			"sourceMaps": true,
+			"outDir": "${workspaceRoot}/dist"
+		},
+		{
+			"name": "Launch Production",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/dist/index.js",
+			"stopOnEntry": false,
+			"args": ["PROD"],
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": null,
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "production",
 				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
 				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
 			},

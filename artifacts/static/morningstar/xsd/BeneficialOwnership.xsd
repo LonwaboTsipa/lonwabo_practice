@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.46">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+
+ <xsd:annotation>
+   <xsd:documentation xml:lang="en">
+    BeneficialOwnership schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+
+ <xsd:element name="BeneficialOwnership">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="OwnershipOverview" minOccurs="1" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element ref="mdt:Date"/>
+       <xsd:element name="HoldingDetail" type="mdt:holdingDetailType"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="_Id" type="xsd:positiveInteger" use="required"/>
+   <xsd:attribute name="_ExternalId" type="mdt:varchar75"/>
+   <xsd:attribute name="Ownership" type="mdt:varchar75"/>
+  </xsd:complexType>
+ </xsd:element>
+
+</xsd:schema>
+
+

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.53">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:include schemaLocation="Company.xsd"/>
+
+ <xsd:annotation>
+   <xsd:documentation xml:lang="en">
+    Separate Account schema for Morningstar XML data structure
+    Copyright 2004 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+
+ <xsd:element name="SeparateAccountOperation">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="AccountBasics" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="TargetMarket" type="mdt:varchar40UnsignedByteType" minOccurs="1"/>
+       <xsd:element name="AccountType" type="mdt:varchar40UnsignedByteType" minOccurs="0"/>
+       <xsd:element name="IGSAFundLink" type="mdt:char10" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="AccountConstruction" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="PreviousProviderCompany" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:choice minOccurs="1">
+           <xsd:element ref="mdt:Company"/>
+           <xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+          </xsd:choice>
+         </xsd:sequence>
+         <xsd:attribute name="EndDate" type="xsd:date" use="required"/>
+         <xsd:attribute name="PreservePerformanceRecord" type="xsd:boolean" use="required"/>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="SimulationEndDate" type="xsd:date" minOccurs="0"/>
+       <xsd:element name="NumberOfMonthBeforeComposite" type="xsd:nonNegativeInteger" minOccurs="0"/>
+       <xsd:element name="ConstructionAttributes" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="TimeWeighted" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="AssetWeighted" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="FullDiscretionary" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="IncludeTerminatedAccount" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="IncludeTaxableAccount" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="IncludeTaxExemptAccount" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="GrossOfManagementFee" type="xsd:boolean" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="Customization" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="MinimumAccountBalance" type="xsd:positiveInteger" minOccurs="0"/>
+          <xsd:element name="Weighting" type="mdt:smallRawDecimal" minOccurs="0"/>
+          <xsd:element name="AvailabilityList">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="AvailabilityOption" type="mdt:nonNegativeIntegerUnsignedByteType" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="TaxEfficiency" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="MinimumAccountBalance" type="xsd:positiveInteger" minOccurs="0"/>
+          <xsd:element name="Weighting" type="mdt:smallRawDecimal" minOccurs="0"/>
+          <xsd:element name="AvailabilityList">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="AvailabilityOption" type="mdt:nonNegativeIntegerUnsignedByteType" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="AccountNarratives" minOccurs="0">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="PurchaseRequirement" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="Disclosure" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>
+

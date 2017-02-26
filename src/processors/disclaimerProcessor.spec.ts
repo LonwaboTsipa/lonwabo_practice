@@ -10,7 +10,7 @@ describe('src/processors/disclaimerProcessor.ts', () => {
     describe("processDisclaimers", () => {    
         let funds = [];    
         let dataToLoad = [];
-        pit("will return dataLoadingArray with funds", async () => {
+        it("will return dataLoadingArray with funds", async () => {
             let response = await processDisclaimers(funds, dataToLoad);   
             expect(response).toBeDefined();
             expect(response.disclaimers).toBeDefined();

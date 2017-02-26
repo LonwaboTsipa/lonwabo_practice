@@ -10,7 +10,7 @@ describe('src/processors/documentProcessor.ts', () => {
     describe("processDocuments", () => {
         let funds = [];
         let dataToLoad = [];
-        pit("will return dataLoadingArray with documents", async () => {
+        it("will return dataLoadingArray with documents", async () => {
             let response = await processDocuments(funds, dataToLoad);   
             expect(response).toBeDefined();
             expect(response.documents).toBeDefined();

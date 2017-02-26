@@ -22,8 +22,8 @@ module.exports = function (wallaby) {
         },
 
         setup: function (wallaby) {
-            var jestConfig = require("./spec/jest-config.json");
-            wallaby.testFramework.configure(jestConfig);
+            // var jestConfig = require("./spec/jest-config.json");
+            // wallaby.testFramework.configure(jestConfig);
         }
     };
 };

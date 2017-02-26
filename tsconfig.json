@@ -3,12 +3,13 @@
 		"target": "es6",
 		"allowJs": false,
 		"module": "commonjs",
-		"outDir": "build",
-		"declaration": true
+		"outDir": "dist",
+		"declaration": true		
 	},
 	"exclude": [
         "node_modules",
 		"dist",
-		"spec"
+		"spec",
+		"src/generator"
     ]
 }

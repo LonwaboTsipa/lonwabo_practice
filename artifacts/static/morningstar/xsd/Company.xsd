@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.60">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:include schemaLocation="ContactInformation.xsd"/>
+	<xsd:include schemaLocation="HistoricalOperation.xsd"/>
+	<xsd:include schemaLocation="InternationalFeature.xsd"/>
+	<xsd:include schemaLocation="ProfessionalInformation.xsd"/>
+	<xsd:include schemaLocation="MultilingualVariation.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Company schema for Morningstar XML data structure
+    Copyright 2004 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="Company">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CompanyOperation" minOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="CompanyBasics" minOccurs="1">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:choice minOccurs="0" maxOccurs="unbounded">
+											<xsd:element name="Name" type="mdt:varchar500" minOccurs="1"/>
+											<xsd:element name="OrganizationForm" type="mdt:varchar40UnsignedByteType" minOccurs="0"/>
+											<xsd:element name="CompanyType" minOccurs="0">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="Type" type="xsd:unsignedByte" maxOccurs="unbounded"/>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="ClassType" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="ClassTypeDetail" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:sequence>
+																	<xsd:element name="Type" type="mdt:char1"/>
+																</xsd:sequence>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="InceptionDate" type="xsd:date" minOccurs="0"/>
+											<xsd:element name="Domicile" minOccurs="0">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="Country" type="mdt:tokenIdChar3Type"/>
+														<xsd:element name="Province" type="mdt:varchar25" minOccurs="0"/>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="ShortName" type="mdt:varchar25" minOccurs="0"/>
+											<xsd:element name="BrandingName" minOccurs="0">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:varchar25">
+															<xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="EIN" type="mdt:char10" minOccurs="0"/>
+											<xsd:element name="ParentCompanyList" minOccurs="0">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="ParentCompany" minOccurs="0" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:sequence>
+																	<xsd:element name="RoleList" minOccurs="0">
+																		<xsd:complexType>
+																			<xsd:sequence>
+																				<xsd:element name="Role" type="mdt:char1"/>
+																			</xsd:sequence>
+																		</xsd:complexType>
+																	</xsd:element>
+																	<xsd:element name="Role" type="mdt:char1" minOccurs="0"/>
+																	<xsd:element name="ParentType" type="mdt:char1" minOccurs="0"/>
+																	<xsd:element name="Source" type="mdt:varchar200" minOccurs="0"/>
+																	<xsd:choice minOccurs="1">
+																		<xsd:element ref="mdt:Company"/>
+																		<xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+																	</xsd:choice>
+																</xsd:sequence>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="NetAssets" minOccurs="0">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="xsd:integer">
+															<xsd:attribute name="Date" type="xsd:date" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="LanguageVariation" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="RegionVariation" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:sequence>
+																	<xsd:element name="ApplicableRegion" minOccurs="0">
+																		<xsd:complexType>
+																			<xsd:sequence>
+																				<xsd:element name="RegionId" type="mdt:char3" maxOccurs="unbounded"/>
+																			</xsd:sequence>
+																		</xsd:complexType>
+																	</xsd:element>
+																	<xsd:element name="Name" type="mdt:varchar40" minOccurs="0"/>
+																	<xsd:element name="LegalName" type="mdt:varchar100" minOccurs="0"/>
+																	<xsd:element name="CompanyNarratives" minOccurs="0">
+																		<xsd:complexType>
+																			<xsd:sequence>
+																				<xsd:element name="Profile" type="mdt:string512" minOccurs="0"/>
+																				<xsd:element name="Headquarter" minOccurs="0">
+																					<xsd:complexType>
+																						<xsd:sequence>
+																							<xsd:element name="CountryHeadquarter" minOccurs="0">
+																								<xsd:complexType>
+																									<xsd:sequence>
+																										<xsd:element name="Country" minOccurs="0">
+																											<xsd:complexType>
+																												<xsd:simpleContent>
+																													<xsd:extension base="mdt:varchar50">
+																														<xsd:attribute name="_Id" type="mdt:char3" use="required"/>
+																													</xsd:extension>
+																												</xsd:simpleContent>
+																											</xsd:complexType>
+																										</xsd:element>
+																										<xsd:element ref="mdt:ContactInformation" minOccurs="0"/>
+																									</xsd:sequence>
+																									<xsd:attribute name="PrimaryHeadquarter" type="xsd:boolean" use="required"/>
+																								</xsd:complexType>
+																							</xsd:element>
+																						</xsd:sequence>
+																					</xsd:complexType>
+																				</xsd:element>
+																			</xsd:sequence>
+																			<xsd:attribute name="_LanguageId" type="mdt:char10" use="required"/>
+																		</xsd:complexType>
+																	</xsd:element>
+																</xsd:sequence>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+													<xsd:attribute name="_LanguageId" type="mdt:char10" use="required"/>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="Obsolete" type="mdt:obsoleteType" minOccurs="0"/>
+											<xsd:element name="TypeStatus" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="EntityType" type="xsd:unsignedByte" minOccurs="0"/>
+										</xsd:choice>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="PersonnelSummary" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="mdt:EndDate" minOccurs="0"/>
+										<xsd:element name="NumberOfEmployee" type="xsd:nonNegativeInteger" minOccurs="0"/>
+										<xsd:element name="JobFunctionBreakdown" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="BreakdownDetail" type="mdt:breakdownNonNegativeType" maxOccurs="unbounded"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="DesignationBreakdown" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="BreakdownDetail" type="mdt:breakdownNonNegativeType" maxOccurs="unbounded"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+              <xsd:element name="CompanyAttributes" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="CompanyAIFMD" type="xsd:boolean" minOccurs="0"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+							<xsd:element name="BusinessTypeClassification" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="BusinessType" type="xsd:unsignedByte" maxOccurs="unbounded"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CompanyOwnership" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="NumberOfEmployeeOwner" type="xsd:unsignedShort" minOccurs="0"/>
+										<xsd:element name="PercentOwnedByEmployee" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+										<xsd:element name="PercentOwnedByFemale" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+										<xsd:element name="MinorityOwned" type="xsd:boolean" minOccurs="0"/>
+										<xsd:element name="PrivateCompany" type="xsd:boolean" minOccurs="0"/>
+										<xsd:element name="RegionalBreakdown" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="BreakdownValue" type="mdt:rawRatioType" maxOccurs="unbounded"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="TopClientList" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="ClientInformation" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Name" type="mdt:varchar40"/>
+													<xsd:element name="TotalMarketValue" type="xsd:long" minOccurs="1"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CompanyIdentifiers" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="CompanyIdentifiers" minOccurs="0">
+											<xsd:complexType>
+												<xsd:choice minOccurs="0" maxOccurs="unbounded">
+													<xsd:element name="RegistrationNo" type="xsd:string" minOccurs="0"/>
+													<xsd:element name="CIKs" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="CIK" minOccurs="0">
+																	<xsd:complexType>
+																		<xsd:simpleContent>
+																			<xsd:extension base="xsd:string">
+																				<xsd:attribute name="EntityType" type="xsd:unsignedByte" use="optional"/>
+																			</xsd:extension>
+																		</xsd:simpleContent>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+                          <xsd:element name="EIN" type="xsd:unsignedInt" minOccurs="0"/>
+													<xsd:element name="SEC13FCIK" type="xsd:long" minOccurs="0"/>
+                          <xsd:element name="ABN" type="xsd:string" minOccurs="0"/>
+													<xsd:element name="CIFCode" type="xsd:string" minOccurs="0"/>
+                          <xsd:element name="DGSCode" type="xsd:string" minOccurs="0"/>
+													<xsd:element name="LEI" type="mdt:char20" minOccurs="0"/>
+													<xsd:element name="SECFileNumbers" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="SECFileNumber" minOccurs="1">
+																	<xsd:complexType>
+																		<xsd:simpleContent>
+																			<xsd:extension base="xsd:string">
+																				<xsd:attribute name="EntityType" type="xsd:unsignedByte" use="optional"/>
+																			</xsd:extension>
+																		</xsd:simpleContent>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="CRDs" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="CRD" minOccurs="1">
+																	<xsd:complexType>
+																		<xsd:simpleContent>
+																			<xsd:extension base="xsd:string">
+																				<xsd:attribute name="EntityType" type="xsd:unsignedByte" use="optional"/>
+																			</xsd:extension>
+																		</xsd:simpleContent>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="CUSIPIssuerIds" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="CUSIPIssuerId" minOccurs="1" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:simpleContent>
+																			<xsd:extension base="xsd:string"/>
+																		</xsd:simpleContent>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:choice>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="KeyPersonnelList" minOccurs="0">
+								<xsd:complexType>
+									<xsd:choice minOccurs="1" maxOccurs="unbounded">
+										<xsd:element ref="mdt:ProfessionalInformation"/>
+										<xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+									</xsd:choice>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Headquarter" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="CountryHeadquarter" minOccurs="1" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Country" type="mdt:tokenIdChar3Type" minOccurs="1"/>
+										<xsd:element ref="mdt:ContactInformation" minOccurs="0"/>
+										<xsd:element name="ContactList" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="ContactPerson" type="mdt:ContactPerson" maxOccurs="12"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="CreditRating" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="CreditRatingDetail" maxOccurs="5">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element ref="mdt:Date" minOccurs="0"/>
+																<xsd:element name="CreditRatingAgency" type="mdt:tokenIdChar2Type"/>
+																<xsd:element name="Value" type="mdt:varchar10"/>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="PrimaryHeadquarter" type="xsd:boolean" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AssetManagementFeature" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="RegulatoryRegistration" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="RegulatoryLicense" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="RegulatoryLicenseDetail" maxOccurs="unbounded">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="LicenseType" type="mdt:varchar40"/>
+																<xsd:element name="LicenseIssuer">
+																	<xsd:complexType>
+																		<xsd:attribute name="_Id" type="mdt:varchar10" use="required"/>
+																		<xsd:attribute name="_CountryId" type="mdt:char10"/>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:choice minOccurs="0">
+																	<xsd:element name="LicenseIssueYear" type="xsd:unsignedShort"/>
+																	<xsd:element name="Exempted" type="xsd:boolean"/>
+																</xsd:choice>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="RegionalRegulatory" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="USARegulatory" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="ExemptFromSECRegistration" type="xsd:boolean" minOccurs="0"/>
+																<xsd:element name="SECAdvisorFileNumber" type="mdt:varchar25" minOccurs="0"/>
+																<xsd:element name="CRDNumber" type="mdt:varchar6" minOccurs="0"/>
+																<xsd:element name="SEC13FCIK" type="xsd:positiveInteger" minOccurs="0"/>
+																<xsd:element name="SEC13FFileNumber" type="mdt:varchar10" minOccurs="0"/>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="SpanishRegulatory" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="DGSCode" type="mdt:varchar6" minOccurs="0"/>
+																<xsd:element name="CIFCode" type="mdt:varchar10" minOccurs="0"/>
+																<xsd:element name="CNMV" type="xsd:positiveInteger" minOccurs="0"/>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PortugalRegulatory" minOccurs="0"/>
+													<xsd:element name="BrazilRegulatory" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="ANBID" type="xsd:unsignedShort" minOccurs="0"/>
+																<xsd:element name="CVM" type="xsd:unsignedInt" minOccurs="0"/>
+																<xsd:element name="CNPJ" type="xsd:string" minOccurs="0"/>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="GIPSCompliance" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="mdt:Date"/>
+										<xsd:element name="Attestation" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element ref="mdt:Date" minOccurs="0"/>
+													<xsd:choice>
+														<xsd:element ref="mdt:Company"/>
+														<xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+													</xsd:choice>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Disciplinarity" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="mdt:Date" minOccurs="0"/>
+										<xsd:element name="DisciplinaryAction" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="PendingAction" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="PreviousUnfavorableAction" minOccurs="0">
+														<xsd:complexType>
+															<xsd:simpleContent>
+																<xsd:extension base="xsd:boolean">
+																	<xsd:attribute name="TimePeriod" type="mdt:varchar4" use="required"/>
+																</xsd:extension>
+															</xsd:simpleContent>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="Description" type="mdt:string512" minOccurs="0"/>
+												</xsd:sequence>
+												<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+												<xsd:attribute name="EntityCharged" type="xsd:unsignedByte" use="required"/>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="LoadReduction" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="RightsOfAccumulation" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="ROAQualification">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="Reduction" minOccurs="0">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="ShareClassType" type="mdt:tokenIdVarchar10Type" maxOccurs="14"/>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="BalanceAggregation" minOccurs="0">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="ShareClassType" type="mdt:tokenIdVarchar10Type" maxOccurs="14"/>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="OwnerList" minOccurs="0">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="OwnerType" maxOccurs="21">
+																				<xsd:complexType>
+																					<xsd:attribute name="_Id" type="xsd:unsignedByte" use="required"/>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="AccountList" minOccurs="0">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="AccountType" maxOccurs="17">
+																				<xsd:complexType>
+																					<xsd:attribute name="_Id" type="xsd:unsignedByte" use="required"/>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="OtherConsideration" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="Description" maxOccurs="5">
+																	<xsd:complexType>
+																		<xsd:simpleContent>
+																			<xsd:extension base="mdt:string1000">
+																				<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+																			</xsd:extension>
+																		</xsd:simpleContent>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+												<xsd:attribute name="_CalculationMethodId" type="xsd:unsignedByte" use="required"/>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="LetterOfIntent" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Escrow" minOccurs="0">
+														<xsd:complexType>
+															<xsd:simpleContent>
+																<xsd:extension base="mdt:smallDecimal">
+																	<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+																</xsd:extension>
+															</xsd:simpleContent>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="ForwardPeriod">
+														<xsd:complexType>
+															<xsd:simpleContent>
+																<xsd:extension base="xsd:unsignedByte">
+																	<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+																</xsd:extension>
+															</xsd:simpleContent>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="LookBackPeriod" minOccurs="0">
+														<xsd:complexType>
+															<xsd:simpleContent>
+																<xsd:extension base="xsd:unsignedByte">
+																	<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+																</xsd:extension>
+															</xsd:simpleContent>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="ExchangePrivilege" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="QualifiedShareClassType" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="QualifiedShareClassTypeDetail" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="SourceShareClassType" type="mdt:tokenIdVarchar10Type"/>
+																			<xsd:element name="DestinationShareClassType" type="mdt:tokenIdVarchar10Type" minOccurs="0"/>
+																			<xsd:element name="RequireSameShareClassType" type="xsd:boolean" minOccurs="0"/>
+																			<xsd:element name="Description" type="mdt:string512" minOccurs="0"/>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="WaiveRedemptionFee" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="WaiveHigherSalesChargeDifference" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="MinimumHoldingPeriod" type="mdt:unitInteger" minOccurs="0"/>
+													<xsd:element name="ResetHoldingPeriod" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="Description" type="mdt:string1000" minOccurs="0"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="ReinstatementPrivilege" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="QualifiedShareClassType" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="QualifiedShareClassTypeDetail" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="SourceShareClassType" type="mdt:tokenIdVarchar10Type"/>
+																			<xsd:element name="DestinationShareClassType" type="mdt:tokenIdVarchar10Type" minOccurs="0"/>
+																			<xsd:element name="RequireSameShareClassType" type="xsd:boolean" minOccurs="0"/>
+																			<xsd:element name="Description" type="mdt:string512" minOccurs="0"/>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="CreditDeferLoad" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="WaiveFrontLoad" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="MaximumReinstatementPeriod" type="mdt:unitInteger" minOccurs="0"/>
+													<xsd:element name="ResetHoldingPeriod" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="Description" type="mdt:string1000" minOccurs="0"/>
+												</xsd:sequence>
+												<xsd:attribute name="MaximumFrequency" type="mdt:char2" use="optional"/>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="NAVTransfer" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="QualifiedShareClassType" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="QualifiedShareClassTypeDetail" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="SourceShareClassType" type="mdt:tokenIdVarchar10Type"/>
+																			<xsd:element name="DestinationShareClassType" type="mdt:tokenIdVarchar10Type" minOccurs="0"/>
+																			<xsd:element name="RequireSameShareClassType" type="xsd:boolean" minOccurs="0"/>
+																			<xsd:element name="Description" type="mdt:string512" minOccurs="0"/>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="MaximumTransferPeriod" type="mdt:unitInteger" minOccurs="0"/>
+													<xsd:element name="Description" type="mdt:string1000" minOccurs="0"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="Date" type="xsd:date" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="TradingPolicy" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="TradingEffectiveness" type="mdt:string1000" minOccurs="0"/>
+										<xsd:element name="SoftDollarPolicy" type="mdt:string1000" minOccurs="0"/>
+										<xsd:element name="ExcessiveTradingPolicy" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="RoundTripPeriod" type="mdt:unitInteger" minOccurs="0"/>
+													<xsd:element name="RoundTripRestriction" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="RoundTripFrequency" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="TimePeriod" type="mdt:unitInteger"/>
+																			<xsd:element name="NumberOfRoundTrip" type="xsd:positiveInteger"/>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="RestrictedTradingPeriod" type="mdt:unitInteger" minOccurs="0"/>
+													<xsd:element name="Description" type="mdt:string1000" minOccurs="0"/>
+												</xsd:sequence>
+												<xsd:attribute name="Date" type="xsd:date" use="required"/>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CompanyAttributes" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="RegisteredAdvisorCompany" type="xsd:boolean"/>
+										<xsd:element name="FirmBonded" type="xsd:boolean"/>
+										<xsd:element name="ErrorsOmissionInsured">
+											<xsd:complexType>
+												<xsd:simpleContent>
+													<xsd:extension base="xsd:boolean">
+														<xsd:attribute name="InsuredLimit" type="xsd:long"/>
+													</xsd:extension>
+												</xsd:simpleContent>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="FiduciaryLiabilityInsured" type="xsd:boolean"/>
+										<xsd:element name="SubjectToUSASecurityLaw" type="xsd:boolean"/>
+										<xsd:element name="DisasterRecoveryPlan" type="xsd:boolean"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="ManagedPortfolio" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="MasterPortfolioId" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:simpleContent>
+													<xsd:extension base="xsd:positiveInteger">
+														<xsd:attribute name="_Type" type="xsd:unsignedByte" use="required"/>
+													</xsd:extension>
+												</xsd:simpleContent>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CompanyNarratives" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Profile" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="OrganizationAndOwnership" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="CompanyHistory" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="ProductOfferingAndService" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="BusinessObjectiveAndStrategy" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="LegalDisclosure" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="InvestmentPhilosophy" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="RiskManagementStrategy" type="xsd:string" minOccurs="0"/>
+						</xsd:sequence>
+						<xsd:attribute name="_LanguageId" type="mdt:char10" use="required"/>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="mdt:HistoricalOperation" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="_Id" type="mdt:varchar10" use="required"/>
+			<xsd:attribute name="_LegacyFamilyId" type="xsd:integer" use="optional"/>
+			<xsd:attribute name="_Status" type="mdt:char1" use="optional"/>
+			<xsd:attribute name="_ExternalId" type="mdt:varchar15" use="optional"/>
+			<xsd:attribute name="_BrandingId" type="mdt:varchar10" use="optional"/>
+			<xsd:attribute name="_IsMultiIdentifiers" type="xsd:boolean" use="optional"/>
+			<xsd:attribute name="_IsUltimateParent" type="xsd:boolean" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -15,7 +15,8 @@
 		"details": false
 	},
 	"endPoints": {
-        "search" : "https://api.fundpress.io/fund/searchentity"
+        "search" : "https://api.fundpress.io/fund/searchentity",
+		"retrieveLayoutConfiguration": "https://api.fundpress.io/layout/retrieveLayoutConfiguration"
     },
 	"externalApi": {
 		"morningstar": {

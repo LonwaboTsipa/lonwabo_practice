@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.54a">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:include schemaLocation="Company.xsd"/>
+ <xsd:include schemaLocation="FundShareClass.xsd"/>
+ <xsd:include schemaLocation="HistoricalOperation.xsd"/>
+ <xsd:include schemaLocation="Performance.xsd"/>
+
+ <xsd:annotation>
+   <xsd:documentation xml:lang="en">
+    Custom fund schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+
+ <xsd:element name="CustomFund">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:choice>
+     <xsd:choice>
+      <xsd:element ref="mdt:FundShareClass"/>
+      <xsd:element name="Stock" type="mdt:tokenIdType"/>
+     </xsd:choice>
+     <xsd:element name="_DataLink" type="mdt:linkChar10Type"/>
+    </xsd:choice>
+    <xsd:element name="Plan" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="PlanBasics">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="Name" type="mdt:varchar75"/>
+          <xsd:element name="InceptionDate" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="Obsolete" type="mdt:obsoleteType" minOccurs="0"/>
+          <xsd:element name="Domicile">
+            <xsd:complexType>
+              <xsd:simpleContent>
+                <xsd:extension base="mdt:varchar40">
+                  <xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+                </xsd:extension>
+              </xsd:simpleContent>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="PrimaryBenchmark" minOccurs="0">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="HoldingDetail" type="mdt:holdingDetailType" maxOccurs="unbounded"/>
+             <xsd:element name="Name" type="mdt:varchar100" minOccurs="0"/>
+             <xsd:element name="AdjustmentFactor" type="mdt:smallRawDecimal" minOccurs="0"/>
+            </xsd:sequence>
+           </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="SecondaryBenchmark" minOccurs="0">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="HoldingDetail" type="mdt:holdingDetailType" maxOccurs="unbounded"/>
+             <xsd:element name="Name" type="mdt:varchar100" minOccurs="0"/>
+             <xsd:element name="AdjustmentFactor" type="mdt:smallRawDecimal" minOccurs="0"/>
+            </xsd:sequence>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="PlanManagement" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="ProviderCompany" minOccurs="0">
+           <xsd:complexType>
+            <xsd:choice minOccurs="1">
+             <xsd:element ref="mdt:Company"/>
+             <xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+            </xsd:choice>
+           </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="SponsorCompany" minOccurs="0">
+           <xsd:complexType>
+            <xsd:choice minOccurs="1">
+             <xsd:element ref="mdt:Company"/>
+             <xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+            </xsd:choice>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="PlanNarratives" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="InvestmentStrategy" type="mdt:string3000"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element ref="mdt:HistoricalOperation" minOccurs="0"/>
+       <xsd:element ref="mdt:Performance" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+      <xsd:attribute name="_Status" type="mdt:char1" use="required"/>
+      <xsd:attribute name="_InvestmentType" type="mdt:char2" use="required"/>
+      <xsd:attribute name="_InvestmentId" type="mdt:char10" use="required"/>
+      <xsd:attribute name="_PerformanceId" type="mdt:char10" use="optional"/>
+      <xsd:attribute name="_PolicyId" type="mdt:char10" use="optional"/>
+      <xsd:attribute name="_ExternalId" type="mdt:varchar15" use="optional"/>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

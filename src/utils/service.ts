@@ -1,6 +1,6 @@
 import { LOADER_CONFIG, IManifest } from "@kurtosys/udm_data_toolkit";
-import { isNullOrWhitespace, safe, deepCopy, validateJSONSchema, addException } from "../utils";
-import { IApiRequestOptions, IApiManifest, IApiOptionsItems } from "../models";
+import { isNullOrWhitespace, safe, deepCopy, validateJSONSchema, addException, colorText, FONT_COLORS } from "../utils";
+import { IApiRequestOptions, IApiManifest, IApiOptionsItems, IOriginalLoaderConfig} from "../models";
 import * as request from "request";
 import * as fs from "fs";
 import * as path from "path";
@@ -66,7 +66,7 @@ export async function callApi(manifestItem: IApiManifest, options: IApiRequestOp
             throw new Error("No apiOptions key found in manifestItem");
         }
 
-        let { externalApi } = LOADER_CONFIG["originalConfig"];
+        let { externalApi } = LOADER_CONFIG["originalConfig"] as IOriginalLoaderConfig;
         if (!externalApi) {
             throw new Error("No externalApi key found in loaderConfig");
         }
@@ -86,7 +86,7 @@ export async function callApi(manifestItem: IApiManifest, options: IApiRequestOp
             headers = {};
         }
         headers = Object.assign({}, headers, requestHeaders);
-        console.log("callApi url: ", url);
+        console.log(`${colorText(FONT_COLORS.yellow, 'callApi')} url: `, url);
         let auth;
         if (targetApi.username && targetApi.password) {
             auth = {
@@ -95,8 +95,7 @@ export async function callApi(manifestItem: IApiManifest, options: IApiRequestOp
             };
         }
         let pfx, passphrase, securityOptions;
-        if (targetApi.certificateName) {
-            console.log(process.cwd());
+        if (targetApi.certificateName) {            
             pfx = getCertificateContent(targetApi.certificateName);
             passphrase = targetApi.certificatePassphrase;
             securityOptions = 'SSL_OP_NO_SSLv3';
@@ -162,8 +161,7 @@ const SCHEMA_STORE = {};
 
 export function getSchema(schemaName: string) {
     if (!SCHEMA_STORE[schemaName]) {
-        let filePath = path.resolve('../../artifacts/config/schema/' + schemaName);
-        console.log('filePath', filePath);
+        let filePath = path.resolve('../../artifacts/config/schema/' + schemaName);    
         let fileContent = fs.readFileSync(filePath);
         SCHEMA_STORE[schemaName] = fileContent;
     }
@@ -172,7 +170,7 @@ export function getSchema(schemaName: string) {
 
 export async function loadDeepLinks(targetApi, manifestItem: IApiManifest, body: {}, apiRequestOptions: IApiRequestOptions) {
     let { deepLinks } = manifestItem.apiOptions;
-    console.log('deepLinks', deepLinks);
+    
     if (deepLinks) {
         if (Array.isArray(body)) {
             for (let element of body) {

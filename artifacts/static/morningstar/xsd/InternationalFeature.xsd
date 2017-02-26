@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.54">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    International Feature schema for Morningstar XML data structure
+    Copyright 2005 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="InternationalFeature">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="IncomeDistribution" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="AccumulatedDistribution" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="GuaranteedPerformance" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="GuaranteedCapital" type="mdt:positiveSmallRawDecimal" minOccurs="0"/>
+								<xsd:element name="GuaranteedReturn" type="mdt:positiveSmallRawDecimal" minOccurs="0"/>
+								<xsd:element name="GuaranteedDividend" type="mdt:positiveSmallRawDecimal" minOccurs="0"/>
+								<xsd:element name="GuaranteedNAVHistory" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="GuaranteedNAV" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:positiveBigRawDecimal">
+															<xsd:attribute name="Date" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:sequence minOccurs="0">
+						<xsd:sequence>
+							<xsd:element name="EuropeanFeature" minOccurs="0">
+								<xsd:complexType>
+									<xsd:choice>
+										<xsd:element name="EUSDReview" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element ref="mdt:Date" minOccurs="0"/>
+													<xsd:element name="Scope" minOccurs="0">
+														<xsd:complexType>
+															<xsd:simpleContent>
+																<xsd:extension base="xsd:string">
+																	<xsd:attribute name="_Id" type="xsd:unsignedByte" use="required"/>
+																</xsd:extension>
+															</xsd:simpleContent>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="ScopeDetail" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence maxOccurs="unbounded">
+																<xsd:element ref="mdt:StartDate" minOccurs="0"/>
+																<xsd:element ref="mdt:EndDate" minOccurs="0"/>
+																<xsd:element name="Scope">
+																	<xsd:complexType>
+																		<xsd:complexContent>
+																			<xsd:extension base="mdt:tokenIdVarchar4Type"/>
+																		</xsd:complexContent>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PercentDirectMoneyDebtInvestment" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+													<xsd:element name="PercentIndirectMoneyDebtInvestment" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+													<xsd:element name="SwitzerlandPercentDirectMoneyDebtInvestment" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+													<xsd:element name="SwitzerlandPercentIndirectMoneyDebtInvestment" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+													<xsd:element name="DeclarationBasisDetail" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence maxOccurs="unbounded">
+																<xsd:element name="AssetTestDate" type="xsd:date"/>
+																<xsd:element name="DeclarationBasis" type="xsd:unsignedByte"/>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="CommonCode" type="mdt:char6" minOccurs="0"/>
+										<xsd:element name="FundProcessingPassport" type="xsd:boolean" minOccurs="0"/>
+									</xsd:choice>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:sequence minOccurs="0">
+								<xsd:element name="AustrianFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:choice>
+											<xsd:sequence>
+												<xsd:element name="PIF" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="FullyInvested" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="SpezialFond" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="LargeInvestorFund" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="AUTTaxTransparence" type="xsd:boolean" minOccurs="0"/>
+											</xsd:sequence>
+											<xsd:element name="WKN" type="mdt:char6" minOccurs="0"/>
+										</xsd:choice>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="BelgiumFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:choice>
+											<xsd:element name="PensionSavingsFund" type="xsd:boolean" minOccurs="0"/>
+											<xsd:sequence>
+												<xsd:element name="CBFInvestorRiskScale" type="mdt:varchar10" minOccurs="0"/>
+											</xsd:sequence>
+										</xsd:choice>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="DanishFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:choice>
+											<xsd:sequence>
+												<xsd:element name="FundStructure" type="mdt:varchar75" minOccurs="0"/>
+												<xsd:element name="IFRKategori" type="mdt:varchar10" minOccurs="0"/>
+												<xsd:element name="DKTrafficLight" type="xsd:unsignedByte" minOccurs="0"/>
+											</xsd:sequence>
+										</xsd:choice>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="DutchFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="MaximiumPositiveDeviation" type="mdt:smallRawDecimal" minOccurs="0"/>
+											<xsd:element name="MaximiumNegativeDeviation" type="mdt:smallRawDecimal" minOccurs="0"/>
+											<xsd:element name="AFMRiskScale" type="mdt:varchar10" minOccurs="0"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="FrenchFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:choice>
+											<xsd:sequence>
+												<xsd:element name="AMFCategory" type="mdt:varchar10" minOccurs="0"/>
+												<xsd:element name="AMFDate" type="xsd:date" minOccurs="0"/>
+												<xsd:element name="PEA" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="RiskProfileFund" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="FCIMT" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="FIPRegion" type="mdt:varchar10" minOccurs="0"/>
+													<xsd:element name="PEAPME" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="AdvisedHoldingPeriod" type="mdt:emptyIdPositiveIntegerType" minOccurs="0"/>
+												<xsd:element name="FCPInvestmentRule" minOccurs="0">
+													<xsd:complexType>
+														<xsd:choice>
+															<xsd:element name="ARIA" type="xsd:boolean"/>
+															<xsd:element name="ARIAEL" type="xsd:boolean"/>
+														</xsd:choice>
+													</xsd:complexType>
+												</xsd:element>
+												<xsd:element name="ReservedFund" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="TargetedInvestors" type="xsd:int" minOccurs="0"/>
+											</xsd:sequence>
+											<xsd:sequence>
+												<xsd:element name="DedicatedFund" type="xsd:boolean" minOccurs="0"/>
+											</xsd:sequence>
+										</xsd:choice>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="GermanFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="ASFund" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="RiesterFund" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="VWL" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="GermanTaxTransparence" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="WKN" type="mdt:char6" minOccurs="0"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="ItalianFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="CategoriaAssogestioni" type="mdt:varchar10" minOccurs="0"/>
+											<xsd:element name="InvestmentScope" type="mdt:emptyIdPositiveIntegerType" minOccurs="0"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="NorwegianFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="OsloBors" type="xsd:integer" minOccurs="0"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="PortugueseFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="APFIPPCategory" type="mdt:varchar10" minOccurs="0"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="SpanishFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:choice>
+											<xsd:sequence>
+												<xsd:element name="CategoriaInverco" type="mdt:varchar10" minOccurs="0"/>
+												<xsd:element name="CategoriaCNMV" type="mdt:varchar10" minOccurs="0"/>
+												<xsd:element name="PrincipalFund" type="xsd:boolean" minOccurs="0"/>
+											</xsd:sequence>
+											<xsd:sequence>
+												<xsd:element name="ESP" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="PensionFundName" type="mdt:varchar40" minOccurs="0"/>
+												<xsd:element name="DGSCode" type="mdt:char5" minOccurs="0"/>
+												<xsd:element name="PensionFundDGSCode" type="mdt:char5" minOccurs="0"/>
+												<xsd:element name="PensionFundCIFCode" type="mdt:char9" minOccurs="0"/>
+											</xsd:sequence>
+										</xsd:choice>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="SwedishFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="IPS" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="PMICode" type="mdt:varchar7" minOccurs="0"/>
+											<xsd:element name="PPM" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="PPMCode" type="xsd:integer" minOccurs="0"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="SwissFeature" minOccurs="0">
+									<xsd:complexType>
+										<xsd:choice>
+											<xsd:element name="FoundationFund" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="Valoren" type="xsd:integer" minOccurs="0"/>
+										</xsd:choice>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:sequence>
+						<xsd:element name="AustralianFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="APIR" type="mdt:char9" minOccurs="0"/>
+									<xsd:element name="EstablishmentFee" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="FeeSchedule" type="mdt:feeScheduleNonNegativeSmallRawDecimalType" maxOccurs="unbounded"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="TerminationFee" minOccurs="0">
+										<xsd:complexType>
+											<xsd:simpleContent>
+												<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+													<xsd:attribute name="_Unit"/>
+												</xsd:extension>
+											</xsd:simpleContent>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="IssuerFee" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="FeeSchedule" type="mdt:feeScheduleNonNegativeSmallRawDecimalType" maxOccurs="unbounded"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="ExpenseRecoveryFee" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+									<xsd:element name="MemberFee" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="FeeSchedule" type="mdt:feeScheduleNonNegativeSmallRawDecimalType" maxOccurs="unbounded"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="MaximumUpfrontAdviserServiceFee" minOccurs="0">
+										<xsd:complexType>
+											<xsd:simpleContent>
+												<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+													<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+												</xsd:extension>
+											</xsd:simpleContent>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="MaximumOngoingAdviserServiceFee" minOccurs="0">
+										<xsd:complexType>
+											<xsd:simpleContent>
+												<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+													<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+												</xsd:extension>
+											</xsd:simpleContent>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="FundRecommendation" type="xsd:unsignedByte" minOccurs="0"/>
+									<xsd:element name="InternalCode" type="mdt:varchar6" minOccurs="0"/>
+									<xsd:element name="IndustryFund" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="IntechCategory" type="mdt:varchar10" minOccurs="0"/>
+                  <xsd:element name="AUSInvestmentVehicleType" type="mdt:varchar75" minOccurs="0"/>
+                  <xsd:element name="AUSInvestmentVehicleABN" type="mdt:varchar75" minOccurs="0"/>
+                  <xsd:element name="AUSInvestmentVehicleRegion" type="mdt:varchar10" minOccurs="0"/>
+                  <xsd:element name="ARSN" type="mdt:varchar10" minOccurs="0"/>
+                  <xsd:element name="APRAInvestmentStrategy" minOccurs="0">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="PrimaryInvestmentStrategy" type="mdt:varchar75" minOccurs="0"/>
+                        <xsd:element name="PrimaryHedgeFund" type="mdt:varchar75" minOccurs="0"/>
+                        <xsd:element name="PrimaryInstrument" type="mdt:varchar75" minOccurs="0"/>
+                        <xsd:element name="PrimaryInvestmentStyle" type="mdt:varchar75" minOccurs="0"/>
+                        <xsd:element name="PrimaryTradingStrategy" type="mdt:varchar75" minOccurs="0"/>
+                        <xsd:element name="PrimaryMarketExposure" type="mdt:varchar75" minOccurs="0"/>
+                        <xsd:element name="PrimaryHoldingPeriod" type="mdt:varchar75" minOccurs="0"/>
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+									<xsd:element name="AUSInvestmentRiskLevelDetail" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence maxOccurs="unbounded">
+												<xsd:element name="Date" type="xsd:date"/>
+												<xsd:element name="AUSInvestmentRiskLevel" type="mdt:varchar2"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="CanadianFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="RRSP" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="RRIF" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="RESP" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="IFICRiskClassification" type="xsd:unsignedByte" minOccurs="0"/>
+									<xsd:element name="CanadaClassType" type="xsd:unsignedByte" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="ChileanFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="RUN" type="mdt:char6" minOccurs="0"/>
+									<xsd:element name="AAFMCategory" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="ACAFICategory" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="SVSCategory" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="AFPCategory" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="APV" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="APVC" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="CCRApproved" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="SBSApproved" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="TaxBenefits" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="APV42Bis" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="APVC42Bis" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="TER18" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="QUATER18" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="Bis57" type="xsd:boolean" minOccurs="0"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="JapaneseFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>
+									<xsd:sequence>
+										<xsd:element name="ITA" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="IbbotsonSector" type="mdt:varchar4" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:sequence>
+										<xsd:element name="ITACode" type="mdt:char8" minOccurs="0"/>
+										<xsd:sequence>
+											<xsd:element name="BaseUnit" type="xsd:int" minOccurs="0"/>
+										</xsd:sequence>
+										<xsd:element name="FrontRedemptionFee" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="FeeSchedule" type="mdt:feeScheduleNonNegativeSmallRawDecimalType" maxOccurs="unbounded"/>
+												</xsd:sequence>
+												<xsd:attribute name="Date" type="xsd:date" use="required"/>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="AvailableForInvestment" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="SMA" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="Public" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="DefinedContribution" type="xsd:boolean" minOccurs="0"/>
+													<xsd:element name="WRAP" type="xsd:boolean" minOccurs="0"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="KoreanFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ClassificationCode_KOR" type="mdt:varchar25" minOccurs="0"/>
+									<xsd:element name="InvestmentRiskLevel" type="xsd:unsignedByte" minOccurs="0"/>
+									<xsd:element name="KRCode" type="mdt:char12"/>
+									<xsd:element name="KRTicker" type="mdt:char5"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="UKFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>
+									<xsd:sequence>
+										<xsd:element name="IMASector" type="mdt:varchar10" minOccurs="0"/>
+										<xsd:element name="FSARecognizedOffshoreFund" type="xsd:boolean" minOccurs="0"/>
+										<xsd:element name="AICSector" type="mdt:varchar10" minOccurs="0"/>
+										<xsd:element name="BrokerFund" type="xsd:boolean" minOccurs="0"/>
+										<xsd:element name="CommonInvestmentFund" type="xsd:boolean" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:sequence>
+										<xsd:element name="MEXCode" type="mdt:varchar7" minOccurs="0"/>
+										<xsd:choice>
+											<xsd:sequence>
+												<xsd:element name="ISA" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="InHouseISA" type="xsd:boolean" minOccurs="0"/>
+												<xsd:element name="UKReportingFund" minOccurs="0">
+													<xsd:complexType>
+														<xsd:sequence>
+															<xsd:element name="Status" maxOccurs="unbounded">
+																<xsd:complexType>
+																	<xsd:simpleContent>
+																		<xsd:extension base="xsd:unsignedByte">
+																			<xsd:attribute name="StartDate" type="xsd:string" use="required"/>
+																		</xsd:extension>
+																	</xsd:simpleContent>
+																</xsd:complexType>
+															</xsd:element>
+														</xsd:sequence>
+													</xsd:complexType>
+												</xsd:element>
+											</xsd:sequence>
+											<xsd:sequence>
+												<xsd:element name="ABILifeFundSector" type="mdt:varchar10" minOccurs="0"/>
+												<xsd:element name="ABIPensionFundSector" type="mdt:varchar10" minOccurs="0"/>
+												<xsd:element name="StakeHolderPension" type="xsd:boolean" minOccurs="0"/>
+											</xsd:sequence>
+										</xsd:choice>
+									</xsd:sequence>
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="HongKongFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="MPFConstituent" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="MPFAPIF" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="MPFSector" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="MPFApprovalNumber" type="mdt:char8" minOccurs="0"/>
+									<xsd:element name="MPFScheme" type="mdt:varchar40" minOccurs="0"/>
+									<xsd:element name="IFASector" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="IFARegistered" type="xsd:boolean" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="SingaporeanFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>
+									<xsd:sequence>
+										<xsd:element name="QualifiedCPFSchemeAccount" type="mdt:emptyIdPositiveIntegerType" minOccurs="0"/>
+										<xsd:element name="RestrictedScheme" type="xsd:boolean" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:sequence>
+										<xsd:element name="CPFClassification" type="mdt:varchar10" minOccurs="0"/>
+										<xsd:element name="CPFFocus" type="mdt:varchar10" minOccurs="0"/>
+									</xsd:sequence>
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="ChineseFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>
+									<xsd:sequence>
+										<xsd:element name="ConstructDate" type="xsd:date" minOccurs="0"/>
+										<xsd:element name="QDII" type="xsd:boolean" minOccurs="0"/>
+										<xsd:element name="CSRCCategory" type="mdt:varchar10" minOccurs="0"/>
+										<xsd:element name="FinancialPlanFund" type="xsd:boolean" minOccurs="0"/>
+										<xsd:element name="LOF" type="xsd:boolean" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:sequence>
+										<xsd:element name="CSDCCCode" type="mdt:char6" minOccurs="0"/>
+										<xsd:element name="IPOSalesCharge" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="FeeSchedule" type="mdt:feeScheduleNonNegativeSmallRawDecimalType" maxOccurs="unbounded"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="TaiwanFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="RiskLevel" type="xsd:integer" minOccurs="0"/>
+									<xsd:element name="SITCACode" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="SITCACategory" type="mdt:varchar10" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="IndianFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>
+									<xsd:sequence>
+										<xsd:element name="OpenInterval" type="mdt:unitInteger" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:sequence>
+										<xsd:element name="AMFICode" type="mdt:char6" minOccurs="0"/>
+									</xsd:sequence>
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="ThaiFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>
+									<xsd:sequence>
+										<xsd:element name="FundCode" type="mdt:varchar50" minOccurs="0"/>
+										<xsd:element name="RegistryNumber" type="mdt:varchar10" minOccurs="0"/>
+										<xsd:element name="PurchaseSchedule" type="mdt:varchar100" minOccurs="0"/>
+										<xsd:element name="RedemptionSchedule" type="mdt:varchar100" minOccurs="0"/>
+										<xsd:element name="SwitchingInFee" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="FeeSchedule" type="mdt:feeScheduleNonNegativeSmallRawDecimalType" maxOccurs="unbounded"/>
+												</xsd:sequence>
+												<xsd:attribute name="Date" type="xsd:date" use="required"/>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:sequence>
+										<xsd:element name="AIMCCategory" type="mdt:varchar15" minOccurs="0"/>
+										<xsd:element name="SECSpecialCharacteristic" type="mdt:varchar25" minOccurs="0"/>
+									</xsd:sequence>
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="PuertoRicanFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="PRSymbol" type="mdt:char7"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="MexicanFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>
+									<xsd:sequence>
+										<xsd:element name="AdvisedHoldingPeriod" type="mdt:emptyIdPositiveIntegerType" minOccurs="0"/>
+										<xsd:element name="AMIBCategory" type="mdt:varchar10" minOccurs="0"/>
+										<xsd:element name="OwnershipLimit" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+										<xsd:element name="MinimumTermToIntroduceSellOrder" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="MinimumTermToIntroduceBuyOrder" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="PurchaseRequest" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="PurchaseExecution" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="PurchaseSettlement" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="SaleRequest" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="SaleExecution" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="SaleSettlement" type="mdt:varchar40" minOccurs="0"/>
+										<xsd:element name="MarketRiskAndRating" minOccurs="0" maxOccurs="4">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="CreditRating" type="mdt:varchar6" minOccurs="0"/>
+													<xsd:element name="MarketRisk" type="xsd:unsignedByte" minOccurs="0"/>
+												</xsd:sequence>
+												<xsd:attribute name="RatingAgency" type="xsd:byte" use="optional"/>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:sequence>
+										<xsd:element name="InvestorClassification" type="mdt:emptyIdPositiveIntegerType" minOccurs="0" maxOccurs="unbounded"/>
+									</xsd:sequence>
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="BrazilFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="TipoANBID" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="TipoCVM" type="mdt:varchar10" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="IsraeliFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ISACode" type="mdt:char7" minOccurs="0"/>
+									<xsd:element name="ISACategory" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="MaximumExposure" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="EquityExposure" type="mdt:emptyIdNonNegativeIntegerType"/>
+												<xsd:element name="ForeignCurrencyExposure">
+													<xsd:complexType>
+														<xsd:attribute name="Id" type="mdt:char1" use="required"/>
+													</xsd:complexType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="Taxation" type="mdt:emptyIdPositiveIntegerType" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="TurkishFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="CMBCategory" type="mdt:varchar10" minOccurs="0"/>
+									<xsd:element name="TypeAFund" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="SeedAmount" type="xsd:integer" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="SouthAfricanFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:choice>
+									<xsd:sequence>
+										<xsd:element name="Regulation28" type="xsd:boolean" minOccurs="0"/>
+										<xsd:element name="ASISASector" type="mdt:varchar10" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:sequence>
+										<xsd:element name="JSEAlphaCode" type="mdt:varchar6" minOccurs="0"/>
+									</xsd:sequence>
+								</xsd:choice>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="MalaysianFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="EmployeeProvidentFund" type="xsd:boolean" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="USFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Act1940" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="GNMASecurity" type="xsd:boolean" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="NewZealandFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="PIE" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="PrePIEPassive" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="KiwiSaver" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="PIEConversionDate" type="xsd:date" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:choice>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

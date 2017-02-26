@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.54a">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:include schemaLocation="FundShareClass.xsd"/>
+	<xsd:include schemaLocation="FixedAccount.xsd"/>
+	<xsd:include schemaLocation="HistoricalOperation.xsd"/>
+	<xsd:include schemaLocation="Performance.xsd"/>
+	<xsd:include schemaLocation="DataStatus.xsd"/>
+	<xsd:include schemaLocation="DataGroupList.xsd"/>
+	<xsd:include schemaLocation="PerformanceId.xsd"/>
+	<xsd:include schemaLocation="ProprietaryData.xsd"/>	
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Sub Account schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="SubAccount">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="mdt:DataStatus" minOccurs="0"/>
+				<xsd:element ref="mdt:DataGroupList" minOccurs="0"/>
+				<xsd:element name="SubAccountBasics" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Name" type="mdt:varchar75"/>
+							<xsd:element name="LegalName" type="mdt:varchar75"/>
+							<xsd:element name="InceptionDate" type="xsd:date"/>
+							<xsd:element name="SeparateAccountAdoptionDate" type="xsd:date" minOccurs="0"/>
+							<xsd:element name="Obsolete" type="mdt:obsoleteType" minOccurs="0"/>
+							<xsd:element name="ClosedToNewInvestors" type="mdt:booleanDateType" minOccurs="0"/>
+							<xsd:element name="MERiskCharge" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+							<xsd:element name="AvailableInAnnuityStage" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="AvailableInAccumStage" type="xsd:boolean" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="_DataLink" type="mdt:linkVarchar10Type" minOccurs="0"/>
+				<xsd:element ref="mdt:PerformanceId" minOccurs="0"/>
+				<xsd:element ref="mdt:HistoricalOperation" minOccurs="0"/>
+				<xsd:element name="ClassPerformance" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="mdt:Performance" minOccurs="0" maxOccurs="10"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="mdt:FixedAccount" minOccurs="0"/>
+				<xsd:element ref="mdt:ProprietaryData" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+			<xsd:attribute name="_Status" type="mdt:char1" use="required"/>
+			<xsd:attribute name="_PerformanceId" type="mdt:char10" use="optional"/>
+			<xsd:attribute name="_PolicyId" type="mdt:char10" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

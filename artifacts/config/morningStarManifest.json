@@ -17,14 +17,29 @@
         "description": "morningstarDetails",
         "apiOptions": {
             "type": "morningstar",
-            "url": "/DataOutput.aspx?Package=EDW&ClientId=FW&IDTYpe=FundShareClassId&Content=1471&Currencies=BAS&Id={morningStarInternalId}",
+            "url": "/DataOutput.aspx?Package=EDW&ClientId=FW&IDTYpe=FundShareClassId&Content={content}&Currencies=BAS&Id={morningStarInternalId}",
             "method": "GET"
         }
+    },
+    {
+        "key": "morningstarFundBasics",
+        "isFileForLoad": false,
+        "description": "morningstarFundBasics"        
     },
     {
         "key": "morningstarHistoricalPerformance",
         "isFileForLoad": false,
         "description": "morningstarHistoricalPerformance"        
+    },
+    {
+        "key": "morningstarTrailingPerformance",
+        "isFileForLoad": false,
+        "description": "morningstarTrailingPerformance"        
+    },
+    {
+        "key": "morningstarRiskAndRating",
+        "isFileForLoad": false,
+        "description": "morningstarRiskAndRating"        
     },
     {
         "key": "morningstarDailyPrices",

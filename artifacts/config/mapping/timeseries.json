@@ -53,5 +53,45 @@
 				"sourceField": "change"
 			}
 		]
+	},
+	{
+		"type": "morning_star_historic_prices",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "clientCode"
+			},
+			{
+				"code": "date",
+				"dataType": "DATE",
+				"sourceField": "EndDate"
+			},
+			{
+				"code": "store_date",
+				"dataType": "DATE",
+				"sourceField": "StoreDate"
+			},
+			{
+				"code": "value",
+				"dataType": "DCML",
+				"sourceField": "ReturnDetail.Value"
+			},
+			{
+				"code": "change",
+				"dataType": "DCML",
+				"sourceField": "change"
+			},
+			{
+				"code": "price_type",
+				"dataType": "STRG",
+				"sourceField": "Type"
+			},            
+            {
+				"code": "period",
+				"dataType": "STRG",
+				"sourceField": "ReturnDetail.TimePeriod"
+			}
+		]
 	}
 ]

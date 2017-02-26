@@ -1,7 +1,7 @@
 {
-	"local": true,
-	"userName": "TEMPLATE_DEV_ADMIN_USERNAME",
-	"userPwd": "TEMPLATE_DEV_ADMIN_PASSWORD",
+	"local": false,
+	"userName": "TOOLS_DEMO_DEV_ADMIN_USERNAME",
+	"userPwd": "TOOLS_DEMO_DEV_ADMIN_PASSWORD",
 	"loaderName": "[CLIENT_NAME]_[PROJECT_CODE]_loader_dev",
 	"ftpServer": "[CLIENT_NAME]_DEV_SFTP_SERVER",
 	"ftpUser": "[CLIENT_NAME]_DEV_SFTP_USER",
@@ -10,12 +10,13 @@
 	"scheduleType": "IMMEDIATE",
 	"schedule": "00 */60 * * * *",
 	"morningStarIngestion": {
-		"internalDetails": false,
+		"internalDetails": true,
 		"dailyPrices": false,
-		"details": false
+		"details": true
 	},
 	"endPoints": {
-		"search": "http://localhost:12004/searchEntity"
+		"search" : "https://api-dev.fundpress.io/fund/searchentity",
+		"retrieveLayoutConfiguration": "https://api-dev.fundpress.io/layout/retrieveLayoutConfiguration"
 	},	
 	"externalApi": {
 		"morningstar": {

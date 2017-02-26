@@ -48,6 +48,11 @@
 				"sourceField": "isin"
 			},
 			{
+				"code": "name",
+				"dataType": "STRG",
+				"sourceField": "name"
+			},
+			{
 				"code": "internal_id",
 				"dataType": "STRG",
 				"sourceField": "internal_id"
@@ -56,6 +61,306 @@
 				"code": "category_id",
 				"dataType": "STRG",
 				"sourceField": "category_id"
+			},
+			{
+				"code": "legal_structure",
+				"dataType": "STRG",
+				"sourceField": "legal_structure"
+			},
+			{
+				"code": "last_updated",
+				"dataType": "STRG",
+				"sourceField": "last_updated"
+			},
+			{
+				"code": "last_updated_nt",
+				"dataType": "STRG",
+				"sourceField": "last_updated_nt"
+			},
+			{
+				"code": "updated_content",
+				"dataType": "ITGR",
+				"sourceField": "updated_content"
+			}			
+		]
+	},
+	{
+		"type": "morning_star_fund_basics",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "clientCode"
+			},
+			{
+				"code": "label",
+				"dataType": "STRG",
+				"sourceField": "label"
+			},
+			{
+				"code": "value",
+				"dataType": "DCML",
+				"sourceField": "value"
+			},
+			{
+				"code": "name",
+				"dataType": "STRG",
+				"sourceField": "Name"
+			},
+			{
+				"code": "legal_structure",
+				"dataType": "STRG",
+				"sourceField": "LegalStructure.content"
+			},
+			{
+				"code": "legal_name",
+				"dataType": "STRG",
+				"sourceField": "LegalName"
+			},
+			{
+				"code": "domicile_id",
+				"dataType": "STRG",
+				"sourceField": "Domicile.Id"
+			},
+			{
+				"code": "domicile_type",
+				"dataType": "STRG",
+				"sourceField": "Domicile.Type"
+			},
+			{
+				"code": "domicile_name",
+				"dataType": "STRG",
+				"sourceField": "Domicile.content"
+			},
+			{
+				"code": "primary_benchmark_id",
+				"dataType": "STRG",
+				"sourceField": "PrimaryBenchmark.HoldingDetail.Id"
+			},
+			{
+				"code": "primary_benchmark",
+				"dataType": "STRG",
+				"sourceField": "PrimaryBenchmark.HoldingDetail.SecurityName"
+			},
+			{
+				"code": "fiscal_year_end_month",
+				"dataType": "ITGR",
+				"sourceField": "FiscalYearEndMonth"
+			},
+			{
+				"code": "mpt_risk_free_rate_benchmark_id",
+				"dataType": "STRG",
+				"sourceField": "MPTRiskFreeRateBenchmark.HoldingDetail.Id"
+			},
+			{
+				"code": "mpt_risk_free_rate_benchmark",
+				"dataType": "STRG",
+				"sourceField": "MPTRiskFreeRateBenchmark.HoldingDetail.SecurityName"
+			},
+			{
+				"code": "category_id",
+				"dataType": "STRG",
+				"sourceField": "CategoryId"
+			},
+			{
+				"code": "oldest_share_id",
+				"dataType": "STRG",
+				"sourceField": "OldestShareId"
+			}				
+		]
+	},
+	{
+		"type": "morning_star_risk_and_ratings",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "clientCode"
+			},
+			{
+				"code": "label",
+				"dataType": "STRG",
+				"sourceField": "label"
+			},
+			{
+				"code": "value",
+				"dataType": "DCML",
+				"sourceField": "Value"
+			},
+			{
+				"code": "rating_type",
+				"dataType": "STRG",
+				"sourceField": "RatingType"
+			},
+			{
+				"code": "period",
+				"dataType": "STRG",
+				"sourceField": "TimePeriod"
+			},
+			{
+				"code": "rating_type_number",
+				"dataType": "STRG",
+				"sourceField": "RatingTypeNumber"
+			},
+			{
+				"code": "date",
+				"dataType": "DATE",
+				"sourceField": "EndDate"
+			},
+			{
+				"code": "category_rank",
+				"dataType": "STRG",
+				"sourceField": "CategoryRank"
+			},
+			{
+				"code": "risk_adjusted_return",
+				"dataType": "STRG",
+				"sourceField": "RiskAdjustedReturn"
+			},
+			{
+				"code": "performance_score",
+				"dataType": "STRG",
+				"sourceField": "PerformanceScore"
+			},
+			{
+				"code": "risk_score",
+				"dataType": "STRG",
+				"sourceField": "RiskScore"
+			}					
+		]
+	},
+	{
+		"type": "morning_star_trailing_perf",
+		"mappings": [
+			{
+				"code": "client_code",
+				"dataType": "STRG",
+				"sourceField": "clientCode"
+			},
+			{
+				"code": "label",
+				"dataType": "STRG",
+				"sourceField": "label"
+			},
+			{
+				"code": "value",
+				"dataType": "DCML",
+				"sourceField": "ClosePrice"
+			},
+			{
+				"code": "type",
+				"dataType": "ITGR",
+				"sourceField": "Type"
+			},			
+			{
+				"code": "date",
+				"dataType": "DATE",
+				"sourceField": "EndDate"
+			},
+			{
+				"code": "store_date",
+				"dataType": "DATE",
+				"sourceField": "StoreDate"
+			},
+			{
+				"code": "price_date",
+				"dataType": "DATE",
+				"sourceField": "PriceDate"
+			},			
+			{
+				"code": "close_price",
+				"dataType": "DCML",
+				"sourceField": "ClosePrice"
+			},
+			{
+				"code": "m0",
+				"dataType": "DCML",
+				"sourceField": "M0"
+			},
+			{
+				"code": "m1",
+				"dataType": "DCML",
+				"sourceField": "M1"
+			},
+			{
+				"code": "m2",
+				"dataType": "DCML",
+				"sourceField": "M2"
+			},
+			{
+				"code": "m3",
+				"dataType": "DCML",
+				"sourceField": "M3"
+			},
+			{
+				"code": "m6",
+				"dataType": "DCML",
+				"sourceField": "M6"
+			},
+			{
+				"code": "m9",
+				"dataType": "DCML",
+				"sourceField": "M9"
+			},
+			{
+				"code": "m12",
+				"dataType": "DCML",
+				"sourceField": "M12"
+			},
+			{
+				"code": "m24",
+				"dataType": "DCML",
+				"sourceField": "M24"
+			},
+			{
+				"code": "m36",
+				"dataType": "DCML",
+				"sourceField": "M36"
+			},
+			{
+				"code": "m48",
+				"dataType": "DCML",
+				"sourceField": "M48"
+			},
+			{
+				"code": "m60",
+				"dataType": "DCML",
+				"sourceField": "M60"
+			},
+			{
+				"code": "m72",
+				"dataType": "DCML",
+				"sourceField": "M72"
+			},
+			{
+				"code": "m84",
+				"dataType": "DCML",
+				"sourceField": "M84"
+			},
+			{
+				"code": "m96",
+				"dataType": "DCML",
+				"sourceField": "M96"
+			},
+			{
+				"code": "m108",
+				"dataType": "DCML",
+				"sourceField": "M108"
+			},
+			{
+				"code": "m120",
+				"dataType": "DCML",
+				"sourceField": "M120"
+			},
+			{
+				"code": "m180",
+				"dataType": "DCML",
+				"sourceField": "M180"
+			},
+			{
+				"code": "m255",
+				"dataType": "DCML",
+				"sourceField": "M255"
 			}
 		]
 	}

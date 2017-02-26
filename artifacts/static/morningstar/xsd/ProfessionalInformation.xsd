@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by Alexander (Home) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.53">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:include schemaLocation="Company.xsd"/>
+	<xsd:include schemaLocation="ContactInformation.xsd"/>
+	<xsd:include schemaLocation="BeneficialOwnership.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Professional Information schema for Morningstar XML data structure
+    Extended from AssetManager.xsd
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="ProfessionalInformation">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="PersonalInformation">
+					<xsd:complexType>
+						<xsd:choice minOccurs="0">
+							<xsd:sequence>
+								<xsd:element name="GivenName" type="mdt:varchar25"/>
+								<xsd:element name="MiddleName" type="mdt:varchar25" minOccurs="0"/>
+								<xsd:element name="FamilyName" type="mdt:varchar25"/>
+								<xsd:element name="Gender" type="xsd:boolean" minOccurs="0"/>
+								<xsd:element name="YearOfBirth" type="xsd:integer" minOccurs="0"/>
+								<xsd:element name="BirthDate" type="xsd:date" minOccurs="0"/>
+								<xsd:element name="Certification" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="CertificationDetail" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="Name" type="mdt:varchar75"/>
+														<xsd:element ref="mdt:Year" minOccurs="0"/>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="CareerStartYear" type="xsd:integer" minOccurs="0"/>
+								<xsd:element name="CareerStartDate" type="xsd:date" minOccurs="0"/>
+								<xsd:element name="CollegeEducation" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="CollegeEducationDetail" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="School" type="mdt:varchar75"/>
+														<xsd:element ref="mdt:Year" minOccurs="0"/>
+														<xsd:element name="Degree" minOccurs="0">
+															<xsd:complexType>
+																<xsd:simpleContent>
+																	<xsd:extension base="mdt:varchar10">
+																		<xsd:attribute name="Level"/>
+																	</xsd:extension>
+																</xsd:simpleContent>
+															</xsd:complexType>
+														</xsd:element>
+														<xsd:element name="Major" type="mdt:varchar75" minOccurs="0"/>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="Affiliation" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="AffiliationDetail" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="Name" type="mdt:varchar75"/>
+														<xsd:element name="Title" type="mdt:varchar25" minOccurs="0"/>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element ref="mdt:ContactInformation" minOccurs="0"/>
+								<xsd:element name="Biography" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:choice minOccurs="0" maxOccurs="unbounded">
+												<xsd:element name="SupplementaryBiography" type="mdt:string1000" minOccurs="0"/>
+												<xsd:element name="ProfessionalBiography" type="mdt:string512" minOccurs="0"/>
+												<xsd:element name="ManagerProvidedBiography" type="mdt:string3000" minOccurs="0"/>
+											</xsd:choice>
+										</xsd:sequence>
+										<xsd:attribute name="_LanguageId" type="mdt:char10" use="optional"/>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:choice>
+            <xsd:attribute name="_IsFundManager" type="xsd:boolean" use="optional"/>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="SpecialtyList" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Specialty" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="mdt:varchar50">
+											<xsd:attribute name="_Id" type="xsd:unsignedByte" use="required"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ProfessionalHistory" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ProfessionalHistoryDetail" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:sequence>
+											<xsd:element name="CompanyName">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:varchar75">
+															<xsd:attribute name="_Id" type="mdt:varchar10"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+										<xsd:element name="RoleList" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="RoleDetail" maxOccurs="unbounded">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="ProfessionalTitle" minOccurs="0">
+																	<xsd:complexType>
+																		<xsd:simpleContent>
+																			<xsd:extension base="mdt:varchar75">
+																				<xsd:attribute name="_Id" type="xsd:unsignedByte"/>
+																			</xsd:extension>
+																		</xsd:simpleContent>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="Responsibility" type="mdt:varchar75" minOccurs="0"/>
+																<xsd:element name="StartYear" type="xsd:integer" minOccurs="0"/>
+																<xsd:element name="EndYear" type="xsd:integer" minOccurs="0"/>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="mdt:BeneficialOwnership" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="_Id" type="mdt:varchar10" use="required"/>
+			<xsd:attribute name="_Status" type="mdt:char1" use="required"/>
+			<xsd:attribute name="_IsFundManager" type="xsd:boolean" use="optional" />
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 sp2 (http://www.altova.com) by ELi (EMBRACE) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.52">
+   <!-- this is been created by OD-->
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Separate Account schema for Morningstar XML data structure
+    Copyright 2004 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="DataMap">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Criteria">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Package" type="mdt:varchar40"/>
+							<xsd:element name="IdType" type="mdt:varchar40"/>
+							<xsd:element name="Id" type="mdt:char10"/>
+							<xsd:element name="RequestedIdType" type="mdt:varchar40"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Result" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ClassificationType" type="xsd:positiveInteger"/>
+							<xsd:element name="TargetRegionId" type="xsd:positiveInteger"/>
+							<xsd:element name="PeerGroupId" type="xsd:positiveInteger"/>
+							<xsd:element name="ClassificationId" type="mdt:char10"/>
+							<xsd:element ref="mdt:StartDate"/>
+							<xsd:element ref="mdt:EndDate" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="Type" type="mdt:varchar40" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -10,7 +10,7 @@ describe('src/processors/commentaryProcessor.ts', () => {
     describe("processCommentaries", () => {    
         let funds = [];    
         let dataToLoad = [];
-        pit("will return dataLoadingArray with funds", async () => {
+        it("will return dataLoadingArray with funds", async () => {
             let response = await processCommentaries(funds, dataToLoad);   
             expect(response).toBeDefined();
             expect(response.commentary).toBeDefined();

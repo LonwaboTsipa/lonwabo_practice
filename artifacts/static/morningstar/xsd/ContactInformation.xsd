@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.49">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+
+ <xsd:annotation>
+   <xsd:documentation xml:lang="en">
+    Company Contact schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+
+ <xsd:element name="ContactInformation">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="AddressLine1" type="mdt:varchar75" minOccurs="0"/>
+    <xsd:element name="AddressLine2" type="mdt:varchar75" minOccurs="0"/>
+    <xsd:element name="AddressLine3" type="mdt:varchar75" minOccurs="0"/>
+    <xsd:element name="AddressLine4" type="mdt:varchar75" minOccurs="0"/>
+    <xsd:element name="AddressLine5" type="mdt:varchar75" minOccurs="0"/>
+    <xsd:element name="Country" type="mdt:tokenIdChar3Type" minOccurs="0"/>
+    <xsd:element name="Phone" type="mdt:varchar25" minOccurs="0"/>
+    <xsd:element name="Fax" type="mdt:varchar25" minOccurs="0"/>
+    <xsd:element name="EmailAddress" type="mdt:varchar75" minOccurs="0"/>
+    <xsd:element name="Homepage" type="mdt:varchar200" minOccurs="0"/>
+    <xsd:element name="City" type="mdt:varchar25" minOccurs="0"/>
+    <xsd:element name="Province" type="mdt:varchar25" minOccurs="0"/>
+    <xsd:element name="PostalCode" type="mdt:varchar15" minOccurs="0"/>
+   </xsd:sequence>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>
+

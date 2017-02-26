@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="FundShareClassList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ShareClass" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Id"/>
+              <xs:element type="xs:string" name="ISIN"/>
+              <xs:element type="xs:string" name="Name"/>
+              <xs:element type="xs:string" name="MSCategoryId"/>
+              <xs:element type="xs:string" name="LegalStructure"/>
+              <xs:element type="xs:string" name="LastUpdated"/>
+              <xs:element name="LastUpdated_NT" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:short" name="_Type" use="optional"/>
+                      <xs:attribute type="xs:byte" name="_Id" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

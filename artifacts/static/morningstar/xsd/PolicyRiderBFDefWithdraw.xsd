@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.00a">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+
+ <xsd:annotation>
+   <xsd:documentation xml:lang="en">
+    Rider schema for Morningstar XML data structure
+    Copyright 2010 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+
+ <xsd:element name="PolicyRiderBFDefWithdraw">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="RiderList">
+     <xsd:complexType>
+      <xsd:sequence maxOccurs="unbounded">
+       <xsd:element name="Rider">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="Name" type="mdt:varchar50"/>
+          <xsd:sequence>
+           <xsd:element name="RiderOptionList">
+            <xsd:complexType>
+             <xsd:sequence>
+              <xsd:element name="RiderOption" maxOccurs="unbounded">
+               <xsd:complexType>
+                <xsd:sequence>
+                 <xsd:element name="DefWithdrawCreditAvailable" type="xsd:boolean" minOccurs="0"/>
+                 <xsd:element name="DefWithdrawCreditPct" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+                 <xsd:element name="DefWithdrawCreditPer" type="xsd:positiveInteger" minOccurs="0"/>
+                 <xsd:element name="DefWithdrawCreditMaxAge" type="xsd:nonNegativeSmallRawDecimal" minOccurs="0"/>
+                 <xsd:element name="DefWithdrawCreditFreqYears" type="xsd:nonNegativeSmallRawDecimal" minOccurs="0"/>
+                 <xsd:element name="DefWithdrawCreditMeth" type="xsd:unsignedByte" minOccurs="0"/>
+                 <xsd:element name="DefWithdrawCreditStop" type="xsd:unsignedByte" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="_StorageId" use="required"/>
+               </xsd:complexType>
+              </xsd:element>
+             </xsd:sequence>
+            </xsd:complexType>
+           </xsd:element>
+          </xsd:sequence>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="_Id" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

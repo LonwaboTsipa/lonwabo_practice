@@ -1,5 +1,5 @@
-import {firstOrDefault} from "../utils";
-import {IPropertyDescriptor, dataLoadingArray, insertWebSocket, createData, createDocuments, TargetObject, EntityType, PropertyType, IDocument } from "@kurtosys/udm_data_toolkit";
+import { firstOrDefault } from "../utils";
+import { IPropertyDescriptor, dataLoadingArray, insertWebSocket, createData, createDocuments, TargetObject, EntityType, PropertyType, IDocument } from "@kurtosys/udm_data_toolkit";
 export function getProperty(item: { [keys: string]: any; }, property: string): any {
     return item && item[property] ? item[property] : "";
 }
@@ -66,9 +66,12 @@ export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFund
         { key: 'commentary', targetType: 'commentary', isCreateDataElement: false, disabled: false, ignoreEntityType: true, batchSize: 50 },
         { key: 'disclaimers', targetType: 'disclaimer', isCreateDataElement: false, disabled: false, ignoreEntityType: true, batchSize: 50 },
         { key: 'translations', targetType: 'translation', isCreateDataElement: true, disabled: false, ignoreEntityType: true, batchSize: 50 },
-        { key: 'fundLists', targetType: 'fundList', isCreateDataElement: true, disabled: false, ignoreEntityType: true, batchSize: 50 }
+        { key: 'fundLists', targetType: 'fundList', isCreateDataElement: true, disabled: false, ignoreEntityType: true, batchSize: 50 },
+        { key: 'layoutComponents', targetType: 'layoutComponent', isCreateDataElement: true, disabled: false, ignoreEntityType: true, batchSize: 50 },
+        { key: 'layouts', targetType: 'layoutConfig', isCreateDataElement: true, disabled: false, ignoreEntityType: true, batchSize: 25 },
+        { key: 'fundmanagers', targetType: 'fundManager', isCreateDataElement: false, disabled: false, ignoreEntityType: false, batchSize: 50 }
     ];
-    
+
     for (let mapping of mappings) {
         let records = [];
         if (!mapping.ignoreEntityType) {
@@ -97,8 +100,8 @@ export async function insertDataToLoad(dataToLoad: dataLoadingArray, excludeFund
 
 export async function sendDataToAPI(mapping, records: {}[], entityType: string = "") {
     if (!mapping.disabled && records && records.length > 0) {
-        let maxBatchSize = mapping.batchSize;        
-        while (records.length > 0) {            
+        let maxBatchSize = mapping.batchSize;
+        while (records.length > 0) {
             let batchSize = records.length;
             let batchRecords = records.splice(0, batchSize);
             if (mapping.key === 'documents') {

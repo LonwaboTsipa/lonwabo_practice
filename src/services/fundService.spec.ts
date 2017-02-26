@@ -21,7 +21,7 @@ describe('src/services/fundService.ts', () => {
         let funds = [];
         let dataToLoad = [];
 		let token = "";
-        pit("will return funds", async () => {
+        it("will return funds", async () => {
             //let response = await fetchFunds(token);   
             //expect(response).toBeDefined();
             

@@ -13,13 +13,13 @@ describe('src/processors/timeseriesProcessor.ts', () => {
     });
     describe("processTimeseries", async () => {
 
-        pit("will return dataLoadingArray with no timeseries", async () => {
+        it("will return dataLoadingArray with no timeseries", async () => {
             let dataToLoad = await processTimeseries(fundsAndSharesData, []);
             expect(dataToLoad).toBeDefined();
             expect(dataToLoad.timeseries).toBeDefined();
             expect(dataToLoad.timeseries.length).toEqual(0);
         });
-        pit("will return dataLoadingArray with timeseries", async () => {
+        it("will return dataLoadingArray with timeseries", async () => {
             let dataToLoad = await processTimeseries(fundsAndSharesData, manifest);
             expect(dataToLoad).toBeDefined();
             expect(dataToLoad.timeseries).toBeDefined();

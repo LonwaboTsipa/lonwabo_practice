@@ -19,14 +19,242 @@
 				"dataType": "STRG"
 			},
 			{
+				"label": "name",
+				"dataType": "STRG"
+			},
+			{
 				"label": "internal_id",
 				"dataType": "STRG"
 			},
 			{
 				"label": "category_id",
 				"dataType": "STRG"
+			},
+			{
+				"label": "legal_structure",
+				"dataType": "STRG"
+			},
+			{
+				"label": "last_updated",
+				"dataType": "STRG"
+			},
+			{
+				"label": "last_updated_nt",
+				"dataType": "STRG"
+			},
+			{
+				"label": "updated_content",
+				"dataType": "ITGR"
 			}
+				
 		],
 		"cardinality": "1"
-	}
+	},
+	{
+		"code": "morning_star_fund_basics",
+		"entityType": "CLSS",
+		"label": "Morning Star Fund Basics",
+		"description": "Morning Star Fund Basics for the share class",
+		"group": "core",
+		"extended": [			
+			{
+				"label": "name",
+				"dataType": "STRG"
+			},			
+			{
+				"label": "legal_structure",
+				"dataType": "STRG"
+			},
+			{
+				"label": "legal_name",
+				"dataType": "STRG"
+			},
+			{
+				"label": "domicile_id",
+				"dataType": "STRG"
+			},
+			{
+				"label": "domicile_type",
+				"dataType": "STRG"
+			},
+			{
+				"label": "domicile_name",
+				"dataType": "STRG"
+			},
+			{
+				"label": "primary_benchmark_id",
+				"dataType": "STRG"
+			},
+			{
+				"label": "primary_benchmark",
+				"dataType": "STRG"
+			},
+			{
+				"label": "fiscal_year_end_month",
+				"dataType": "ITGR"
+			},
+			{
+				"label": "mpt_risk_free_rate_benchmark_id",
+				"dataType": "STRG"
+			},
+			{
+				"label": "mpt_risk_free_rate_benchmark",
+				"dataType": "STRG"
+			},
+			{
+				"label": "category_id",
+				"dataType": "STRG"
+			},
+			{
+				"label": "oldest_share_id",
+				"dataType": "STRG"
+			}
+						
+		],
+		"cardinality": "1"
+	},
+	{
+		"code": "morning_star_trailing_perf",
+		"entityType": "CLSS",
+		"label": "Morning Star Trailing Perf",
+		"description": "Morning Star Trailing Perf for the share class",
+		"group": "core",
+		"extended": [
+			{
+				"label": "type",
+				"dataType": "ITGR"
+			},
+			{
+				"label": "date",
+				"dataType": "DATE"
+			},
+			{
+				"label": "store_date",
+				"dataType": "DATE"
+			},
+			{
+				"label": "price_date",
+				"dataType": "DATE"
+			},			
+			{
+				"label": "close_price",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m0",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m1",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m2",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m3",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m6",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m9",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m12",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m24",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m36",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m48",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m60",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m72",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m84",
+				"dataType": "DCML"
+			},
+			{
+				"label": "96",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m108",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m120",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m180",
+				"dataType": "DCML"
+			},
+			{
+				"label": "m255",
+				"dataType": "DCML"
+			}			
+		],
+		"cardinality": "1"
+	},
+	{
+		"code": "morning_star_risk_and_ratings",
+		"entityType": "CLSS",
+		"label": "Morning Star Risk And Ratings",
+		"description": "Morning Star Risk And Ratings for the share class",
+		"group": "core",
+		"extended": [
+			{
+				"label": "rating_type",
+				"dataType": "STRG"
+			},
+			{
+				"label": "period",
+				"dataType": "STRG"
+			},
+			{
+				"label": "rating_type_number",
+				"dataType": "STRG"
+			},
+			{
+				"label": "date",
+				"dataType": "DATE"
+			},
+			{
+				"label": "category_rank",
+				"dataType": "STRG"
+			},
+			{
+				"label": "risk_adjusted_return",
+				"dataType": "STRG"
+			},
+			{
+				"label": "performance_score",
+				"dataType": "STRG"
+			},
+			{
+				"label": "risk_score",
+				"dataType": "STRG"
+			}			
+		],
+		"cardinality": "1"
+	}	
 ]

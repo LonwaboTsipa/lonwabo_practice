@@ -1,0 +1,1287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by Alexander (Home) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.53">
+	<xsd:include schemaLocation="Company.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Common data type schema for Morningstar XML data structure
+    Copyright 2004 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:simpleType name="styleBoxType">
+		<xsd:restriction base="xsd:byte">
+			<xsd:minInclusive value="1"/>
+			<xsd:maxInclusive value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="morningstarRatingType">
+		<xsd:restriction base="xsd:byte">
+			<xsd:minInclusive value="1"/>
+			<xsd:maxInclusive value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="percentileRankType">
+		<xsd:restriction base="xsd:byte">
+			<xsd:minInclusive value="1"/>
+			<xsd:maxInclusive value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SRRIRank">
+		<xsd:restriction base="xsd:byte">
+			<xsd:minInclusive value="1"/>
+			<xsd:maxInclusive value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="smallDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="9"/>
+			<xsd:fractionDigits value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="bigDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="nonNegativeSmallDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="9"/>
+			<xsd:fractionDigits value="2"/>
+			<xsd:minInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="smallRawDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="9"/>
+			<xsd:fractionDigits value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="bigRawDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="positiveSmallRawDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="9"/>
+			<xsd:fractionDigits value="5"/>
+			<xsd:minExclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="positiveBigRawDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="5"/>
+			<xsd:minExclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="nonNegativeSmallRawDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="9"/>
+			<xsd:fractionDigits value="5"/>
+			<xsd:minInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="nonNegativeBigRawDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="5"/>
+			<xsd:minInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="decimal19-9Type">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="decimal19-15Type">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="15"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="nonNegativeDecimal19-9Type">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="9"/>
+			<xsd:minInclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="positiveDecimal19-9Type">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="9"/>
+			<xsd:minExclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="positiveTinyRawExtendedDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="19"/>
+			<xsd:fractionDigits value="15"/>
+			<xsd:minExclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="positiveBigRawExtendedDecimal">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="38"/>
+			<xsd:fractionDigits value="15"/>
+			<xsd:minExclusive value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char1">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char2">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar2">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="2"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char3">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char4">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar3">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="3"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar4">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="4"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char5">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar5">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="5"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char6">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="6"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar6">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="6"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char7">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar7">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="7"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char8">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char9">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char10">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char20">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="20"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar10">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="10"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar10min0">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="10"/>
+			<xsd:minLength value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="char12">
+		<xsd:restriction base="xsd:token">
+			<xsd:length value="12"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar12">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="12"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar15">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="15"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar25">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="25"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar32">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="32"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar36">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="36"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar40">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="40"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar40min0">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="40"/>
+			<xsd:minLength value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar50">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="50"/>
+			<xsd:minLength value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar75">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="75"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar100">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="100"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar120">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="120"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar200">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="200"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="varchar500">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="500"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string512">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="512"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string1000">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="1000"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string3000">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="3000"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string5120">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="5120"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="stringGradeType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="Grade" type="mdt:varchar10" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="unitInteger">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:integer">
+				<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+				<xsd:attribute name="_CurrencyId" type="mdt:char3"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="descriptionType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:string5120">
+				<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="companyDetailType">
+		<xsd:sequence>
+			<xsd:element name="CompanyName" type="mdt:varchar75"/>
+			<xsd:element name="AddressLine1" type="mdt:varchar75" minOccurs="0"/>
+			<xsd:element name="AddressLine2" type="mdt:varchar75" minOccurs="0"/>
+			<xsd:element name="AddressLine3" type="mdt:varchar75" minOccurs="0"/>
+			<xsd:element name="AddressLine4" type="mdt:varchar75" minOccurs="0"/>
+			<xsd:element name="Country" type="mdt:tokenIdChar3Type" minOccurs="0"/>
+			<xsd:element name="Phone" type="mdt:varchar25" minOccurs="0"/>
+			<xsd:element name="Fax" type="mdt:varchar25" minOccurs="0"/>
+			<xsd:element name="EmailAddress" type="mdt:varchar75" minOccurs="0"/>
+			<xsd:element name="Homepage" type="mdt:varchar200" minOccurs="0"/>
+			<xsd:element name="City" type="mdt:varchar25" minOccurs="0"/>
+			<xsd:element name="Province" type="mdt:varchar25" minOccurs="0"/>
+			<xsd:element name="PostalCode" type="mdt:varchar15" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="_Id" type="xsd:positiveInteger"/>
+		<xsd:attribute name="CIK" type="mdt:char10" use="optional"/>
+	</xsd:complexType>
+  <xsd:complexType name="holdingDetailType">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="Country" type="mdt:tokenIdChar3Type" minOccurs="0"/>
+        <xsd:element name="CUSIP" type="mdt:char9" minOccurs="0"/>
+        <xsd:element name="SEDOL" type="mdt:char7" minOccurs="0"/>
+        <xsd:element name="ISIN" type="mdt:char12" minOccurs="0"/>
+        <xsd:element name="Ticker" type="mdt:varchar10" minOccurs="0"/>
+        <xsd:element name="Currency" type="mdt:tokenIdChar3Type" minOccurs="0"/>
+        <xsd:element name="SecurityName" type="mdt:varchar75"/>
+        <xsd:element name="LocalName" minOccurs="0">
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base="mdt:varchar40">
+                <xsd:attribute name="_LanguageId" type="mdt:char10" use="required"/>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Weighting" type="mdt:smallRawDecimal" minOccurs="0"/>
+        <xsd:element name="NumberOfShare" type="xsd:unsignedLong" minOccurs="0"/>
+        <xsd:element name="SharePercentage" type="mdt:smallRawDecimal" minOccurs="0"/>
+        <xsd:element name="NumberOfJointlyOwnedShare" type="xsd:unsignedLong" minOccurs="0"/>
+        <xsd:element name="MarketValue" type="xsd:long" minOccurs="0"/>
+        <xsd:element name="CostBasis" type="mdt:bigRawDecimal" minOccurs="0"/>
+        <xsd:element name="ShareChange" type="xsd:long" minOccurs="0"/>
+        <xsd:element name="Sector" type="mdt:tokenIdNonNegativeIntegerType" minOccurs="0"/>
+        <xsd:element name="MaturityDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="AccruedInterest" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+        <xsd:element name="Coupon" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+        <xsd:element name="CreditQuality" type="mdt:varchar10" minOccurs="0"/>
+        <xsd:element name="Duration" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+        <xsd:element name="IndustryId" type="xsd:integer" minOccurs="0"/>
+        <xsd:element name="GlobalIndustryId" type="xsd:integer" minOccurs="0"/>
+        <xsd:element name="GlobalSector" type="xsd:integer" minOccurs="0"/>
+        <xsd:element name="GICSIndustryId" type="mdt:char8" minOccurs="0"/>
+        <xsd:element name="LocalCurrencyCode" type="mdt:char3" minOccurs="0"/>
+        <xsd:element name="ZAFAssetType" type="mdt:varchar3" minOccurs="0"/>
+        <xsd:element name="LocalMarketValue" type="xsd:long" minOccurs="0"/>
+        <xsd:element name="Rule144AEligible" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="AltMinTaxEligible" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="SecondarySectorId" type="xsd:integer" minOccurs="0"/>
+        <xsd:element name="FirstBoughtDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="ISOExchangeId" type="mdt:char4" minOccurs="0"/>
+        <xsd:element name="CompanyId" type="mdt:char10" minOccurs="0"/>
+        <xsd:element name="CompanyName" type="mdt:varchar200" minOccurs="0"/>
+        <xsd:element name="LessThanOneYearBond" type="xsd:integer" minOccurs="0"/>
+        <xsd:element name="AccountingValue" type="xsd:long" minOccurs="0"/>
+        <xsd:element name="AccountingLocalValue" type="xsd:long" minOccurs="0"/>
+        <xsd:element name="ZAFBondIssuerClass" type="mdt:varchar4" minOccurs="0"/>
+        <xsd:element name="IndianCreditQualityClassification" type="mdt:varchar25" minOccurs="0"/>
+        <xsd:element name="IndianIndustryClassification" type="mdt:tokenIdPositiveIntegerType" minOccurs="0"/>
+        <xsd:element name="GeographicZone" type="mdt:varchar5" minOccurs="0"/>
+        <xsd:element name="PerformanceId" type="mdt:char10" minOccurs="0"/>
+        <xsd:element name="CIC" type="mdt:varchar4" minOccurs="0"/>
+        <xsd:element name="NACE" type="mdt:varchar5" minOccurs="0"/>
+        <xsd:element name="EDIIssuerName" minOccurs="0">
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:string">
+                <xsd:attribute name="_Id" type="xsd:integer" use="required"/>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="NominalValue" type="mdt:smallRawDecimal" minOccurs="0"/>
+        <xsd:element name="IssueDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="OutstandingAmount" type="xsd:decimal" minOccurs="0"/>
+        <xsd:element name="CouponType" minOccurs="0">
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:string">
+                <xsd:attribute name="_Id" type="xsd:string" use="required"/>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="CouponFrequency" minOccurs="0">
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:string">
+                <xsd:attribute name="_Id" type="xsd:string" use="required"/>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="IntCommencementDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="FirstCouponDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="InterestAccrualConvention" type="mdt:varchar10" minOccurs="0"/>
+        <xsd:element name="MatPriceAsPercent" type="mdt:smallRawDecimal" minOccurs="0"/>
+        <xsd:element name="Perpetual" type="mdt:char1" minOccurs="0"/>
+        <xsd:element name="MaturityStructure" minOccurs="0">
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:string">
+                <xsd:attribute name="_Id" type="mdt:char1" use="required"/>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Callable" type="mdt:char1" minOccurs="0"/>
+        <xsd:element name="Puttable" type="mdt:char1" minOccurs="0"/>
+        <xsd:element name="SettlementDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="PrimaryExchange" minOccurs="0">
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:string">
+                <xsd:attribute name="_Id" type="xsd:string" use="required"/>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="YieldtoMaturity" type="xsd:decimal" minOccurs="0"/>
+        <xsd:element name="ModifiedDuration" type="xsd:decimal" minOccurs="0"/>
+        <xsd:element name="MacaulayDuration" type="mdt:smallRawDecimal" minOccurs="0"/>
+        <xsd:element name="Convexity" type="mdt:smallRawDecimal" minOccurs="0"/>
+        <xsd:element name="FitchRating" type="mdt:varchar4" minOccurs="0"/>
+        <xsd:element name="MoodyRating" type="mdt:varchar4" minOccurs="0"/>
+        <xsd:element name="MSCategoryId" type="mdt:char10" minOccurs="0"/>
+        <xsd:element name="BloombergTicker" type="mdt:char4" minOccurs="0"/>
+        <xsd:element name="ContractSize" type="xsd:integer" minOccurs="0"/>
+        <xsd:element name="UnderlyingSecId" type="mdt:char10" minOccurs="0"/>
+        <xsd:element name="UnderlyingSecurityName" type="mdt:varchar200" minOccurs="0"/>
+        <xsd:element name="SIX" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:choice minOccurs="0">
+                <xsd:element name="INSTRID_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="INSTRIDTYPE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="BC_TYPE_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="BOURSE_CODE_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="INSTRUMENT_NAME_SIX" type="mdt:varchar500" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="CIC_CODE_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="BC_TYPE_CIC_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="CIC_CODE_BC_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="CAPITAL_OUTSTANDING_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="NOMINAL_CURRENCY_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERLYING_REF_NAME_SIX" type="mdt:varchar500" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERLYING_TYPE_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERLYING_IDENTIFIER_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERLYING_ASSET_TYPE_SIX" type="mdt:varchar500" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ADDITIONAL_MARGIN_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="PROPORTIONAL_MARGIN_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="VAR_ANNUAL_RETURN_SIX" type="mdt:varchar100" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="FIXED_RATE_RETURN_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="MATURITY_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNITSIIPRICE_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="QUOTATION_TYPE_SIX" type="mdt:varchar500" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="PRICEDATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="VALUATION_METHOD_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ACCRUED_INTEREST_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="DURATION_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="MOD_DURATION_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="CALLABLE_PUTABLE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="MOD_DURATION_NEXT_CALL_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="DURATION_NEXT_CALL_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="INSTR_RATING_SP_SYMBOL_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="INSTR_RATING_SP_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="INSTR_RATING_MOODY_SYMBOL_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="INSTR_RATING_MOODY_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="INSTR_RATING_FITCH_SYMBOL_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="INSTR_RATING_FITCH_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="SP_TYPE_OF_STRUCT_PRODUCT_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="SP_CAPITAL_PROTECTION_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="SP_UNDERLYING_SECURITY_SIX" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="SP_SYNTHETIC_SIX" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="SP_PREPAYMENT_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="AC_DIVIDENDES_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ASSET_CATEG_D4_SIX" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_SFI_NAME_SIX" type="mdt:varchar120" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_SFI_CODE_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_LEI_CODE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_LEI_TYPE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_COUNTRY_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_SUPRANATIONAL_IND_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_SFI_SECTOR_CODE_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_NACE_SECTOR_CODE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_NACE_SECTOR_DESCR_SIX" type="mdt:varchar120" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_SP_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_SP_SYMBOL_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_SP_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_MOODY_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_MOODY_SYMBOL_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_MOODY_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_FITCH_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_FITCH_SYMBOL_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_RATING_FITCH_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUER_GEOGRAPHICAL_ZONE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UP_QUALIFIER_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_SFI_ISSUER_NAME_SIX" type="mdt:varchar120" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_SFI_ISSUER_CODE_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_LEI_CODE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_LEI_TYPE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_COUNTRY_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_SUPRANATIONAL_IND_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_SFI_SECTOR_CODE_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_NACE_SECTOR_CODE_SIX" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_NACE_SECTOR_DESCR_SIX" type="mdt:varchar120" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_SP_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_SP_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_SP_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_MOODYS_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_MOODYS_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_MOODYS_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_FITCH_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_FITCH_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ULTIM_RATING_FITCH_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="CONTRACT_SIZE_AMOUNT_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="CONTRACT_DIMENSION_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="TRIGGER_VALUE_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="DELTA_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="THETA_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="RHO_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GAMMA_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="VEGA_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="OPTION_TYPE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="CONVERSION_FACTOR_CONCORDANCE_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="QUOTATION_CURRENCY_SIX" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="QUOTATION_GEOZONE_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="BOND_INTERESTRATE_TYPE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="NOMINAL_OF_BOND_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="FREQUENCY_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="BONDREDEMPTION_PERCENTAGE_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERLYING_INDEX_CODE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERLYING_INDEX_CODE_TYPE_SIX" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="MIN_COUPON_RATE_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="MAX_COUPON_RATE_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="NEXT_COUPON_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="PRECEDENT_COUPON_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="YIELD_TO_MATURITY_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="CONVEXITY_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="NEXT_CALLABLE_DATE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="SENIORITY_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="COVERED_MODE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERL_SECURITY_MLTP_BC_SIX" type="mdt:char5" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERL_SECURITY_CODE_CIC_INST_SIX" type="mdt:char4" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERL_CURRENCY_GEO_ZONE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERL_SECURITY_VAL_PRICE_INST_SIX" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERL_SECURITY_VAL_DATE_SIX" type="mdt:char10" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERL_MODIFIED_DURATION_SIX" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERL_ISSUER_COUNTRY_SIX" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="UNDERL_ISSUER_GEO_ZONE_SIX" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_TYPE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_SFI_NAME_SIX" type="mdt:varchar120" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_SFI_GK_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_SP_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_SP_SYMBOL_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_SP_DATE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_MOODY_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_MOODY_SYMBOL_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_MOODY_DATE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_FITCH_IDENTIF_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_FITCH_SYMBOL_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_RATING_FITCH_DATE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_LEI_CODE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_LEI_TYPE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_NACE_SECTOR_CODE_SIX" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_NACE_SECTOR_DESCR_SIX" type="mdt:varchar120" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="GUARANT_COUNTRY_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="COUPON_DAYCOUNT_SIX" type="mdt:varchar75" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ISSUE_DATE_SIX" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+              </xsd:choice>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="IDC" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:choice minOccurs="0">
+                <xsd:element name="ITT12_CIC" type="mdt:char4" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT13_CountryOfQuotation" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14_ISIN" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14A_SEDOL" type="mdt:char7" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14B_CUSIP" type="mdt:char9" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14C_AIIMIC" type="mdt:char4" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14D_AIIExchangeProductCode" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14E_AIIDerivativeType" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14F_AIIPutCallId" type="mdt:char1" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14G_AIIExpiryDeliveryPromptDate" type="xsd:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT14H_AIIStrikePrice" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT17_Name" type="mdt:varchar32" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT32_InterestRateType" type="mdt:varchar32" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT33_CouponRate" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT36_InterestRateIndexName" type="mdt:varchar100" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT37_InterestRateMargin" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT38_CouponPaymentFrequency" type="mdt:varchar25" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT39_Maturitydate" type="xsd:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT40_RedemptionType" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT41_RedemptionRate" type="mdt:varchar15" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT42_CallablePutable" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT43_CallDate" type="xsd:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT43A_Putdate" type="xsd:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT44_IssuerBearerOptionExercise" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT45_StrikePriceEmbeddedCallOption" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT45A_StrikePriceEmbeddedPutOption" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT46_IssuerName" type="mdt:varchar500" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT47_IssuerIdCode" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT48_IssuerTypeOfIdCode" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT49_IssuerGroupName" type="mdt:varchar500" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT50_IssuerGroupLEI" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT51_IssuerGroupTypeOfIdCode" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT52_IssuerCountryOfIncorporation" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT53_IssuerGeographicalZoneOfIssue" type="mdt:char4" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT54_IssuerNACE" type="mdt:char8" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT55_IssueCovered" type="mdt:varchar32" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT56_IssueSecuritisation" type="mdt:char1" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT57_IssueExplicitGuaranteeCountryOfIssue" type="mdt:varchar36" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT58_IssueSubordinatedDebt" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT58A_IssueNatureOftheTRANCHE" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT59_IssueSPIssueLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT59A_IssueMoodyIssueLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT59B_IssueFitchIssueLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT60_IssueCallPut" type="mdt:char1" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT61_IssueStrikePrice" type="mdt:varchar15" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT63_IssueExpiryDate" type="xsd:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT64_IssueExerciseType" type="mdt:varchar40" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT67_UnderlyingCIC" type="mdt:char4" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT68_UnderlyingISIN" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT68A_UnderlyingSEDOLIDII" type="mdt:char7" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT68B_UnderlyingCUSIP" type="mdt:char9" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT70_UnderlyingName" type="mdt:varchar32" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT71_UnderlyingQuotationCurrency" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72_UnderlyingPriceSource1" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72A_UnderlyingPrice1A" type="mdt:varchar15" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72B_UnderlyingPrice1B" type="mdt:varchar15" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72C_UnderlyingPriceType1" type="mdt:varchar36" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72D_UnderlyingPriceChangeDate1" type="xsd:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72E_UnderlyingPriceSource2" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72F_UnderlyingPrice2A" type="mdt:varchar15" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72G_UnderlyingPrice2B" type="mdt:varchar15" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72H_UnderlyingPriceType2" type="mdt:varchar36" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT72I_UnderlyingPriceChangeDate2" type="xsd:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT73_UnderlyingCountryOfQuotation" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT75_UnderlyingCouponRate" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT76_UnderlyingCouponPaymentFrequency" type="mdt:varchar25" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT77_UnderlyingMaturityDate" type="xsd:date" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT78_UnderlyingRedemptionProfile" type="mdt:varchar50" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT79_UnderlyingRedemptionRate" type="mdt:varchar15" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT80_UnderlyingIssuerName" type="mdt:varchar500" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT81_UnderlyingIssuerIdCode" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT82_UnderlyingIssuerTypeOfIdCode" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT83_UnderlyingIssuerGroupName" type="mdt:varchar500" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT84_UnderlyingIssuerGroupLEI" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT85_UnderlyingIssuerGroupTypeOfIdCode" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT86_UnderlyingIssuerCountryOfIncorporation" type="mdt:char3" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT87_UnderlyingIssuerGeographicalZoneOfIssue" type="mdt:char4" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT88_UnderlyingIssueExplicitGuaranteeCountryOfIssue" type="mdt:varchar36" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT89_UnderlyingIssueSPIssueLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT89A_UnderlyingIssueMoodyIssueLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT89B_UnderlyingIssueFitchIssueLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT90_ModifiedDuration" type="mdt:char9" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT94_Convexity" type="mdt:char8" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT112_IssueSPIssuerLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT112A_IssueMoodyIssuerLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT112B_IssueFitchIssuerLong" type="mdt:char6" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT114_IssueIssuerGeographicalZoneOfIssue" type="mdt:char4" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT129_BIDYield" type="mdt:char12" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element name="ITT130_ZVO_Bid" type="mdt:char20" minOccurs="0" maxOccurs="unbounded"/>
+              </xsd:choice>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="_Id" type="mdt:char10"/>
+    <xsd:attribute name="_DetailHoldingTypeId" type="mdt:varchar2" use="required"/>
+    <xsd:attribute name="_StorageId" type="xsd:unsignedInt"/>
+    <xsd:attribute name="_ExternalId" type="mdt:varchar25"/>
+    <xsd:attribute name="ExternalName" type="mdt:varchar500"/>
+
+  </xsd:complexType>
+	<xsd:complexType name="linkVarchar10Type">
+		<xsd:attribute name="_Id" type="mdt:varchar10" use="required"/>
+		<xsd:attribute name="ElementName" type="mdt:varchar75" use="required"/>
+		<xsd:attribute name="href" type="mdt:varchar40" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="linkChar10Type">
+		<xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+		<xsd:attribute name="ElementName" type="mdt:varchar75" use="required"/>
+		<xsd:attribute name="href" type="mdt:varchar40" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="linkIntegerType">
+		<xsd:attribute name="_Id" type="xsd:positiveInteger" use="required"/>
+		<xsd:attribute name="ElementName" type="mdt:varchar75" use="required"/>
+		<xsd:attribute name="href" type="mdt:varchar40" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="obsoleteType">
+		<xsd:sequence>
+			<xsd:element ref="mdt:Date" minOccurs="0"/>
+			<xsd:element name="MergedTo" type="mdt:tokenOptionalIdType" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="Type" type="mdt:char1" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="booleanDateType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:boolean">
+				<xsd:attribute name="Date" type="xsd:date" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="varchar40UnsignedByteType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="nonNegativeIntegerUnsignedByteType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:nonNegativeInteger">
+				<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenOptionalIdType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar75">
+				<xsd:attribute name="_Id" type="mdt:char10" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar500">
+				<xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdChar2Type">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="_Id" type="mdt:char2" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenVarchar100IdChar2Type">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar100">
+				<xsd:attribute name="_Id" type="mdt:char2" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdChar3Type">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="_Id" type="mdt:char3" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdChar10Type">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdChar10TypeMin0">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40min0">
+				<xsd:attribute name="_Id" type="mdt:varchar10min0" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdVarchar4Type">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="_Id" type="mdt:varchar4" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdVarchar10Type">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="_Id" type="mdt:varchar10" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdPositiveIntegerType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="_Id" type="xsd:positiveInteger" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="emptyIdPositiveIntegerType">
+		<xsd:attribute name="_Id" type="xsd:positiveInteger" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="emptyIdNonNegativeIntegerType">
+		<xsd:attribute name="_Id" type="xsd:nonNegativeInteger" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="tokenIdNonNegativeIntegerType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="_Id" type="xsd:nonNegativeInteger" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="mediaStubNameType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar15">
+				<xsd:attribute name="_MediaGroupId" type="xsd:positiveInteger"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="accountBreakdownType">
+		<xsd:sequence>
+			<xsd:element name="NumberOfAccount" type="xsd:unsignedInt" minOccurs="0"/>
+			<xsd:element name="TotalMarketValue" type="xsd:long" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="breakdownNonNegativeType">
+		<xsd:sequence>
+			<xsd:element name="Value" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="Ratio" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="rawRatioType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+				<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="smallRawDecimalRatioType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:smallRawDecimal">
+				<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="ratioType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:nonNegativeSmallDecimal">
+				<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="rawRatioVarchar10Type">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+				<xsd:attribute name="Type" type="mdt:varchar10" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="rawRatioIntegerType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+				<xsd:attribute name="Type" type="xsd:integer" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="peerGroupRankType">
+		<xsd:sequence>
+			<xsd:element name="PeerGroupRankDetail" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="PercentileRank" type="mdt:percentileRankType"/>
+						<xsd:element name="AbsoluteRank" type="xsd:integer" minOccurs="0"/>
+					</xsd:sequence>
+					<xsd:attribute name="_ClassificationMethod" type="xsd:unsignedByte" use="required"/>
+					<xsd:attribute name="_PeerGroupId" type="xsd:unsignedByte" use="required"/>
+					<xsd:attribute name="_MarketingRegionId" type="xsd:unsignedByte" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="returnType">
+		<xsd:sequence>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="mdt:StartDate"/>
+				<xsd:element ref="mdt:EndDate"/>
+				<xsd:element ref="mdt:ClosePrice" minOccurs="0"/>
+				<xsd:element name="PriceDate" type="xsd:date" minOccurs="0"/>
+				<xsd:element name="ReturnDetail" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Value" type="mdt:bigRawDecimal" minOccurs="0"/>
+							<xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+							<xsd:element name="PeerGroupRankDetail" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="PercentileRank" type="xsd:unsignedByte"/>
+                    <xsd:element name="AbsoluteRank" type="xsd:unsignedByte" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:attribute name="_ClassificationMethod" type="xsd:unsignedByte" use="required"/>
+									<xsd:attribute name="_MarketingRegionId" type="xsd:unsignedByte" use="required"/>
+									<xsd:attribute name="_PeerGroupId" type="xsd:unsignedByte" use="required"/>
+									<xsd:attribute name="_ClassificationId" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CategoryPerformance" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element maxOccurs="unbounded" name="Category">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Name" type="mdt:varchar40" />
+													<xsd:element  name="PeerGroup" minOccurs="0" maxOccurs="unbounded">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="Value" type="mdt:bigRawDecimal" />
+															</xsd:sequence>
+															<xsd:attribute name="_Id" type="xsd:unsignedByte" use="required" />
+															<xsd:attribute name="_RegionId" type="xsd:unsignedByte" use="required" />
+															<xsd:attribute name="_PerformanceId" type="mdt:char10" use="required" />
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+												<xsd:attribute name="_Id" type="mdt:char10" use="required" />
+												<xsd:attribute name="_Type" type="mdt:varchar40" use="required" />
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="TimePeriod" type="mdt:varchar4" use="required"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="StoreDate" type="xsd:date"/>
+		<xsd:attribute name="Type" type="xsd:unsignedShort" use="required"/>
+		<xsd:attribute name="_TaxRegionId" type="mdt:varchar10"/>
+	</xsd:complexType>
+	<xsd:complexType name="premiumDiscountType">
+		<xsd:sequence>
+			<xsd:element ref="mdt:EndDate"/>
+			<xsd:element name="LastValue" type="mdt:smallDecimal" minOccurs="0"/>
+			<xsd:element name="PremiumDiscountDetail" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AverageValue" type="mdt:smallDecimal" minOccurs="1"/>
+						<xsd:element name="HighValue" type="mdt:smallDecimal" minOccurs="0"/>
+						<xsd:element name="LowValue" type="mdt:smallDecimal" minOccurs="0"/>
+					</xsd:sequence>
+					<xsd:attribute name="TimePeriod" type="mdt:varchar4" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="StoreDate" type="xsd:date" use="required"/>
+		<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="groupPerformanceType">
+		<xsd:sequence>
+			<xsd:element name="EndDate" type="xsd:date"/>
+			<xsd:element name="GroupPerformanceDetail" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="GroupSize" type="xsd:unsignedShort"/>
+						<xsd:element name="GroupBreakpoint" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="GroupBreakpointDetail" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="AverageValue" type="mdt:smallDecimal"/>
+												<xsd:element name="HighValue" type="mdt:smallDecimal"/>
+												<xsd:element name="LowValue" type="mdt:smallDecimal"/>
+											</xsd:sequence>
+											<xsd:attribute name="Rank" type="mdt:percentileRankType" use="required"/>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:attribute name="TimePeriod" type="mdt:varchar4" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+		<xsd:attribute name="_ClassificationMethod" type="xsd:unsignedByte" use="required"/>
+		<xsd:attribute name="_PeerGroupId" type="xsd:unsignedByte" use="required"/>
+		<xsd:attribute name="_MarketingRegionId" type="xsd:unsignedByte" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="priceByDateType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:positiveBigRawDecimal">
+				<xsd:attribute name="Date" type="xsd:date"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="endDateValueType">
+		<xsd:sequence>
+			<xsd:element ref="mdt:EndDate"/>
+			<xsd:element ref="mdt:Value"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="nonNegativeDecimal19-9EndDateValueType">
+		<xsd:sequence>
+			<xsd:element ref="mdt:EndDate"/>
+			<xsd:element name="Value" type="mdt:nonNegativeDecimal19-9Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="nonNegativeSmallRawDecimalEndDateType">
+		<xsd:sequence>
+			<xsd:element ref="mdt:EndDate"/>
+			<xsd:element name="Value" type="mdt:nonNegativeSmallRawDecimal"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="nonNegativeBigRawDecimalEndDateType">
+		<xsd:sequence>
+			<xsd:element ref="mdt:EndDate"/>
+			<xsd:element name="Value" type="mdt:nonNegativeBigRawDecimal"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="smallRawDecimalEndDateType">
+		<xsd:sequence>
+			<xsd:element ref="mdt:EndDate"/>
+			<xsd:element name="Value" type="mdt:smallRawDecimal"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="varchar40ByEndDateType">
+		<xsd:simpleContent>
+			<xsd:extension base="mdt:varchar40">
+				<xsd:attribute name="EndDate" type="xsd:date" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="feeScheduleNonNegativeSmallRawDecimalType">
+		<xsd:sequence>
+			<xsd:element name="BreakpointUnit" type="xsd:unsignedByte"/>
+			<xsd:element name="LowBreakpoint" type="mdt:nonNegativeSmallRawDecimal"/>
+			<xsd:element name="HighBreakpoint" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+			<xsd:element name="Value" type="mdt:nonNegativeSmallRawDecimal"/>
+		</xsd:sequence>
+		<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="feeScheduleNonNegativeIntegerType">
+		<xsd:sequence>
+			<xsd:element name="BreakpointUnit" type="xsd:unsignedByte"/>
+			<xsd:element name="LowBreakpoint" type="xsd:nonNegativeInteger"/>
+			<xsd:element name="HighBreakpoint" type="xsd:nonNegativeInteger" minOccurs="0"/>
+			<xsd:element name="Value" type="mdt:nonNegativeSmallRawDecimal"/>
+		</xsd:sequence>
+		<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="feeScheduleNonNegativeIntegerDecimal19-9ValueType">
+		<xsd:sequence>
+			<xsd:element name="BreakpointUnit" type="xsd:unsignedByte"/>
+			<xsd:element name="LowBreakpoint" type="xsd:nonNegativeInteger"/>
+			<xsd:element name="HighBreakpoint" type="xsd:nonNegativeInteger" minOccurs="0"/>
+			<xsd:element name="Value" type="mdt:decimal19-9Type"/>
+		</xsd:sequence>
+		<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="shareIssuedDetailType">
+		<xsd:sequence>
+			<xsd:element ref="mdt:Date" minOccurs="0"/>
+			<xsd:element name="ShareOutstanding" type="mdt:bigRawDecimal" minOccurs="0"/>
+			<xsd:element name="CommonShareOutstanding" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="SharePubliclyTraded" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="NumberOfShareHolder" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="AssetRaised" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="CommonAssetRaised" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="PreferredAssetRaised" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="ShareAuthorized" type="xsd:integer" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="IPOValue" type="xsd:boolean"/>
+	</xsd:complexType>
+	<xsd:complexType name="availableSalesChargeClassDetailType">
+		<xsd:sequence>
+			<xsd:element name="ClassType">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="mdt:varchar25">
+							<xsd:attribute name="_Id" type="xsd:unsignedByte" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="FundSERV" minOccurs="0">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:boolean">
+							<xsd:attribute name="_Id" type="mdt:varchar10" use="required"/>
+							<xsd:attribute name="_Status" type="xsd:unsignedByte" use="required"/>
+							<xsd:attribute name="_CurrencyId" type="mdt:char10" use="required"/>
+							<xsd:attribute name="_CannexCode" type="xsd:unsignedInt" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ratioRangeType">
+		<xsd:sequence>
+			<xsd:element name="MinimumValue" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+			<xsd:element name="MaximumValue" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="nonNegativeIntegerRangeType">
+		<xsd:sequence>
+			<xsd:element name="MinimumValue" type="xsd:nonNegativeInteger" minOccurs="0"/>
+			<xsd:element name="MaximumValue" type="xsd:nonNegativeInteger" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="StyleBox" type="mdt:styleBoxType"/>
+	<xsd:element name="ClosePrice" type="mdt:nonNegativeBigRawDecimal"/>
+	<xsd:element name="Value" type="mdt:bigDecimal"/>
+	<xsd:element name="CategoryRank" type="mdt:percentileRankType"/>
+	<xsd:element name="ReinvestDate" type="xsd:date"/>
+	<xsd:element name="ExcludingDate" type="xsd:date"/>
+	<xsd:element name="Date" type="xsd:date"/>
+	<xsd:element name="StartDate" type="xsd:date"/>
+	<xsd:element name="EndDate" type="xsd:date"/>
+	<xsd:element name="Year" type="xsd:unsignedShort"/>
+	<xsd:complexType name="policyPurchaseDetailType">
+		<xsd:sequence>
+			<xsd:element name="InitialPremium" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ValueRange" type="mdt:nonNegativeIntegerRangeType"/>
+					</xsd:sequence>
+					<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SubsequentPremium" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ValueRange" type="mdt:nonNegativeIntegerRangeType"/>
+						<xsd:element name="EFTMinimum" type="xsd:nonNegativeInteger" minOccurs="0"/>
+					</xsd:sequence>
+					<xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="AllowException" type="xsd:boolean" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="registrationType">
+		<xsd:sequence>
+			<xsd:element name="CountryOfRegistration" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Country" type="mdt:tokenIdChar3Type"/>
+						<xsd:choice minOccurs="0">
+							<xsd:element ref="mdt:Company"/>
+							<xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+						</xsd:choice>
+						<xsd:element name="LocalName" type="mdt:varchar75" minOccurs="0"/>
+						<xsd:element ref="mdt:StartDate" minOccurs="0"/>
+						<xsd:element ref="mdt:EndDate" minOccurs="0"/>
+						<xsd:element name="ClosedEndToOpenEndSwitchDate" type="xsd:date" minOccurs="0"/>
+					</xsd:sequence>
+					<xsd:attribute name="_ExternalId" type="mdt:varchar15" use="optional"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CreationUnit">
+		<xsd:sequence>
+			<xsd:element name="UnitSize">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:unsignedInt">
+							<xsd:attribute name="_Unit" type="xsd:unsignedByte"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="TransactionFee" type="xsd:unsignedInt"/>
+			<xsd:element name="MaximumTransactionFee" type="xsd:unsignedInt" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ContactPerson">
+		<xsd:sequence>
+			<xsd:element name="Name" type="mdt:varchar75" minOccurs="1"/>
+			<xsd:element name="ProfessionalTitle" minOccurs="0">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="mdt:varchar40">
+							<xsd:attribute name="_Id" type="xsd:unsignedByte" use="optional"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RoleList" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="FunctionRole" maxOccurs="7">
+							<xsd:complexType>
+								<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element ref="mdt:ContactInformation" minOccurs="1"/>
+		</xsd:sequence>
+		<xsd:attribute name="TargetMarketType" type="xsd:unsignedByte" use="required"/>
+		<xsd:attribute name="PrimaryContact" type="xsd:boolean" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="DataReadyType">
+		<xsd:sequence>
+			<xsd:element name="OnGoingDataReady" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="HistoricalDataReady" type="xsd:boolean" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

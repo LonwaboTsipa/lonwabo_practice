@@ -1,18 +1,13 @@
-[
+[    
     {
         "key": "funds",
         "isFileForLoad": true,
-        "fileName": "Fund.csv",
+        "fileName": "Fund.xlsx",
         "sheet": "Fund",
-        "regex": "Fund.*\\.csv",
-        "type": "csv",
+        "regex": "Fund.*\\.xlsx",
+        "type": "xlsx",
         "raw": true,
-        "description": "Funds",
-        "csvOptions": {
-            "separator": ";",
-            "quote": "'",
-            "escape": "'"
-        }
+        "description": "Funds"
     },
     {
         "key": "shareClasses",

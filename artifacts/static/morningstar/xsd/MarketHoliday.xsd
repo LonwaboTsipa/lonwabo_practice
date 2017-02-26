@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.54">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:annotation>
+  <xsd:documentation xml:lang="en">
+    International Feature schema for Morningstar XML data structure
+    Copyright 2005 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+ <xsd:element name="MarketHoliday">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="Date" type="xsd:date" maxOccurs="unbounded"/>
+   </xsd:sequence>
+   <xsd:attribute name="_PatternId" type="mdt:char10" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

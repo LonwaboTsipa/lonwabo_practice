@@ -2,7 +2,7 @@ import { login, dataLoadingArray, getClient, IManifest, LOADER_CONFIG } from "@k
 import {concatDataToLoad, insertDataToLoad} from "../utils";
 import {processAllocations, processFunds, processShareClasses, processTimeseries,
 	processStatistics, processDocuments, processTranslations, processCommentaries,
-	processDisclaimers, processMorningStar } from "../processors";
+	processDisclaimers, processLayouts, processMorningStar } from "../processors";
 import {fetchFunds, fetchShareClasses} from "../services";
 import { IOrchestratedManifest, IMorningStarIngestionIndication } from "../models";
 
@@ -27,7 +27,7 @@ export async function processAll(manifest: IOrchestratedManifest): Promise<dataL
 	let existingFunds = await fetchFunds(token);
 	let existingShareClasses = await fetchShareClasses(token);
 	let fundsAndShares = [].concat(existingFunds).concat(existingShareClasses);
-
+	
 	// Process Allocations
 	dataToLoad = concatDataToLoad(dataToLoad, await processAllocations(fundsAndShares, manifest));
 
@@ -49,11 +49,15 @@ export async function processAll(manifest: IOrchestratedManifest): Promise<dataL
 	// Proccess Disclaimers
 	dataToLoad = concatDataToLoad(dataToLoad, await processDisclaimers(fundsAndShares, manifest));
 
+	// Proccess Layouts
+	dataToLoad = concatDataToLoad(dataToLoad, await processLayouts(fundsAndShares, manifest, token));
+
 	// Process MorningStar data
 	let morningStarIngestion = (LOADER_CONFIG["originalConfig"]["morningStarIngestion"] || {}) as IMorningStarIngestionIndication;
 	let anyMorningStarIngestion = Object.keys(morningStarIngestion).reduce((existing, key) => {
 		return existing || morningStarIngestion[key];
 	}, false);
+	
 	if (anyMorningStarIngestion) {
 		dataToLoad = concatDataToLoad(dataToLoad, await processMorningStar(fundsAndShares, manifest));
 	}

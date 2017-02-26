@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.50">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:include schemaLocation="Company.xsd"/>
+ <xsd:include schemaLocation="Performance.xsd"/>
+
+ <xsd:element name="Strategy">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="StrategyBasics">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="Name" type="mdt:varchar40"/>
+       <xsd:element name="InceptionDate" type="xsd:date" minOccurs="0"/>
+       <xsd:element name="PrimaryBenchmark" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="HoldingDetail" type="mdt:holdingDetailType" maxOccurs="4"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="SecondaryBenchmark" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="HoldingDetail" type="mdt:holdingDetailType" maxOccurs="4"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="OfferingFrequency" type="mdt:char2" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="_StrategyGroupId" type="mdt:char10"/>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="StrategyManagement" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="ProviderCompany">
+        <xsd:complexType>
+         <xsd:choice>
+          <xsd:element ref="mdt:Company"/>
+          <xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+         </xsd:choice>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="PercentFromExternalResearch" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+       <xsd:element name="ContractualLimit" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="ContractualLimitDetail" maxOccurs="2">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="HighValue" type="mdt:smallDecimal"/>
+             <xsd:element name="LowValue" type="mdt:smallDecimal"/>
+            </xsd:sequence>
+            <xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+            <xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="MinimumInvestment" minOccurs="0" maxOccurs="6">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="Date" type="xsd:date"/>
+          <xsd:element name="InitialInvestment" type="mdt:unitInteger" minOccurs="0"/>
+         </xsd:sequence>
+         <xsd:attribute name="Type" type="xsd:unsignedByte" use="optional"/>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="StrategyAvailability" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="SeparateAccountAvailability" minOccurs="0">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="Institutional" type="xsd:boolean" />
+             <xsd:element name="MultipleStrategyPortfolio" type="xsd:boolean" />
+             <xsd:element name="SeparateManagedAccount" type="xsd:boolean" />
+             <xsd:element name="UnifiedManagedAccount" type="xsd:boolean" />
+            </xsd:sequence>
+           </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="CollectiveInvestmentTrust" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="MutualFund" type="xsd:boolean" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="InvestmentApproach" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="ManagementApproach" minOccurs="0">
+        <xsd:complexType>
+         <xsd:choice>
+          <xsd:element name="ActivelyManaged" type="xsd:boolean"/>
+          <xsd:element name="PassivelyManaged" type="xsd:boolean"/>
+          <xsd:element name="EnhancedIndex" type="xsd:boolean"/>
+         </xsd:choice>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="IndexingApproach" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="CensusReplication" type="xsd:boolean"/>
+          <xsd:element name="FullReplication" type="xsd:boolean"/>
+          <xsd:element name="Optimization" type="xsd:boolean"/>
+          <xsd:element name="StratifiedSampling" type="xsd:boolean"/>
+          <xsd:element name="Structured" type="xsd:boolean"/>
+          <xsd:element name="Synthetic" type="xsd:boolean"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="AssetAllocationStrategy" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="StrategicAllocation" type="xsd:boolean"/>
+          <xsd:element name="TacticalAllocation" type="xsd:boolean"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="InvestmentAnalysis" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="FundamentalAnalysis" type="xsd:boolean"/>
+          <xsd:element name="QuantitativeAnalysis" type="xsd:boolean"/>
+          <xsd:element name="TechnicalAnalysis" type="xsd:boolean"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="FixedIncomeStrategy" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="SectorRotation" type="xsd:boolean"/>
+          <xsd:element name="InterestRateExpectation" type="xsd:boolean"/>
+          <xsd:element name="YieldCurve" type="xsd:boolean"/>
+          <xsd:element name="OptionAdjustedSpreadBased" type="xsd:boolean"/>
+          <xsd:element name="IndividualSecuritySelection" type="xsd:boolean"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="RiskHedging" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="RiskHedgingDetail" maxOccurs="7">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="HedgingScope">
+              <xsd:complexType>
+               <xsd:sequence>
+                <xsd:element name="FullyHedged" type="xsd:boolean"/>
+                <xsd:element name="FrequentlyHedged" type="xsd:boolean"/>
+               </xsd:sequence>
+              </xsd:complexType>
+             </xsd:element>
+             <xsd:element name="HedgingMethod">
+              <xsd:complexType>
+               <xsd:sequence>
+                <xsd:element name="FuturesHedging" type="xsd:boolean"/>
+                <xsd:element name="OptionsHedging" type="xsd:boolean"/>
+                <xsd:element name="SecuritiesHedging" type="xsd:boolean"/>
+                <xsd:element name="Swaps" type="xsd:boolean"/>
+               </xsd:sequence>
+              </xsd:complexType>
+             </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="InvestmentBias" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:choice  minOccurs="0">
+           <xsd:element name="LongBiased" type="xsd:boolean"/>
+           <xsd:element name="ShortBiased" type="xsd:boolean"/>
+           <xsd:element name="LongOnly" type="xsd:boolean"/>
+           <xsd:element name="ShortOnly" type="xsd:boolean"/>
+           <xsd:element name="LongShortVariable" type="xsd:boolean"/>
+           <xsd:element name="MarketNeutral" type="xsd:boolean"/>
+          </xsd:choice>
+          <xsd:element name="Arbitrage" type="xsd:boolean"  minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="PortfolioManagement" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="Concentrated" type="xsd:boolean"/>
+          <xsd:element name="CoreGroupPositions" type="xsd:boolean"/>
+          <xsd:element name="Diversified" type="xsd:boolean"/>
+          <xsd:element name="Thematic" type="xsd:boolean"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="SecurityAllocation" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="SecuritySelectionApproach" maxOccurs="2">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="BottomUp" type="xsd:boolean"/>
+             <xsd:element name="TopDown" type="xsd:boolean"/>
+            </xsd:sequence>
+            <xsd:attribute name="SelectionScope" type="xsd:unsignedByte" use="required"/>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="StrategyAttributes" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="SingleHedgingStrategy" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="GlobalInvesting" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="DerivativeInvesting" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="ShortSecurity" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="SecurityLending" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="CurrencyHedging" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="SociallyResponsible" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="ConsumerResponsible" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="LaborSensitive" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="CommunityResponsible" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="EnvironmentalConscious" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="ReligiousAwareness" type="xsd:boolean" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element ref="mdt:HistoricalOperation" minOccurs="0"/>
+    <xsd:element ref="mdt:Performance" minOccurs="0"/>
+   </xsd:sequence>
+   <xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

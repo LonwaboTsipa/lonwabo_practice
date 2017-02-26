@@ -12,7 +12,7 @@ describe('src/processors/fundProcessor.ts', () => {
         
     });
     describe("processFunds", () => {    
-        pit("will return dataLoadingArray with funds", async () => {
+        it("will return dataLoadingArray with funds", async () => {
             let response = await processFunds(manifest);   
             expect(response).toBeDefined();
             expect(response.funds).toBeDefined();

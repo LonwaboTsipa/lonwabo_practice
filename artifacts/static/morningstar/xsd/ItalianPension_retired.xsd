@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.60">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:include schemaLocation="FundShareClass.xsd"/>
+ <xsd:annotation>
+  <xsd:documentation xml:lang="en">
+   Fund share class schema for Morningstar XML data structure
+   Copyright 2003 Morningstar, Inc. All rights reserved.
+  </xsd:documentation>
+ </xsd:annotation>
+
+ <xsd:element name="ItalianPension">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="ItalianPensionBasics">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="Name" type="mdt:varchar40"/>
+       <xsd:element name="PensionType" minOccurs="0">
+        <xsd:complexType>
+         <xsd:attribute name="_Id" type="mdt:char3" use="required"/>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="InceptionDate" type="xsd:date" minOccurs="0"/>
+       <xsd:element name="Domicile">
+        <xsd:complexType>
+         <xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="Currency" type="mdt:tokenIdChar10Type" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItalianPensionManagement" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="ProviderCompany" minOccurs="0">
+        <xsd:complexType>
+         <xsd:choice>
+          <xsd:element ref="mdt:Company"/>
+          <xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+         </xsd:choice>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="FNPWorkerCategory" type="mdt:varchar10" minOccurs="0"/>
+       <xsd:element name="ItalianPensionFee" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="ManagementPositionFee" minOccurs="0">
+           <xsd:complexType>
+            <xsd:simpleContent>
+             <xsd:extension base="mdt:nonNegativeSmallDecimal">
+              <xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+             </xsd:extension>
+            </xsd:simpleContent>
+           </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="TransferFee" minOccurs="0">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="Value" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+             <xsd:element name="MaximumValue" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+           </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="RedeemPositionFee" minOccurs="0">
+           <xsd:complexType>
+            <xsd:simpleContent>
+             <xsd:extension base="mdt:nonNegativeSmallDecimal">
+              <xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+             </xsd:extension>
+            </xsd:simpleContent>
+           </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="AnticipationFee" minOccurs="0">
+           <xsd:complexType>
+            <xsd:simpleContent>
+             <xsd:extension base="mdt:nonNegativeSmallDecimal">
+              <xsd:attribute name="_Unit" type="xsd:unsignedByte" use="required"/>
+             </xsd:extension>
+            </xsd:simpleContent>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItalianPensionInsurance" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="DeathInsurance" type="xsd:boolean"/>
+       <xsd:element name="InvalidityInsurance" type="xsd:boolean"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="FundLine" minOccurs="0">
+     <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+       <xsd:element ref="mdt:FundShareClass"/>
+       <xsd:element name="_DataLink" type="mdt:linkChar10Type"/>
+      </xsd:choice>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+   <xsd:attribute name="_Status" type="mdt:char1" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

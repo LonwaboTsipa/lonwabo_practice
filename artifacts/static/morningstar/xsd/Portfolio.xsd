@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by Alexander (Home) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.52">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Portfolio schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="Portfolio">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="PortfolioSummary">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="mdt:Date"/>
+							<xsd:element name="PreviousPortfolioDate" type="xsd:date" minOccurs="0"/>
+							<xsd:element name="HoldingAggregate" minOccurs="0" maxOccurs="2">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="NumberOfHolding" type="xsd:unsignedInt"/>
+										<xsd:element name="NumberOfStockHolding" type="xsd:unsignedInt" minOccurs="0"/>
+										<xsd:element name="NumberOfBondHolding" type="xsd:unsignedInt" minOccurs="0"/>
+										<xsd:element name="TotalMarketValue" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:simpleContent>
+													<xsd:extension base="xsd:decimal">
+														<xsd:attribute name="_CurrencyId" type="mdt:char3"/>
+													</xsd:extension>
+												</xsd:simpleContent>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="_SalePosition" type="mdt:char1" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="AggregatedHoldingAggregate" minOccurs="0" maxOccurs="2">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="NumberOfHolding" type="xsd:unsignedInt"/>
+										<xsd:element name="NumberOfStockHolding" type="xsd:unsignedInt" minOccurs="0"/>
+										<xsd:element name="NumberOfBondHolding" type="xsd:unsignedInt" minOccurs="0"/>
+										<xsd:element name="TotalMarketValue" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:simpleContent>
+													<xsd:extension base="xsd:decimal">
+														<xsd:attribute name="_CurrencyId" type="mdt:char3"/>
+													</xsd:extension>
+												</xsd:simpleContent>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="_SalePosition" type="mdt:char1" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="NetExpenseRatio" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="PortfolioStatistics" minOccurs="0" maxOccurs="2">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="EquityStyle" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="EquityStyleCoreValue">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element ref="mdt:StyleBox"/>
+													<xsd:choice>
+														<xsd:sequence>
+															<xsd:element name="StyleScore" type="mdt:smallRawDecimal"/>
+															<xsd:element name="SizeScore" type="mdt:smallRawDecimal"/>
+														</xsd:sequence>
+														<xsd:sequence minOccurs="0">
+															<xsd:element name="PTEScore" type="mdt:smallRawDecimal"/>
+															<xsd:element name="PTBScore" type="mdt:smallRawDecimal"/>
+														</xsd:sequence>
+													</xsd:choice>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="EquityStyleFactor" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="ProspectiveEarningsYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+													<xsd:element name="ProspectiveBookValueYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+													<xsd:element name="ProspectiveRevenueYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+													<xsd:element name="ProspectiveCashFlowYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+													<xsd:element name="ProspectiveDividendYield" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+													<xsd:element name="Forecasted5YearEarningsGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+													<xsd:element name="ForecastedEarningsGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+													<xsd:element name="ForecastedBookValueGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+													<xsd:element name="ForecastedRevenueGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+													<xsd:element name="ForecastedCashFlowGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="EquityStatistics" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="MarketCapital" type="mdt:nonNegativeBigRawDecimal"/>
+										<xsd:element name="DTC" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="ROA" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="ROE" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="NetMargin" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="EarningsYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+										<xsd:element name="BookValueYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+										<xsd:element name="RevenueYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+										<xsd:element name="CashFlowYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+										<xsd:element name="Past3YearEarningsGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="FairValueYield" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="EconomicMoatScore" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="FreeCashFlowYield" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="ROIC" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="FinancialHealthGrade" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="ProfitabilityGrade" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="GrowthGrade" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="DividendYield" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="CashReturn" type="mdt:smallRawDecimal" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:attribute name="StoreDate" type="xsd:date" use="optional"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="BondStatistics" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="mdt:StyleBox" minOccurs="0"/>
+										<xsd:element name="EffectiveDuration" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="EffectiveMaturity" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="AverageCoupon" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="AverageCreditQuality" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="AveragePrice" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="YieldToMaturity" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="AMTExposure" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="ModifiedDuration" type="mdt:smallRawDecimal" minOccurs="0"/>
+										<xsd:element name="PreRefundedRatio" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="CurrentYield" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+										<xsd:element name="AltMinTaxExposure" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="_SalePosition" type="mdt:char1" use="required"/>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="PortfolioBreakdown" minOccurs="0" maxOccurs="2">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element name="AssetAllocation" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="RegionalAssetAllocation" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="AssetAllocationBreakdown" maxOccurs="5">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="BreakdownValue" type="mdt:rawRatioType" maxOccurs="unbounded"/>
+													</xsd:sequence>
+													<xsd:attribute name="_RegionId" type="mdt:char3" use="required"/>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="MarketCapitalBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="StyleBoxBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="StockSectorBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="GlobalStockSectorBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioIntegerType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="IndustryGroupBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioIntegerType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="IndustryBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioIntegerType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="StockTypeBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="RegionalExposure" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="BondRegionalExposure" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="CountryExposure" minOccurs="0" maxOccurs="3">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="CountryExposureValue" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+															<xsd:attribute name="CountryId" type="mdt:char3" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+										<xsd:attribute name="Type" type="mdt:char1" use="required"/>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="BondSectorBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="GlobalBondSector" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="GlobalBondSectorBreakdown" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="BreakdownValue" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:simpleContent>
+																	<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+																		<xsd:attribute name="Type" type="xsd:unsignedInt" use="required"/>
+																	</xsd:extension>
+																</xsd:simpleContent>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+													<xsd:attribute name="Level" type="xsd:unsignedByte" use="required"/>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="GlobalBondSectorCountryBreakdown" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="BreakdownValue" minOccurs="0" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:simpleContent>
+																	<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+																		<xsd:attribute name="CountryId" type="mdt:char3" use="required"/>
+																	</xsd:extension>
+																</xsd:simpleContent>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+													<xsd:attribute name="Type" type="xsd:unsignedInt" use="required"/>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="CashBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="BondIssuerCompanyBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="IssuerCompanyValue" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+															<xsd:attribute name="CompanyId" type="mdt:char10" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="CreditQualityBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:smallRawDecimalRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+										<xsd:attribute name="Date" type="xsd:date"/>
+										<xsd:attribute name="Surveyed" type="xsd:boolean"/>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="MaturityRange" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="CouponRange" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="CallableBondBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="CallableRatio" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+															<xsd:attribute name="TimePeriod" type="mdt:varchar4" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="AssetClassExposure" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="AssetClassExposureValue" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="xsd:boolean">
+															<xsd:attribute name="AssetClassId" type="mdt:varchar2" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="AssetLiquidity" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="InvestmentTimeHorizon" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="SpecialBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="GICS" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="GICSBreakdown" maxOccurs="4">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="BreakdownValue" type="mdt:rawRatioVarchar10Type" minOccurs="0" maxOccurs="unbounded"/>
+													</xsd:sequence>
+													<xsd:attribute name="Type" type="xsd:unsignedInt" use="required"/>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="CustomBreakdown" minOccurs="0" maxOccurs="10">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:bigRawDecimal">
+															<xsd:attribute name="Type" type="mdt:varchar10" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+										<xsd:attribute name="Type" type="xsd:unsignedInt" use="required"/>
+										<xsd:attribute name="Date" type="xsd:date" use="required"/>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="SpecializedBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="SpecializedBreakdownDetail" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="BreakdownValue" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:simpleContent>
+																	<xsd:extension base="mdt:smallRawDecimal">
+																		<xsd:attribute name="Type" type="mdt:varchar10" use="required"/>
+																	</xsd:extension>
+																</xsd:simpleContent>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+													<xsd:attribute name="BreakdownType" type="xsd:unsignedInt" use="required"/>
+													<xsd:attribute name="Type" type="mdt:char1" use="required"/>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="EconomicMoatBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+											<xsd:element name="CoverageRatio" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0" maxOccurs="1"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="MSCICountryBreakdown" minOccurs="0" maxOccurs="3">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="MSCICountryBreakdownValue" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+															<xsd:attribute name="CountryId" type="mdt:char3" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+										<xsd:attribute name="Type" type="mdt:char1" use="required"/>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="MSCIRegionalExposure" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="BreakdownValue" type="mdt:rawRatioType" minOccurs="0" maxOccurs="unbounded"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="RegionalGovBondSectorBreakdown" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="RegionalBreakdown">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="BreakdownValue" type="mdt:rawRatioType" maxOccurs="unbounded"/>
+													</xsd:sequence>
+													<xsd:attribute name="_RegionId" type="mdt:char3" use="required"/>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="RiskCurrencyExposure" minOccurs="0" maxOccurs="2">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="RiskCurrencyExposureValue" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:smallRawDecimal">
+															<xsd:attribute name="CurrencyId" type="mdt:char3" use="required"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+										<xsd:attribute name="Type" type="mdt:char1" use="required"/>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:choice>
+						</xsd:sequence>
+						<xsd:attribute name="_SalePosition" type="mdt:char1" use="required"/>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="FundOfFundSummary" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="FundOfFundDetail" maxOccurs="2">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="NumberOfFund" type="xsd:unsignedInt" minOccurs="0"/>
+										<xsd:element name="ClosedFundWeighting" type="xsd:unsignedInt" minOccurs="0"/>
+									</xsd:sequence>
+									<xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Holding" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:choice minOccurs="0">
+								<xsd:element name="HoldingDetail" type="mdt:holdingDetailType" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:choice>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AggregatedHolding" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:choice minOccurs="0">
+								<xsd:element name="HoldingDetail" type="mdt:holdingDetailType" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:choice>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="SoldOutHolding" minOccurs="0" maxOccurs="2">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="HoldingDetail" type="mdt:holdingDetailType" maxOccurs="unbounded"/>
+						</xsd:sequence>
+						<xsd:attribute name="_SalePosition" type="mdt:char1" use="required"/>
+					</xsd:complexType>
+				</xsd:element>
+        <xsd:element name="SurveyData" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="AustralianSurvey" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="AssetAllocation" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="BreakdownValue" type="mdt:smallRawDecimal" />
+                        </xsd:sequence>
+                        <xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                  <xsd:attribute name="EffectiveDate" type="xsd:date" use="required"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="APRAAustralianSurvey" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="APRAAssetAllocation" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="BreakdownValue" type="mdt:smallRawDecimal" />
+                        </xsd:sequence>
+                        <xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="HedgingAPRAAssetAllocation" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="BreakdownValue" type="mdt:smallRawDecimal" />
+                        </xsd:sequence>
+                        <xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="APRAGearingProportion" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="BreakdownValue" type="mdt:smallRawDecimal" />
+                        </xsd:sequence>
+                        <xsd:attribute name="Type" type="xsd:unsignedByte" use="required"/>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="OtherAllocation" minOccurs="0">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="AllocationDetail" minOccurs="0">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="SecurityExternalName" type="mdt:varchar75"/>
+                                <xsd:element name="_SecurityExternalId" type="mdt:varchar75"/>
+                                <xsd:element name="Percentage" type="mdt:smallRawDecimal"/>
+                                <xsd:element name="SecurityType" type="mdt:varchar75"/>
+                                <xsd:element name="SecurityDomicileType" type="xsd:positiveInteger"/>
+                                <xsd:element name="SecurityAssetClass" type="mdt:varchar75"/>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="_MasterPortfolioId" type="xsd:positiveInteger" use="required"/>
+          </xsd:complexType>
+        </xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="_Id" type="xsd:positiveInteger" use="required"/>
+			<xsd:attribute name="_MasterPortfolioId" type="xsd:positiveInteger" use="required"/>
+			<xsd:attribute name="_PrimaryIndexId" type="mdt:char10" use="optional"/>
+			<xsd:attribute name="_SecondaryIndexId" type="mdt:char10" use="optional"/>
+			<xsd:attribute name="_LanguageId" type="mdt:char2" use="optional"/>
+			<xsd:attribute name="_CurrencyId" type="mdt:char3" use="optional"/>
+			<xsd:attribute name="IdentifiedAssetPercentage" type="mdt:nonNegativeSmallRawDecimal"/>
+			<xsd:attribute name="SuppressionExpiration" type="xsd:date"/>
+			<xsd:attribute name="_ExternalId" type="mdt:varchar75"/>
+			<xsd:attribute name="_ManagerId" type="mdt:varchar10"/>
+			<xsd:attribute name="Ownership" type="mdt:varchar75"/>
+			<xsd:attribute name="ProviderId" type="xsd:positiveInteger" use="optional"/>
+			<xsd:attribute name="NonMonthEndPortfolio" type="xsd:boolean" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

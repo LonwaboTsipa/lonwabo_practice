@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.00">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+
+ <xsd:annotation>
+   <xsd:documentation xml:lang="en">
+    StockMaster schema for Morningstar XML data structure
+    This is a temporary solution before we centralize the portfolio processing
+    Copyright 2004 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+
+ <xsd:element name="StockMaster">
+  <xsd:complexType>
+   <xsd:sequence>
+
+    <xsd:element name="StockBasics" minOccurs="1">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="Name" type="mdt:varchar75"/>
+       <xsd:element name="CUSIP" type="mdt:char9" minOccurs="1"/>
+       <xsd:element name="CountryId" type="mdt:char10" minOccurs="0"/>
+       <xsd:element name="CurrencyId" type="mdt:char10" minOccurs="0"/>
+       <xsd:element name="ISIN" type="mdt:char12" minOccurs="0"/>
+       <xsd:element name="PrimaryListingTicker" type="mdt:varchar12" minOccurs="0"/>
+       <xsd:element name="SectorId" type="xsd:nonNegativeInteger" minOccurs="0"/>
+       <xsd:element name="IndustryId" type="mdt:char10" minOccurs="0"/>
+       <xsd:element name="GICSIndustryId" type="mdt:char8" minOccurs="0"/>
+       <xsd:element name="GlobalSectorId" type="mdt:char10" minOccurs="0"/>
+       <xsd:element name="GlobalIndustryId" type="mdt:char10" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="EquityStyle" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element ref="mdt:StyleBox"/>
+       <xsd:element name="StyleScore" type="mdt:smallRawDecimal"/>
+       <xsd:element name="SizeScore" type="mdt:smallRawDecimal"/>
+       <xsd:element name="ValueScore" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="GrowthScore" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="ProspectiveEarningsYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="ProspectiveBookValueYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="ProspectiveRevenueYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="ProspectiveCashFlowYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="ProspectiveDividendYield" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+       <xsd:element name="Forecasted5YearEarningsGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="ForecastedEarningsGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="ForecastedBookValueGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="ForecastedRevenueGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="ForecastedCashFlowGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="EquityStatistics" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="MarketCapital" type="mdt:nonNegativeBigRawDecimal"/>
+       <xsd:element name="DTC" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+       <xsd:element name="ROA" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="ROE" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="NetMargin" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="EarningsYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="BookValueYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="RevenueYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="CashFlowYield" type="mdt:bigRawDecimal" minOccurs="0"/>
+
+       <xsd:element name="Past3YearEarningsGrowth" type="mdt:smallRawDecimal" minOccurs="0"/>
+       <xsd:element name="CurrentEarningsPerShareMeanEstimate" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="DilutedEarningsPerShareCOPSYear1" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="DilutedEarningsPerShareCOPSYear2" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="DilutedEarningsPerShareCOPSYear3" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="DilutedEarningsPerShareCOPSYear4" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="DilutedEarningsPerShareCOPSYear5" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="BookValuePerShareYear1" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="BookValuePerShareYear2" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="BookValuePerShareYear3" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="BookValuePerShareYear4" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="BookValuePerShareYear5" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="RevenuePerShareYear1" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="RevenuePerShareYear2" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="RevenuePerShareYear3" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="RevenuePerShareYear4" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="RevenuePerShareYear5" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="CashFlowPerShareYear1" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="CashFlowPerShareYear2" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="CashFlowPerShareYear3" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="CashFlowPerShareYear4" type="mdt:bigRawDecimal" minOccurs="0"/>
+       <xsd:element name="CashFlowPerShareYear5" type="mdt:bigRawDecimal" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+
+   <xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+   <xsd:attribute name="Date" type="xsd:date" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+
+</xsd:schema>
+
+

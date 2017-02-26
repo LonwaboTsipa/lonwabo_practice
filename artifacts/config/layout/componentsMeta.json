@@ -1,0 +1,16 @@
+[
+	{
+		"code": "factsheet",
+		"name": "Factsheet",
+		"description": "Component to control Factsheet layout",
+		"prefix": "",
+		"layout": {
+			"elementProperties": {
+				"key": "component1",
+				"label": "Component One",
+				"visible": true
+			},
+			"elements": []
+		}
+	}
+]

@@ -9,7 +9,7 @@ describe('src/processors/translationProcessor.ts', () => {
     });
     describe("processTranslations", () => {        
         let dataToLoad = [];
-        pit("will return dataLoadingArray with funds", async () => {
+        it("will return dataLoadingArray with funds", async () => {
             let response = await processTranslations(dataToLoad);   
             expect(response).toBeDefined();
             expect(response.translations).toBeDefined();

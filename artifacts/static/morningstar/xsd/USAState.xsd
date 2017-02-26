@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.00">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:element name="USAState">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="Name" type="mdt:varchar15"/>
+    <xsd:element name="Abbreviation" type="mdt:char2"/>
+    <xsd:element name="NoIncomeTax" type="xsd:boolean"/>
+    <xsd:element name="State529Feature">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="MaximumContribution" minOccurs="0">
+        <xsd:complexType>
+         <xsd:simpleContent>
+          <xsd:extension base="xsd:positiveInteger">
+           <xsd:attribute name="IncludeAppreciation" type="xsd:boolean"/>
+          </xsd:extension>
+         </xsd:simpleContent>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="OutState529PlanWithdrawalTaxable" type="xsd:boolean" minOccurs="0"/>
+       <xsd:element name="IncomeTaxDeduction" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="FullyDeductible" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="TaxParityStateList" minOccurs="0">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="StateId" type="mdt:varchar10" maxOccurs="10"/>
+            </xsd:sequence>
+           </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="AnnualDeductionLimit" minOccurs="0">
+           <xsd:complexType>
+            <xsd:sequence minOccurs="0">
+             <xsd:element name="IndividualLimit" type="xsd:positiveInteger"/>
+             <xsd:element name="JointLimit" type="xsd:positiveInteger" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="Basis" type="xsd:unsignedByte" use="required"/>
+           </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="Description" type="mdt:string512" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="ContributionMatchDescription" type="mdt:string512" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="_Id" type="mdt:varchar10" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

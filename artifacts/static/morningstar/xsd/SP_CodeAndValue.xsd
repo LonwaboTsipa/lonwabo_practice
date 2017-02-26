@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by Alexander (Home) -->
+<!-- 编辑使用 XMLSpy v2006 U (http://www.altova.com) 由 eli (EMBRACE) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.00">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    temp Standard and Poor Code And Value schema for Morningstar XML data structure
+    Copyright 2007 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="SP_CodeAndValue">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:sequence>
+					<xsd:element name="SPId" type="mdt:varchar7" minOccurs="0"/>
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:sequence>
+							<xsd:element name="FocusShareList" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="FocusShare" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="ClassCode" type="mdt:char2"/>
+													<xsd:element name="LIFSCode" type="mdt:varchar6" minOccurs="0"/>
+													<xsd:element name="FocusId" type="mdt:varchar6" minOccurs="0"/>
+													<xsd:element name="RegisteredShareList" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="RegisteredShare" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="RegisteredClassCode" type="mdt:char2"/>
+																			<xsd:element name="LIFSCode" type="mdt:varchar10" minOccurs="0"/>
+																			<xsd:element name="RegisteredShareFocusId" type="mdt:varchar6" minOccurs="0"/>
+																		</xsd:sequence>
+																		<xsd:attribute name="_PerformanceId" type="mdt:char10"/>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+												<xsd:attribute name="_PerformanceId" type="mdt:char10" use="required"/>
+												<xsd:attribute name="IsCoreForShareClass" type="xsd:boolean" use="required"/>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<!--<xsd:element name="FundURL" type="mdt:string512" minOccurs="0"/>-->
+							<xsd:element name="PrimaryLifePensionShare" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="RegularSavingsFlag" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="RegularSavingsAmount" type="xsd:positiveInteger" minOccurs="0"/>
+						</xsd:sequence>
+						<xsd:sequence>
+							<xsd:element name="RestrictedDistribution" type="mdt:char1"/>
+							<!--L: Limited
+           U: Unlimited
+           N: No Distribution
+         -->
+							<xsd:element name="Accreditation" type="mdt:string512" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element name="FundURL" type="mdt:string512" minOccurs="0"/>
+						<xsd:element name="PrivateFund" type="xsd:boolean" minOccurs="0"/>
+						<xsd:element name="SalesRestriction" type="mdt:string3000" minOccurs="0"/>
+						<xsd:element name="USAFeature" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="AvailableThroughFundSupermarket" type="xsd:boolean"/>
+									<xsd:element name="EmployeeOnly" type="xsd:boolean"/>
+									<xsd:element name="AffinityFund" type="xsd:boolean"/>
+									<xsd:element name="KeoghPlan" type="xsd:boolean"/>
+									<xsd:element name="AvailableFor401KPlan" type="xsd:boolean"/>
+									<xsd:element name="CloseToAllIRAInvestment" type="xsd:boolean"/>
+									<xsd:element name="CloseToNewIRAInvestment" type="xsd:boolean"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="DeferLoad" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="DeferLoadInvestmentLevel" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="BreakpointUnit" type="xsd:unsignedByte"/>
+												<xsd:element name="LowBreakpoint" type="mdt:nonNegativeSmallRawDecimal"/>
+												<xsd:element name="HighBreakpoint" type="mdt:nonNegativeSmallRawDecimal" minOccurs="0"/>
+												<xsd:element name="FeeSchedule" type="mdt:feeScheduleNonNegativeSmallRawDecimalType" maxOccurs="unbounded"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="Date" type="xsd:date" use="required"/>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Max12B1Fee" type="mdt:smallDecimal" minOccurs="0"/>
+						<xsd:element name="FundPortfolioCode" type="mdt:varchar6" minOccurs="0"/>
+						<xsd:element name="SPLegalStructure" type="mdt:varchar25" minOccurs="0"/>
+						<xsd:element name="GIFSCode" type="mdt:char10" minOccurs="0"/>
+						<xsd:element name="EUMainSectorCode" type="mdt:char10" minOccurs="0"/>
+						<xsd:element name="SpecialistSectorCode" type="mdt:char10" minOccurs="0"/>
+						<xsd:element name="StyleSectorCode" type="mdt:varchar4" minOccurs="0"/>
+						<xsd:element name="DetailedCode" type="mdt:char3" minOccurs="0"/>
+						<xsd:element name="RestructureDate" type="xsd:date" minOccurs="0"/>
+						<xsd:element name="PrimaryFundList" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="PrimaryFundForClass" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="SPId" type="mdt:varchar7" minOccurs="0"/>
+												<xsd:element name="Id" type="mdt:char10" minOccurs="0"/>
+												<xsd:element name="PerformanceId" type="mdt:char10" minOccurs="0"/>
+											</xsd:sequence>
+											<xsd:attribute name="_ClassCode" type="mdt:char2" use="required"/>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="IMAPrimaryShareClass" type="mdt:char10" minOccurs="0"/>
+						<xsd:element name="InvestmentAreaCode" type="mdt:char10" minOccurs="0"/>
+						<xsd:element name="FundSizeHistory" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="FundSize" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="Date" type="xsd:date"/>
+												<xsd:element name="Value" type="xsd:positiveInteger"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="_CurrencyId" type="mdt:char10"/>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="SPCreditRating" type="mdt:char3" minOccurs="0"/>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

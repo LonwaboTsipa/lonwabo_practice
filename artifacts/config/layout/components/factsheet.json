@@ -1,0 +1,823 @@
+{
+    "code": "factsheet",
+    "name": "Factsheet",
+    "description": "Component to control Factsheet layout",
+    "schema": {
+        "type": "object",
+        "properties": {
+            "elementProperties": {
+                "type": "object",
+                "properties": {
+                    "label": {
+                        "type": "string"
+                    },
+                    "key": {
+                        "title": "Component Key",
+                        "type": "string"
+                    },
+                    "visible": {
+                        "title": "Visible",
+                        "type": "boolean"
+                    },
+                    "disclaimers": {
+                        "title": "Disclaimers",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "disclaimerType": {
+                                    "title": "Disclaimer Type",
+                                    "type": "array",
+                                    "items": {
+                                        "isDisclaimerType": true,
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "elements": {
+                "title": "Layout Elements",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "elementProperties": {
+                            "type": "object",
+                            "properties": {
+                                "label": {
+                                    "type": "string"
+                                },
+                                "key": {
+                                    "title": "Component Key",
+                                    "type": "string"
+                                },
+                                "visible": {
+                                    "title": "Visible",
+                                    "type": "boolean"
+                                },
+                                "disclaimers": {
+                                    "title": "Disclaimers",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "disclaimerType": {
+                                                "title": "Disclaimer Type",
+                                                "type": "array",
+                                                "items": {
+                                                    "isDisclaimerType": true,
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "elements": {
+                            "title": "Layout Elements",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "elementProperties": {
+                                        "type": "object",
+                                        "properties": {
+                                            "label": {
+                                                "type": "string"
+                                            },
+                                            "key": {
+                                                "title": "Component Key",
+                                                "type": "string"
+                                            },
+                                            "visible": {
+                                                "title": "Visible",
+                                                "type": "boolean"
+                                            },
+                                            "disclaimers": {
+                                                "title": "Disclaimers",
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "disclaimerType": {
+                                                            "title": "Disclaimer Type",
+                                                            "type": "array",
+                                                            "items": {
+                                                                "isDisclaimerType": true,
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "elements": {
+                                        "title": "Layout Elements",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "elementProperties": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "label": {
+                                                            "type": "string"
+                                                        },
+                                                        "key": {
+                                                            "title": "Component Key",
+                                                            "type": "string"
+                                                        },
+                                                        "visible": {
+                                                            "title": "Visible",
+                                                            "type": "boolean"
+                                                        },
+                                                        "disclaimers": {
+                                                            "title": "Disclaimers",
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "disclaimerType": {
+                                                                        "title": "Disclaimer Type",
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "isDisclaimerType": true,
+                                                                            "type": "string"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "elements": {
+                                                    "title": "Layout Elements",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "elementProperties": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "label": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "key": {
+                                                                        "title": "Component Key",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "visible": {
+                                                                        "title": "Visible",
+                                                                        "type": "boolean"
+                                                                    },
+                                                                    "disclaimers": {
+                                                                        "title": "Disclaimers",
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "disclaimerType": {
+                                                                                    "title": "Disclaimer Type",
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "isDisclaimerType": true,
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "elements": {
+                                                                "title": "Layout Elements",
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "elementProperties": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "label": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "key": {
+                                                                                    "title": "Component Key",
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "visible": {
+                                                                                    "title": "Visible",
+                                                                                    "type": "boolean"
+                                                                                },
+                                                                                "disclaimers": {
+                                                                                    "title": "Disclaimers",
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "disclaimerType": {
+                                                                                                "title": "Disclaimer Type",
+                                                                                                "type": "array",
+                                                                                                "items": {
+                                                                                                    "isDisclaimerType": true,
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "elements": {
+                                                                            "title": "Layout Elements",
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "elementProperties": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "label": {
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "key": {
+                                                                                                "title": "Component Key",
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "visible": {
+                                                                                                "title": "Visible",
+                                                                                                "type": "boolean"
+                                                                                            },
+                                                                                            "disclaimers": {
+                                                                                                "title": "Disclaimers",
+                                                                                                "type": "array",
+                                                                                                "items": {
+                                                                                                    "type": "object",
+                                                                                                    "properties": {
+                                                                                                        "disclaimerType": {
+                                                                                                            "title": "Disclaimer Type",
+                                                                                                            "type": "array",
+                                                                                                            "items": {
+                                                                                                                "isDisclaimerType": true,
+                                                                                                                "type": "string"
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    },
+                                                                                    "elements": {
+                                                                                        "title": "Layout Elements",
+                                                                                        "type": "array",
+                                                                                        "items": {
+                                                                                            "type": "object",
+                                                                                            "properties": {
+                                                                                                "elementProperties": {
+                                                                                                    "type": "object",
+                                                                                                    "properties": {
+                                                                                                        "label": {
+                                                                                                            "type": "string"
+                                                                                                        },
+                                                                                                        "key": {
+                                                                                                            "title": "Component Key",
+                                                                                                            "type": "string"
+                                                                                                        },
+                                                                                                        "visible": {
+                                                                                                            "title": "Visible",
+                                                                                                            "type": "boolean"
+                                                                                                        },
+                                                                                                        "disclaimers": {
+                                                                                                            "title": "Disclaimers",
+                                                                                                            "type": "array",
+                                                                                                            "items": {
+                                                                                                                "type": "object",
+                                                                                                                "properties": {
+                                                                                                                    "disclaimerType": {
+                                                                                                                        "title": "Disclaimer Type",
+                                                                                                                        "type": "array",
+                                                                                                                        "items": {
+                                                                                                                            "isDisclaimerType": true,
+                                                                                                                            "type": "string"
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "elements": {
+                                                                                                    "title": "Layout Elements",
+                                                                                                    "type": "array",
+                                                                                                    "items": {
+                                                                                                        "type": "object",
+                                                                                                        "properties": {
+                                                                                                            "elementProperties": {
+                                                                                                                "type": "object",
+                                                                                                                "properties": {
+                                                                                                                    "label": {
+                                                                                                                        "type": "string"
+                                                                                                                    },
+                                                                                                                    "key": {
+                                                                                                                        "title": "Component Key",
+                                                                                                                        "type": "string"
+                                                                                                                    },
+                                                                                                                    "visible": {
+                                                                                                                        "title": "Visible",
+                                                                                                                        "type": "boolean"
+                                                                                                                    },
+                                                                                                                    "disclaimers": {
+                                                                                                                        "title": "Disclaimers",
+                                                                                                                        "type": "array",
+                                                                                                                        "items": {
+                                                                                                                            "type": "object",
+                                                                                                                            "properties": {
+                                                                                                                                "disclaimerType": {
+                                                                                                                                    "title": "Disclaimer Type",
+                                                                                                                                    "type": "array",
+                                                                                                                                    "items": {
+                                                                                                                                        "isDisclaimerType": true,
+                                                                                                                                        "type": "string"
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "elements": {
+                                                                                                                "title": "Layout Elements",
+                                                                                                                "type": "array",
+                                                                                                                "items": {
+                                                                                                                    "type": "object",
+                                                                                                                    "properties": {
+                                                                                                                        "elementProperties": {
+                                                                                                                            "type": "object",
+                                                                                                                            "properties": {
+                                                                                                                                "label": {
+                                                                                                                                    "type": "string"
+                                                                                                                                },
+                                                                                                                                "key": {
+                                                                                                                                    "title": "Component Key",
+                                                                                                                                    "type": "string"
+                                                                                                                                },
+                                                                                                                                "visible": {
+                                                                                                                                    "title": "Visible",
+                                                                                                                                    "type": "boolean"
+                                                                                                                                },
+                                                                                                                                "disclaimers": {
+                                                                                                                                    "title": "Disclaimers",
+                                                                                                                                    "type": "array",
+                                                                                                                                    "items": {
+                                                                                                                                        "type": "object",
+                                                                                                                                        "properties": {
+                                                                                                                                            "disclaimerType": {
+                                                                                                                                                "title": "Disclaimer Type",
+                                                                                                                                                "type": "array",
+                                                                                                                                                "items": {
+                                                                                                                                                    "isDisclaimerType": true,
+                                                                                                                                                    "type": "string"
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        },
+                                                                                                                        "elements": {
+                                                                                                                            "title": "Layout Elements",
+                                                                                                                            "type": "array",
+                                                                                                                            "items": {
+                                                                                                                                "type": "object",
+                                                                                                                                "properties": {
+                                                                                                                                    "elementProperties": {
+                                                                                                                                        "type": "object",
+                                                                                                                                        "properties": {
+                                                                                                                                            "label": {
+                                                                                                                                                "type": "string"
+                                                                                                                                            },
+                                                                                                                                            "key": {
+                                                                                                                                                "title": "Component Key",
+                                                                                                                                                "type": "string"
+                                                                                                                                            },
+                                                                                                                                            "visible": {
+                                                                                                                                                "title": "Visible",
+                                                                                                                                                "type": "boolean"
+                                                                                                                                            },
+                                                                                                                                            "disclaimers": {
+                                                                                                                                                "title": "Disclaimers",
+                                                                                                                                                "type": "array",
+                                                                                                                                                "items": {
+                                                                                                                                                    "type": "object",
+                                                                                                                                                    "properties": {
+                                                                                                                                                        "disclaimerType": {
+                                                                                                                                                            "title": "Disclaimer Type",
+                                                                                                                                                            "type": "array",
+                                                                                                                                                            "items": {
+                                                                                                                                                                "isDisclaimerType": true,
+                                                                                                                                                                "type": "string"
+                                                                                                                                                            }
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    },
+                                                                                                                                    "elements": {
+                                                                                                                                        "title": "Layout Elements",
+                                                                                                                                        "type": "array"
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "formDefinition": [
+            {
+                "key": "factsheet.elementProperties",
+                "type": "fieldset-header",
+                "items": [
+                    {
+                        "key": "factsheet.elementProperties.label",
+                        "type": "fieldset-label"
+                    },
+                    {
+                        "key": "factsheet.elementProperties.disclaimers",
+                        "type": "array-popover",
+                        "description": "Edit disclaimers",
+                        "add": null,
+                        "items": [
+                            {
+                                "key": "factsheet.elementProperties.disclaimers[].disclaimerType",
+                                "type": "multi-select",
+                                "hintText": "Add disclaimer types"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "factsheet.elementProperties.visible"
+                    }
+                ]
+            },
+            {
+                "key": "factsheet.elements",
+                "startEmpty": true,
+                "items": [
+                    {
+                        "key": "factsheet.elements[].elementProperties",
+                        "type": "fieldset-header",
+                        "items": [
+                            {
+                                "key": "factsheet.elements[].elementProperties.label",
+                                "type": "fieldset-label"
+                            },
+                            {
+                                "key": "factsheet.elements[].elementProperties.disclaimers",
+                                "type": "array-popover",
+                                "description": "Edit disclaimers",
+                                "add": null,
+                                "items": [
+                                    {
+                                        "key": "factsheet.elements[].elementProperties.disclaimers[].disclaimerType",
+                                        "type": "multi-select",
+                                        "hintText": "Add disclaimer types"
+                                    }
+                                ]
+                            },
+                            {
+                                "key": "factsheet.elements[].elementProperties.visible"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "factsheet.elements[].elements",
+                        "startEmpty": true,
+                        "items": [
+                            {
+                                "key": "factsheet.elements[].elements[].elementProperties",
+                                "type": "fieldset-header",
+                                "items": [
+                                    {
+                                        "key": "factsheet.elements[].elements[].elementProperties.label",
+                                        "type": "fieldset-label"
+                                    },
+                                    {
+                                        "key": "factsheet.elements[].elements[].elementProperties.disclaimers",
+                                        "type": "array-popover",
+                                        "description": "Edit disclaimers",
+                                        "add": null,
+                                        "items": [
+                                            {
+                                                "key": "factsheet.elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                "type": "multi-select",
+                                                "hintText": "Add disclaimer types"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key": "factsheet.elements[].elements[].elementProperties.visible"
+                                    }
+                                ]
+                            },
+                            {
+                                "key": "factsheet.elements[].elements[].elements",
+                                "startEmpty": true,
+                                "items": [
+                                    {
+                                        "key": "factsheet.elements[].elements[].elements[].elementProperties",
+                                        "type": "fieldset-header",
+                                        "items": [
+                                            {
+                                                "key": "factsheet.elements[].elements[].elements[].elementProperties.label",
+                                                "type": "fieldset-label"
+                                            },
+                                            {
+                                                "key": "factsheet.elements[].elements[].elements[].elementProperties.disclaimers",
+                                                "type": "array-popover",
+                                                "description": "Edit disclaimers",
+                                                "add": null,
+                                                "items": [
+                                                    {
+                                                        "key": "factsheet.elements[].elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                        "type": "multi-select",
+                                                        "hintText": "Add disclaimer types"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "key": "factsheet.elements[].elements[].elements[].elementProperties.visible"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "key": "factsheet.elements[].elements[].elements[].elements",
+                                        "startEmpty": true,
+                                        "items": [
+                                            {
+                                                "key": "factsheet.elements[].elements[].elements[].elements[].elementProperties",
+                                                "type": "fieldset-header",
+                                                "items": [
+                                                    {
+                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elementProperties.label",
+                                                        "type": "fieldset-label"
+                                                    },
+                                                    {
+                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elementProperties.disclaimers",
+                                                        "type": "array-popover",
+                                                        "description": "Edit disclaimers",
+                                                        "add": null,
+                                                        "items": [
+                                                            {
+                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                                "type": "multi-select",
+                                                                "hintText": "Add disclaimer types"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elementProperties.visible"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements",
+                                                "startEmpty": true,
+                                                "items": [
+                                                    {
+                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elementProperties",
+                                                        "type": "fieldset-header",
+                                                        "items": [
+                                                            {
+                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elementProperties.label",
+                                                                "type": "fieldset-label"
+                                                            },
+                                                            {
+                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers",
+                                                                "type": "array-popover",
+                                                                "description": "Edit disclaimers",
+                                                                "add": null,
+                                                                "items": [
+                                                                    {
+                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                                        "type": "multi-select",
+                                                                        "hintText": "Add disclaimer types"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elementProperties.visible"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements",
+                                                        "startEmpty": true,
+                                                        "items": [
+                                                            {
+                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elementProperties",
+                                                                "type": "fieldset-header",
+                                                                "items": [
+                                                                    {
+                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.label",
+                                                                        "type": "fieldset-label"
+                                                                    },
+                                                                    {
+                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers",
+                                                                        "type": "array-popover",
+                                                                        "description": "Edit disclaimers",
+                                                                        "add": null,
+                                                                        "items": [
+                                                                            {
+                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                                                "type": "multi-select",
+                                                                                "hintText": "Add disclaimer types"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.visible"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements",
+                                                                "startEmpty": true,
+                                                                "items": [
+                                                                    {
+                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties",
+                                                                        "type": "fieldset-header",
+                                                                        "items": [
+                                                                            {
+                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.label",
+                                                                                "type": "fieldset-label"
+                                                                            },
+                                                                            {
+                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers",
+                                                                                "type": "array-popover",
+                                                                                "description": "Edit disclaimers",
+                                                                                "add": null,
+                                                                                "items": [
+                                                                                    {
+                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                                                        "type": "multi-select",
+                                                                                        "hintText": "Add disclaimer types"
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.visible"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements",
+                                                                        "startEmpty": true,
+                                                                        "items": [
+                                                                            {
+                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties",
+                                                                                "type": "fieldset-header",
+                                                                                "items": [
+                                                                                    {
+                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.label",
+                                                                                        "type": "fieldset-label"
+                                                                                    },
+                                                                                    {
+                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers",
+                                                                                        "type": "array-popover",
+                                                                                        "description": "Edit disclaimers",
+                                                                                        "add": null,
+                                                                                        "items": [
+                                                                                            {
+                                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                                                                "type": "multi-select",
+                                                                                                "hintText": "Add disclaimer types"
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.visible"
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements",
+                                                                                "startEmpty": true,
+                                                                                "items": [
+                                                                                    {
+                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties",
+                                                                                        "type": "fieldset-header",
+                                                                                        "items": [
+                                                                                            {
+                                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.label",
+                                                                                                "type": "fieldset-label"
+                                                                                            },
+                                                                                            {
+                                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers",
+                                                                                                "type": "array-popover",
+                                                                                                "description": "Edit disclaimers",
+                                                                                                "add": null,
+                                                                                                "items": [
+                                                                                                    {
+                                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                                                                        "type": "multi-select",
+                                                                                                        "hintText": "Add disclaimer types"
+                                                                                                    }
+                                                                                                ]
+                                                                                            },
+                                                                                            {
+                                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.visible"
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements",
+                                                                                        "startEmpty": true,
+                                                                                        "items": [
+                                                                                            {
+                                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties",
+                                                                                                "type": "fieldset-header",
+                                                                                                "items": [
+                                                                                                    {
+                                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.label",
+                                                                                                        "type": "fieldset-label"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers",
+                                                                                                        "type": "array-popover",
+                                                                                                        "description": "Edit disclaimers",
+                                                                                                        "add": null,
+                                                                                                        "items": [
+                                                                                                            {
+                                                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.disclaimers[].disclaimerType",
+                                                                                                                "type": "multi-select",
+                                                                                                                "hintText": "Add disclaimer types"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elementProperties.visible"
+                                                                                                    }
+                                                                                                ]
+                                                                                            },
+                                                                                            {
+                                                                                                "key": "factsheet.elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements[].elements",
+                                                                                                "startEmpty": true,
+                                                                                                "items": []
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "applicableTo": [
+        "FUNDTOOL"
+    ]
+}

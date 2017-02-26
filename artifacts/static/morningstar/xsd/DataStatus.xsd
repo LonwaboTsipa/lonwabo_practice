@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.54">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    International Feature schema for Morningstar XML data structure
+    Copyright 2005 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="DataStatus">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CollectionStatus">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="DataReadiness" type="xsd:unsignedByte" minOccurs="0"/>
+							<xsd:element name="MarketPriceReadiness" type="mdt:DataReadyType" minOccurs="0"/>
+							<xsd:element name="NAVPriceReadiness" type="mdt:DataReadyType" minOccurs="0"/>
+							<xsd:element name="BidOfferPriceReadiness" type="mdt:DataReadyType" minOccurs="0"/>
+							<xsd:element name="DividendReadiness" type="mdt:DataReadyType" minOccurs="0"/>
+							<xsd:element name="TaxCreditReadiness" type="mdt:DataReadyType" minOccurs="0"/>
+							<xsd:element name="CapitalGainReadiness" type="mdt:DataReadyType" minOccurs="0"/>
+							<xsd:element name="TNAReadiness" type="mdt:DataReadyType" minOccurs="0"/>
+							<xsd:element name="EUSDReadiness" type="mdt:DataReadyType" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="DataAvailability" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:choice minOccurs="0" maxOccurs="unbounded">
+								<xsd:element name="PricingAvailability" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="DelayedPricing" type="xsd:unsignedByte" minOccurs="0"/>
+											<xsd:element name="PricingFrequency" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:tokenVarchar100IdChar2Type">
+															<xsd:attribute name="StartDate" type="xsd:date"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="SkippedPricing" minOccurs="0">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="Date" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:simpleContent>
+																	<xsd:extension base="xsd:date">
+																		<xsd:attribute name="EndDate" type="xsd:date"/>
+																		<xsd:attribute name="NonBizDateType" type="xsd:unsignedByte"/>
+																	</xsd:extension>
+																</xsd:simpleContent>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="DistributionAvailability" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="DeclaresDailyDividend" type="xsd:boolean" minOccurs="0"/>
+											<xsd:element name="DividendDistributionFrequency" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:tokenVarchar100IdChar2Type">
+															<xsd:attribute name="StartDate" type="xsd:date"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="CapitalGainDistributionFrequency" type="mdt:tokenVarchar100IdChar2Type" minOccurs="0"/>
+											<xsd:element name="EstimatedDividendDistribution" minOccurs="0">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="EstimatedDividendDistributionDetail" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:sequence>
+																	<xsd:element name="ExcludingDate" type="xsd:date"/>
+																	<xsd:element name="Dividend" type="mdt:positiveSmallRawDecimal" minOccurs="0"/>
+																</xsd:sequence>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="EstimatedCapitalGainDistribution" minOccurs="0">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="EstimatedCapitalGainDistributionDetail" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:sequence>
+																	<xsd:element name="ExcludingDate" type="xsd:date"/>
+																	<xsd:element name="LongTermCapitalGain" type="mdt:positiveSmallRawDecimal" minOccurs="0"/>
+																	<xsd:element name="ShortTermCapitalGain" type="mdt:positiveSmallRawDecimal" minOccurs="0"/>
+																</xsd:sequence>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="SkippedDividend" minOccurs="0">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="Date" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:simpleContent>
+																	<xsd:extension base="xsd:date">
+																		<xsd:attribute name="EndDate" type="xsd:date"/>
+																		<xsd:attribute name="NonBizDateType" type="xsd:unsignedByte"/>
+																	</xsd:extension>
+																</xsd:simpleContent>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+											<xsd:element name="MissingDividend" minOccurs="0">
+												<xsd:complexType>
+													<xsd:sequence>
+														<xsd:element name="Date" maxOccurs="unbounded">
+															<xsd:complexType>
+																<xsd:simpleContent>
+																	<xsd:extension base="xsd:date">
+																		<xsd:attribute name="EndDate" type="xsd:date"/>
+																	</xsd:extension>
+																</xsd:simpleContent>
+															</xsd:complexType>
+														</xsd:element>
+													</xsd:sequence>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="TNAAvailability" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="DelayedTNA" type="xsd:unsignedByte" minOccurs="0"/>
+											<xsd:element name="TNAFrequency" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:tokenVarchar100IdChar2Type">
+															<xsd:attribute name="StartDate" type="xsd:date"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="DailyYieldAvailability" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="DelayedDailyYield" type="xsd:unsignedByte" minOccurs="0"/>
+											<xsd:element name="DailyYieldFrequency" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:tokenVarchar100IdChar2Type">
+															<xsd:attribute name="StartDate" type="xsd:date"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="ReportedReturnAvailability" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="DelayedReportedReturn" type="xsd:unsignedByte" minOccurs="0"/>
+											<xsd:element name="ReportedReturnFrequency" minOccurs="0">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:tokenVarchar100IdChar2Type">
+															<xsd:attribute name="StartDate" type="xsd:date" use="required" />
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+								<xsd:element name="MonthlyYieldAvailability" minOccurs="0">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="DelayedMonthlyYield" type="xsd:unsignedByte" minOccurs="0"/>
+											<xsd:element name="MonthlyYieldFrequency" minOccurs="0" maxOccurs="unbounded">
+												<xsd:complexType>
+													<xsd:simpleContent>
+														<xsd:extension base="mdt:tokenVarchar100IdChar2Type">
+															<xsd:attribute name="StartDate" type="xsd:date"/>
+														</xsd:extension>
+													</xsd:simpleContent>
+												</xsd:complexType>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:choice>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CalculationRule" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="IncludeInPeerGroup" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="MarketHolidayPattern" type="mdt:char10" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

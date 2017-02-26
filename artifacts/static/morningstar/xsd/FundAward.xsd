@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.54a">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:annotation>
+  <xsd:documentation xml:lang="en">
+    Company schema for Morningstar XML data structure
+    Copyright 2008 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+ <xsd:element name="FundAward">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="AwardDetail" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="AwardName" type="mdt:varchar75"/>
+       <xsd:element name="Region" type="mdt:varchar40"/>
+       <xsd:element name="Winner" type="mdt:varchar75"/>
+       <xsd:element name="Manager" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="_Id" type="mdt:char10" maxOccurs="10"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:choice minOccurs="0">
+        <xsd:element name="FundShareClass">
+         <xsd:complexType>
+          <xsd:sequence>
+           <xsd:element name="_Id" type="mdt:char10" maxOccurs="10"/>
+          </xsd:sequence>
+         </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Fund">
+         <xsd:complexType>
+          <xsd:sequence>
+           <xsd:element name="_Id" type="mdt:char10" maxOccurs="5"/>
+          </xsd:sequence>
+         </xsd:complexType>
+        </xsd:element>
+       </xsd:choice>
+       <xsd:element name="Company" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="_Id" type="mdt:char10" maxOccurs="5"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="Year" type="xsd:unsignedShort" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

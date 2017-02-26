@@ -12,7 +12,7 @@ describe('src/processors/shareClassProcessor.ts', () => {
         
     });
     describe("processShareClasses", () => { 
-        pit("will return dataLoadingArray with classes", async () => {
+        it("will return dataLoadingArray with classes", async () => {
             let response = await processShareClasses(manifest);   
             expect(response).toBeDefined();
             expect(response.classes).toBeDefined();

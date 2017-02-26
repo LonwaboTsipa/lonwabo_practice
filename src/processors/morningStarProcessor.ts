@@ -10,12 +10,24 @@ let timeseriesMapping = require("../../artifacts/config/mapping/timeseries");
 export async function processMorningStar(funds: IFundOrShareClass[], manifest: {}): Promise<dataLoadingArray> {
 	let response = new dataLoadingArray();
 	let morningStarManifest = await ingestAllMorningstar(funds);
-
+	if (!response.timeseries) {
+		response.timeseries = [];
+	}
+	if (!response.statistics) {
+		response.statistics = [];
+	}
 	// Prepare dataToProcess for Timeseries here
 	let dataToProcess = safe(() => morningStarManifest['morningstarDailyPrices'].orchestratedData, []);	
 		// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {
-		response.timeseries = processValueCollection('morning_star_daily_prices', dataToProcess, timeseriesProperties, timeseriesMapping, false, "DAILY");
+		response.timeseries.push(...processValueCollection('morning_star_daily_prices', dataToProcess, timeseriesProperties, timeseriesMapping, false, "DAILY"));
+	}
+
+	// Prepare dataToProcess for Timeseries here
+	dataToProcess = safe(() => morningStarManifest['morningstarHistoricalPerformance'].orchestratedData, []);	
+		// Add processing logic here
+	if (!isNullOrEmpty(dataToProcess)) {		
+		//response.timeseries.push(...processValueCollection('morning_star_historic_prices', dataToProcess, timeseriesProperties, timeseriesMapping, false, "DAILY"));
 	}
 	
 	// morningstarInternalDetails processing, this is to allow for the internal details about the share classes
@@ -25,7 +37,28 @@ export async function processMorningStar(funds: IFundOrShareClass[], manifest: {
 	
 	// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {		
-		response.statistics = processValueCollection('morning_star_internal_details', dataToProcess, statisticsProperties, statisticsMapping);		
+		response.statistics.push(...processValueCollection('morning_star_internal_details', dataToProcess, statisticsProperties, statisticsMapping));		
+	}
+
+	dataToProcess = safe(() => morningStarManifest['morningstarFundBasics'].orchestratedData, []);
+	
+	// Add processing logic here
+	if (!isNullOrEmpty(dataToProcess)) {		
+		//response.statistics.push(...processValueCollection('morning_star_fund_basics', dataToProcess, statisticsProperties, statisticsMapping));		
+	}
+
+	dataToProcess = safe(() => morningStarManifest['morningstarTrailingPerformance'].orchestratedData, []);
+	
+	// Add processing logic here
+	if (!isNullOrEmpty(dataToProcess)) {		
+		response.statistics.push(...processValueCollection('morning_star_trailing_perf', dataToProcess, statisticsProperties, statisticsMapping));		
+	}
+
+	dataToProcess = safe(() => morningStarManifest['morningstarRiskAndRating'].orchestratedData, []);
+	
+	// Add processing logic here
+	if (!isNullOrEmpty(dataToProcess)) {		
+		//response.statistics.push(...processValueCollection('morning_star_risk_and_ratings', dataToProcess, statisticsProperties, statisticsMapping));		
 	}
 
 	return response;

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by Alexander (Home) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.00">
+	<!-- this is been created by OD-->
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:include schemaLocation="DataStatus.xsd"/>
+	<xsd:include schemaLocation="PerformanceBasics.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Currency schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="PerformanceId">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Result" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:choice>
+								<xsd:sequence>
+									<xsd:element name="CurrencyId" type="mdt:char3" minOccurs="0"/>
+									<xsd:element name="IsBaseCurrency" type="xsd:boolean" minOccurs="0"/>
+									<xsd:element name="PerformanceId" type="mdt:char10" minOccurs="0"/>
+									<xsd:element name="PerformanceReturnSourceId" type="mdt:char1" minOccurs="0"/>
+									<xsd:element ref="mdt:PerformanceBasics" minOccurs="0"/>
+									<xsd:element ref="mdt:DataStatus" minOccurs="0"/>
+                  <xsd:element name="LatestQuotedYield" minOccurs="0">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element ref="mdt:EndDate"/>
+                        <xsd:element ref="mdt:Value"/>
+                      </xsd:sequence>
+                      <xsd:attribute name="_Id" type="mdt:char10"/>
+                    </xsd:complexType>
+                  </xsd:element>
+								</xsd:sequence>
+							</xsd:choice>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

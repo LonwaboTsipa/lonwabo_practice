@@ -456,7 +456,7 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 						if(!isNullOrUndefined(extendedValue)) {
 							valueObj[mappingProperty.code] = extendedValue;
 						}
-					}
+					}					
 				}
 			}
 		}

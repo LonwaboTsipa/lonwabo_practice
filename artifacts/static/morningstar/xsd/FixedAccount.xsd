@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.50">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:include schemaLocation="Company.xsd"/>
+
+ <xsd:annotation>
+   <xsd:documentation xml:lang="en">
+    Fixed Account schema for Morningstar XML data structure
+    Copyright 2005 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+
+ <xsd:element name="FixedAccount">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="Name" type="mdt:varchar75"/>
+    <xsd:element name="FixedAccountType" type="mdt:tokenIdNonNegativeIntegerType"/>
+    <xsd:element name="AdvisorCompany" minOccurs="0">
+     <xsd:complexType>
+      <xsd:choice minOccurs="1">
+       <xsd:element ref="mdt:Company"/>
+       <xsd:element name="_DataLink" type="mdt:linkVarchar10Type"/>
+      </xsd:choice>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="GuaranteedPeriodList" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="TimePeriod" type="mdt:unitInteger" maxOccurs="10"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="DollarCostAveragingPeriodList" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="TimePeriod" type="mdt:unitInteger" maxOccurs="3"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="InterestAdjusted" type="xsd:boolean" minOccurs="0"/>
+   </xsd:sequence>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

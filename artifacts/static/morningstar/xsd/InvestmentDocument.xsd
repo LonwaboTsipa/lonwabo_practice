@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.54a">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+ <xsd:annotation>
+  <xsd:documentation xml:lang="en">
+    Investment Document schema for Morningstar XML data structure
+    Copyright 2007 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+ <xsd:element name="InvestmentDocument">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="ReportingInformation">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="ReportingFrequency" maxOccurs="8">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="DocumentType" type="xsd:positiveInteger"/>
+          <xsd:element name="Frequency" type="mdt:tokenIdChar2Type"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:choice maxOccurs="unbounded">
+     <xsd:element name="FilingDocument">
+      <xsd:complexType>
+       <xsd:sequence>
+        <xsd:element name="FilingDate" type="xsd:date"/>
+        <xsd:element name="EffectiveDate" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="URL" type="mdt:varchar75" minOccurs="0">
+         <xsd:annotation>
+          <xsd:documentation>External URL, outside of Morningstar.</xsd:documentation>
+         </xsd:annotation>
+        </xsd:element>
+       </xsd:sequence>
+       <xsd:attribute name="_Id" type="xsd:positiveInteger" use="required"/>
+       <xsd:attribute name="_SourceId" type="mdt:varchar10" use="required"/>
+       <xsd:attribute name="_ExternalId" type="mdt:varchar10"/>
+       <xsd:attribute name="Type" type="xsd:unsignedByte" use="required">
+        <xsd:annotation>
+         <xsd:documentation>0: Other
+1: Prospectus
+2: Supplement
+3: SAI
+4: AnnualReport
+5: SemiAnnualReport
+6: ProspectusPreliminary
+7: BusinessCombination
+8: ProspectusRevise</xsd:documentation>
+        </xsd:annotation>
+       </xsd:attribute>
+       <xsd:attribute name="_RegionId" type="mdt:char10" use="required"/>
+      </xsd:complexType>
+     </xsd:element>
+     <xsd:element name="_DataLink" type="mdt:linkIntegerType"/>
+    </xsd:choice>
+   </xsd:sequence>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

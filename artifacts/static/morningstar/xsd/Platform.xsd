@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.00">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+
+ <xsd:annotation>
+   <xsd:documentation xml:lang="en">
+    International Feature schema for Morningstar XML data structure
+    Copyright 2008 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+ <xsd:element name="Platform">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="PlatformBasics">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="Name" type="mdt:varchar40"/>
+       <xsd:element name="ShortName" type="mdt:varchar32" minOccurs="0"/>
+       <xsd:element name="Currency" type="mdt:tokenIdChar10Type" minOccurs="0"/>
+       <xsd:element name="Type" type="xsd:unsignedByte" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="MinimumInvestment" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element ref="mdt:Date"/>
+       <xsd:element name="InitialInvestment" type="mdt:unitInteger" minOccurs="0"/>
+       <xsd:element name="SubsequentInvestment" type="mdt:unitInteger" minOccurs="0"/>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+   <xsd:attribute name="_CompanyId" type="mdt:varchar10" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

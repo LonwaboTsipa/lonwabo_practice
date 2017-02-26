@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.58">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+
+ <xsd:annotation>
+  <xsd:documentation xml:lang="en">
+    Performance schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+ <xsd:element name="ExchangeRate">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="SpotRate" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="SpotRatePair" maxOccurs="unbounded">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="SpotRateDetail" maxOccurs="unbounded">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="BidPrice" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+             <xsd:element name="AskPrice" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+             <xsd:element name="ClosePrice" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="TransactionDate" type="xsd:date" use="required"/>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+         <xsd:attribute name="TermCurrency" type="mdt:varchar10" use="required"/>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ForwardRate" minOccurs="0">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element name="ForwardRatePair" maxOccurs="unbounded">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="ForwardRateDetail" maxOccurs="unbounded">
+           <xsd:complexType>
+            <xsd:sequence>
+             <xsd:element name="ForwardRateDetail" maxOccurs="unbounded">
+              <xsd:complexType>
+               <xsd:sequence>
+                <xsd:element name="BidPrice" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+                <xsd:element name="AskPrice" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+                <xsd:element name="ClosePrice" type="mdt:nonNegativeBigRawDecimal" minOccurs="0"/>
+               </xsd:sequence>
+               <xsd:attribute name="TimeToExpiry" type="mdt:char2" use="required"/>
+              </xsd:complexType>
+             </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="TransactionDate" type="xsd:date" use="required"/>
+           </xsd:complexType>
+          </xsd:element>
+         </xsd:sequence>
+         <xsd:attribute name="TermCurrency" type="mdt:varchar10" use="required"/>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+   <xsd:attribute name="_CurrencyId" type="mdt:char10" use="required"/>
+  </xsd:complexType>
+ </xsd:element>
+
+</xsd:schema>

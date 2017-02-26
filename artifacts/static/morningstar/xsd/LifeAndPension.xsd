@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.54a">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:include schemaLocation="SubAccount.xsd"/>
+	<xsd:include schemaLocation="Policy.xsd"/>
+	<xsd:include schemaLocation="FundShareClass.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+   Fund share class schema for Morningstar XML data structure
+   Copyright 2003 Morningstar, Inc. All rights reserved.
+  </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="LP">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="mdt:SubAccount" />
+				<xsd:element ref="mdt:Policy" />
+				<xsd:element ref="mdt:FundShareClass" />				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

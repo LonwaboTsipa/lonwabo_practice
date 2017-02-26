@@ -1,0 +1,84 @@
+{
+    "code": "{{CODE}}",
+    "name": "{{NAME}}",
+    "description": "{{DESCRIPTION}}",
+    "schema": {
+        "type": "object",
+        "properties": {
+            "elementProperties": {
+                "type": "object",                
+                "properties": {
+                    "label": {
+                        "type": "string"
+                    },
+                    "key": {
+                        "title": "Component Key",
+                        "type": "string"
+                    },
+                    "visible": {
+                        "title": "Visible",
+                        "type": "boolean"
+                    },
+                    "disclaimers": {
+                        "title": "Disclaimers",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "disclaimerType": {
+                                    "title": "Disclaimer Type",
+                                    "type": "array",
+                                    "items": {
+                                        "isDisclaimerType": true,
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "elements": {
+                "title": "Layout Elements",
+                "type": "array",
+                "items": {
+                    "type": "object"
+                }
+            }
+        },
+        "formDefinition": [
+            {
+                "key": "{{CODE}}{{PREFIX}}.elementProperties",
+                "type": "fieldset-header",
+                "items": [
+                    {
+                        "key": "{{CODE}}{{PREFIX}}.elementProperties.label",
+                        "type": "fieldset-label"
+                    },
+                    {
+                        "key": "{{CODE}}{{PREFIX}}.elementProperties.disclaimers",
+                        "type": "array-popover",
+                        "description": "Edit disclaimers",
+                        "add": null,
+                        "items": [
+                            {
+                                "key": "{{CODE}}{{PREFIX}}.elementProperties.disclaimers[].disclaimerType",
+                                "type": "multi-select",
+                                "hintText": "Add disclaimer types"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "{{CODE}}{{PREFIX}}.elementProperties.visible"
+                    }
+                ]
+            },
+            {
+                "key": "{{CODE}}{{PREFIX}}.elements",
+                "startEmpty": true,
+                "items": []
+            }
+        ]
+    },
+    "applicableTo": ["FUNDTOOL"]
+}

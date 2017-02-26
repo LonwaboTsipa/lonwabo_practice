@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.50">
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Annual report schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="AnnualReport">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Date" type="xsd:date"/>
+				<xsd:element name="FeeAndExpense" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="NetIncomeRatio" minOccurs="0">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="mdt:smallDecimal">
+											<xsd:attribute name="Unannualized" type="xsd:boolean"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="GrossExpenseRatio" minOccurs="0">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="mdt:smallRawDecimal">
+											<xsd:attribute name="Unannualized" type="xsd:boolean"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="NetExpenseRatio" minOccurs="0">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="mdt:smallRawDecimal">
+											<xsd:attribute name="Unannualized" type="xsd:boolean"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="OngoingCharge" type="mdt:smallRawDecimal" minOccurs="0" />
+							<xsd:element name="AverageNetAssets" minOccurs="0">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="xsd:integer">
+											<xsd:attribute name="NumberOfMonthCovered" type="mdt:bigRawDecimal" use="required"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="GrossExpenseRatioOnManagedAssets" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+							<xsd:element name="NetExpenseRatioOnManagedAssets" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+							<xsd:element name="AverageManagedAssets" minOccurs="0">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="xsd:integer">
+											<xsd:attribute name="NumberOfMonthCovered" type="xsd:positiveInteger" use="required"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="GrossIncome" type="xsd:integer" minOccurs="0"/>
+							<xsd:element name="IndirectCostRatio" minOccurs="0">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="mdt:nonNegativeSmallRawDecimal">
+											<xsd:attribute name="IncludePerformanceFee" type="xsd:boolean" use="required"/>
+											<xsd:attribute name="Estimated" type="xsd:boolean" use="required"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="ManagementExpenseRatio" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+							<xsd:element name="PerformanceFee" type="mdt:smallRawDecimal" minOccurs="0"/>
+							<xsd:element name="DeferLoad" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+							<xsd:element name="AdministrationFeePercentage" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+							<xsd:element name="AssetManagementFeePercentage" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+							<xsd:element name="AOP" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+							<xsd:element name="IsOGC" type="mdt:char1" minOccurs="0"/>
+							<xsd:element name="ExpenseComponent" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="AccountingFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="AdministratorFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="AdvisorFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="AuditorFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="BoardOfDirectorsFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="CustodianFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="TrusteeFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="DistributionFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="LegalFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="OrganizationFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="ProfessionalFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="RegistrationFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="ShareholderReportingFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="SubAdvisorFee" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="TotalValue" type="xsd:integer" minOccurs="0"/>
+													<xsd:element name="CompanyFeeDetail" minOccurs="0" maxOccurs="unbounded">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="ContractualValue" type="mdt:nonNegativeSmallDecimal" minOccurs="0"/>
+																<xsd:element name="ActualValue" type="xsd:integer" minOccurs="0"/>
+																<xsd:element name="FeeSchedule" type="mdt:feeScheduleNonNegativeIntegerType" minOccurs="0" maxOccurs="unbounded"/>
+															</xsd:sequence>
+															<xsd:attribute name="_CompanyId" type="mdt:varchar10" use="required"/>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="TransferAgencyFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="OtherFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="InsuranceFee" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="Interest" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="Dividend" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="Tax" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="ExpenseWaiver" type="xsd:integer" minOccurs="0"/>
+										<xsd:element name="ListingFee" type="xsd:integer" minOccurs="0"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="TradingExpenseRatio" type="mdt:smallRawDecimal" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Financials" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="UnrealizedCapitalGain" type="mdt:bigRawDecimal" minOccurs="0"/>
+							<xsd:element name="RealizedCapitalGain" type="mdt:bigRawDecimal" minOccurs="0"/>
+							<xsd:element name="NetAssets" type="xsd:integer" minOccurs="0"/>
+							<xsd:element name="TurnoverRatio" minOccurs="0">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="mdt:smallDecimal">
+											<xsd:attribute name="Date" type="xsd:date" use="required"/>
+											<xsd:attribute name="Unannualized" type="xsd:boolean"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="RestructuringExpense" type="xsd:integer" minOccurs="0"/>
+							<xsd:element name="PerformanceFeeAmount" type="xsd:integer" minOccurs="0"/>
+							<xsd:element name="TotalDistributionToPreferredShareholder" type="xsd:integer" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="_Id" type="mdt:char10" use="required"/>
+			<xsd:attribute name="_ExternalId" type="mdt:varchar15"/>
+			<xsd:attribute name="_Type" type="xsd:unsignedByte"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

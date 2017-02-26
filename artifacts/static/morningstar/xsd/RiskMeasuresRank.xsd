@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+            targetNamespace="MorningstarData"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:mdt="MorningstarData"
+            elementFormDefault="qualified"
+            version = "1.58">
+ <xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+
+ <xsd:annotation>
+  <xsd:documentation xml:lang="en">
+    Performance schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+ </xsd:annotation>
+ <xsd:element name="RiskMeasuresRank">
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="RiskMeasuresRankDetail" maxOccurs="unbounded">
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element ref="mdt:EndDate"/>
+       <xsd:element name="ArithmeticMean" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+        <xsd:element name="AverageGain" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="AverageDrawdown" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+       <xsd:element name="StandardDeviation" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="Skewness" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="Kurtosis" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="MaximumDrawdown" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="SharpeRatio" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="SortinoRatio" minOccurs="0">
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="PeerGroupRank" type="mdt:peerGroupRankType" minOccurs="0"/>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="Type" type="xsd:unsignedInt" use="required"/>
+      <xsd:attribute name="TimePeriod" type="mdt:varchar4" use="required"/>
+      <xsd:attribute name="_TaxRegionId" type="mdt:varchar10" use="optional"/>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

@@ -1,0 +1,12 @@
+[
+	{
+		"type": "page_layout",
+		"tags": [
+			{ "key": "fund_key", "selector": "properties.fund_key.value", "order": 1 },
+			{ "key": "isin", "selector": "shareClass.clientCode", "order": 2 }
+		],
+		"componentCodes": [
+			"factsheet"
+		]
+	}
+]

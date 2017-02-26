@@ -492,7 +492,7 @@ describe("processor", () => {
 			"WEEKLY": ["7", "w", "week", "weekly", "wkly"],
 			"MONTHLY": ["30", "m", "month", "monthly", "mnthly"],
 			"QUARTERLY": ["90", "q", "quarter", "quarterly", "qrtrly"],
-			"YEARLY": ["365", "y", "year", "yearly", "yrly"]
+			"ANNUALLY": ["365", "y", "year", "yearly", "yrly"]
 		};
 		for (let key of Object.keys(possibleValues)) {
 			for (let value of possibleValues[key]) {

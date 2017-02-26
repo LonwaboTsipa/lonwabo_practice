@@ -15,7 +15,8 @@
 		"details": true
 	},
 	"endPoints": {
-		"search": "http://localhost:12004/searchEntity"
+		"search": "http://localhost:12004/searchEntity",
+		"retrieveLayoutConfiguration": "http://localhost:12009/retrieveLayoutConfiguration"
 	},
 	"externalApi": {
 		"morningstar": {

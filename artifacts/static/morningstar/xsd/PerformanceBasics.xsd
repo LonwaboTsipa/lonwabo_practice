@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by Alexander (Home) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mdt="MorningstarData" targetNamespace="MorningstarData" elementFormDefault="qualified" version="1.58">
+	<!-- this is been created by OD-->
+	<xsd:include schemaLocation="_MorningstarDataType.xsd"/>
+	<xsd:include schemaLocation="InternationalFeature.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+    Performance schema for Morningstar XML data structure
+    Copyright 2003 Morningstar, Inc. All rights reserved.
+   </xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="PerformanceBasics">
+		<xsd:complexType>
+			<xsd:choice minOccurs="0">
+				<xsd:sequence>
+					<xsd:element name="ISIN" type="mdt:char12" minOccurs="0"/>
+					<xsd:element name="ExchangeId" type="mdt:char10" minOccurs="0"/>
+					<xsd:element name="InceptionDate" type="xsd:date" minOccurs="0"/>
+					<xsd:element name="PenceTraded" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="InheritanceEndDate" type="xsd:date" minOccurs="0"/>					
+					<xsd:element name="CurrencyChangeHistory" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="CurrencyChangeDetail" maxOccurs="unbounded">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="EndDate" type="xsd:date"/>
+											<xsd:element name="CurrencyId" type="mdt:char3"/>
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="DividendExclusionHistory" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="StatusChangeTrack" maxOccurs="unbounded">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="StartDate" type="xsd:date"/>
+										</xsd:sequence>
+										<xsd:attribute name="Status" type="mdt:char1" use="required"/>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="PricingConversionFactor" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="EndDate" type="xsd:date"/>
+								<xsd:element name="Value" type="mdt:positiveSmallRawDecimal"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element ref="mdt:InternationalFeature" minOccurs="0"/>
+					<xsd:element name="SEDOL" type="mdt:char7" minOccurs="0"/>					
+					<xsd:element name="TradingSymbol" type="mdt:varchar10" minOccurs="0"/>					
+				</xsd:sequence>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

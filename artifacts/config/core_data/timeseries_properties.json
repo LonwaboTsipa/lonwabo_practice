@@ -21,5 +21,31 @@
 			}
         ],
         "cardinality": "1"
+    },
+    {
+        "code": "morning_star_historic_prices",
+        "entityType": "CLSS",
+        "label": "Morning Star Historic Prices",
+        "description": "Morning Star Historic Prices",
+        "group": "core",		
+        "extended": [
+            {
+				"label": "store_date",
+				"dataType": "DATE"
+			},
+            {
+				"label": "change",
+				"dataType": "DCML"
+			},
+            {
+				"label": "price_type",
+				"dataType": "STRG"
+			},            
+            {
+				"label": "period",
+				"dataType": "STRG"
+			}
+        ],
+        "cardinality": "1"
     }	
 ]
