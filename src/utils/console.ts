@@ -1,3 +1,5 @@
+import { isNullOrUndefined, isNullOrEmpty } from "@kurtosys/ksys_utils";
+import * as changeCase from "change-case";
 export const FONT_COLORS = {
 	"default": '39',
 	"black": '30',
@@ -60,4 +62,45 @@ export function styleConsoleText(text, ...styles) {
 	response += text;
 	response += '\u001b[0m';
 	return response;
+}
+
+export function askQuestion(readlineInterface, question: string, defaultValue: string = null, options: any[] = null): Promise<string> {
+    return new Promise((resolve, reject) => {
+        let questionText = `${styleConsoleText('Question:', FONT_COLORS.lightGray)} ${styleConsoleText(question, FONT_COLORS.lightGreen)}`;
+        if (options) {
+			questionText += ` ${styleConsoleText(`[${options.join(', ')}]`, FONT_COLORS.darkGray)}`;
+		}
+		if (defaultValue) {
+            questionText += ` ${styleConsoleText(`(${defaultValue})`, FONT_COLORS.white)}`;
+        }
+        questionText += ' \n\r';
+        readlineInterface.question(questionText, (answer) => {
+            if (defaultValue && isNullOrEmpty(answer)) {
+                resolve(defaultValue);
+            }
+            else {
+                resolve(answer);
+            }
+        });
+    });
+}
+
+export function evaluateBooleanString(value: string) {
+    if (isNullOrUndefined(value)) {
+        return false;
+    }
+    let trueStrings = ['t', 'true', 'y', 'yes', '1', 'correct'];
+    return trueStrings.indexOf(value.toLowerCase()) > -1;
+}
+
+export function getCasesForComponentName(componentName) {
+    return {
+        original: componentName,
+        snake: changeCase.snake(componentName), // component_name
+        camel: changeCase.camel(componentName), // componentName
+        constant: changeCase.constant(componentName), // COMPONENT_NAME
+        param: changeCase.paramCase(componentName), // component-name
+        pascal: changeCase.pascalCase(componentName), // ComponentName
+        title: changeCase.titleCase(componentName) // Component Name
+    };
 }

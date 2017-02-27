@@ -14,8 +14,9 @@ export function getProcessOptions(): IProcessOptions {
 	let response: IProcessOptions = {
 		forceMorningstarUpdate: false
 	};
+	console.log('process.argv', process.argv);
 	for (let processOption of validProcessOptions) {
-		for (let arg of process.argv.filter(a => a.indexOf(`${processOption.key}=`))) {
+		for (let arg of process.argv.filter(a => a.startsWith(`${processOption.key}=`))) {
 
 			let argSplit = arg.split('=');
 			if (argSplit.length > 1) {

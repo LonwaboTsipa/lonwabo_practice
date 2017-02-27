@@ -27,24 +27,16 @@ export async function processMorningStar(funds: IFundOrShareClass[], manifest: {
 	dataToProcess = safe(() => morningStarManifest['morningstarHistoricalPerformance'].orchestratedData, []);	
 		// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {		
-		//response.timeseries.push(...processValueCollection('morning_star_historic_prices', dataToProcess, timeseriesProperties, timeseriesMapping, false, "DAILY"));
+		response.timeseries.push(...processValueCollection('morning_star_historic_prices', dataToProcess, timeseriesProperties, timeseriesMapping, false, "DAILY"));
 	}
 	
-	// morningstarInternalDetails processing, this is to allow for the internal details about the share classes
-	// to be loaded once and not every time. In other loaders this might be added directly to the propertiesPub
-	// but this can cause a problem with the internal details are run without being able to access morningStar
-	dataToProcess = safe(() => morningStarManifest['morningstarInternalDetails'].orchestratedData, []);
 	
-	// Add processing logic here
-	if (!isNullOrEmpty(dataToProcess)) {		
-		response.statistics.push(...processValueCollection('morning_star_internal_details', dataToProcess, statisticsProperties, statisticsMapping));		
-	}
 
 	dataToProcess = safe(() => morningStarManifest['morningstarFundBasics'].orchestratedData, []);
 	
 	// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {		
-		//response.statistics.push(...processValueCollection('morning_star_fund_basics', dataToProcess, statisticsProperties, statisticsMapping));		
+		response.statistics.push(...processValueCollection('morning_star_fund_basics', dataToProcess, statisticsProperties, statisticsMapping));		
 	}
 
 	dataToProcess = safe(() => morningStarManifest['morningstarTrailingPerformance'].orchestratedData, []);
@@ -58,7 +50,17 @@ export async function processMorningStar(funds: IFundOrShareClass[], manifest: {
 	
 	// Add processing logic here
 	if (!isNullOrEmpty(dataToProcess)) {		
-		//response.statistics.push(...processValueCollection('morning_star_risk_and_ratings', dataToProcess, statisticsProperties, statisticsMapping));		
+		response.statistics.push(...processValueCollection('morning_star_risk_and_ratings', dataToProcess, statisticsProperties, statisticsMapping));		
+	}
+
+	// morningstarInternalDetails processing, this is to allow for the internal details about the share classes
+	// to be loaded once and not every time. In other loaders this might be added directly to the propertiesPub
+	// but this can cause a problem with the internal details are run without being able to access morningStar
+	dataToProcess = safe(() => morningStarManifest['morningstarInternalDetails'].orchestratedData, []);
+	
+	// Add processing logic here
+	if (!isNullOrEmpty(dataToProcess)) {		
+		response.statistics.push(...processValueCollection('morning_star_internal_details', dataToProcess, statisticsProperties, statisticsMapping));		
 	}
 
 	return response;

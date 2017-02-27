@@ -173,8 +173,7 @@ export async function processLayoutConfigurations(funds: IFundOrShareClass[], ma
 				for (let shareClass of shareClasses) {
 					let properties = shareClass.properties_pub || shareClass.propertiesPub;
 					if (properties) {
-						let options = { shareClass, properties };
-						console.log('options', options);
+						let options = { shareClass, properties };						
 						addLayoutConfigurationsForCurrentAndParents(layoutConfigurationType, options, predefinedLayoutTemplates, layoutsByTypeKey, layoutConfigurationTypeTemplate);
 					}
 				}

@@ -1,6 +1,6 @@
 import { IPropertyDescriptor, DataType, IPropertyPub, IFund, IShareClass, EntityType } from "@kurtosys/udm_data_toolkit";
 import { IMapping } from "../models";
-import { safe, firstOrDefault, isNullOrUndefined, getValueFromStringNotation } from "../utils";
+import { safe, firstOrDefault, isNullOrUndefined, isNullOrWhitespace, getValueFromStringNotation } from "../utils";
 import { CLIENT_CODE_KEY, ISIN_KEY } from "../constants";
 import * as crypto from 'crypto';
 import * as moment from "moment";
@@ -50,8 +50,8 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 
 	switch (property.dataType) {
 		case "STRG":
-			if (value) {
-				value = value.toString();
+			if (!isNullOrUndefined(value)) {
+				value = value.toString().trim();
 			}
 			break;
 		case "DCML":
@@ -227,10 +227,12 @@ export function processCommentaryCollection(collectionType: string, rows, proper
 		let fundData = hash[linkedEntity];
 		if (!fundData[commentaryType]) {
 			fundData[commentaryType] = {
-				commentaryType,
-				linkedEntity,
+				commentaryType,				
 				"commentaries": <ICommentaryInstance[]>[]
 			};
+			if (!isNullOrWhitespace(linkedEntity)) {
+				fundData[commentaryType].linkedEntity = linkedEntity;
+			}
 		}
 		let commentaryObj = fundData[commentaryType];
 		let commentaryInstance = <ICommentaryInstance>{
@@ -286,10 +288,12 @@ export function processDisclaimerCollection(collectionType: string, rows, proper
 		let fundData = hash[linkedEntity];
 		if (!fundData[disclaimerType]) {
 			fundData[disclaimerType] = {
-				disclaimerType,
-				linkedEntity,
+				disclaimerType,				
 				"disclaimers": <IDisclaimerInstance[]>[]
 			};
+			if (!isNullOrWhitespace(linkedEntity)) {
+				fundData[disclaimerType].linkedEntity = linkedEntity;
+			}
 		}
 		let disclaimerObj = fundData[disclaimerType];
 		let disclaimerInstance = <IDisclaimerInstance>{

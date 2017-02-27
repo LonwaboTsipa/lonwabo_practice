@@ -1,6 +1,10 @@
 [
 	{
-		"commentaryType": "Fund Overview",
-		"description": "Fund Overview"
+		"commentaryType": "investment_objective",
+		"description": "Investment Objective"
+	},
+	{
+		"commentaryType": "manager_comment",
+		"description": "Manager Comment"
 	}
 ]

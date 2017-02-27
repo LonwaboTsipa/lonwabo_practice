@@ -5,18 +5,18 @@
   "main": "dist/index.js",
   "typings": "dist/src/index.d.ts",
   "bin": {
-    "create-layout-components": "./bin/src/generator/create-layout-components.js",
-    "create-layout-configuration-template": "./bin/src/generator/create-layout-configuration-template.js",
-    "test-layout-component": "./bin/src/generator/test-layout-component.js"
+    "create-layout-components": "./bin/generator/create-layout-components.js",
+    "create-layout-configuration-template": "./bin/generator/create-layout-configuration-template.js",
+    "generate-properties": "./bin/generator/generate-properties.js"
   },
   "scripts": {
-    "clean": "npm run clean:build && npm run clean:bin && rimraf dist/",
-    "clean:build": "rimraf build/",
+    "clean": "npm run clean:bin && npm run clean:dist",    
     "clean:bin": "rimraf bin/",
+    "clean:dist": "rimraf dist/",
     "clean:logs": "rimraf artifacts/errors/* && rimraf artifacts/output/*",
     "prepublish": "npm run clean && npm run build",
     "build:dev": "npm run clean && tsc",
-    "build": "npm run clean:logs && npm run clean && tsc",
+    "build": "npm run clean:logs && npm run clean:dist && tsc && npm run build:bin",
     "build:bin": "npm run clean:bin && tsc --p tsconfig.bin.json",    
     "build:watch": "tsc -w",
     "test": "jest --no-cache --config spec/jest-config.json",

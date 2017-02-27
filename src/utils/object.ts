@@ -37,6 +37,9 @@ export function getValueFromStringNotation(stringNotation: string | null | undef
 	if (isNullOrUndefined(value)) {
 		value = defaultValue;
 	}
+	else {
+		value = value.toString().trim();
+	}
 
     return value;       
 }
