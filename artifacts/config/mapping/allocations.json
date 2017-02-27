@@ -1,37 +1,37 @@
 [
-	{
-		"type": "allocation_1",
-		"mappings": [
-			{
-				"code": "client_code",
-				"dataType": "STRG",
-				"sourceField": "Fund Code"
-			},
-			{
-				"code": "date",
-				"dataType": "DATE",
-				"sourceField": "Date"
-			},
-			{
-				"code": "type",
-				"dataType": "STRG",
-				"sourceField": "Type"
-			},
-			{
-				"code": "label",
-				"dataType": "STRG",
-				"sourceField": "Label"
-			},
-			{
-				"code": "value",
-				"dataType": "DCML",
-				"sourceField": "Value"
-			},
-			{
-				"code": "sector",
-				"dataType": "STRG",
-				"sourceField": "Sector"
-			}
-		]
-	}
+    {
+        "type": "allocation_1",
+        "mappings": [
+            {
+                "code": "client_code",
+                "dataType": "STRG",
+                "sourceField": "Fund Code"
+            },
+            {
+                "code": "date",
+                "dataType": "DATE",
+                "sourceField": "Date"
+            },
+            {
+                "code": "type",
+                "dataType": "STRG",
+                "sourceField": "Type"
+            },
+            {
+                "code": "label",
+                "dataType": "STRG",
+                "sourceField": "Label"
+            },
+            {
+                "code": "value",
+                "dataType": "DCML",
+                "sourceField": "Value"
+            },
+            {
+                "code": "sector",
+                "dataType": "STRG",
+                "sourceField": "Sector"
+            }
+        ]
+    }
 ]

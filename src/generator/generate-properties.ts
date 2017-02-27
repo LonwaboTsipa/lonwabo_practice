@@ -28,7 +28,7 @@ interface IOptions {
     typeName?: string;
     properties?: IPropertyDescriptor[];
     currentColumnName: string;
-    rootProperty?: IPropertyDescriptor;
+    rootProperty?: IPropertyDescriptor & { sourceField?: string; cardinality?: "1" | "N" };
     mapping?: IMapping
 }
 
@@ -55,8 +55,15 @@ async function getOptions(): Promise<IOptions> {
         options.typeName = await askQuestion(rli, `What is the type name which will be used in the mapping and code?`) as string;
         let typeNameCases = getCasesForComponentName(options.typeName);
         options.typeName = typeNameCases.snake;
+
+        options.rootProperty = {
+            code: "",
+            entityType: "CLSS",
+            cardinality: "1",
+            group: "core"
+        }
+        options.rootProperty.entityType = options.entityType;
         options.rootProperty.code = options.typeName;
-        options.rootProperty.dataType = await askQuestion(rli, `What is the dataType?`, 'STRG') as DataType;
         options.rootProperty.label = await askQuestion(rli, `What is the label?`, typeNameCases.title) as string;
         options.rootProperty.description = await askQuestion(rli, `What is the description?`, typeNameCases.title) as string;
         options.rootProperty.extended = [];
@@ -207,8 +214,21 @@ async function generateProperties() {
     let existinDataElement = existing[options.type];
     if (existinDataElement) {
         let { properties, propertiesFileName, mappings, mappingsFileName } = existinDataElement;
-        if (properties && options.properties) {
-            for (let newProperty of options.properties) {
+        if (properties) {
+            if (options.properties) {
+                for (let newProperty of options.properties) {
+                    for (let i = 0; i < properties.length; i++) {
+                        let oldProperty = properties[i];
+                        if (oldProperty.code === newProperty.code && oldProperty.entityType === newProperty.entityType) {
+                            properties.splice(i, 1);
+                            i--;
+                        }
+                    }
+                    properties.push(newProperty);
+                }
+            }
+            if (options.rootProperty) {
+                let newProperty = options.rootProperty;
                 for (let i = 0; i < properties.length; i++) {
                     let oldProperty = properties[i];
                     if (oldProperty.code === newProperty.code && oldProperty.entityType === newProperty.entityType) {

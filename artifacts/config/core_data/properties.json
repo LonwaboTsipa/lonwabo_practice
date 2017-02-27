@@ -1,5 +1,5 @@
 [
-	{
+    {
         "code": "client_code",
         "entityType": "FUND",
         "dataType": "STRG",
@@ -8,7 +8,7 @@
         "description": "clientCode",
         "label": "Client Code",
         "cardinality": "1",
-		"sourceField": "Fund Code"
+        "sourceField": "Fund Code"
     },
     {
         "code": "name",
@@ -19,9 +19,9 @@
         "description": "Fund name",
         "label": "Name",
         "cardinality": "1",
-		"sourceField": "Name"
+        "sourceField": "Name"
     },
-	{
+    {
         "code": "external_id",
         "entityType": "FUND",
         "dataType": "STRG",
@@ -51,7 +51,7 @@
         "description": "The share class' ISIN",
         "label": "Isin",
         "cardinality": "1",
-		"sourceField": "Isin"
+        "sourceField": "Isin"
     },
     {
         "code": "fund_key",
@@ -62,9 +62,9 @@
         "description": "Fund Key",
         "label": "Fund",
         "cardinality": "1",
-		"sourceField": "Fund"
+        "sourceField": "Fund"
     },
-	{
+    {
         "code": "name",
         "entityType": "CLSS",
         "dataType": "STRG",
