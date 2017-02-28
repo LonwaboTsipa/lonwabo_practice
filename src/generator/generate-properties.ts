@@ -4,6 +4,7 @@ import * as path from "path";
 import { EntityType, IPropertyDescriptor, DataType } from "@kurtosys/udm_data_toolkit";
 declare type PropertyType = "entity" | "statistic" | "allocation" | "timeseries";
 import { askQuestion, getCasesForComponentName, styleConsoleText, FONT_COLORS } from "../utils";
+import * as changeCase from "change-case";
 const readline = require("readline");
 
 const rli = readline.createInterface({
@@ -129,36 +130,45 @@ async function getOptions(): Promise<IOptions> {
 
 
         if (options.type === "entity") {
-            let property: IPropertyDescriptor & { sourceField?: string; cardinality?: "1" | "N" } = {
-                code: "",
-                entityType: options.entityType,
-                validationRule: "NONE",
-                cardinality: "1",
-                group: "core"
-            };
-            property.sourceField = await askQuestion(rli, `${propertyPrefix}: What is the sourceField?`) as string;
-            let cases = getCasesForComponentName(property.sourceField);
-            property.code = await askQuestion(rli, `${propertyPrefix}: What is the code?`, cases.snake) as string;
-            property.dataType = await askQuestion(rli, `${propertyPrefix}: What is the dataType?`, 'STRG') as DataType;
-            property.label = await askQuestion(rli, `${propertyPrefix}: What is the label?`, cases.title) as string;
-            property.description = await askQuestion(rli, `${propertyPrefix}: What is the description?`, cases.title) as string;
-            options.properties.push(property);
+            let sourceField = await askQuestion(rli, `${propertyPrefix}: What is the sourceField? (Comma separate for multiple)`) as string;
+
+            for (let currentSourceField of sourceField.split(',')) {
+                let property: IPropertyDescriptor & { sourceField?: string; cardinality?: "1" | "N" } = {
+                    code: "",
+                    entityType: options.entityType,
+                    validationRule: "NONE",
+                    cardinality: "1",
+                    group: "core"
+                };
+                currentSourceField = currentSourceField.trim();
+                property.sourceField = currentSourceField;
+                let cases = getCasesForComponentName(currentSourceField);
+                property.code = await askQuestion(rli, `${currentSourceField}: What is the code?`, cases.snake) as string;
+                property.dataType = await askQuestion(rli, `${currentSourceField}: What is the dataType?`, 'STRG') as DataType;
+                property.label = await askQuestion(rli, `${currentSourceField}: What is the label?`, cases.title) as string;
+                property.description = await askQuestion(rli, `${currentSourceField}: What is the description?`, cases.title) as string;
+                options.properties.push(property);
+            }
         }
         else {
-            let mappingItem: IMappingItem = {
-                "code": "",
-                "dataType": "STRG",
-                "sourceField": ""
-            };
-            mappingItem.sourceField = await askQuestion(rli, `${propertyPrefix}: What is the sourceField?`) as string;
-            let cases = getCasesForComponentName(mappingItem.sourceField);
-            mappingItem.code = await askQuestion(rli, `${propertyPrefix}: What is the code?`, cases.snake) as string;
-            mappingItem.dataType = await askQuestion(rli, `${propertyPrefix}: What is the dataType?`, 'STRG') as DataType;
-            options.mapping.mappings.push(mappingItem);
-            options.rootProperty.extended.push({
-                label: mappingItem.code,
-                dataType: mappingItem.dataType
-            });
+            let sourceField = await askQuestion(rli, `${propertyPrefix}: What is the sourceField? (Comma separate for multiple)`) as string;
+            for (let currentSourceField of sourceField.split(',')) {
+                let mappingItem: IMappingItem = {
+                    "code": "",
+                    "dataType": "STRG",
+                    "sourceField": ""
+                };
+                currentSourceField = currentSourceField.trim();
+                mappingItem.sourceField = currentSourceField;
+                let cases = getCasesForComponentName(currentSourceField);
+                mappingItem.code = await askQuestion(rli, `${currentSourceField}: What is the code?`, cases.snake) as string;
+                mappingItem.dataType = await askQuestion(rli, `${currentSourceField}: What is the dataType?`, 'STRG') as DataType;
+                options.mapping.mappings.push(mappingItem);
+                options.rootProperty.extended.push({
+                    label: mappingItem.code,
+                    dataType: mappingItem.dataType
+                });
+            }
         }
 
 
@@ -211,6 +221,7 @@ const coreDataPath = path.join(configPath, 'core_data');
 
 async function generateProperties() {
     let options = await getOptions();
+    console.log('got options');
     let existinDataElement = existing[options.type];
     if (existinDataElement) {
         let { properties, propertiesFileName, mappings, mappingsFileName } = existinDataElement;
@@ -257,8 +268,76 @@ async function generateProperties() {
             let filePath = path.join(mappingPath, fileName);
             fs.writeFileSync(filePath, JSON.stringify(mappings, null, 4), 'utf8');
         }
+        generateInterfaces(options, properties, mappings);
     }
     process.exit(0);
+}
+
+function getInterfaceType(dataType: DataType) {
+    let response = "string";
+    switch (dataType) {
+        case "BOOL":
+            response = "boolean";
+            break;
+        case "ITGR":
+        case "DCML":
+            response = "number";
+            break;
+        case "DATE":
+        case "DTIM":
+        case "STRG":
+        default:
+            response = "string";
+            break;
+    }
+    return response;
+}
+
+function generateInterfaces(options: IOptions, properties: IPropertyDescriptor[], mappings: IMapping[]) {
+    let tab = '    ';
+
+    if (options.type === "entity") {
+        let interfaceProperties: {[property: string]: string } = {};
+        properties.map(property => {
+            let interfaceType = getInterfaceType(property.dataType);
+            interfaceProperties[property.code] = `${tab}${property.code}: ${interfaceType};`;            
+        });
+        createInterfaceFile(interfaceProperties, options.type);
+    }
+    else {
+        mappings.map(mapping => {
+            let interfaceProperties: {[property: string]: string } = {};
+            mapping.mappings.map(map => {
+                let interfaceType = getInterfaceType(map.dataType);
+                interfaceProperties[map.code] = `${tab}${map.code}: ${interfaceType};`;
+            });
+            createInterfaceFile(interfaceProperties, mapping.type);
+        });
+    }
+
+}
+
+function createInterfaceFile(interfaceProperties: {[property: string]: string }, baseName: string) {
+    const interfacePath = path.resolve(process.cwd(), 'artifacts/tool_interfaces');
+    if (!fs.existsSync(interfacePath)) {
+        console.log('interfacePath', interfacePath);
+        interfacePath
+            .split('/')
+            .reduce((accPath, folder) => {
+                accPath = path.join(accPath, folder);
+                if (!fs.existsSync(accPath)) {
+                    fs.mkdirSync(accPath);
+                }
+                return accPath;
+            }, '~/');
+    }
+    let interfaceName = `I${changeCase.pascal(baseName)}`;
+    let uniqueInterfaceProperties = Object.keys(interfaceProperties).reduce((acc, key) => { acc.push(interfaceProperties[key]); return acc}, []);
+    let fileContent = `export interface ${interfaceName} {
+${uniqueInterfaceProperties.join('\n')}
+}`;
+    let filePath = path.join(interfacePath, `${interfaceName}.ts`);
+    fs.writeFileSync(filePath, fileContent, 'utf8');
 }
 
 generateProperties();
