@@ -9,6 +9,10 @@
             {
                 "label": "sector",
                 "dataType": "STRG"
+            },
+            {
+                "label": "type",
+                "dataType": "STRG"
             }
         ],
         "cardinality": "1"

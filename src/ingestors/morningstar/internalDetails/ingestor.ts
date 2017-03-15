@@ -35,7 +35,7 @@ export async function ingestMorningStarInternalDetails(funds: IFundOrShareClass[
 							// This checks if the last updated date is not equal to the last time we ran the loader
 							// All of the other MorningStar™ ingestors will use the values in this manifestItems orchestratedData to 
 							// continue their own ingestion. If there is no change nothing will be requested for the other ingestors.							
-							const targetedTypes = [1,4];
+							const targetedTypes = [1,2,4];
 							let targetContent = 0;
 							if (processOptions.forceMorningstarUpdate || isNullOrWhitespace(identifier.last_updated_nt) || (isNullOrWhitespace(dataObj.last_updated_nt))) {								
 								targetContent = targetedTypes.reduce((acc, type) => acc += type, 0);

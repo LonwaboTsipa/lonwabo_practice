@@ -27,6 +27,16 @@
         "description": "morningstarFundBasics"        
     },
     {
+        "key": "morningstarShareClassBasics",
+        "isFileForLoad": false,
+        "description": "morningstarShareClassBasics"        
+    },
+     {
+        "key": "morningstarPortfolioStatistics",
+        "isFileForLoad": false,
+        "description": "morningstarPortfolioStatistics"        
+    },
+    {
         "key": "morningstarHistoricalPerformance",
         "isFileForLoad": false,
         "description": "morningstarHistoricalPerformance"        

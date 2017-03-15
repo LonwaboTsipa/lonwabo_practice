@@ -104,7 +104,7 @@ function processLayoutComponents() {
 	if (!response["layoutComponents"]) {
 		response["layoutComponents"] = [];
 	}
-	let componentFiles = listFiles(path.join(rootDir, 'config/layout/components'), "");	
+	let componentFiles = listFiles(path.join(rootDir, 'config/layout/components'), "");
 	if (componentFiles && componentFiles.length > 0) {
 		let componentFilesWithContent = loadFiles(componentFiles);
 		componentFilesWithContent.map(componentFileWithContent => {
@@ -119,7 +119,7 @@ function processLayoutComponents() {
 				response["layoutComponents"].push(fileJson);
 			}
 		});
-	}	
+	}
 	return response;
 }
 let colorIndex = 0;
@@ -133,7 +133,7 @@ function randomLog(text) {
 }
 
 export async function processLayoutConfigurations(funds: IFundOrShareClass[], manifest: IOrchestratedManifest, token: string): Promise<dataLoadingArray> {
-	
+
 	let response = new dataLoadingArray();
 	if (!response.layouts) {
 		response.layouts = [];
@@ -141,10 +141,10 @@ export async function processLayoutConfigurations(funds: IFundOrShareClass[], ma
 
 
 	// Add processing logic here
-	if (funds && funds.length > 0) {		
+	if (funds && funds.length > 0) {
 		let shareClasses = funds.filter(fund => fund.type === 'CLSS');
-		if (shareClasses && shareClasses.length > 0) {			
-			for (let layoutConfigurationType of layoutConfigurationTypes) {				
+		if (shareClasses && shareClasses.length > 0) {
+			for (let layoutConfigurationType of layoutConfigurationTypes) {
 				let predefinedLayoutTemplates: ILayoutFileMapping | null = getPredefinedLayoutTemplates(layoutConfigurationType);
 				let layoutConfigurationTypeTemplate = getLayoutConfigurationTypeTemplate(layoutConfigurationType);
 				let allLayoutConfigurations = await fetchAllLayoutConfigurations(token, layoutConfigurationType.type);
@@ -153,27 +153,28 @@ export async function processLayoutConfigurations(funds: IFundOrShareClass[], ma
 				// This migrates them from one environment to the next by saving them, then you need to remove 
 				// the ones in the environment you want to update.
 				// LEAVE COMMENTED OUT UNLESS YOU ARE SURE YOU KNOW HOW TO USE THIS
-				saveLayoutConfigurationsToFiles(layoutConfigurationType, allLayoutConfigurations);
+				//saveLayoutConfigurationsToFiles(layoutConfigurationType, allLayoutConfigurations);
 
-
-				let layoutsByTypeKey = allLayoutConfigurations.reduce((acc, layoutConfiguration) => {
-					layoutConfiguration.existingLayoutConfigurationId = layoutConfiguration.layoutConfigurationId;
-					layoutConfiguration.layoutConfigurationType = layoutConfigurationType.type;
-					delete layoutConfiguration.layoutConfigurationId;
-					delete layoutConfiguration.code;
-					if (!layoutConfiguration.clientCodes || !Array.isArray(layoutConfiguration.clientCodes)) {
-						delete layoutConfiguration.clientCodes;
-					}
-					let key = getKeyFromTagObject(layoutConfigurationType, layoutConfiguration.tags);
-					acc[key] = layoutConfiguration;
-					return acc;
-				}, {});
-
+				let layoutsByTypeKey = {};
+				if (allLayoutConfigurations && Array.isArray(allLayoutConfigurations)) {
+					layoutsByTypeKey = allLayoutConfigurations.reduce((acc, layoutConfiguration) => {
+						layoutConfiguration.existingLayoutConfigurationId = layoutConfiguration.layoutConfigurationId;
+						layoutConfiguration.layoutConfigurationType = layoutConfigurationType.type;
+						delete layoutConfiguration.layoutConfigurationId;
+						delete layoutConfiguration.code;
+						if (!layoutConfiguration.clientCodes || !Array.isArray(layoutConfiguration.clientCodes)) {
+							delete layoutConfiguration.clientCodes;
+						}
+						let key = getKeyFromTagObject(layoutConfigurationType, layoutConfiguration.tags);
+						acc[key] = layoutConfiguration;
+						return acc;
+					}, {});
+				}
 
 				for (let shareClass of shareClasses) {
 					let properties = shareClass.properties_pub || shareClass.propertiesPub;
 					if (properties) {
-						let options = { shareClass, properties };						
+						let options = { shareClass, properties };
 						addLayoutConfigurationsForCurrentAndParents(layoutConfigurationType, options, predefinedLayoutTemplates, layoutsByTypeKey, layoutConfigurationTypeTemplate);
 					}
 				}
@@ -188,7 +189,7 @@ export async function processLayoutConfigurations(funds: IFundOrShareClass[], ma
 				}
 			}
 		}
-	}	
+	}
 	return response;
 }
 
@@ -224,14 +225,16 @@ export function addLayoutConfigurationForKey(layoutConfigurationType: ILayoutCon
 
 export function saveLayoutConfigurationsToFiles(layoutConfigurationType: ILayoutConfigurationType, allLayoutConfigurations: ITemplateResponse[]) {
 	let basePath = getLayoutConfigurationPath(layoutConfigurationType);
-	for (let layoutConfiguration of allLayoutConfigurations) {
-		let { tags, configuration } = layoutConfiguration;
-		if (tags) {
-			let fileName = getKeyFromTagObject(layoutConfigurationType, tags);			
-			let fullPath = path.resolve(basePath, fileName + ".json");
-			let content = JSON.stringify(configuration);
-			console.log('Saving file: ' + fileName);
-			fs.writeFileSync(fullPath, content, "utf8");
+	if (allLayoutConfigurations && Array.isArray(allLayoutConfigurations)) {
+		for (let layoutConfiguration of allLayoutConfigurations) {
+			let { tags, configuration } = layoutConfiguration;
+			if (tags) {
+				let fileName = getKeyFromTagObject(layoutConfigurationType, tags);
+				let fullPath = path.resolve(basePath, fileName + ".json");
+				let content = JSON.stringify(configuration);
+				console.log('Saving file: ' + fileName);
+				fs.writeFileSync(fullPath, content, "utf8");
+			}
 		}
 	}
 }
@@ -333,7 +336,7 @@ function mergeMissingTemplateFields(layoutElementInput: IAtomElement, templateEl
 	let hasChange = false;
 	let layoutElementsByKey: { [property: string]: IAtomElement } = getElementsByKey(layoutElementInput);
 	let templateElementsByKey: { [property: string]: IAtomElement } = getElementsByKey(templateElementInput);
-	let rootProperties = ["key", "label"];
+	let rootProperties = ["label"];
 	rootProperties.map(prop => {
 		if (templateElementInput.elementProperties[prop] !== layoutElementInput.elementProperties[prop]) {
 			layoutElementInput.elementProperties[prop] = templateElementInput.elementProperties[prop];

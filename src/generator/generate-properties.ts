@@ -300,7 +300,7 @@ function generateInterfaces(options: IOptions, properties: IPropertyDescriptor[]
         let interfaceProperties: {[property: string]: string } = {};
         properties.map(property => {
             let interfaceType = getInterfaceType(property.dataType);
-            interfaceProperties[property.code] = `${tab}${property.code}: ${interfaceType};`;            
+            interfaceProperties[property.code] = `${tab}${property.code}?: ${interfaceType};`;            
         });
         createInterfaceFile(interfaceProperties, options.type);
     }
@@ -309,7 +309,7 @@ function generateInterfaces(options: IOptions, properties: IPropertyDescriptor[]
             let interfaceProperties: {[property: string]: string } = {};
             mapping.mappings.map(map => {
                 let interfaceType = getInterfaceType(map.dataType);
-                interfaceProperties[map.code] = `${tab}${map.code}: ${interfaceType};`;
+                interfaceProperties[map.code] = `${tab}${map.code}?: ${interfaceType};`;
             });
             createInterfaceFile(interfaceProperties, mapping.type);
         });

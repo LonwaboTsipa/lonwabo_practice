@@ -2,7 +2,8 @@ import * as xmlParser from "xml2json";
 import { IManifest, IPropertyDescriptor } from "@kurtosys/udm_data_toolkit";
 import { IFundOrShareClass, IApiManifest, IBatchPromiseElement, IOrchestratedManifest } from "../../../models";
 import { callApi, safe, batchExecutePromises, getPropertyValue, isNullOrWhitespace, isNullOrUndefined, convertXmlToJson, isNumeric, groupBy } from "../../../utils";
-import { ingestMorningStarHistoricalPerformance, ingestMorningStarRiskAndRating, ingestMorningStarFundBasics, ingestMorningStarTrailingPerformance } from "./utils";
+import { ingestMorningStarHistoricalPerformance, ingestMorningStarRiskAndRating, ingestMorningStarFundBasics, ingestMorningStarShareClassBasics, 
+	ingestMorningStarTrailingPerformance, ingestMorningStarPortfolioStatistics } from "./utils";
 import { parserOptions } from "./parserOptions";
 import { IInternalDetail } from "../models";
 import { document } from "./model";
@@ -34,6 +35,8 @@ export async function ingestMorningStarDetails(funds: IFundOrShareClass[], manif
 						let internalId = json.FundShareClass.Id;						
 						let shareClass = detailsByInternalId[internalId];						
 						ingestMorningStarFundBasics(json, shareClass, manifest);
+						ingestMorningStarShareClassBasics(json, shareClass, manifest);
+						ingestMorningStarPortfolioStatistics(json, shareClass, manifest);
 						ingestMorningStarHistoricalPerformance(json, shareClass, manifest);
 						ingestMorningStarTrailingPerformance(json, shareClass, manifest);
 						ingestMorningStarRiskAndRating(json, shareClass, manifest);

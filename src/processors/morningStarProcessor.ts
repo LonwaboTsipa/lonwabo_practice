@@ -39,6 +39,20 @@ export async function processMorningStar(funds: IFundOrShareClass[], manifest: {
 		response.statistics.push(...processValueCollection('morning_star_fund_basics', dataToProcess, statisticsProperties, statisticsMapping));		
 	}
 
+	dataToProcess = safe(() => morningStarManifest['morningstarShareClassBasics'].orchestratedData, []);
+	
+	// Add processing logic here
+	if (!isNullOrEmpty(dataToProcess)) {		
+		response.statistics.push(...processValueCollection('morning_star_share_class_basics', dataToProcess, statisticsProperties, statisticsMapping));		
+	}
+
+	dataToProcess = safe(() => morningStarManifest['morningstarPortfolioStatistics'].orchestratedData, []);
+	
+	// Add processing logic here
+	if (!isNullOrEmpty(dataToProcess)) {		
+		response.statistics.push(...processValueCollection('morning_star_portfolio_stats', dataToProcess, statisticsProperties, statisticsMapping));		
+	}
+
 	dataToProcess = safe(() => morningStarManifest['morningstarTrailingPerformance'].orchestratedData, []);
 	
 	// Add processing logic here

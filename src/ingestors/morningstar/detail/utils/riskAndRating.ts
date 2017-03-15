@@ -10,21 +10,23 @@ export function ingestMorningStarRiskAndRating(json: document, shareClass: IInte
 	let riskAndRatingStatistics = [];
 	if (riskAndRating) {
 		let starRating = riskAndRating.StarRating;
-		let asOfDate = starRating.EndDate;
-		let ratingDetails = starRating.RatingDetail;
+		if (starRating) {
+			let asOfDate = starRating.EndDate;
+			let ratingDetails = starRating.RatingDetail;
 
 
-		ratingDetails.map((ratingDetail) => {
-			Object.keys(ratingDetail).filter(key => typeof ratingDetail[key] === 'object').map(key => {
-				let childElement = ratingDetail[key];
-				childElement['clientCode'] = shareClass.isin;
-				childElement['RatingType'] = changeCase.snake(key);
-				childElement['TimePeriod'] = ratingDetail.TimePeriod;
-				childElement['RatingTypeNumber'] = ratingDetail.Type;
-				childElement['EndDate'] = asOfDate;
-				riskAndRatingStatistics.push(childElement);
+			ratingDetails.map((ratingDetail) => {
+				Object.keys(ratingDetail).filter(key => typeof ratingDetail[key] === 'object').map(key => {
+					let childElement = ratingDetail[key];
+					childElement['clientCode'] = shareClass.isin;
+					childElement['RatingType'] = changeCase.snake(key);
+					childElement['TimePeriod'] = ratingDetail.TimePeriod;
+					childElement['RatingTypeNumber'] = ratingDetail.Type;
+					childElement['EndDate'] = asOfDate;
+					riskAndRatingStatistics.push(childElement);
+				});
 			});
-		});
+		}
 	}
 	if (riskAndRatingStatistics && riskAndRatingStatistics.length > 0) {
 		let manifestItem = manifest['morningstarRiskAndRating'];

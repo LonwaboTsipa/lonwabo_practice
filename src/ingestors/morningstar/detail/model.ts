@@ -3044,7 +3044,7 @@ export interface FundTypeIndexPortfolioType extends _FundTypeIndexPortfolioType 
 
 export interface _FundTypePortfolioListType extends BaseType {
 	DataLink: linkIntegerType[];
-	Portfolio: PortfolioType[];
+	Portfolio: PortfolioType;
 	SurveyData?: FundTypePortfolioListTypeSurveyDataType[];
 }
 export interface FundTypePortfolioListType extends _FundTypePortfolioListType { constructor: { new(): FundTypePortfolioListType }; }

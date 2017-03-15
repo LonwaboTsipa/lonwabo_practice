@@ -51,7 +51,7 @@ export function ingestMorningStarHistoricalPerformance(json: document, shareClas
 						previousValue = Value;
 					}
 					else {
-						periodValue.change = (Value - previousValue)/ Math.abs(previousValue) * 100;
+						//periodValue.change = (Value - previousValue)/ Math.abs(previousValue) * 100;
 						previousValue = Value;
 					}
 				});

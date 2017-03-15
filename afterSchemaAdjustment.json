@@ -7,28 +7,28 @@
                 "Name": "Parvest Bond Euro Government Classic-Capitalisation",
                 "MSCategoryId": "EUCA000589",
                 "LegalStructure": "SICAV",
-                "LastUpdated": "2017-02-22 08:41:12",
+                "LastUpdated": "2017-03-05 04:08:47",
                 "LastUpdated_NT": [
                     {
                         "content": "2017-02-17 11:49:41",
                         "Type": 1
                     },
                     {
-                        "content": "2017-02-21 13:13:33",
+                        "content": "2017-03-04 02:37:35",
                         "Type": 2
                     },
                     {
-                        "content": "2017-02-16 11:59:34",
+                        "content": "2017-03-04 02:37:35",
                         "Type": 4,
                         "Id": 1
                     },
                     {
-                        "content": "2017-02-09 03:01:18",
+                        "content": "2017-03-04 02:37:35",
                         "Type": 4,
                         "Id": 2
                     },
                     {
-                        "content": "2017-02-22 08:31:44",
+                        "content": "2017-03-04 02:37:35",
                         "Type": 4,
                         "Id": 3
                     },
@@ -41,7 +41,7 @@
                         "Type": 16
                     },
                     {
-                        "content": "2017-02-22 08:31:44",
+                        "content": "2017-03-04 02:37:35",
                         "Type": 32
                     },
                     {
@@ -57,7 +57,7 @@
                         "Type": 256
                     },
                     {
-                        "content": "2017-02-20 10:54:08",
+                        "content": "2017-03-05 04:08:47",
                         "Type": 512
                     },
                     {
