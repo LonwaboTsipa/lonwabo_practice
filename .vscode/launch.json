@@ -13,6 +13,7 @@
 			"request": "launch",
 			"name": "launch RELEASE",
 			"program": "${workspaceRoot}/dist/index.js",
+			"outFiles": ["${workspaceRoot}/**/*.js"],
 			"cwd": "${workspaceRoot}",
 			"console": "internalConsole",
 			"runtimeArgs": [
@@ -28,6 +29,7 @@
 			"request": "launch",
 			"name": "launch DEV",
 			"program": "${workspaceRoot}/dist/index.js",
+			"outFiles": ["${workspaceRoot}/**/*.js"],
 			"cwd": "${workspaceRoot}",
 			"console": "internalConsole",
 			"runtimeArgs": [
