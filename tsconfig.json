@@ -1,16 +1,16 @@
 {
 	"compilerOptions": {
-		"target": "es6",
+		"target": "es2017",
 		"allowJs": false,
 		"module": "commonjs",
 		"outDir": "dist",
-		"declaration": true		
+		"declaration": true,
+		"sourceMap": true
 	},
+	"include": [
+		"src/**/*.ts"
+	],
 	"exclude": [
-        "node_modules",
-		"dist",
-		"spec",
-		"src/generator",
-		"artifacts"
-    ]
+		"src/**/*.spec.ts"
+	]
 }

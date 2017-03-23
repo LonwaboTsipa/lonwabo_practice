@@ -2,104 +2,41 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch Local",
-			"type": "node",
-			"request": "launch",
-			"program": "${workspaceRoot}/dist/index.js",
-			"stopOnEntry": false,
-			"args": ["LOCAL"],
-			"cwd": "${workspaceRoot}",
-			"preLaunchTask": null,
-			"runtimeExecutable": null,
-			"runtimeArgs": [
-				"--nolazy"
-			],
-			"env": {
-				"NODE_ENV": "development",
-				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
-				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
-			},
-			"externalConsole": false,
-			"sourceMaps": true,
-			"outDir": "${workspaceRoot}/dist"
-		},
-		{
-			"name": "Launch Dev",
-			"type": "node",
-			"request": "launch",
-			"program": "${workspaceRoot}/dist/index.js",
-			"stopOnEntry": false,
-			"args": ["DEV"],
-			"cwd": "${workspaceRoot}",
-			"preLaunchTask": null,
-			"runtimeExecutable": null,
-			"runtimeArgs": [
-				"--nolazy"
-			],
-			"env": {
-				"NODE_ENV": "development",
-				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
-				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
-			},
-			"externalConsole": false,
-			"sourceMaps": true,
-			"outDir": "${workspaceRoot}/dist"
-		},
-		{
-			"name": "Launch Staging",
-			"type": "node",
-			"request": "launch",
-			"program": "${workspaceRoot}/dist/index.js",
-			"stopOnEntry": false,
-			"args": ["STAGING"],
-			"cwd": "${workspaceRoot}",
-			"preLaunchTask": null,
-			"runtimeExecutable": null,
-			"runtimeArgs": [
-				"--nolazy"
-			],
-			"env": {
-				"NODE_ENV": "staging",
-				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
-				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
-			},
-			"externalConsole": false,
-			"sourceMaps": true,
-			"outDir": "${workspaceRoot}/dist"
-		},
-		{
-			"name": "Launch Production",
-			"type": "node",
-			"request": "launch",
-			"program": "${workspaceRoot}/dist/index.js",
-			"stopOnEntry": false,
-			"args": ["PROD"],
-			"cwd": "${workspaceRoot}",
-			"preLaunchTask": null,
-			"runtimeExecutable": null,
-			"runtimeArgs": [
-				"--nolazy"
-			],
-			"env": {
-				"NODE_ENV": "production",
-				"TEMPLATE_DEV_ADMIN_USERNAME": "template_dev_admin_user",
-				"TEMPLATE_DEV_ADMIN_PASSWORD": "password"
-			},
-			"externalConsole": false,
-			"sourceMaps": true,
-			"outDir": "${workspaceRoot}/dist"
-		},
-		{
-			"name": "Attach",
 			"type": "node",
 			"request": "attach",
-			"port": 5858,
-			"address": "localhost",
-			"restart": false,
-			"sourceMaps": false,
-			"outDir": null,
-			"localRoot": "${workspaceRoot}",
-			"remoteRoot": null
+			"name": "Attach to Process",
+			"processId": "${command:PickProcess}",
+			"port": 5858
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "launch RELEASE",
+			"program": "${workspaceRoot}/dist/index.js",
+			"cwd": "${workspaceRoot}",
+			"console": "internalConsole",
+			"runtimeArgs": [
+				"--harmony",
+				"--max-old-space-size=8192"
+			],
+			"args": [
+				"RELEASE"
+			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "launch DEV",
+			"program": "${workspaceRoot}/dist/index.js",
+			"cwd": "${workspaceRoot}",
+			"console": "internalConsole",
+			"runtimeArgs": [
+				"--harmony",
+				"--max-old-space-size=8192"
+			],
+			"args": [
+				"DEV"
+			]
 		}
 	]
 }

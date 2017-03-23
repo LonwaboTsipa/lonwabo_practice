@@ -1,11 +1,11 @@
 {
 	"local": false,
-	"userName": "TOOLS_DEMO_DEV_ADMIN_USERNAME",
+	"userName": "TOOLS_DEMO_RELESE_ADMIN_USERNAME",
 	"userPwd": "TOOLS_DEMO_DEV_ADMIN_PASSWORD",
 	"loaderName": "[CLIENT_NAME]_[PROJECT_CODE]_loader_dev",
-	"ftpServer": "[CLIENT_NAME]_DEV_SFTP_SERVER",
-	"ftpUser": "[CLIENT_NAME]_DEV_SFTP_USER",
-	"ftpPwd": "[CLIENT_NAME]_DEV_SFTP_PASSWORD",
+	"ftpServer": "[CLIENT_NAME]_RELESE_SFTP_SERVER",
+	"ftpUser": "[CLIENT_NAME]_RELESE_SFTP_USER",
+	"ftpPwd": "[CLIENT_NAME]_RELESE_SFTP_PASSWORD",
 	"clientName": "TEMPLATE_CLIENTTOOLS",
 	"scheduleType": "IMMEDIATE",
 	"schedule": "00 */60 * * * *",
@@ -17,12 +17,12 @@
 	"endPoints": {
 		"search" : "https://api-rel.fundpress.io/fund/searchentity",
 		"retrieveLayoutConfiguration": "https://api-rel.fundpress.io/layout/retrieveLayoutConfiguration"
-	},	
+	},
 	"externalApi": {
 		"morningstar": {
 			"isTextResponse": true,
 			"type": "morningstar",
-			"baseUrl": "http://edw.morningstar.com/"			
+			"baseUrl": "http://edw.morningstar.com/"
 		}
 	}
 }
