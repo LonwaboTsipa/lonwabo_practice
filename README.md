@@ -1,7 +1,7 @@
 # On Premise Loader Template project
 
 ## Setup
-To start do a clone of this repo, then change the repo path. 
+1. To start do a clone of this repo, then change the repo path. 
 
 ```
 	git clone https://github.com/Kurtosys/ksys_loader_start.git <YOUR PROJECT FOLDER>
@@ -10,20 +10,19 @@ To start do a clone of this repo, then change the repo path.
 	git push origin master
 ```
 
-Now setup the upstream to the template to be able to get latest of the template into your project
+2. Now setup the upstream to the template to be able to get latest of the template into your project
 
 ```
 	git remote add upstream https://github.com/Kurtosys/ksys_loader_start.git
 ``` 
 
-The solution is using Typescript to be able to compile, not webpack as these solutions have no need to minify their code, being non-client facing.
+3. Make sure that you have at least node v6.2.0
 
-Make sure that you have typings installed as well as the at least node v6.2.0
-
-```
-	npm install typings -g 
-	nvm use v6.9.1
 ```	
+	nvm use v7.6.0
+```	
+
+4. Replace the place holders that are in the template
 
 The project has place holders for values that need to change for each project.
 
@@ -32,6 +31,13 @@ Do a full solution find and replace on the following keys:
 `[CLIENT_NAME]` - Upper case client name with no spaces (Underscores are allowed)
 
 `[PROJECT_CODE]` - The projects code, e.g. 'ksys339'
+
+5. Setup the environmental variables on your system. 
+
+Go to the `artifacts` folder, there are a number of files that are named with the following pattern: `loaderConfig_<environment>.json`. 
+
+
+
 
 The following commands can be used to be able to initialize the solution:
 
