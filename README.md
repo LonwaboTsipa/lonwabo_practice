@@ -36,6 +36,22 @@ Do a full solution find and replace on the following keys:
 
 Go to the `artifacts` folder, there are a number of files that are named with the following pattern: `loaderConfig_<environment>.json`. 
 
+You will need to add environmental variables for the userName and userPwd fields values in each of the files. e.g.
+```
+    export DEMO_CLIENT_DEV_ADMIN_USERNAME='<USERNAME>'
+    export DEMO_CLIENT_DEV_ADMIN_PASSWORD='<PASSWORD>'
+```
+The values for these come from the initial client setup that was done for you and provided over OTS. These will be the Admin user credentials and not the API user. The Admin user will have access to load data into the database through the API while the API user only has read access by default.
+
+6. Install the project dependencies using npm install in a terminal pointing to the root of the project.
+```
+    npm install
+```
+or 
+```
+    npm i
+```
+7. Develop the loader code for ingesting
 
 
 
