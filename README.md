@@ -7,13 +7,14 @@ Table of Contents
 
 * [Requirements](#requirements)
 * [Project Setup](#project-setup)
-* [Development](#development)
+* [Implementation](#implementation)
 * [NPM Commands](#npm-commands)
 
 
 Requirements
 ------------
 
+### Kurtosys API Setup
 Contact the Implementation department of Kurtosys for the setup of the following information:
 
 * A GitHub account
@@ -43,7 +44,25 @@ Contact the Implementation department of Kurtosys for the setup of the following
 	* A client short code provided to you (Usually a 3 digit code)
 	* A private loader repository created on GitHub on the Kurtosys account
 
+### Knowledge
+To implement a loader project you need to know the following technologies:
+* Javascript (ECMA6 and higher) 
+	* [Mozilla JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+* [Typescript](https://www.typescriptlang.org/) 
+	* [Typescript Deep Dive](https://basarat.gitbooks.io/typescript/) Tutorial 	
+* [Kurtosys API](https://www.kurtosys.com/api/)
 
+### Software 
+To implement a loader project it is recommended that you have the following installed:
+* Git
+	* Installation instructions can be found [here](https://git-scm.com/downloads)
+* Node JS
+	* We recommend installing the latest LTS version.
+	* Details for installation can be found [here](https://nodejs.org/)
+	* To assist with the versioning of Node we would recommend installing [NVM](https://github.com/creationix/nvm) as well.
+* An IDE (Integrated Development Environment)
+	* We use [Visual Studio Code](https://code.visualstudio.com/) and would strongly recommend using it, but you can use any IDE that you feel comfortable with.
+	
 Project Setup
 -------------
 
@@ -62,13 +81,7 @@ Project Setup
 	git remote add upstream https://github.com/Kurtosys/ksys_loader_start.git
 	``` 
 
-3. Make sure that you have at least node v6.2.0
-
-	```	
-	nvm use v7.6.0
-	```	
-
-4. Replace the place holders that are in the template
+3. Replace the place holders that are in the template
 
 	The project has place holders for values that need to change for each project.
 
@@ -78,7 +91,7 @@ Project Setup
 
 	`[PROJECT_CODE]` - The projects code, e.g. 'ksys339'
 
-5. Setup the environmental variables on your system. 
+4. Setup the environmental variables on your system. 
 
 	Go to the `artifacts` folder, there are a number of files that are named with the following pattern: `loaderConfig_<environment>.json`. 
 
@@ -89,7 +102,7 @@ Project Setup
 	```
 	The values for these come from the initial client setup that was done for you and provided over OTS. These will be the Admin user credentials and not the API user. The Admin user will have access to load data into the database through the API while the API user only has read access by default.
 
-6. Install the project dependencies using npm install in a terminal pointing to the root of the project.
+5. Install the project dependencies using npm install in a terminal pointing to the root of the project.
 	```
 	npm install
 	```
@@ -98,9 +111,9 @@ Project Setup
 	npm i
 	```
 
-Development
------------
-The instructions for developing using this template can be found [here](./docs/DEVELOPMENT.md)
+Implementation
+--------------
+The instructions for implementating this template can be found [here](./docs/IMPLEMENTATION.md)
 
 NPM Commands
 ------------
