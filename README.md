@@ -1,6 +1,17 @@
-# On Premise Loader Template project
+# Loader Template Project
+The starter project for the Kurtosys loader
 
-## Setup
+
+Table of Contents
+-----------------
+
+  * [Setup](#setup)
+  * [Development](#development)
+  * [NPM Commands](#npm-commands)
+
+
+Setup
+-----
 1. To start do a clone of this repo, then change the repo path. 
 
 ```
@@ -51,11 +62,14 @@ or
 ```
     npm i
 ```
-7. Develop the loader code for ingesting
 
+Development
+-----------
+The instructions for developing using this template can be found [here](./docs/DEVELOPMENT.md)
 
-
-The following commands can be used to be able to initialize the solution:
+NPM Commands
+------------
+The following commands can be used with the solution from the root directory:
 
 `npm install` - Installs missing node_modules
 
@@ -65,17 +79,19 @@ The following commands can be used to be able to initialize the solution:
 
 `npm run properties:dev` - Creates the properties using the development instance
 
+`npm run properties:release` - Creates the properties using the release instance
+
 `npm run properties:staging` - Creates the properties using the staging instance
 
 `npm run properties:prod` - Creates the properties using the production instance
 
-`npm run start` - Starts the development instance
+`npm run start:dev` - Starts the development instance
+
+`npm run start:release` - Starts the release instance
 
 `npm run start:staging` - Starts the staging instance
 
 `npm run start:prod` - Starts the production instance
 
-## Development and testing
 
-If you are using [vs-code](https://code.visualstudio.com/) just hit `F6` to build and `F5` to debug.
   
