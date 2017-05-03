@@ -43,6 +43,16 @@ Contact the Implementation department of Kurtosys for the setup of the following
 	* A permanent token will be provided for the API users.
 	* A client short code provided to you (Usually a 3 digit code)
 	* A private loader repository created on GitHub on the Kurtosys account
+* Infrastructure Setup
+	
+	The Kurtosys infrastructure needs to setup:
+	* Hosting structure 
+	* SFTP directory if you need to ingest files. The following will be provided in this case for each environment:
+		* Server name
+		* Username
+		* Password
+		 
+
 
 ### Knowledge
 To implement a loader project you need to know the following technologies:
@@ -62,7 +72,7 @@ To implement a loader project it is recommended that you have the following inst
 	* To assist with the versioning of Node we would recommend installing [NVM](https://github.com/creationix/nvm) as well.
 * An IDE (Integrated Development Environment)
 	* We use [Visual Studio Code](https://code.visualstudio.com/) and would strongly recommend using it, but you can use any IDE that you feel comfortable with.
-	
+
 Project Setup
 -------------
 
@@ -95,12 +105,21 @@ Project Setup
 
 	Go to the `artifacts` folder, there are a number of files that are named with the following pattern: `loaderConfig_<environment>.json`. 
 
-	You will need to add environmental variables for the userName and userPwd fields values in each of the files. e.g.
+	You will need to add environmental variables for the ```userName``` and ```userPwd``` fields values in each of the files. e.g.
 	```
 	export DEMO_CLIENT_DEV_ADMIN_USERNAME='<USERNAME>'
 	export DEMO_CLIENT_DEV_ADMIN_PASSWORD='<PASSWORD>'
 	```
 	The values for these come from the initial client setup that was done for you and provided over OTS. These will be the Admin user credentials and not the API user. The Admin user will have access to load data into the database through the API while the API user only has read access by default.
+
+	You will also need to setup the SFTP details as environmental variables if you are ingesting files and this was setup by the Infrastructure team. The names of these variables can be found in the same configuration files for the different environments. For ```ftpServer```, ```ftpUser```, ```ftpPwd```
+
+	An example of this is:
+	```
+	export DEMO_CLIENT_DEV_SFTP_SERVER='<SFTP_SERVER>'
+	export DEMO_CLIENT_DEV_SFTP_USER='<SFTP_USERNAME>'
+	export DEMO_CLIENT_DEV_SFTP_PASSWORD='<SFTP_PASSWORD>'
+	```
 
 5. Install the project dependencies using npm install in a terminal pointing to the root of the project.
 	```
