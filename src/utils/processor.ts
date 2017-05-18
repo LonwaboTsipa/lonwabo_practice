@@ -34,9 +34,9 @@ export function getDefaultValueForType(type: DataType | undefined, allowNull = f
 export function processPropertiesPub(instance: {}, properties: IPropertyDescriptor[]): IPropertyPub {
 	let response = {};
 	for (let property of properties) {
-		let propertyValue = getPropertyValue(instance, property);
-		if (!isNullOrUndefined(propertyValue)) {
-			response[property.code] = { value: propertyValue };
+		let value = getPropertyValue(instance, property);
+		if (!isNullOrUndefined(value)) {
+			response[property.code] = { value };
 		}
 	}
 	return response;

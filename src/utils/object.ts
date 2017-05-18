@@ -12,16 +12,16 @@ const MODIFIER_SEPARATOR = ":";
  * @param {*} [defaultValue=null]
  * @returns {*}
  */
-export function getValueFromStringNotation(stringNotation: string | null | undefined, instance: {} | null | undefined, defaultValue: any = null) : any {
-    let value = null;
+export function getValueFromStringNotation(stringNotation: string | null | undefined, instance: {} | null | undefined, defaultValue: any = null): any {
+	let value = null;
 	let parameterList = getInnerParameters(stringNotation);
 	if (parameterList && parameterList.length > 0) {
 		let parameters = {};
 		for (let parameter of parameterList) {
 			let parameterValue = getValueFromDotNotation(parameter, instance, defaultValue);
 			if (parameterValue) {
-				parameters[parameter] = parameterValue;	
-			}			
+				parameters[parameter] = parameterValue;
+			}
 		}
 		value = stringNotation;
 		for (let parameter of Object.keys(parameters)) {
@@ -32,16 +32,12 @@ export function getValueFromStringNotation(stringNotation: string | null | undef
 	else {
 		value = getValueFromDotNotation(stringNotation, instance, defaultValue);
 	}
-	
 
 	if (isNullOrUndefined(value)) {
 		value = defaultValue;
 	}
-	else {
-		value = value.toString().trim();
-	}
 
-    return value;       
+	return value;
 }
 /**
  * This will get the value from the property for a complex identifier (If the source field is deeper than the base object it will traverse)

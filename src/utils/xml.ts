@@ -11,11 +11,11 @@ export function convertXmlToJson(xml, xsdPath, parserOptions, options: SchemaCha
 	let json = xmlParser.toJson(xml, parserOptions);	
 	let schemaJson = xmlParser.toJson(schema, parserOptions);
 	cleanPropertyNames(json);
-	fs.writeFileSync('beforeSchemaAdjustment.json', JSON.stringify(json, null, 4), 'utf8');
+	//fs.writeFileSync('beforeSchemaAdjustment.json', JSON.stringify(json, null, 4), 'utf8');
 
 	applySchemaChangesForArrays(json, schemaJson, options);
 
-	fs.writeFileSync('afterSchemaAdjustment.json', JSON.stringify(json, null, 4), 'utf8');
+	//fs.writeFileSync('afterSchemaAdjustment.json', JSON.stringify(json, null, 4), 'utf8');
 	return json;
 }
 
