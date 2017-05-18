@@ -35,10 +35,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/isomorphic-fetch": "0.0.33",
-    "@types/jest": "^18.1.1",
-    "@types/node": "^7.0.5",
-    "@types/request": "0.0.40",
+    "@types/node": "^7.0.18",
     "crypto": "0.0.3",
     "expect": "^1.20.1",
     "jest": "^19.0.2",

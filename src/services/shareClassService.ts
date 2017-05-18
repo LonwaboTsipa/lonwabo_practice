@@ -1,3 +1,4 @@
+import * as fetch from "isomorphic-fetch";
 import { LOADER_CONFIG } from "@kurtosys/udm_data_toolkit";
 import { IOriginalLoaderConfig } from "../models";
 export async function fetchShareClasses(token) {
@@ -29,10 +30,10 @@ export async function fetchShareClasses(token) {
         if (body && body.values) {
             return body.values.map(shareClass => {
                 shareClass.propertiesPub = shareClass.properties_pub;
-                delete shareClass.properties_pub;  
+                delete shareClass.properties_pub;
                 return shareClass;
             });
-        }        
+        }
         return [];
     }
     return null;

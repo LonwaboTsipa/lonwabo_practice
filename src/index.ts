@@ -1,4 +1,3 @@
-require('isomorphic-fetch');
 import { login, dataLoadingArray, LOADER_CONFIG, getClient, initDataToolkitConfig, registerLoaderStart, loadFilesFromFolder, IManifest,
     IPropertyDescriptor, registerLoaderEnd, syncFTPFolder, finalizeFTP
 } from "@kurtosys/udm_data_toolkit";
@@ -26,7 +25,7 @@ export async function loadDataAsync() {
         if (useFTP) {
             let syncResult = await syncFTPFolder(ftpSourceRelativePath);
         }
-        
+
         let hasFilesToLoad = await loadFilesFromFolder(pendingDir, rawManifest.filter(m => m.isFileForLoad));
 
         // Ingest external data
