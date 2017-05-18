@@ -53,8 +53,15 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 
 	switch (property.dataType) {
 		case "STRG":
-			if (!isNullOrUndefined(value)) {
-				value = value.toString().trim();
+			if (value) {
+				if (property["cardinality"] === 1) {
+					value = value.toString();
+				}
+			}
+			if (property["cardinality"] === 'N') {
+				if (isNullOrUndefined(value) || value === "" || !Array.isArray(value) || value.length === 0) {
+					value = null;
+				}
 			}
 			break;
 		case "DCML":
@@ -230,7 +237,7 @@ export function processCommentaryCollection(collectionType: string, rows, proper
 		let fundData = hash[linkedEntity];
 		if (!fundData[commentaryType]) {
 			fundData[commentaryType] = {
-				commentaryType,				
+				commentaryType,
 				"commentaries": <ICommentaryInstance[]>[]
 			};
 			if (!isNullOrWhitespace(linkedEntity)) {
@@ -291,7 +298,7 @@ export function processDisclaimerCollection(collectionType: string, rows, proper
 		let fundData = hash[linkedEntity];
 		if (!fundData[disclaimerType]) {
 			fundData[disclaimerType] = {
-				disclaimerType,				
+				disclaimerType,
 				"disclaimers": <IDisclaimerInstance[]>[]
 			};
 			if (!isNullOrWhitespace(linkedEntity)) {
@@ -339,7 +346,7 @@ export function processFundListCollection(collectionType: string, rows: {}[] = [
 	}
 	let mappingProperties = explicitMapping.mappings;
 	for (let row of rows) {
-		let listName = getPropertyValueByCode(row, "list_name", mappingProperties);	
+		let listName = getPropertyValueByCode(row, "list_name", mappingProperties);
 		let key = listName;
 		if (!hash[key]) {
 			hash[key] = {
@@ -393,7 +400,7 @@ export function processTranslationCollection(collectionType: string, rows: {}[] 
 
 export function processValueCollection(collectionType: string, rows, labelValueProperties, mappings: IMapping[], isLabelCollection: boolean = true, periodicity: string = 'MONTHLY', entityType: "CLSS" | "FUND" = "CLSS"): {}[] {
 	let hash = {};
-	
+
 	let explicitMapping = getMappingByType(collectionType, mappings);
 	if (!explicitMapping) {
 		console.log("No mapping found to process");
@@ -406,15 +413,15 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 	let mappingProperties = explicitMapping.mappings;
 	for (let row of rows) {
 
-		let clientCodeProperty = getClientCodeProperty(mappingProperties);		
-		let clientCode = getPropertyValue(row, clientCodeProperty);		
+		let clientCodeProperty = getClientCodeProperty(mappingProperties);
+		let clientCode = getPropertyValue(row, clientCodeProperty);
 		let label = getPropertyValueByCode(row, "label", mappingProperties);
 		let value = getPropertyValueByCode(row, "value", mappingProperties);
 		let date = getPropertyValueByCode(row, "date", mappingProperties);
 		let ccy = getPropertyValueByCode(row, "ccy", mappingProperties, true) || "N/A";
 
 		let property = getPropertyByCode(collectionType, labelValueProperties);
-		
+
 		if (property) {
 			let { code } = property;
 			if (!hash[clientCode]) {
@@ -463,7 +470,7 @@ export function processValueCollection(collectionType: string, rows, labelValueP
 						if(!isNullOrUndefined(extendedValue)) {
 							valueObj[mappingProperty.code] = extendedValue;
 						}
-					}					
+					}
 				}
 			}
 		}
