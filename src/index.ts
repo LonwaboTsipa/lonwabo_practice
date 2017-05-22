@@ -10,7 +10,7 @@ import {rootDir, pendingDir} from "./constants";
 
 import {fetchFunds, fetchShareClasses} from "./services";
 // Get the manifest with data source mappings
-const rawManifest = <IManifest[]>require("../artifacts/config/manifest");
+const rawManifest = <IManifest[]>JSON.parse(JSON.stringify(require("../artifacts/config/manifest")));
 const useFTP = false;
 export async function loadDataAsync() {
     clearExceptions();
