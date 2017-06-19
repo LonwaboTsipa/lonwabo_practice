@@ -54,7 +54,7 @@ export function getPropertyValue(instance: {}, property: IPropertyDescriptor | u
 	switch (property.dataType) {
 		case "STRG":
 			if (value) {
-				if (property["cardinality"] === 1) {
+				if (property["cardinality"] === "1") {
 					value = value.toString();
 				}
 			}

@@ -126,7 +126,7 @@
         "description": "oneview",
         "apiOptions": {
             "type": "oneview",
-            "url": "/wmfreportconfig/65J3.json",
+            "url": "/wmfreportconfig/{fundId}.json",
             "method": "GET",
             "deepLinks": {
                 "shareClasses": {
