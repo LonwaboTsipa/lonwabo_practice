@@ -251,7 +251,7 @@ async function generateProperties() {
             }
             let fileName = !existinDataElement.propertiesFileName.endsWith('.json') ? existinDataElement.propertiesFileName + '.json' : existinDataElement.propertiesFileName;
             let filePath = path.join(coreDataPath, fileName);
-            fs.writeFileSync(filePath, JSON.stringify(properties, null, 4), 'utf8');
+            fs.writeFileSync(filePath, JSON.stringify(properties, null, 4), { encoding: 'utf8' });
         }
         if (mappings && options.mapping) {
             let newMapping = options.mapping;
@@ -266,7 +266,7 @@ async function generateProperties() {
 
             let fileName = !existinDataElement.mappingsFileName.endsWith('.json') ? existinDataElement.mappingsFileName + '.json' : existinDataElement.mappingsFileName;
             let filePath = path.join(mappingPath, fileName);
-            fs.writeFileSync(filePath, JSON.stringify(mappings, null, 4), 'utf8');
+            fs.writeFileSync(filePath, JSON.stringify(mappings, null, 4), { encoding: 'utf8' });
         }
         generateInterfaces(options, properties, mappings);
     }
@@ -337,7 +337,7 @@ function createInterfaceFile(interfaceProperties: {[property: string]: string },
 ${uniqueInterfaceProperties.join('\n')}
 }`;
     let filePath = path.join(interfacePath, `${interfaceName}.ts`);
-    fs.writeFileSync(filePath, fileContent, 'utf8');
+    fs.writeFileSync(filePath, fileContent, { encoding: 'utf8' });
 }
 
 generateProperties();

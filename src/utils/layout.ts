@@ -61,9 +61,9 @@ export function generateComponents() {
         delete properties.elements.items;
         allComponents.push(root);
         output = JSON.stringify(root, null, 4);
-        fs.writeFileSync(path.join(componentPath, `${componentMeta.code}.json`), output, 'utf8');
+        fs.writeFileSync(path.join(componentPath, `${componentMeta.code}.json`), output, { encoding: 'utf8' });
     }
-    //fs.writeFileSync(path.join(componentPath, `all.json`), JSON.stringify(allComponents), 'utf8');    
+    //fs.writeFileSync(path.join(componentPath, `all.json`), JSON.stringify(allComponents), { encoding: 'utf8' });    
 }
 
 export function generateConfigurationTemplate(layoutConfigurationType: ILayoutConfigurationType) {
@@ -76,14 +76,14 @@ export function generateConfigurationTemplate(layoutConfigurationType: ILayoutCo
     }
     output = JSON.stringify(output, null, 4);
     let filePath = getLayoutConfigurationTypeTemplatePath(layoutConfigurationType);
-    fs.writeFileSync(filePath, output, 'utf8');
+    fs.writeFileSync(filePath, output, { encoding: 'utf8' });
 }
 
 export function getLayoutConfigurationTypeTemplate(layoutConfigurationType: ILayoutConfigurationType) {
     let templatePath = getLayoutConfigurationTypeTemplatePath(layoutConfigurationType);
     let response: any = null;
     if (fs.existsSync(templatePath)) {
-        let text = fs.readFileSync(templatePath, 'utf8');
+        let text = fs.readFileSync(templatePath, { encoding: 'utf8' });
         try {
             response = JSON.parse(text);
         }

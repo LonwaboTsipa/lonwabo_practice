@@ -74,7 +74,7 @@
             },
             {
                 "label": "domicile_type",
-                "dataType": "STRG"
+                "dataType": "ITGR"
             },
             {
                 "label": "domicile_name",
@@ -230,7 +230,7 @@
             },
             {
                 "label": "rating_type_number",
-                "dataType": "STRG"
+                "dataType": "ITGR"
             },
             {
                 "label": "date",
@@ -238,19 +238,19 @@
             },
             {
                 "label": "category_rank",
-                "dataType": "STRG"
+                "dataType": "DCML"
             },
             {
                 "label": "risk_adjusted_return",
-                "dataType": "STRG"
+                "dataType": "DCML"
             },
             {
                 "label": "performance_score",
-                "dataType": "STRG"
+                "dataType": "DCML"
             },
             {
                 "label": "risk_score",
-                "dataType": "STRG"
+                "dataType": "DCML"
             }
         ],
         "cardinality": "1"

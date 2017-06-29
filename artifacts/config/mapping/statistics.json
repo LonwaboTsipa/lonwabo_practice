@@ -124,7 +124,7 @@
             },
             {
                 "code": "domicile_type",
-                "dataType": "STRG",
+                "dataType": "ITGR",
                 "sourceField": "Domicile.Type"
             },
             {
@@ -199,7 +199,7 @@
             },
             {
                 "code": "rating_type_number",
-                "dataType": "STRG",
+                "dataType": "ITGR",
                 "sourceField": "RatingTypeNumber"
             },
             {
@@ -209,22 +209,22 @@
             },
             {
                 "code": "category_rank",
-                "dataType": "STRG",
+                "dataType": "DCML",
                 "sourceField": "CategoryRank"
             },
             {
                 "code": "risk_adjusted_return",
-                "dataType": "STRG",
+                "dataType": "DCML",
                 "sourceField": "RiskAdjustedReturn"
             },
             {
                 "code": "performance_score",
-                "dataType": "STRG",
+                "dataType": "DCML",
                 "sourceField": "PerformanceScore"
             },
             {
                 "code": "risk_score",
-                "dataType": "STRG",
+                "dataType": "DCML",
                 "sourceField": "RiskScore"
             }
         ]
