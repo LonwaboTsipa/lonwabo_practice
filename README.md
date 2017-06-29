@@ -129,6 +129,11 @@ Project Setup
 	```
 	npm i
 	```
+6. Run initialization script
+   ```
+   cd scripts
+   sh init-artifacts.sh
+   ```
 
 Implementation
 --------------
