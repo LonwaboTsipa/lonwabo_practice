@@ -10,9 +10,9 @@
 	"scheduleType": "IMMEDIATE",
 	"schedule": "00 */60 * * * *",
 	"morningStarIngestion": {
-		"internalDetails": true,
+		"internalDetails": false,
 		"dailyPrices": false,
-		"details": true
+		"details": false
 	},
 	"endPoints": {
 		"search" : "https://api-dev.fundpress.io/fund/searchentity",
