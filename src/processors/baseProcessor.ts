@@ -50,7 +50,7 @@ export async function processAll(manifest: IOrchestratedManifest): Promise<dataL
 	dataToLoad = concatDataToLoad(dataToLoad, await processDisclaimers(fundsAndShares, manifest));
 
 	// Proccess Layouts
-	dataToLoad = concatDataToLoad(dataToLoad, await processLayouts(fundsAndShares, manifest, token));
+	//dataToLoad = concatDataToLoad(dataToLoad, await processLayouts(fundsAndShares, manifest, token));
 
 	// Process MorningStar data
 	let morningStarIngestion = (LOADER_CONFIG["originalConfig"]["morningStarIngestion"] || {}) as IMorningStarIngestionIndication;
