@@ -107,8 +107,8 @@ Project Setup
 
 	You will need to add environmental variables for the ```userName``` and ```userPwd``` fields values in each of the files. e.g.
 	```
-	export DEMO_CLIENT_DEV_ADMIN_USERNAME='<USERNAME>'
-	export DEMO_CLIENT_DEV_ADMIN_PASSWORD='<PASSWORD>'
+	export [CLIENT_NAME]_[ENVIRONMENT]_ADMIN_USERNAME='<USERNAME>'
+	export [CLIENT_NAME]_[ENVIRONMENT]_ADMIN_PASSWORD='<PASSWORD>'
 	```
 	The values for these come from the initial client setup that was done for you and provided over OTS. These will be the Admin user credentials and not the API user. The Admin user will have access to load data into the database through the API while the API user only has read access by default.
 
@@ -116,9 +116,9 @@ Project Setup
 
 	An example of this is:
 	```
-	export DEMO_CLIENT_DEV_SFTP_SERVER='<SFTP_SERVER>'
-	export DEMO_CLIENT_DEV_SFTP_USER='<SFTP_USERNAME>'
-	export DEMO_CLIENT_DEV_SFTP_PASSWORD='<SFTP_PASSWORD>'
+	export [CLIENT_NAME]_[ENVIRONMENT]_SFTP_SERVER='<SFTP_SERVER>'
+	export [CLIENT_NAME]_[ENVIRONMENT]_SFTP_USER='<SFTP_USERNAME>'
+	export [CLIENT_NAME]_[ENVIRONMENT]_SFTP_PASSWORD='<SFTP_PASSWORD>'
 	```
 
 5. Install the project dependencies using npm install in a terminal pointing to the root of the project.

@@ -12,13 +12,23 @@ import {fetchFunds, fetchShareClasses} from "./services";
 // Get the manifest with data source mappings
 const rawManifest = <IManifest[]>JSON.parse(JSON.stringify(require("../artifacts/config/manifest")));
 const useFTP = false;
+const processStats = {
+    isRunning: false,
+    currentProcessId: null
+};
 export async function loadDataAsync() {
+    if (processStats.isRunning) {
+        console.log(`${new Date()}: Process (${processStats.currentProcessId}) is currently running, will not start a new instance`);
+        return;
+    }
+    processStats.isRunning = true;
     clearExceptions();
     let registerEndRan = false;
     try {
         let token = await login();
         let client = await getClient();
         let loaderStart = await registerLoaderStart();
+        processStats.currentProcessId = LOADER_CONFIG.loaderSnapId;
         let dataToLoad = new dataLoadingArray();
         let ftpSourceRelativePath = 'pending';
         let ftpArchiveRelativePath = 'archive';
@@ -49,6 +59,9 @@ export async function loadDataAsync() {
             registerLoaderEnd(e.exitcode, e);
         }
         throw e;
+    }
+    finally {
+        processStats.isRunning = false;
     }
 }
 
