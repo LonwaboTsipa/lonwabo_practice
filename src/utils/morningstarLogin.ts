@@ -2,12 +2,23 @@ import * as requestPromise from "request-promise";
 import { Cookie } from "request-cookies";
 import * as tough from "tough-cookie";
 import { logger } from "../utils";
-
+import * as moment from "moment";
 const MORNINGSTAR_EMAIL = process.env.MORNINGSTAR_EMAIL;
 const MORNINGSTAR_PASSWORD = process.env.MORNINGSTAR_PASSWORD;
 
+const loginDetails = {
+	lastLoginTime: null,
+	currentCookieJar: null
+};
+
 export async function loginToMorningstar() {
 	logger.info(">>>>>>>>>>>>>>>>>> Logging in to M* Pending...");
+	const { lastLoginTime, currentCookieJar } = loginDetails;
+	if (currentCookieJar && moment().diff(lastLoginTime, "hours") < 1) {
+		logger.info('Getting cookie jar from cache');
+		return currentCookieJar;
+	}
+
 	let cookiejar = requestPromise.jar();
 	const options = {
 		method: 'POST',
@@ -15,8 +26,8 @@ export async function loginToMorningstar() {
 		uri: 'http://edw.morningstar.com/login.aspx',
 		// proxy: 'http://127.0.0.1:8888', // used for Charles proxy for debugging - leave commented
 		form: {
-			"email": "fundworks@morningstar.com",
-			"password": "fw1234",
+			email: MORNINGSTAR_EMAIL,
+			password: MORNINGSTAR_PASSWORD,
 		},
 		gzip: true,
 		headers: {
@@ -49,5 +60,7 @@ export async function loginToMorningstar() {
 	}
 
 	logger.info(">>>>>>>>>>>>>>>>>> Logging in to M* Success!!");
+	loginDetails.currentCookieJar = cookiejar;
+	loginDetails.lastLoginTime = moment();
 	return cookiejar;
 }
