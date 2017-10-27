@@ -12,13 +12,14 @@ const loginDetails = {
 };
 
 export async function loginToMorningstar() {
-	logger.info(">>>>>>>>>>>>>>>>>> Logging in to M* Pending...");
 	const { lastLoginTime, currentCookieJar } = loginDetails;
 	if (currentCookieJar && moment().diff(lastLoginTime, "hours") < 1) {
-		logger.info('Getting cookie jar from cache');
+		logger.info('>>>>>>>>>>>>>>>>>> Getting cookie jar from cache!!');
 		return currentCookieJar;
 	}
 
+	logger.info(">>>>>>>>>>>>>>>>>> There are no Cookies in the Cookie Jar, and the Cookie Monster is sad!!");
+	logger.info(">>>>>>>>>>>>>>>>>> Logging in to M* Pending...");
 	let cookiejar = requestPromise.jar();
 	const options = {
 		method: 'POST',
