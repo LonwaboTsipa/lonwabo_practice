@@ -2,7 +2,7 @@ import * as xmlParser from "xml2json";
 import { IManifest, IPropertyDescriptor } from "@kurtosys/udm_data_toolkit";
 import { IFundOrShareClass, IApiManifest, IBatchPromiseElement, IOrchestratedManifest } from "../../../models";
 import { callApi, safe, batchExecutePromises, getPropertyValue, isNullOrWhitespace, isNullOrUndefined, convertXmlToJson, isNumeric, groupBy } from "../../../utils";
-import { ingestMorningStarHistoricalPerformance, ingestMorningStarRiskAndRating, ingestMorningStarFundBasics, ingestMorningStarShareClassBasics, 
+import { ingestMorningStarHistoricalPerformance, ingestMorningStarRiskAndRating, ingestMorningStarFundBasics, ingestMorningStarShareClassBasics,
 	ingestMorningStarTrailingPerformance, ingestMorningStarPortfolioStatistics } from "./utils";
 import { parserOptions } from "./parserOptions";
 import { IInternalDetail } from "../models";
@@ -11,7 +11,6 @@ import { mappings } from "./mappings";
 
 const XSD_PATH = 'artifacts/static/morningstar/xsd/FundShareClass.xsd';
 let t: document;
-
 
 export async function ingestMorningStarDetails(funds: IFundOrShareClass[], manifest: IOrchestratedManifest, internalDetailsManifestItem: IManifest): Promise<IOrchestratedManifest> {
 
@@ -25,15 +24,15 @@ export async function ingestMorningStarDetails(funds: IFundOrShareClass[], manif
 		let urlParameters = { content: internalDetail.updated_content, morningStarInternalId: internalDetail.internal_id };
 		batchPromiseElements.push({
 			identifier: internalDetail,
-			promiseFunc: () => callApi(detailManifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson: true }),
+			promiseFunc: () => callApi(detailManifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson: true }, true),
 			responseFunc: (response, identifier) => {
 				if (!isNullOrWhitespace(response)) {
 					try {
 						// xml to json
 						let json = convertXmlToJson(response, XSD_PATH, parserOptions, { tagPrefix: 'xsd:' }) as document;
 						let dataObj = {};
-						let internalId = json.FundShareClass.Id;						
-						let shareClass = detailsByInternalId[internalId];						
+						let internalId = json.FundShareClass.Id;
+						let shareClass = detailsByInternalId[internalId];
 						ingestMorningStarFundBasics(json, shareClass, manifest);
 						ingestMorningStarShareClassBasics(json, shareClass, manifest);
 						ingestMorningStarPortfolioStatistics(json, shareClass, manifest);

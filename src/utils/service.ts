@@ -1,5 +1,5 @@
 import { LOADER_CONFIG, IManifest } from "@kurtosys/udm_data_toolkit";
-import { isNullOrWhitespace, safe, deepCopy, validateJSONSchema, addException, colorText, FONT_COLORS } from "../utils";
+import { isNullOrWhitespace, safe, deepCopy, validateJSONSchema, addException, colorText, FONT_COLORS, logger, loginToMorningstar } from "../utils";
 import { IApiRequestOptions, IApiManifest, IApiOptionsItems, IOriginalLoaderConfig} from "../models";
 import * as request from "request";
 import * as fs from "fs";
@@ -47,8 +47,8 @@ export function getCertificateContent(certificateName: string): string {
     return content;
 }
 
-export async function callApi(manifestItem: IApiManifest, options: IApiRequestOptions = {}) {
-    return new Promise((resolve, reject) => {
+export async function callApi(manifestItem: IApiManifest, options: IApiRequestOptions = {}, isMorningstarCall:boolean = false) {
+    return new Promise(async (resolve, reject) => {
         let { requestBody, urlParameters, requestHeaders } = options;
 
         if (options.passRequestBodyToDeepLinks) {
@@ -95,13 +95,13 @@ export async function callApi(manifestItem: IApiManifest, options: IApiRequestOp
             };
         }
         let pfx, passphrase, securityOptions;
-        if (targetApi.certificateName) {            
+        if (targetApi.certificateName) {
             pfx = getCertificateContent(targetApi.certificateName);
             passphrase = targetApi.certificatePassphrase;
             securityOptions = 'SSL_OP_NO_SSLv3';
         }
 
-        let response = request({
+        let requestObj = {
             url,
             method,
             headers,
@@ -109,8 +109,16 @@ export async function callApi(manifestItem: IApiManifest, options: IApiRequestOp
             auth,
             pfx,
             passphrase,
-            securityOptions
-        } as any, (error, response, body) => {
+            securityOptions,
+            jar: undefined
+        };
+
+        if (isMorningstarCall) {
+            requestObj.jar = await loginToMorningstar();
+            logger.debug(">>>>>>>>>>>>>>>>>> Requesting M* data after login.");
+        }
+
+        let dataResponse = request(requestObj, (error, response, data) => {
             if (error) {
                 console.error(`Error on api call to ${url}, with message: ${error}`);
                 addException({
@@ -119,13 +127,13 @@ export async function callApi(manifestItem: IApiManifest, options: IApiRequestOp
                     apiDetails: {
                         method: method,
                         url: url,
-                        requestBody: JSON.stringify(body)
+                        requestBody: JSON.stringify(data)
                     }
                 });
                 resolve();
             }
             else {
-                let responseBody = options.dontParseBodyAsJson ? body : JSON.parse(body);
+                let responseBody = options.dontParseBodyAsJson ? data : JSON.parse(data);
                 if (!options.dontParseBodyAsJson && manifestItem.apiOptions.schema) {
                     let schema = getSchema(manifestItem.apiOptions.schema);
                     let validationResponse = validateJSONSchema(responseBody, schema);
@@ -140,18 +148,18 @@ export async function callApi(manifestItem: IApiManifest, options: IApiRequestOp
                                 response: JSON.stringify(responseBody)
                             }
                         });
-                        body = undefined;
+                        data = undefined;
                     }
                     else {
-                        body = loadDeepLinks(targetApi, manifestItem, responseBody, options);
+                        data = loadDeepLinks(targetApi, manifestItem, responseBody, options);
                     }
                     console.log('validationResponse', validationResponse);
                 }
                 else {
-                    body = loadDeepLinks(targetApi, manifestItem, responseBody, options);
+                    data = loadDeepLinks(targetApi, manifestItem, responseBody, options);
                 }
 
-                resolve(body);
+                resolve(data);
             }
         });
     });
@@ -161,7 +169,7 @@ const SCHEMA_STORE = {};
 
 export function getSchema(schemaName: string) {
     if (!SCHEMA_STORE[schemaName]) {
-        let filePath = path.resolve('../../artifacts/config/schema/' + schemaName);    
+        let filePath = path.resolve('../../artifacts/config/schema/' + schemaName);
         let fileContent = fs.readFileSync(filePath);
         SCHEMA_STORE[schemaName] = fileContent;
     }
@@ -170,7 +178,7 @@ export function getSchema(schemaName: string) {
 
 export async function loadDeepLinks(targetApi, manifestItem: IApiManifest, body: {}, apiRequestOptions: IApiRequestOptions) {
     let { deepLinks } = manifestItem.apiOptions;
-    
+
     if (deepLinks) {
         if (Array.isArray(body)) {
             for (let element of body) {

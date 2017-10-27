@@ -3,8 +3,7 @@ import { processAllocations, processFunds, processShareClasses, processTimeserie
 import { fetchFunds, fetchShareClasses } from "../services";
 import { IOrchestratedManifest, IFundOrShareClass, IApiManifest, IMorningStarIngestionIndication, IBatchPromiseElement } from "../models";
 import { orchestrateManifest, callApi, safe, isNullOrUndefined, isNullOrWhitespace, batchExecutePromises } from "../utils";
-import { ingestMorningStarInternalDetails, ingestMorningStarDetails } from "./morningstar"
-
+import { ingestMorningStarInternalDetails, ingestMorningStarDetails } from "./morningstar";
 
 import * as xpath from "xpath";
 import { parseString } from "xml2js";
@@ -13,15 +12,13 @@ import { Converter } from "csvtojson";
 
 import * as xmlParser from "xml2json";
 
-
 const rawMorningStarManifest = <IManifest[]>require("../../artifacts/config/morningStarManifest");
-const morningStarManifest = orchestrateManifest(rawMorningStarManifest.map(m => Object.assign({}, m)));
 
 export async function ingestAllMorningstar(funds: IFundOrShareClass[]): Promise<IOrchestratedManifest> {
 	let morningStarIngestion = (LOADER_CONFIG["originalConfig"]["morningStarIngestion"] || {}) as IMorningStarIngestionIndication;
 	let morningStarManifest = orchestrateManifest(rawMorningStarManifest.map(m => Object.assign({}, m)));
 
-	if (morningStarIngestion.internalDetails && morningStarManifest['morningstarInternalDetails']) {		
+	if (morningStarIngestion.internalDetails && morningStarManifest['morningstarInternalDetails']) {
 		morningStarManifest['morningstarInternalDetails'] = await ingestMorningStarInternalDetails(funds, morningStarManifest['morningstarInternalDetails']);
 	}
 	if (morningStarIngestion.details && morningStarManifest['morningstarDetails']) {
@@ -32,8 +29,6 @@ export async function ingestAllMorningstar(funds: IFundOrShareClass[]): Promise<
 	}
 	return morningStarManifest;
 }
-
-
 
 export async function ingestMorningStarDailyPrices(funds: IFundOrShareClass[], manifestItem: IManifest, internalDetailsManifestItem: IManifest): Promise<IManifest> {
 	if (!manifestItem.orchestratedData) {
@@ -48,7 +43,7 @@ export async function ingestMorningStarDailyPrices(funds: IFundOrShareClass[], m
 
 	for (let internalDetail of (internalDetailsManifestItem.orchestratedData as { isin: string; internal_id: string; }[])) {
 		let urlParameters = { morningStarInternalId: internalDetail.internal_id };
-		promises.push(callApi(manifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson: true }));
+		promises.push(callApi(manifestItem as IApiManifest, { urlParameters, dontParseBodyAsJson: true }, true));
 	}
 
 	if (promises.length > 0) {
@@ -66,7 +61,7 @@ export async function ingestMorningStarDailyPrices(funds: IFundOrShareClass[], m
 					results = results.sort((a, b) => {
 						return new Date(a.Date).getTime() - new Date(b.Date).getTime();
 					});
-					
+
 					let lastValue = 0;
 					for (let result of results) {
 						let resultInternalId = result['SecId'];

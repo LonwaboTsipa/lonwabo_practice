@@ -1,14 +1,15 @@
 import * as xmlParser from "xml2json";
 import * as fs from "fs";
 import { safe } from "../utils";
+
 export function convertXmlToJson(xml, xsdPath, parserOptions, options: SchemaChangeOptions = {}) {
 	options = Object.assign({
 		tagPrefix: "xs:"
 	}, options);
 
-	let schema = fs.readFileSync(xsdPath, { encoding: 'utf8' });	
-	
-	let json = xmlParser.toJson(xml, parserOptions);	
+	let schema = fs.readFileSync(xsdPath, { encoding: 'utf8' });
+
+	let json = xmlParser.toJson(xml, parserOptions);
 	let schemaJson = xmlParser.toJson(schema, parserOptions);
 	cleanPropertyNames(json);
 	//fs.writeFileSync('beforeSchemaAdjustment.json', JSON.stringify(json, null, 4), { encoding: 'utf8' });
@@ -43,15 +44,13 @@ function cleanPropertyNames(json) {
 				cleanPropertyNames(v);
 			});
 		}
-	})
+	});
 }
 
 function applySchemaChangesForArrays(json, schemaJson, options: SchemaChangeOptions = {}) {
 	options = Object.assign({
 		tagPrefix: "xs:"
 	}, options);
-
-	
 
 	const { tagPrefix } = options;
 	const schemaKey = `${tagPrefix}schema`;
@@ -73,13 +72,13 @@ function applySchemaChangesForArrays(json, schemaJson, options: SchemaChangeOpti
 	for (let schemaElement of schemaElements) {
 		if (json.hasOwnProperty(schemaElement.name) && json[schemaElement.name]) {
 			let jsonElement = json[schemaElement.name];
-			
+
 			let isArray = Array.isArray(jsonElement);
 			if (schemaElement[complexTypeKey]) {
 				let complexTypeChild = schemaElement[complexTypeKey];
 				let arraySchemaChild = (complexTypeChild[sequenceKey] || complexTypeChild[simpleContentKey]);
 				let schemaChildElement = safe(() => arraySchemaChild[elementKey], {});
-				
+
 				if (!isArray && arraySchemaChild && schemaElement.maxOccurs) {
 					json[schemaElement.name] = [jsonElement];
 					jsonElement = json[schemaElement.name];
@@ -89,7 +88,7 @@ function applySchemaChangesForArrays(json, schemaJson, options: SchemaChangeOpti
 				if (schemaChildElement) {
 					let jsonChildElements = isArray ? [].concat(jsonElement) : [jsonElement];
 
-					for (let jsonChildElement of jsonChildElements) {						
+					for (let jsonChildElement of jsonChildElements) {
 						applySchemaChangesForArrays(jsonChildElement, schemaChildElement, options);
 					}
 				}
